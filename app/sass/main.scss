@@ -1,0 +1,59 @@
+// Links
+//
+// usual links and style for external links
+//
+// Markup: <a href="" class="{$modifiers}">Link</a>
+//
+// :visited  - visited styles
+// :hover    - Highlight the button when hovered.
+// :focus    - focus styles
+// :active   - "Press" the button down when clicked.
+// .external - external link styles
+//
+// Styleguide 1
+
+a {
+  color: $link-color;
+  text-decoration: underline;
+
+  &:visited {
+    color: $link-colorV;
+  }
+  &:hover {
+    color: $link-colorH;
+  }
+  &:focus {
+    color: $link-colorF;
+    outline: thin dotted;
+  }
+  &:active {
+    color: $link-colorA;
+    outline: none;
+  }
+  &:hover, &:active {
+    outline: none;
+  }
+  &.external {
+    color: $link-external;
+  }
+}
+
+// A button suitable for giving a star to someone.
+//
+// Markup: <a href="" class="{$modifiers}">Link</a>
+//
+// :hover             - Subtle hover highlight.
+// .star-given        - A highlight indicating you've already given a star.
+// .star-given:hover  - Subtle hover highlight on top of star-given styling.
+// .disabled          - Dims the button to indicate it cannot be used.
+//
+// Styleguide 2
+a.button.star{
+
+  &.star-given{
+    background-color: #008000;
+  }
+    &.disabled{
+      background-color: red;
+  }
+}
