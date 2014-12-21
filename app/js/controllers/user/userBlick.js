@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('360blickFrontendApp')
-  .controller('UserBlickCtrl',['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+app.controller('UserBlickCtrl',['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
         if(!$stateParams.blickId){
             $state.go('user');
         }

@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     open = require ('gulp-open'),
     webserver = require('gulp-webserver'),
     clean = require('gulp-clean'),
+    angularFilesort = require('gulp-angular-filesort'),
     gulpkss = require('gulp-kss');
 
 
@@ -30,7 +31,6 @@ gulp.task('webserver', function() {
     gulp.src('./app')
         .pipe(webserver({
             livereload: true,
-            open: true,
             fallback: 'index.html'
         }));
 });

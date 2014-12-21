@@ -1,14 +1,18 @@
 'use strict';
+var app = angular.module('360blickFrontendApp', [
+        'ngCookies',
+        'ngResource',
+        'ngSanitize',
+        'ngAnimate',
+        'ui.router',
+        'angularModalService'
+    ]);
 
-angular
-  .module('360blickFrontendApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ngAnimate',
-    'ui.router'
-  ])
-  .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+  app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+
+      $httpProvider.defaults.useXDomain = true;
+      $httpProvider.defaults.headers.common = 'Content-Type: application/json';
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     $stateProvider
         .state('app', {
@@ -20,15 +24,15 @@ angular
                 }
             }
         })
-        .state('login', {
-            url: "/login",
-            views: {
-                "app": {
-                    templateUrl: "views/login.html",
-                    controller: "LoginCtrl"
-                }
-            }
-        })
+//        .state('login', {
+//            url: "/login",
+//            views: {
+//                "app": {
+//                    templateUrl: "views/login.html",
+//                    controller: "LoginCtrl"
+//                }
+//            }
+//        })
         .state('user', {
             url: "/:username",
             views: {
@@ -76,3 +80,7 @@ angular
 
     $urlRouterProvider.otherwise("/app");
   }]);
+
+app.run(function(){
+
+});

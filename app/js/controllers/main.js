@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('360blickFrontendApp')
-  .controller('MainCtrl',['$scope', function ($scope) {
+  app.controller('MainCtrl', ['$scope', 'Login', function ($scope, LoginService) {
 
+      $scope.showLoginModal = function(){
+          LoginService.showLoginModal();
+      }
   }]);
+
