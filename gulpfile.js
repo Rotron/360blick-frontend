@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    sass = require('gulp-ruby-sass'),
+    sass = require('gulp-sass'),
     plumber = require('gulp-plumber'),
     inject = require('gulp-inject'),
     open = require ('gulp-open'),
@@ -51,14 +51,14 @@ gulp.task('webserver', function() {
 // Styles
 gulp.task('sass', function() {
     return gulp.src('app/sass/main.scss')
-        .pipe(plumber())
-        .pipe(sass({ style: 'expanded'}))
-        .pipe(gulp.dest('app/css'))
+        .pipe(sass())
+        .pipe(gulp.dest('app/css'));
 });
 
 gulp.task('watch', function() {
-    // Watch .scss filesg
+    // Watch .scss files
     gulp.watch('app/sass/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['inject', 'sass']);
+gulp.task('serve', ['webserver', 'watch']);

@@ -12,7 +12,7 @@
     "gulp-kss": "0.0.2",
     "gulp-open": "^0.3.1",
     "gulp-plumber": "^0.6.6",
-    "gulp-ruby-sass": "^1.0.0-alpha"
+    "gulp-sass": "^1.2.4"
   },
   "devDependencies": {
     "gulp-clean": "^0.3.1",

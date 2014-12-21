@@ -5,13 +5,14 @@ angular
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngAnimate',
     'ui.router'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider
         .state('app', {
-            url: "/app",
+            url: "/",
             views: {
                 "app": {
                     templateUrl: "views/main.html",
@@ -34,24 +35,37 @@ angular
                 "app": {
                     templateUrl: "views/user/user.html",
                     controller: "UserCtrl"
+                },
+                "userContent@user": {
+                    templateUrl: "views/user/gallery.html",
+                    controller: "UserGalleryCtrl"
                 }
             }
         })
-        .state('user.view', {
-            url: "/view",
+        .state('user.assets', {
+            url: "/assets",
             views: {
-                "app@": {
-                    templateUrl: "views/user/view.html",
-                    controller: "UserViewCtrl"
+                "userContent@user": {
+                    templateUrl: "views/user/assets.html",
+                    controller: "UserAssetsCtrl"
                 }
             }
         })
-        .state('user.profile', {
-            url: "/profile",
+        .state('user.settings', {
+            url: "/settings",
             views: {
-                "app@": {
-                    templateUrl: "views/user/profile.html",
-                    controller: "UserProfileCtrl"
+                "userContent@user": {
+                    templateUrl: "views/user/settings.html",
+                    controller: "UserSettingsCtrl"
+                }
+            }
+        })
+        .state('user.blick', {
+            url: "/blick/:blickId",
+            views: {
+                "userContent@user": {
+                    templateUrl: "views/user/blick.html",
+                    controller: "UserBlickCtrl"
                 }
             }
         })
