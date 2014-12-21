@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     open = require ('gulp-open'),
     webserver = require('gulp-webserver'),
     clean = require('gulp-clean'),
+    karma = require('gulp-karma'),
     gulpkss = require('gulp-kss');
 
 
@@ -37,15 +38,31 @@ gulp.task('webserver', function() {
 
 
 
-//// Open Task (starts app automatically)
-//gulp.task("open", function(){
-//    var options = {
-//        url: "http://localhost:8080",
-//        app: "Chrome"
-//    };
-//    gulp.src("app/index.html")
-//        .pipe(open("", options));
-//});
+var testFiles = [
+    'app/bower_components/angular/angular.js',
+    'app/bower_components/angular-mocks/angular-mocks.js',
+    'app/bower_components/angular-resource/angular-resource.js',
+    'app/bower_components/angular-cookies/angular-cookies.js',
+    'app/bower_components/angular-sanitize/angular-sanitize.js',
+    'app/bower_components/angular-ui-router/release/angular-ui-router.js',
+    'app/js/*.js',
+    'app/js/**/*.js',
+    'test/mock/**/*.js',
+    'test/spec/**/*.js'
+];
+
+gulp.task('test', function() {
+    // Be sure to return the stream
+    return gulp.src(testFiles)
+        .pipe(karma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            // Make sure failed tests cause gulp to exit non-zero
+            throw err;
+        });
+});
 
 
 // Styles
