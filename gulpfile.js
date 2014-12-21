@@ -50,7 +50,7 @@ gulp.task('webserver', function() {
 
 // Styles
 gulp.task('sass', function() {
-    return gulp.src('app/scss/default.scss')
+    return gulp.src('app/sass/main.scss')
         .pipe(plumber())
         .pipe(sass({ style: 'expanded'}))
         .pipe(gulp.dest('app/css'))
@@ -60,7 +60,5 @@ gulp.task('watch', function() {
     // Watch .scss filesg
     gulp.watch('app/sass/**/*.scss', ['sass']);
 });
-
-gulp.task('sass', ['sass']);
 
 gulp.task('default', ['inject', 'sass']);

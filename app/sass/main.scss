@@ -12,9 +12,17 @@
 //
 // Styleguide 1
 
+$link-color: #0000FF;
+$link-colorV: #0000FF;
+$link-colorH: #0000FF;
+$link-colorF: #0000FF;
+$link-colorA: #0000FF;
+$link-external: #0000FF;
+
+
 a {
   color: $link-color;
-  text-decoration: underline;
+  text-decoration: none;
 
   &:visited {
     color: $link-colorV;
