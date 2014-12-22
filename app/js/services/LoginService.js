@@ -10,7 +10,7 @@ app.service('Login',['ModalService', 'Request', '$http', 'Session', function(Mod
 
     this.login = function(credentials){
         return $http
-            .post('http://localhost:3000/users/sign_in', credentials)
+            .post('http://localhost:8000/users/sign_in', credentials)
             .then(function (res) {
                 console.log(res);
 //                Session.create(res.data.id, res.data.user.id,
