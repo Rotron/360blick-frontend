@@ -1,4 +1,4 @@
-app.service('Request',[ function() {
+app.service('RequestService',[ function() {
 
 
 }]);

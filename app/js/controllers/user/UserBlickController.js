@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UserBlickCtrl',['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+app.controller('UserBlickController',['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
         if(!$stateParams.blickId){
             $state.go('user');
         }

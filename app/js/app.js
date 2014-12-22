@@ -11,38 +11,46 @@ var app = angular.module('360blickFrontendApp', [
   app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
       $httpProvider.defaults.useXDomain = true;
-      $httpProvider.defaults.headers.common = 'Content-Type: application/json';
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-    $stateProvider
+      $stateProvider
         .state('app', {
             url: "/",
             views: {
                 "app": {
                     templateUrl: "views/main.html",
-                    controller: "MainCtrl"
+                    controller: "MainController"
                 }
             }
         })
-//        .state('login', {
-//            url: "/login",
-//            views: {
-//                "app": {
-//                    templateUrl: "views/login.html",
-//                    controller: "LoginCtrl"
-//                }
-//            }
-//        })
+        .state('register', {
+            url: "/register",
+            views: {
+                "app": {
+                    templateUrl: "views/auth/register.html",
+                    controller: "RegisterController"
+                }
+            }
+        })
+        .state('login', {
+            url: "/login",
+            views: {
+                "app": {
+                    templateUrl: "views/auth/login.html",
+                    controller: "LoginController"
+                }
+            }
+        })
         .state('user', {
             url: "/:username",
             views: {
                 "app": {
                     templateUrl: "views/user/user.html",
-                    controller: "UserCtrl"
+                    controller: "UserController"
                 },
                 "userContent@user": {
                     templateUrl: "views/user/gallery.html",
-                    controller: "UserGalleryCtrl"
+                    controller: "UserGalleryController"
                 }
             }
         })
@@ -51,7 +59,7 @@ var app = angular.module('360blickFrontendApp', [
             views: {
                 "userContent@user": {
                     templateUrl: "views/user/assets.html",
-                    controller: "UserAssetsCtrl"
+                    controller: "UserAssetsController"
                 }
             }
         })
@@ -60,7 +68,7 @@ var app = angular.module('360blickFrontendApp', [
             views: {
                 "userContent@user": {
                     templateUrl: "views/user/settings.html",
-                    controller: "UserSettingsCtrl"
+                    controller: "UserSettingsController"
                 }
             }
         })
@@ -69,12 +77,10 @@ var app = angular.module('360blickFrontendApp', [
             views: {
                 "userContent@user": {
                     templateUrl: "views/user/blick.html",
-                    controller: "UserBlickCtrl"
+                    controller: "UserBlickController"
                 }
             }
-        })
-
-    ;
+        });
 
     $locationProvider.html5Mode(true);
 
