@@ -37,4 +37,14 @@ app.service('EditorService',[ function() {
         return scene.children;
     }
 
+	this.exportToJson = function(){
+		var output = scene.toJSON();
+		output = JSON.stringify( output, null, '\t' );
+		output = output.replace( /[\n\t]+([\d\.e\-\[\]]+)/g, '$1' );
+		var blob = new Blob( [ output ], { type: 'text/plain' } );
+		var objectURL = URL.createObjectURL( blob );
+
+		window.open( objectURL, '_blank' );
+		window.focus();
+	}
 }]);

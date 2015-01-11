@@ -11,6 +11,10 @@
           EditorService.zoomIn(1.1);
       }
 
+      $scope.exportToJson = function(){
+		  EditorService.exportToJson();
+      }
+
       $scope.sceneObjects = EditorService.getObjects();
 
   }]);
