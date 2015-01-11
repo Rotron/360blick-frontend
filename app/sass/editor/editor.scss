@@ -1,0 +1,23 @@
+@include add-grid(12);
+@include add-gutter(0em);
+
+.editor-wrapper{
+  @include grid-span(12);
+  height: 100%;
+}
+
+.editor-header{
+  @include grid-span(12);
+  height: 30px;
+  background-color: #444;
+}
+.editor-view{
+  @include grid-span(9, 1);
+  background-color: #008000;
+  height: 100%;
+}
+.editor-sidebar{
+  @include grid-span(3, 10);
+  background-color: red;
+  height: 100%;
+}

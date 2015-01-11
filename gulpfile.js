@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-ruby-sass'),
     plumber = require('gulp-plumber'),
     inject = require('gulp-inject'),
     open = require ('gulp-open'),
@@ -51,7 +51,12 @@ gulp.task('webserver', function() {
 // Styles
 gulp.task('sass', function() {
     return gulp.src('app/sass/main.scss')
-        .pipe(sass())
+        .pipe(sass({
+            loadPath: [
+                    './app/bower_components/singularity/stylesheets'
+                ]
+            }
+        ))
         .pipe(gulp.dest('app/css'));
 });
 

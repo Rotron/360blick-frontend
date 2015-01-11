@@ -1,0 +1,12 @@
+.editor-sidebar{
+  .objects-wrapper{
+    height: 300px;
+    @include grid-span(12);
+    border-bottom: 3px solid #444;
+    overflow-y: hidden;
+    .scene-object{
+      padding: 5px;
+      border-bottom: 1px solid #888;
+    }
+  }
+}

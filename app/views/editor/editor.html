@@ -1,0 +1,26 @@
+<div class="editor-header">
+    <button ng-click="zoomIn()">Zoom In</button>
+    <button ng-click="zoomOut()">Zoom Out</button>
+</div>
+<div class="editor-wrapper">
+    <div class="editor-view" id="editor-view-container"></div>
+    <div class="editor-sidebar">
+        <div class="objects-wrapper">
+            <div class="scene-object" ng-repeat="item in sceneObjects">
+                {{item.type}} {{item.id}}: {{item.geometry.type}} <button ng-click="item.detailsOpen = !item.detailsOpen">Edit</button>
+                <div class="scene-object-details" ng-if="item.detailsOpen">
+                    <div>
+                        X: <input type="number" ng-model="item.position.x">
+                    </div>
+                    <div>
+                        Y: <input type="number" ng-model="item.position.y">
+                    </div>
+                    <div>
+                        Z: <input type="number" ng-model="item.position.z">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

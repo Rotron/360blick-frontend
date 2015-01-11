@@ -41,6 +41,15 @@ var app = angular.module('360blickFrontendApp', [
                 }
             }
         })
+        .state('editor', {
+            url: "/editor",
+            views: {
+                "app": {
+                    templateUrl: "views/editor/editor.html",
+                    controller: "EditorController"
+                }
+            }
+        })
         .state('user', {
             url: "/:username",
             views: {
