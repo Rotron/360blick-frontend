@@ -1,6 +1,6 @@
 'use strict';
 
-  app.controller('EditorController', ['$scope', 'AuthService', 'EditorService', function ($scope, AuthService, EditorService) {
+  app.controller('EditorController', ['$scope', 'AuthService', 'EditorService', 'PrimitiveObjectService', function ($scope, AuthService, EditorService, PrimitiveObjectService) {
 
       EditorService.init();
 
@@ -11,7 +11,14 @@
           EditorService.zoomIn(1.1);
       }
 
+      $scope.addNewObject = function(type){
+          EditorService.addNewPrimitive(type);
+      }
+
       $scope.sceneObjects = EditorService.getObjects();
+
+      $scope.supportedPrimitiveObjects = PrimitiveObjectService.getSupportedObjectTypes();
+
 
   }]);
 

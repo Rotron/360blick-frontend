@@ -1,12 +1,41 @@
 .editor-sidebar{
+  background-color: #222;
   .objects-wrapper{
     height: 300px;
     @include grid-span(12);
-    border-bottom: 3px solid #444;
-    overflow-y: hidden;
+    border-bottom: 1px solid #000;
+    overflow-y: scroll;
     .scene-object{
+      overflow: auto;
       padding: 5px;
-      border-bottom: 1px solid #888;
+      color: #fff;
+      font-family: 'Verdana', sans-serif !important;
+      &:nth-child(even){
+        background-color: #222;
+      }
+      &:nth-child(odd){
+        background-color: #333;
+      }
+      .scene-object-description{
+        @include grid-span(11, 1);
+      }
+      .scene-object-buttons{
+        @include grid-span(1, 12);
+        text-align: right;
+      }
+      .scene-object-inner{
+        @include grid-span(12);
+      }
+    }
+
+
+    .primitive-object{
+      display: inline-block;
+      background-color: #333;
+      padding: 5px;
+      margin: 5px;
+      color: #FFF;
+      cursor: pointer;
     }
   }
 }

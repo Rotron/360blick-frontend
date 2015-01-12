@@ -1,24 +1,52 @@
 <div class="editor-header">
-    <button ng-click="zoomIn()">Zoom In</button>
-    <button ng-click="zoomOut()">Zoom Out</button>
+    <i ng-click="zoomIn()" class="fa fa-plus-square"></i>
+    <i ng-click="zoomOut()" class="fa fa-minus-square"></i>
 </div>
 <div class="editor-wrapper">
     <div class="editor-view" id="editor-view-container"></div>
     <div class="editor-sidebar">
         <div class="objects-wrapper">
             <div class="scene-object" ng-repeat="item in sceneObjects">
-                {{item.type}} {{item.id}}: {{item.geometry.type}} <button ng-click="item.detailsOpen = !item.detailsOpen">Edit</button>
-                <div class="scene-object-details" ng-if="item.detailsOpen">
-                    <div>
-                        X: <input type="number" ng-model="item.position.x">
+                <div class="scene-object-inner">
+                    <div class="scene-object-description">
+                        {{item.type}} {{item.id}}: {{item.geometry.type}}
                     </div>
-                    <div>
-                        Y: <input type="number" ng-model="item.position.y">
-                    </div>
-                    <div>
-                        Z: <input type="number" ng-model="item.position.z">
+                    <div class="scene-object-buttons">
+                        <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
                     </div>
                 </div>
+                <div class="scene-object-details" ng-if="item.detailsOpen">
+                    <div>
+                        <div>Position</div>
+                        <div>
+                            X: <input type="number" ng-model="item.position.x">
+                        </div>
+                        <div>
+                            Y: <input type="number" ng-model="item.position.y">
+                        </div>
+                        <div>
+                            Z: <input type="number" ng-model="item.position.z">
+                        </div>
+                    </div>
+                    <div>
+                        <div>Rotation</div>
+                        <div>
+                            X: <input type="number" ng-model="item.rotation.x">
+                        </div>
+                        <div>
+                            Y: <input type="number" ng-model="item.rotation.y">
+                        </div>
+                        <div>
+                            Z: <input type="number" ng-model="item.rotation.z">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="objects-wrapper">
+            <div class="primitive-object" ng-repeat="type in supportedPrimitiveObjects" ng-click="addNewObject(type)">
+                {{type}}
             </div>
         </div>
     </div>
