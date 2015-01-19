@@ -1,6 +1,6 @@
 'use strict';
 
-  app.controller('EditorController', ['$scope', 'AuthService', 'EditorService', 'PrimitiveObjectService', function ($scope, AuthService, EditorService, PrimitiveObjectService) {
+  app.controller('EditorController', ['$scope', '$rootScope', 'AuthService', 'EditorService', 'PrimitiveObjectService', 'ObjectSelectionService', function ($scope, $rootScope, AuthService, EditorService, PrimitiveObjectService, ObjectSelectionService) {
 
       EditorService.init();
 
@@ -16,6 +16,12 @@
       }
 
       $scope.sceneObjects = EditorService.getObjects();
+
+      $scope.currentSelected = undefined;
+      $rootScope.$on('objectSelected', function(event, object){
+          $scope.currentSelected = object;
+          $scope.$apply();
+      });
 
       $scope.supportedPrimitiveObjects = PrimitiveObjectService.getSupportedObjectTypes();
 

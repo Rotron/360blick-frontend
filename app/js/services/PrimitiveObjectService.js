@@ -9,6 +9,11 @@ app.service('PrimitiveObjectService',[ function() {
 
     var container = angular.element(document.getElementById('editor-view-container'))[0];
 
+    function setMaterialProperties(object){
+        object.material.side = THREE.DoubleSide;
+        object.material.transparent = true;
+    }
+
     this.getObject = function(type){
 
         if(supportedObjects.indexOf(type) == -1){
@@ -34,7 +39,7 @@ app.service('PrimitiveObjectService',[ function() {
         }
         var object = new THREE.Mesh( geometry, material );
         object.add(objectCamera);
-        object.material.side = THREE.DoubleSide;
+        setMaterialProperties(object);
 
         return object;
     }

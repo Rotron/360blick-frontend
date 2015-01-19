@@ -1,51 +1,58 @@
-app.service('EditorService',['PrimitiveObjectService', function(PrimitiveObjectService) {
+app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', function($rootScope, PrimitiveObjectService, WindowResizeService) {
 
-    var scene, camera, renderer, container;
+
+    var that = this;
+
     this.init = function(){
-        container = angular.element(document.getElementById('editor-view-container'))[0];
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera( 75, container.clientWidth / container.clientHeight, 0.1, 1000 );
-        renderer = new THREE.WebGLRenderer({
+        this.container = angular.element(document.getElementById('editor-view-container'))[0];
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera( 75, this.container.clientWidth / this.container.clientHeight, 0.1, 1000 );
+        this.renderer = new THREE.WebGLRenderer({
             precision: 'highp',
             antialias: true
 
         });
-        console.log(container);
-        renderer.setSize( container.clientWidth, container.clientHeight );
-        container.appendChild( renderer.domElement );
+        console.log(this.container);
+        this.renderer.setSize( this.container.clientWidth, this.container.clientHeight );
+        this.container.appendChild( this.renderer.domElement );
 
-        var axes = new THREE.AxisHelper(100);
-        scene.add(axes);
-        var gridXZ = new THREE.GridHelper(100, 1);
-        scene.add(gridXZ);
+//        var axes = new THREE.AxisHelper(100);
+//        axes.position.y = 0.001;
+//        this.scene.add(axes);
+//        var gridXZ = new THREE.GridHelper(100, 1);
+//        this.scene.add(gridXZ);
 
-        camera.position.z = 10;
-        camera.position.y = 5;
-        camera.lookAt(new THREE.Vector3(0,0,0));
+        this.camera.position.z = 10;
+        this.camera.position.y = 5;
+        this.camera.lookAt(new THREE.Vector3(0,0,0));
 
         var light = new THREE.PointLight( 0xff0000, 1, 100 );
         light.position.set( 10, 10, 10 );
-        scene.add( light );
+        this.scene.add( light );
+
+
+        WindowResizeService.init(this.renderer, this.camera, this.container);
 
         function render() {
             requestAnimationFrame( render );
-            renderer.render( scene, camera );
+            that.renderer.render( that.scene, that.camera );
         }
         render();
     };
 
     this.zoomIn = function(zoomFactor){
-        camera.fov *= zoomFactor;
-        camera.updateProjectionMatrix();
+        this.camera.fov *= zoomFactor;
+        this.camera.updateProjectionMatrix();
     };
 
     this.getObjects = function(){
-        return scene.children;
+        return this.scene.children;
     };
 
     this.addNewPrimitive = function(type){
         var object = PrimitiveObjectService.getObject(type);
-        scene.add(object);
+        console.log(object);
+        this.scene.add(object);
     }
 
 }]);

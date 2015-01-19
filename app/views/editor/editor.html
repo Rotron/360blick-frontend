@@ -1,4 +1,4 @@
-<div class="editor-header">
+<div class="editor-header" id="editor-header">
     <i ng-click="zoomIn()" class="fa fa-plus-square"></i>
     <i ng-click="zoomOut()" class="fa fa-minus-square"></i>
 </div>
@@ -6,7 +6,7 @@
     <div class="editor-view" id="editor-view-container"></div>
     <div class="editor-sidebar">
         <div class="objects-wrapper">
-            <div class="scene-object" ng-repeat="item in sceneObjects">
+            <div class="scene-object" ng-repeat="item in sceneObjects" ng-class="{active: item.id == currentSelected.id}">
                 <div class="scene-object-inner">
                     <div class="scene-object-description">
                         {{item.type}} {{item.id}}: {{item.geometry.type}}
@@ -15,31 +15,11 @@
                         <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
                     </div>
                 </div>
-                <div class="scene-object-details" ng-if="item.detailsOpen">
-                    <div>
-                        <div>Position</div>
-                        <div>
-                            X: <input type="number" ng-model="item.position.x">
-                        </div>
-                        <div>
-                            Y: <input type="number" ng-model="item.position.y">
-                        </div>
-                        <div>
-                            Z: <input type="number" ng-model="item.position.z">
-                        </div>
-                    </div>
-                    <div>
-                        <div>Rotation</div>
-                        <div>
-                            X: <input type="number" ng-model="item.rotation.x">
-                        </div>
-                        <div>
-                            Y: <input type="number" ng-model="item.rotation.y">
-                        </div>
-                        <div>
-                            Z: <input type="number" ng-model="item.rotation.z">
-                        </div>
-                    </div>
+                <div class="scene-object-details" ng-if="item.detailsOpen || item.id == currentSelected.id">
+                    <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
+                    <xyz-input title="Position" item="item.position"></xyz-input>
+                    <xyz-input title="Rotation" item="item.rotation"></xyz-input>
+                    <xyz-input title="Skalierung" item="item.scale"></xyz-input>
 
                 </div>
             </div>
