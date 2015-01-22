@@ -1,4 +1,0 @@
-app.service('ModalService',[ function() {
-
-
-}]);

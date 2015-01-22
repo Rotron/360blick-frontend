@@ -8,6 +8,17 @@ var app = angular.module('360blickFrontendApp', [
         'angularModalService'
     ]);
 
+  app.constant('AUTH_EVENTS', {
+      loginSuccess: 'auth-login-success',
+      loginFailed: 'auth-login-failed',
+      logoutSuccess: 'auth-logout-success',
+      registerSuccess: 'auth-register-success',
+      registerFailed: 'auth-register-failed',
+      sessionTimeout: 'auth-session-timeout',
+      notAuthenticated: 'auth-not-authenticated',
+      notAuthorized: 'auth-not-authorized'
+  });
+
   app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
       $httpProvider.defaults.useXDomain = true;
@@ -87,6 +98,8 @@ var app = angular.module('360blickFrontendApp', [
     $urlRouterProvider.otherwise("/app");
   }]);
 
-app.run(function(){
-
-});
+app.run(['$rootScope', 'AuthService', function($rootScope, AuthService){
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+        AuthService.showLoginModal();
+    });
+}]);

@@ -2,28 +2,34 @@ app.service('SessionService', function () {
 
     this.getSession = function() {
         return {
-            id: this.id,
-            userId: this.userId,
-            userNick: this.userNick,
-            userEmail: this.userEmail,
-            userRole: this.userRole
+            token: this.token,
+            nick: this.nick,
+            email: this.email
         }
     };
 
-    this.create = function (sessionId, userId, userNick, userEmail, userRole) {
-        this.id = sessionId;
-        this.userId = userId;
-        this.userNick = userNick;
-        this.userEmail = userEmail;
-        this.userRole = userRole;
+    this.getNick = function() {
+        return this.nick;
     };
+
+    this.getAuthCredentials = function() {
+        return {
+            token: this.token,
+            nick: this.nick
+        }
+    };
+
+    this.create = function (token, nick, email) {
+        this.token = token;
+        this.nick = nick;
+        this.email = email;
+    };
+
     this.destroy = function () {
-        this.id = null;
-        this.userId = null;
-        this.userNick = null;
-        this.userEmail = null;
-        this.userEmail = null;
-        this.userRole = null;
+        this.token = null;
+        this.nick = null;
+        this.email = null;
     };
+
     return this;
 })

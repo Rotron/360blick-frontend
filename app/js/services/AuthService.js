@@ -35,38 +35,26 @@ app.service('AuthService',['ModalService', 'RequestService', '$http', 'SessionSe
     this.login = function(credencials){
         return $http
             .post('http://localhost:3000/api/v1/users/login.json', credencials)
-            .then(function (res) {
-                console.log(res);
-                res.data.user = {
-                    id: '123123123',
-                    nick: 'david',
-                    email: 'email'
-                };
-
-                Session.create(res.data.token, res.data.user.id, res.data.user.nick, res.data.user.email, 'free');
-                return res.data.user;
+            .success(function (res) {
+                SessionService.create(res.auth_token, res.nick, res.email);
+                return res.data;
+            })
+            .error(function(res, status){
+                console.log('error');
+                console.error(res);
             });
     };
 
     this.logout = function(credencials){
         return $http
-            .post('http://localhost:3000/api/v1/users/logout.json', { token: '1' })
+            .post('http://localhost:3000/api/v1/users/logout.json', SessionService.getAuthCredentials() )
             .then(function (res) {
                 console.log(res);
             });
     };
 
     this.isAuthenticated = function () {
-        return !!Session.userId;
+        return !!SessionService.getNick();
     };
-
-    this.isAuthorized = function (authorizedRoles) {
-        if (!angular.isArray(authorizedRoles)) {
-            authorizedRoles = [authorizedRoles];
-        }
-        return (authService.isAuthenticated() &&
-            authorizedRoles.indexOf(Session.userRole) !== -1);
-    };
-
 
 }]);
