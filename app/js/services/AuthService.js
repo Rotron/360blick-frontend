@@ -1,60 +1,57 @@
-app.service('AuthService',['ModalService', 'RequestService', '$http', 'SessionService', function(ModalService, RequestService, $http, SessionService) {
+app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'AUTH_EVENTS', 'btfModal',
+    function (RequestService, SessionService, $rootScope, AUTH_EVENTS, btfModal) {
 
-    this.showLoginModal = function(){
-        ModalService.showModal({
-            templateUrl: "views/partials/login.html",
-            controller: "LoginController"
+    this.showDialog = function () {
+
+        var modal = btfModal({
+            controller: 'LoginController',
+            controllerAs: 'ctrl',
+            templateUrl: 'partials/login.html'
+            //template: '<div class="btf-modal">Hello {{ctrl.name}}</div>'
+
+        });
+
+        modal.activate();
+
+        /*var modal = btfModal({
+            controller: function () {
+                this.name = 'World';
+            },
+            controllerAs: 'ctrl',
+            template: '<div class="btf-modal">Hello {{ctrl.name}}</div>'
+        });
+
+        modal.activate();*/
+    };
+
+    $rootScope.$on(AUTH_EVENTS.notAuthenticated, this.showDialog);
+    $rootScope.$on(AUTH_EVENTS.sessionTimeout, this.showDialog);
+
+    this.login = function (credentials) {
+
+        RequestService.create('users/login', credentials, function(res){
+            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+            console.log(res);
+            $rootScope.setCurrentUser(credentials);
+            // TODO: Backend, res.data.role
+            SessionService.create(res.auth_token, res.nick, res.email, 'editor');
+        },
+        function(){
+            console.log('login faild');
+            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });
     };
 
-    this.nickValidRegistration = function(nick) {
-        return $http
-            .post('http://localhost:3000/api/v1/users/nick_valid_registration.json', {nick: nick})
-            .then(function (res) {
-                console.log(res);
-            });
-    };
-
-    this.emailValidRegistration = function(email) {
-        return $http
-            .post('http://localhost:3000/api/v1/users/nick_valid_registration.json', {nick: email})
-            .then(function (res) {
-                console.log(res);
-            });
-    };
-
-    this.register = function(credencials) {
-
-        return $http
-            .post('http://localhost:3000/api/v1/users/register.json', credencials)
-            .then(function (res) {
-                console.log(res);
-            });
-    };
-
-    this.login = function(credencials){
-        return $http
-            .post('http://localhost:3000/api/v1/users/login.json', credencials)
-            .success(function (res) {
-                SessionService.create(res.auth_token, res.nick, res.email);
-                return res.data;
-            })
-            .error(function(res, status){
-                console.log('error');
-                console.error(res);
-            });
-    };
-
-    this.logout = function(credencials){
-        return $http
-            .post('http://localhost:3000/api/v1/users/logout.json', SessionService.getAuthCredentials() )
-            .then(function (res) {
-                console.log(res);
-            });
-    };
-
     this.isAuthenticated = function () {
-        return !!SessionService.getNick();
+        return !!SessionService.nick;
     };
 
+    this.isAuthorized = function (authorizedRoles) {
+        if (!angular.isArray(authorizedRoles)) {
+            authorizedRoles = [authorizedRoles];
+        }
+
+        return (this.isAuthenticated() &&
+        authorizedRoles.indexOf(SessionService.userRole) !== -1);
+    };
 }]);

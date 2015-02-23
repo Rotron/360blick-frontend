@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     webserver = require('gulp-webserver'),
     clean = require('gulp-clean'),
     angularFilesort = require('gulp-angular-filesort'),
-    gulpkss = require('gulp-kss');
+    gulpkss = require('gulp-kss'),
+    templateCache = require('gulp-angular-templatecache');
 
 gulp.task('inject', function() {
     gulp.src('./app/index.html')
@@ -47,6 +48,7 @@ gulp.task('sass', function() {
 
 gulp.task('watch', function() {
     gulp.watch('app/sass/**/*.scss', ['sass']);
+    gulp.watch('app/views/**/*.html', ['templateCache']);
 });
 
 /**
@@ -72,10 +74,19 @@ gulp.task('css-copy', ['sass'], function() {
         .pipe(gulp.dest('styleguide/public'));
 });
 
+
+gulp.task('templateCache', function () {
+    gulp.src('app/views/**/*.html')
+        .pipe(templateCache({
+            standalone: true
+        }))
+        .pipe(gulp.dest('app/js'));
+});
+
 /**
  * Multiple-Tasks
  */
-gulp.task('default', ['inject', 'sass']);
+gulp.task('default', ['inject', 'sass', 'templateCache']);
 gulp.task('serve', ['webserver', 'watch']);
 gulp.task('serve-styleguide', ['webserver-styleguide', 'watch-styleguide']);
 gulp.task('serve-all', ['webserver', 'webserver-styleguide', 'watch', 'watch-styleguide']);

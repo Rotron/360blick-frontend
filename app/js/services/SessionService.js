@@ -1,35 +1,23 @@
-app.service('SessionService', function () {
+app.service('SessionService', ['USER_ROLES', function (USER_ROLES) {
 
-    this.getSession = function() {
-        return {
-            token: this.token,
-            nick: this.nick,
-            email: this.email
-        }
-    };
+    this.token = null;
+    this.nick = null;
+    this.email = null;
+    this.userRole = USER_ROLES.guest;
 
-    this.getNick = function() {
-        return this.nick;
-    };
-
-    this.getAuthCredentials = function() {
-        return {
-            token: this.token,
-            nick: this.nick
-        }
-    };
-
-    this.create = function (token, nick, email) {
+    this.create = function (token, nick, email, userRole) {
         this.token = token;
         this.nick = nick;
         this.email = email;
+        this.userRole = userRole;
     };
 
     this.destroy = function () {
         this.token = null;
         this.nick = null;
         this.email = null;
+        this.userRole = USER_ROLES.guest;
     };
 
     return this;
-})
+}]);

@@ -1,15 +1,21 @@
-<div class="modal-dialog fade">
-    <div class="modal-content">
-        <div class="modal-header">
+<div class="dialog fade">
+    <div class="dialog-content">
+        <div class="dialog-header">
             <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Login</h4>
+            <h4 class="dialog-title">Login</h4>
         </div>
-        <div class="modal-body">
-            <form ng-submit="login(credencials)">
-                <input type="text" ng-model="credencials.login" placeholder="Username" name="login">
-                <input type="password" ng-model="credencials.password" placeholder="Password" name="password">
-                <input type="submit" value="Submit">
+        <div class="dialog-body">
+            <form name="loginForm" ng-controller="LoginController"
+                  ng-submit="login(credentials)" novalidate>
+                <label for="login">Username:</label>
+                <input type="text" id="login"
+                       ng-model="credentials.login">
+                <label for="password">Password:</label>
+                <input type="password" id="password"
+                       ng-model="credentials.password">
+                <button type="submit">Login</button>
             </form>
         </div>
     </div>
 </div>
+

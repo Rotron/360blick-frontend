@@ -1,9 +1,6 @@
 'use strict';
 
-  app.controller('MainController', ['$scope', 'AuthService', function ($scope, AuthService) {
+app.controller('MainController', ['$scope', function ($scope) {
 
-      $scope.showLoginModal = function(){
-          AuthService.showLoginModal();
-      }
-  }]);
+}]);
 
