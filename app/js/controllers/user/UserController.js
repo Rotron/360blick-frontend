@@ -3,11 +3,11 @@
 app.controller('UserController', ['$scope', '$stateParams', 'RequestService', function ($scope, $stateParams, RequestService) {
     $scope.username = $stateParams['username'];
 
-    /*RequestService.create('users/test', {}, function(res) {
+    RequestService.get('users/secret', {}, function(res) {
             console.log(res);
         }, function(error) {
-            console.log(error)
+            console.log(error);
         }
-    );*/
+    );
 
 }]);

@@ -3,14 +3,12 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
 
     this.login = function (credentials) {
         RequestService.create('users/login', credentials, function(res){
-            console.log('login success');
             $rootScope.setCurrentUser(credentials);
             // TODO: Backend, res.data.role
             SessionService.create(res.auth_token, res.nick, res.email, 'editor');
-            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: res.nick});
             },
         function(){
-            console.log('login faild');
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
         });
     };
@@ -21,12 +19,10 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
         };
 
         RequestService.create('users/logout', credentials, function(res){
-                console.log('logout success');
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 SessionService.destroy();
             },
             function(error){
-                console.log('logout faild', error);
                 $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
             });
     };

@@ -7,8 +7,18 @@ app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'btf
             templateUrl: 'partials/login.html'
         });
 
-        this.redirect = function () {
-            $state.go($rootScope.nextState.next.name, $rootScope.nextState.params, {reload: true});
+        this.redirect = function (nick) {
+            var redirectState = {
+                name: 'user',
+                params: {
+                    username: nick
+                }
+            };
+            if($rootScope.nextState){
+                redirectState.name = $rootScope.nextState.next.name;
+                redirectState.params = $rootScope.nextState.params;
+            }
+            $state.go(redirectState.name, redirectState.params, {reload: true});
         };
 
         this.redirectLandingPage = function() {
@@ -34,9 +44,10 @@ app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'btf
         $rootScope.$on(AUTH_EVENTS.sessionTimeout, function() {
             loginModal.activate();
         });
-        $rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
-            loginModal.deactivate(); // TODO: remove dom
-            that.redirect();
+        $rootScope.$on(AUTH_EVENTS.loginSuccess, function(event, data) {
+            loginModal.deactivate();
+            var nick = data ? data.nick : null;
+            that.redirect(nick);
         });
         $rootScope.$on(AUTH_EVENTS.logoutSuccess, this.redirectLandingPage);
     }]);

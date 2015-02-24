@@ -155,10 +155,8 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'USER_ROLES', 'AUTH_EVENTS
                 event.preventDefault();
                 if (AuthService.isAuthenticated()) {
                     // user is not allowed
-                    console.log(1);
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {next: next, params: nextParams});
                 } else {
-                    console.log(2);
                     // user is not logged in
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated, {next: next, params: nextParams});
                 }
