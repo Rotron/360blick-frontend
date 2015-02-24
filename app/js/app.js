@@ -6,13 +6,15 @@ var app = angular.module('360blickFrontendApp', [
     'ngAnimate',
     'ui.router',
     'btford.modal',
-    'templates'
+    'templates',
+    'mdo-angular-cryptography'
 ]);
 
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
     loginFailed: 'auth-login-failed',
     logoutSuccess: 'auth-logout-success',
+    logoutFailed: 'auth-logout-failed',
     registerSuccess: 'auth-register-success',
     registerFailed: 'auth-register-failed',
     sessionTimeout: 'auth-session-timeout',
@@ -32,13 +34,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
-    $httpProvider.interceptors.push([
-        '$injector',
-        function ($injector) {
-            return $injector.get('AuthInterceptor');
-        }
-    ]);
 
     $stateProvider
         .state('app', {
@@ -74,14 +69,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             },
             data: {
-                authorizedRoles: [USER_ROLES.editor]
+                authorizedRoles: false
             }
         })
         .state('user', {
             url: "/:username",
             views: {
                 "app": {
-                    templateUrl: "views/user/user.html",
+                    templateUrl: "views/user/index.html",
                     controller: "UserController"
                 },
                 "userContent@user": {
@@ -135,32 +130,38 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     $urlRouterProvider.otherwise("/");
 }]);
 
-app.run(['$rootScope', 'AuthService', 'USER_ROLES', 'AUTH_EVENTS', function ($rootScope, AuthService, USER_ROLES, AUTH_EVENTS) {
-    $rootScope.currentUser = null;
-    $rootScope.userRoles = USER_ROLES;
-    $rootScope.isAuthorized = AuthService.isAuthorized;
+app.run(['$rootScope', 'AuthService', 'EventService', 'USER_ROLES', 'AUTH_EVENTS',
+    function ($rootScope, AuthService, EventService, USER_ROLES, AUTH_EVENTS) {
 
-    $rootScope.setCurrentUser = function (user) {
-        $rootScope.currentUser = user;
-    };
+        $rootScope.currentUser = null;
+        $rootScope.userRoles = USER_ROLES;
+        $rootScope.isAuthorized = AuthService.isAuthorized;
 
-    $rootScope.$on('$stateChangeStart', function (event, next) {
+        $rootScope.setCurrentUser = function (user) {
+            $rootScope.currentUser = user;
+        };
 
-        var authorizedRoles = next.data.authorizedRoles;
+        AuthService.reloadLocalCredentials();
 
-        if (authorizedRoles === false) {
-            return;
-        }
+        $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
 
-        if (!AuthService.isAuthorized(authorizedRoles)) {
-            event.preventDefault();
-            if (AuthService.isAuthenticated()) {
-                // user is not allowed
-                $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-            } else {
-                // user is not logged in
-                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+            var authorizedRoles = next.data.authorizedRoles;
+
+            if (authorizedRoles === false) {
+                return;
             }
-        }
-    });
+
+            if (!AuthService.isAuthorized(authorizedRoles)) {
+                event.preventDefault();
+                if (AuthService.isAuthenticated()) {
+                    // user is not allowed
+                    console.log(1);
+                    $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {next: next, params: nextParams});
+                } else {
+                    console.log(2);
+                    // user is not logged in
+                    $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated, {next: next, params: nextParams});
+                }
+            }
+         });
 }]);
