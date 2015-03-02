@@ -9,7 +9,7 @@ app.controller('RegisterController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'Re
     };
 
     $scope.register = function (credentials) {
-        RequestService.create('users/register', credentials, function(res){
+        RequestService.post('users/register', credentials, function(res){
             $rootScope.$broadcast(AUTH_EVENTS.registerSuccess);
         }, function () {
             $rootScope.$broadcast(AUTH_EVENTS.registerFailed);
