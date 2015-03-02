@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('RegisterController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'RequestService', function ($scope, $rootScope, AUTH_EVENTS, RequestService) {
+app.controller('RegisterController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'RequestService', 'SessionService', function ($scope, $rootScope, AUTH_EVENTS, RequestService, SessionService) {
 
     $scope.credentials = {};
 
@@ -10,7 +10,8 @@ app.controller('RegisterController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'Re
 
     $scope.register = function (credentials) {
         RequestService.post('users/register', credentials, function(res){
-            $rootScope.$broadcast(AUTH_EVENTS.registerSuccess);
+            SessionService.create(res.token, res.nick, res.email, 'editor');
+            $rootScope.$broadcast(AUTH_EVENTS.registerSuccess, {nick: res.nick});
         }, function () {
             $rootScope.$broadcast(AUTH_EVENTS.registerFailed);
         });

@@ -49,5 +49,9 @@ app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'btf
             var nick = data ? data.nick : null;
             that.redirect(nick);
         });
+        $rootScope.$on(AUTH_EVENTS.registerSuccess, function(event, data) {
+            var nick = data ? data.nick : null;
+            that.redirect(nick);
+        });
         $rootScope.$on(AUTH_EVENTS.logoutSuccess, this.redirectLandingPage);
     }]);
