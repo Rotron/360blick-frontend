@@ -1,0 +1,22 @@
+@include add-grid(12);
+@include add-gutter(0em);
+
+.editor-wrapper{
+  @include grid-span(12);
+  height: -moz-calc(100% - #{$editorHeaderHeight});
+  height: -webkit-calc(100% - #{$editorHeaderHeight});
+  height: calc(100% - #{$editorHeaderHeight});
+}
+
+.editor-header{
+  @include grid-span(12);
+  height: $editorHeaderHeight;
+}
+.editor-view{
+  @include grid-span(9, 1);
+  height: 100%;
+}
+.editor-sidebar{
+  @include grid-span(3, 10);
+  height: 100%;
+}

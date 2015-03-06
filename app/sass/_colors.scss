@@ -1,0 +1,71 @@
+$primary-0: #22313B;
+$primary-1: #2b3e4b;
+$primary-2: #0E4D6F;
+$primary-3: #4099C6;
+$primary-4: #98D7F4;
+
+$secondary-0: #edebe4;
+$secondary-1: #FFFFFF;
+
+$tertiary-0: #5f6470;
+$tertiary-1: #6F8694;
+
+$cta-0: #F35E60;
+$cta-1: #7AF476;
+
+// Color-Collection
+$colors:
+  primary-0 $primary-0 #fff,
+  primary-1 $primary-1 #fff,
+  primary-2 $primary-2,
+  primary-3 $primary-3,
+  primary-4 $primary-4,
+  secondary-0 $secondary-0,
+  secondary-1 $secondary-1,
+  tertiary-0 $tertiary-0,
+  tertiary-1 $tertiary-1,
+  cta-0 $cta-0,
+  cta-1 $cta-1;
+
+// ATTENTION: DO NOT USE IN PRODUCTION
+// FOLLOWING CLASSES ONLY FOR USE IN THE STYLEGUIDE.MD
+.sg-color {
+  display: inline-block;
+  position: relative;
+  width: 230px;
+  height: 220px;
+  padding: 50px;
+  margin: 10px 10px 10px 0;
+  color: #555;
+  text-align: center;
+  border: 1px solid #aeaeae;
+}
+
+.sg-color-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.6);
+  width: 100%;
+  border-top: 1px solid #aeaeae;
+
+  &:before, &:after {
+    display: block;
+  }
+}
+
+@for $i from 1 through length($colors) {
+  $color: nth($colors, $i);
+  $color-name: nth($color, 1);
+  $color-hex: nth($color, 2);
+  $color-rgb: rgba($color-hex, 0);
+
+  .sg-color-#{$color-name} {
+    background-color: $color-hex;
+
+    .sg-color-info {
+      &:before { content: "#{$color-hex}"; }
+      &:after { content: "#{$color-rgb}"; }
+    }
+  }
+}

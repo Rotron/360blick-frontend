@@ -1,11 +1,11 @@
 var gulp = require('gulp'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-ruby-sass'),
     plumber = require('gulp-plumber'),
     inject = require('gulp-inject'),
     open = require ('gulp-open'),
     webserver = require('gulp-webserver'),
     clean = require('gulp-clean'),
-    angularFilesort = require('gulp-angular-filesort'),
+    //angularFilesort = require('gulp-angular-filesort'),
     gulpkss = require('gulp-kss'),
     templateCache = require('gulp-angular-templatecache');
 
@@ -41,8 +41,12 @@ gulp.task('webserver-styleguide', function() {
  * Styles
  **/
 gulp.task('sass', function() {
-    return gulp.src('app/sass/main.scss')
-        .pipe(sass())
+    return sass('app/sass/main.scss', {
+            loadPath: [
+                    './app/bower_components/singularity/stylesheets'
+                ]
+            }
+        )
         .pipe(gulp.dest('app/css'));
 });
 

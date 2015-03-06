@@ -72,6 +72,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('editor', {
+            url: "/editor",
+            views: {
+                "app": {
+                    templateUrl: "views/editor/editor.html",
+                    controller: "EditorController"
+                }
+            }
+        })
         .state('user', {
             url: "/:username",
             views: {

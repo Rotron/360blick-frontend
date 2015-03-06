@@ -1,0 +1,34 @@
+<div class="editor-header" id="editor-header">
+    <i ng-click="zoomIn()" class="fa fa-plus-square"></i>
+    <i ng-click="zoomOut()" class="fa fa-minus-square"></i>
+</div>
+<div class="editor-wrapper">
+    <div class="editor-view" id="editor-view-container"></div>
+    <div class="editor-sidebar">
+        <div class="objects-wrapper">
+            <div class="scene-object" ng-repeat="item in sceneObjects" ng-class="{active: item.id == currentSelected.id}">
+                <div class="scene-object-inner">
+                    <div class="scene-object-description">
+                        {{item.type}} {{item.id}}: {{item.geometry.type}}
+                    </div>
+                    <div class="scene-object-buttons">
+                        <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
+                    </div>
+                </div>
+                <div class="scene-object-details" ng-if="item.detailsOpen || item.id == currentSelected.id">
+                    <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
+                    <xyz-input title="Position" item="item.position"></xyz-input>
+                    <xyz-input title="Rotation" item="item.rotation"></xyz-input>
+                    <xyz-input title="Skalierung" item="item.scale"></xyz-input>
+
+                </div>
+            </div>
+        </div>
+        <div class="objects-wrapper">
+            <div class="primitive-object" ng-repeat="type in supportedPrimitiveObjects" ng-click="addNewObject(type)">
+                {{type}}
+            </div>
+        </div>
+    </div>
+</div>
+
