@@ -7,7 +7,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
+  font-size: 16px;
   font: inherit;
   vertical-align: baseline; }
 
@@ -52,12 +52,19 @@ Additions by 360blick
 body, html, .app-container {
   height: 100%;
   width: 100%;
+}
+
+html, body {
   background: #fff;
-  font-family: sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 img {
   max-width: 100%;
+}
+
+a {
+  text-decoration: none;
 }
 
 ::-moz-selection { background: #555; color: #fff; }

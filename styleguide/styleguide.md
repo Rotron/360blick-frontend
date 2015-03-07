@@ -1,10 +1,10 @@
-# 360blick Styleguide
+# Overview
 
 Enjoy.
 
 ## Colors
 
-Following all colors variables with their value.
+Following all color variables with their value.
 
 ### Primary Colors
 

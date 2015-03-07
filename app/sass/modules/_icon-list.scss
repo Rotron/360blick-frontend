@@ -1,0 +1,84 @@
+$icon-list-size: 60px;
+$icon-list-radius: 100px;
+
+$icon-list-size-minor: 40px;
+$icon-list-radius-minor: 80px;
+
+
+// Icon-List
+//
+// Desc
+//
+// Markup: <ul class="icon-list"><li class="icon-list-item"></li></ul>
+//
+// Styleguide 1
+.icon-list-item {
+  display: inline-block;
+  text-align: center;
+  width: 240px;
+
+  i {
+    background: $secondary-0;
+    color: $primary-0;
+    display: block;
+    font-size: $icon-list-size;
+    width: $icon-list-radius;
+    height: $icon-list-radius;
+    border-radius: $icon-list-radius;
+    line-height: $icon-list-radius;
+    margin: 0 auto 25px;
+  }
+
+  + .icon-list-item {
+    margin-left: 20px;
+  }
+}
+
+.icon-list-title {
+  display: block;
+  @include font-bold;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.icon-list-title-divided {
+  position: relative;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+
+  &:after {
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    content: '';
+    width: 14%;
+    height: 2px;
+    margin-left: -7%;
+    background: $secondary-0;
+  }
+}
+
+.icon-list-text {
+  @include font-light;
+  line-height: 1.2;
+}
+
+.icon-list-minor {
+
+  .icon-list-item {
+    width: 120px;
+
+    i {
+      font-size: $icon-list-size-minor;
+      width: $icon-list-radius-minor;
+      height: $icon-list-radius-minor;
+      border-radius: $icon-list-radius-minor;
+      line-height: $icon-list-radius-minor;
+      margin: 0 auto 15px;
+    }
+
+    + .icon-list-item {
+      margin-left: 10px;
+    }
+  }
+}

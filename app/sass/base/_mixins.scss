@@ -3,3 +3,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+@mixin blick-transition($property: all) {
+  transition: $property 0.15s ease-in;
+}

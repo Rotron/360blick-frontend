@@ -1,0 +1,27 @@
+.footer {
+  background-color: $primary-0;
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 14px;
+
+  li {
+    display: inline-block;
+    padding: 0 15px;
+
+    + li {
+      border-left: 1px solid $secondary-1;
+    }
+  }
+
+  a {
+    color: $secondary-1;
+    border-bottom: 1px solid $primary-0;
+    text-transform: uppercase;
+    @include blick-transition(border-color);
+    @include font-normal;
+
+    &:hover {
+      border-color: $secondary-1;
+    }
+  }
+}

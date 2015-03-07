@@ -1,18 +1,26 @@
-@import "_reset";
-@import "_mixins";
-@import "_icons";
-@import "_colors";
-@import "_singularitygs";
+//@import "_singularitygs";
+
+@import "base/reset";
+@import "base/mixins";
+@import "base/fonts";
+@import "base/icons";
+@import "base/grid";
+@import "base/colors";
 
 @import "partials/_buttons.scss";
 
 @import "modules/_banner.scss";
+@import "modules/_icon-list.scss";
+@import "modules/_dialog.scss";
+
+@import "layouts/_landingpage.scss";
+@import "layouts/footer";
 
 // Links
 //
 // usual links and style for external links
 //
-// Markup: <a href="" class="{$modifiers}">Link</a>
+// Markup: <a href="" class="test {$modifiers}">Link</a>
 //
 // :visited  - visited styles
 // :hover    - Highlight the button when hovered.
@@ -31,7 +39,7 @@ $link-external: #0000FF;
 
 
 
-a {
+.test {
   color: $link-color;
   text-decoration: none;
 
@@ -58,7 +66,7 @@ a {
   }
 }
 
-// A button suitable for giving a star to someone.
+// A button suitable
 //
 // Markup: <a href="" class="{$modifiers}">Link</a>
 //

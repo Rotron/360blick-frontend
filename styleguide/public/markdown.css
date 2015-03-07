@@ -7,11 +7,10 @@ html {
 body {
   color: #444444;
   background: #fefefe;
-  font-family: 'Droid Serif', Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 12px;
   line-height: 1.5em;
-  padding: 1em;
-  max-width: 52em;
+  padding: 0;
 }
 a {
   color: #0645ad;
@@ -52,10 +51,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Droid Serif', Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+  font-family: 'Ubuntu', sans-serif;
   color: #111111;
   font-weight: normal;
-  line-height: 1em;
+  line-height: 1.4em;
+  margin-bottom: 0.5em;
+  color: #2b3e4b;
 }
 h4,
 h5,

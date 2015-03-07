@@ -1,0 +1,84 @@
+
+.section {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 42px;
+  text-transform: uppercase;
+  @include font-medium;
+}
+
+.section-title-small {
+  @include font-light;
+  font-size: 20px;
+  line-height: 1.2;
+  padding: 40px 0 55px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.section-text {
+  @include font-light;
+  line-height: 1.2;
+}
+
+.section-gallery {
+  background-color: $primary-1;
+  background-image: url(../images/alps-from-nebelhorn-flickr-sonic-knight.jpg);
+  background-position: 50% 50%;
+  background-size: cover;
+  padding: 240px 20px;
+  color: $secondary-1;
+  position: relative;
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba($primary-1, 0.40);
+  }
+}
+
+.section-gallery-title {
+  @include font-bold;
+  font-size: 100px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-gallery-title-small {
+  @include font-light;
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.section-features {
+  background-color: $secondary-1;
+}
+
+.section-toggle {
+  background-color: $secondary-0;
+}
+
+.section-toggle-images {
+  width: 625px;
+  height: 320px;
+  background: $secondary-1;
+  margin: 0 auto;
+}
+
+.section-options {
+  color: $secondary-1;
+  background-color: $primary-1;
+}

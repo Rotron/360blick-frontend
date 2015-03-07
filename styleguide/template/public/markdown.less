@@ -15,8 +15,8 @@
 @md-colors-selection      : rgba(255,255,0,0.3);
 @md-colors-selection-text : @md-colors-foreground;
 
-@md-font-headers          : 'Droid Serif', Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
-@md-font-body             : 'Droid Serif', Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+@md-font-headers          : 'Ubuntu', sans-serif;
+@md-font-body             : 'Ubuntu', sans-serif;
 @md-font-monospace        : 'Monaco', 'Ubuntu Mono', 'Lucida Console', 'Courier New', Courier, monospace;
 
 // ------------------------------------------------------------------------------
@@ -38,8 +38,7 @@ body {
 	font-size:12px;
 
 	line-height:1.5em;
-	padding:1em;
-	max-width:52em;
+	padding: 0;
 }
 
 // ------------------------------------------------------------------------------
@@ -80,7 +79,9 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: @md-font-headers;
 	color: @md-colors-headers;
 	font-weight: normal;
-	line-height: 1em;
+	line-height: 1.4em;
+    margin-bottom: 0.5em;
+    color: #2b3e4b;
 }
 
 h4, h5, h6 {
