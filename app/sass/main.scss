@@ -1,4 +1,52 @@
-//@import "_singularitygs";
+/*
+
+# COMPONENTS
+
+  A page module that has a certain purpose and is a wrapper for it’s children,
+  in example a modal or a slider can be a component.
+
+  Components use a name:
+
+  .component {}
+  .component-name {}
+
+  A name can consist of different words separated by a “-” (dash).
+
+# VARIANTS
+
+  A component and its containing elements which are modified in a certain way.
+
+  .component--variant {}
+  .component-name--variant-modifier {}
+
+  A variant is divided by “--”(double dash) from the main component’s name.
+  It can contain “-”(dashes) to separate words from each other.
+
+# NESTED ELEMENTS
+
+  Parts of which a component can consist, sometimes similar across components.
+
+  .component__link {}
+  .component-name__link-element {}
+
+# MODIFIERS / STATES
+
+  The state of a component or nested element is modified by user interaction,
+  for example a disabled button.
+
+  A component can be modified via a separate class:
+
+  .component.is-active {}
+  .component-name.has-children {}
+  .component.js-selected {}
+
+  A modifier class is a verb combined with the purpose it has to describe the state of the component,
+  which are separated with a “-” (dash).
+*/
+
+
+
+
 
 @import "base/reset";
 @import "base/mixins";
