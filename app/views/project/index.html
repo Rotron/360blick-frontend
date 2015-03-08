@@ -1,8 +1,20 @@
-Projekt {{projectId}}
-<div>
-    <button ui-sref="user({username: username})">back to list</button>
-    <button ui-sref="user.project.scenes({projectId: projectId})">Scenes</button>
-    <button ui-sref="user.project.assets({projectId: projectId})">Assets</button>
-    <button ui-sref="user.project.settings({projectId: projectId})">Settings</button>
+<div class="hotfix-container">
+    Projekt {{projectId}}
+    <nav>
+        <ul class="nav-tabs">
+            <li class="nav-tabs__item">
+                <button ui-sref="user({username: username})" class="nav-tabs__btn"><i class="fa fa-angle-left"></i></button>
+            </li>
+            <li class="nav-tabs__item">
+                <button ui-sref="user.project.scenes({projectId: projectId})" class="nav-tabs__btn">Scenes</button>
+            </li>
+            <li class="nav-tabs__item">
+                <button ui-sref="user.project.assets({projectId: projectId})" class="nav-tabs__btn">Assets</button>
+            </li>
+            <li class="nav-tabs__item">
+                <button ui-sref="user.project.settings({projectId: projectId})" class="nav-tabs__btn">Settings</button>
+            </li>
+        </ul>
+    </nav>
 </div>
 <div ui-view="projectContent" class="reveal-animation"></div>

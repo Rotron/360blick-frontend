@@ -2,7 +2,6 @@
     <div class="container">
         <div class="col span-6">&nbsp;</div>
         <div class="col span-6 has-text-right">
-            <button ui-sref="user({username: currentUser})">Profile</button>
             <button ui-sref="login" class="btn btn--round btn--sign-in" ng-if="!isAuthenticated()">sign in</button>
             <button ng-click="logout()" class="btn btn--round" ng-if="isAuthenticated()">logout</button>
         </div>

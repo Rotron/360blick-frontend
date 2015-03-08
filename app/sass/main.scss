@@ -72,6 +72,21 @@ body, html {
   }
 }
 
+.hotfix-container {
+  padding: 10px 20px;
+  border: 1px solid $primary-3;
+  margin: 10px;
+
+  h2 {
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+}
+
 // Links
 //
 // usual links and style for external links

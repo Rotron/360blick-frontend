@@ -1,12 +1,11 @@
-scenes von {{projectId}}
-
-<div>
-    <div>
-        <label>Titel</label>
-        <input ng-model="newScene.title">
-        <button ng-click="createNewScene()">Neues Szene anlegen</button>
-    </div>
-    <div ng-repeat="scene in scenes">
-        <h2>{{scene.title}}</h2>
-    </div>
+<div class="hotfix-container">
+    scenes von {{projectId}}
+</div>
+<div class="hotfix-container">
+    <label>Titel</label>
+    <placeholder-input value="newScene.title" label="Title" type="text"></placeholder-input>
+    <button ng-click="createNewScene()" class="btn btn--round">Neues Szene anlegen</button>
+</div>
+<div ng-repeat="scene in scenes" class="hotfix-container">
+    <h2>{{scene.title}}</h2>
 </div>

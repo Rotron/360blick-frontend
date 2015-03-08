@@ -160,18 +160,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             data: {
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
-        })
-        .state('user.blick', {
-            url: "/blick/:blickId",
-            views: {
-                "userContent@user": {
-                    templateUrl: "views/user/blick.html",
-                    controller: "UserBlickController"
-                }
-            },
-            data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-            }
         });
 
     $locationProvider.html5Mode(true);
