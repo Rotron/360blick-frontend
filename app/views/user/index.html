@@ -1,15 +1,22 @@
 <nav-header></nav-header>
 <div id="view--user">
-    <div ng-if="currentUser">Welcome, {{ currentUser.name }}</div>
-
-    <div ng-switch on="currentUser.role">
-        <div ng-switch-when="userRoles.admin">Role: admin.</div>
-        <div ng-switch-when="userRoles.editor">Role: editor.</div>
-        <div ng-switch-default>Role: You're something else.</div>
+    <div class="user-banner">
+        <div class="user-banner__container container">
+            <div class="user-banner__image col span-6"><i class="fa fa-mars"></i></div>
+            <div class="user-banner__info col span-6">
+                <div>{{ username }}</div>
+            </div>
+        </div>
     </div>
-    <button ui-sref="user" class="btn btn--round">Gallery</button>
-    <button ui-sref="user.assets" class="btn btn--round">Assets</button>
-    <button ui-sref="user.settings" class="btn btn--round">Settings</button>
-    <button ui-sref="user.blick" class="btn btn--round">Blick</button>
+    <nav>
+        <ul class="nav-tabs">
+            <li class="nav-tabs__item">
+                <button ui-sref="user" ui-sref-active="active" class="nav-tabs__btn">Gallery</button>
+            </li>
+            <li class="nav-tabs__item">
+                <button ui-sref="user.settings" ui-sref-active="active" class="nav-tabs__btn">Settings</button>
+            </li>
+        </ul>
+    </nav>
     <div ui-view="userContent" class="reveal-animation"></div>
 </div>

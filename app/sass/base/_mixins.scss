@@ -30,8 +30,8 @@ $size-content: 14px;
   text-overflow: ellipsis;
 }
 
-@mixin blick-transition($property: all) {
-  transition: $property 0.15s ease-in;
+@mixin blick-transition($property: all, $duration: 0.15s, $effect: ease-in) {
+  transition: $property $duration;
 }
 
 @mixin breakpoint($point) {

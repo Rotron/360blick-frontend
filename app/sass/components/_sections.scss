@@ -4,13 +4,13 @@
   text-align: center;
 }
 
-.section_title {
+.section__title {
   font-size: 42px;
   text-transform: uppercase;
   @include font-medium;
 }
 
-.section_subtitle {
+.section__subtitle {
   @include font-light;
   font-size: 20px;
   line-height: 1.2;
@@ -19,7 +19,7 @@
   margin: 0 auto;
 }
 
-.section_text {
+.section__text {
   @include font-light;
   line-height: 1.2;
 }
@@ -39,21 +39,21 @@
   }
 }
 
-.section--gallery_title {
+.section--gallery__title {
   @include font-bold;
   font-size: 100px;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
 
-.section--gallery_subtitle {
+.section--gallery__subtitle {
   @include font-light;
   font-size: 25px;
   text-transform: uppercase;
   margin-bottom: 40px;
 }
 
-.section--gallery_sign-up {
+.section--gallery__sign-up {
   position: absolute;
   bottom: 150px;
   width: 130px;
@@ -69,7 +69,7 @@
   background-color: $secondary-0;
 }
 
-.section--toggle_images {
+.section--toggle__images {
   width: 625px;
   height: 320px;
   background: $secondary-1;

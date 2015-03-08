@@ -1,0 +1,26 @@
+.user-banner {
+  background: $tertiary-1;
+  height: 240px;
+  padding: 100px;
+}
+
+.user-banner__container {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.user-banner__image {
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 40px;
+  background: $tertiary-0;
+  border-radius: 100px;
+  text-align: center;
+}
+
+.user-banner__info {
+  font-size: 20px;
+  line-height: 80px;
+  padding-left: $base * 2;
+}

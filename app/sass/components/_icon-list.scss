@@ -12,7 +12,7 @@ $icon-list-radius-minor: 80px;
 // Markup: <ul class="icon-list"><li class="icon-list-item"></li></ul>
 //
 // Styleguide 1
-.icon-list_item {
+.icon-list__item {
   display: inline-block;
   text-align: center;
   width: 240px;
@@ -29,19 +29,19 @@ $icon-list-radius-minor: 80px;
     margin: 0 auto 25px;
   }
 
-  + .icon-list_item {
+  + .icon-list__item {
     margin-left: 20px;
   }
 }
 
-.icon-list_title {
+.icon-list__title {
   display: block;
   @include font-bold;
   font-size: 22px;
   text-transform: uppercase;
 }
 
-.icon-list_title--divided {
+.icon-list__title--divided {
   position: relative;
   padding-bottom: 20px;
   margin-bottom: 20px;
@@ -58,14 +58,14 @@ $icon-list-radius-minor: 80px;
   }
 }
 
-.icon-list_text {
+.icon-list__text {
   @include font-light;
   line-height: 1.2;
 }
 
 .icon-list--minor {
 
-  .icon-list_item {
+  .icon-list__item {
     width: 120px;
 
     i {
@@ -77,7 +77,7 @@ $icon-list-radius-minor: 80px;
       margin: 0 auto 15px;
     }
 
-    + .icon-list_item {
+    + .icon-list__item {
       margin-left: 10px;
     }
   }

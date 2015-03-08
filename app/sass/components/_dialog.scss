@@ -12,7 +12,7 @@ $dialog-header-height: $base * 10;
   z-index: 4;
 }
 
-.dialog_content {
+.dialog__content {
   background: $secondary-0;
   color: $primary-0;
   width: 600px;
@@ -20,7 +20,7 @@ $dialog-header-height: $base * 10;
   margin: 0 auto;
 }
 
-.dialog_close {
+.dialog__close {
   background: $cta-0;
   color: $secondary-1;
   position: absolute;
@@ -29,9 +29,10 @@ $dialog-header-height: $base * 10;
   color: $secondary-1;
   height: $dialog-header-height;
   width: $dialog-header-height;
+  cursor: pointer;
 }
 
-.dialog_header {
+.dialog__header {
   background: $primary-1;
   color: $secondary-1;
   position: relative;
@@ -39,11 +40,11 @@ $dialog-header-height: $base * 10;
   padding: 0 $base * 3;
 }
 
-.dialog_title {
+.dialog__title {
   font-size: $size-title;
   line-height: $dialog-header-height;
 }
 
-.dialog_body {
+.dialog__body {
   padding: $base * 3;
 }

@@ -3,31 +3,33 @@
   margin-bottom: $base;
 
   &.is-focused {
-    .input_label {
+    .input__label {
       opacity: .6;
     }
   }
 
   &.is-filled {
-    .input_label {
+    .input__label {
       opacity: .2;
     }
   }
 }
 
-.input_label {
+.input__label {
   position: absolute;
   line-height: $base * 6;
   padding: $base;
+  cursor: text;
 }
 
-.input_field {
+.input__field {
   line-height: $base * 6;
   height: $base * 8;
   padding: $base;
 }
 
-.input_field[type=text],
-.input_field[type=password] {
+.input__field[type=text],
+.input__field[type=email],
+.input__field[type=password] {
   background: $tertiary-1;
 }

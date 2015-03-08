@@ -58,11 +58,15 @@
 @import "components/_dialog";
 @import "components/_sections";
 @import "components/_form";
+@import "components/_nav-tabs";
+@import "components/_user-banner";
 @import "components/_footer";
 @import "components/_views";
 
 
 body, html {
+  background: $secondary-1;
+
   &.is-fixed {
     overflow: hidden;
   }

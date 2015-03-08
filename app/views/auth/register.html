@@ -1,7 +1,18 @@
-<h1>Register</h1>
-<form ng-submit="register(credencials)">
-    <input type="text" ng-model="credencials.nick" placeholder="Username" name="nick">
-    <input type="text" ng-model="credencials.email" placeholder="Email" name="email">
-    <input type="password" ng-model="credencials.password" placeholder="Password" name="password">
-    <input type="submit" value="Submit">
-</form>
+<div id="view--register">
+    <h1>Register</h1>
+    <form name="registerForm" class="container"
+          ng-controller="LoginController" ng-submit="register(credencials)" novalidate>
+        <fieldset class="row">
+            <placeholder-input value="credentials.nick" label="Username" type="text"></placeholder-input>
+        </fieldset>
+        <fieldset class="row">
+            <placeholder-input value="credentials.email" label="Email" type="email"></placeholder-input>
+        </fieldset>
+        <fieldset class="row">
+            <placeholder-input value="credentials.password" label="Password" type="password"></placeholder-input>
+        </fieldset>
+        <div class="row">
+            <button class="btn btn--round btn--submit">Login</button>
+        </div>
+    </form>
+</div>

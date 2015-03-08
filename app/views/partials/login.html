@@ -1,10 +1,10 @@
 <div class="dialog">
-    <div class="dialog_content">
-        <div class="dialog_header">
-            <button type="button" class="dialog_close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="dialog_title">Login</h4>
+    <div class="dialog__content">
+        <div class="dialog__header">
+            <button class="dialog__close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="dialog__title">Login</h4>
         </div>
-        <div class="dialog_body">
+        <div class="dialog__body">
             <form name="loginForm" class="container"
                   ng-controller="LoginController" ng-submit="login(credentials)" novalidate>
                 <fieldset class="row">
