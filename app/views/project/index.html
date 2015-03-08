@@ -1,0 +1,8 @@
+Projekt {{projectId}}
+<div>
+    <button ui-sref="user({username: username})">back to list</button>
+    <button ui-sref="user.project.scenes({projectId: projectId})">Scenes</button>
+    <button ui-sref="user.project.assets({projectId: projectId})">Assets</button>
+    <button ui-sref="user.project.settings({projectId: projectId})">Settings</button>
+</div>
+<div ui-view="projectContent" class="reveal-animation"></div>

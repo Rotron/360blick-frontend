@@ -4,3 +4,4 @@ dist
 .sass-cache
 app/bower_components
 app/css
+app/js/templates.js

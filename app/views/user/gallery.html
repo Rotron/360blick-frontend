@@ -1,1 +1,16 @@
 Gallery von User {{username}}
+
+<h1>Projects</h1>
+<div>
+    <label>Titel</label>
+    <input ng-model="newProject.title">
+    <label>Description</label>
+    <textarea ng-model="newProject.description"></textarea>
+    <button ng-click="createNewProject()">Neues Projekt anlegen</button>
+</div>
+<div>
+    <div ng-repeat="project in projects" ui-sref="user.project({projectId: project.id})">
+        <h2>{{project.title}}</h2>
+        <p>{{project.description}}</p>
+    </div>
+</div>
