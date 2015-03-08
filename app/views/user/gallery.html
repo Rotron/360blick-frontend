@@ -9,7 +9,7 @@ Gallery von User {{username}}
     <button ng-click="createNewProject()">Neues Projekt anlegen</button>
 </div>
 <div>
-    <div ng-repeat="project in projects" ui-sref="user.project({projectId: project.id})">
+    <div ng-repeat="project in projects" ui-sref="user.project.scenes({projectId: project.id})">
         <h2>{{project.title}}</h2>
         <p>{{project.description}}</p>
     </div>

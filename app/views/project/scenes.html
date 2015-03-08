@@ -1,6 +1,11 @@
 scenes von {{projectId}}
 
 <div>
+    <div>
+        <label>Titel</label>
+        <input ng-model="newScene.title">
+        <button ng-click="createNewScene()">Neues Szene anlegen</button>
+    </div>
     <div ng-repeat="scene in scenes">
         <h2>{{scene.title}}</h2>
     </div>
