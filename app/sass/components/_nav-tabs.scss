@@ -1,0 +1,20 @@
+.nav-tabs {
+  position: relative;
+  margin: $base * 2;
+}
+
+.nav-tabs__item {
+  display: inline-block;
+}
+
+.nav-tabs__btn {
+  font-size: 18px;
+  background: $tertiary-1;
+  border-radius: $base;
+  padding: $base;
+  color: $secondary-0;
+
+  &.is-active {
+    background: $primary-3;
+  }
+}

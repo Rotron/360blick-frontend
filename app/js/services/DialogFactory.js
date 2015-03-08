@@ -43,7 +43,6 @@ angular.module('btford.modal', []).
 
             function setDialogCounter(value) {
                 dialogCounter = value;
-                console.log(dialogCounter);
 
                 if(dialogCounter > 0) {
                     angular.element(document.querySelectorAll('body, html')).addClass('is-fixed');
