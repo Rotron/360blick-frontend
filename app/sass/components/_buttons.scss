@@ -2,20 +2,27 @@
 
 }
 
-.btn-round {
+.btn--round {
   border-radius: 40px;
   padding: 15px 25px;
   text-transform: uppercase;
+  background: $tertiary-1;
+  color: $secondary-1;
   @include font-light;
 }
 
-.btn-sign-up {
+.btn--sign-up {
   background: $primary-3;
   color: $secondary-1;
   padding: 20px 35px;
 }
 
-.btn-sign-in {
+.btn--sign-in {
+  background: $primary-2;
+  color: $secondary-1;
+}
+
+.btn--submit {
   background: $primary-2;
   color: $secondary-1;
 }

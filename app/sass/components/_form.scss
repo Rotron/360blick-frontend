@@ -1,0 +1,33 @@
+.input {
+  position: relative;
+  margin-bottom: $base;
+
+  &.is-focused {
+    .input_label {
+      opacity: .6;
+    }
+  }
+
+  &.is-filled {
+    .input_label {
+      opacity: .2;
+    }
+  }
+}
+
+.input_label {
+  position: absolute;
+  line-height: $base * 6;
+  padding: $base;
+}
+
+.input_field {
+  line-height: $base * 6;
+  height: $base * 8;
+  padding: $base;
+}
+
+.input_field[type=text],
+.input_field[type=password] {
+  background: $tertiary-1;
+}

@@ -1,14 +1,49 @@
+$dialog-header-height: $base * 10;
+
 .dialog {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba($secondary-0, .95);
-  padding: 20px;
-  z-index: 2;
+  background: $primary-0;
+  background: rgba($primary-0, .9);
+  padding: $base * 14;
+  z-index: 4;
+}
 
-  input {
-    border: 1px solid black;
-  }
+.dialog_content {
+  background: $secondary-0;
+  color: $primary-0;
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.dialog_close {
+  background: $cta-0;
+  color: $secondary-1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: $secondary-1;
+  height: $dialog-header-height;
+  width: $dialog-header-height;
+}
+
+.dialog_header {
+  background: $primary-1;
+  color: $secondary-1;
+  position: relative;
+  height: $dialog-header-height;
+  padding: 0 $base * 3;
+}
+
+.dialog_title {
+  font-size: $size-title;
+  line-height: $dialog-header-height;
+}
+
+.dialog_body {
+  padding: $base * 3;
 }

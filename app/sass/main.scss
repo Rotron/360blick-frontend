@@ -45,19 +45,28 @@
 
 */
 
-@import "base/reset";
 @import "base/mixins";
-@import "base/fonts";
+@import "base/reset";
 @import "base/icons";
 @import "base/grid";
 @import "base/colors";
+@import "base/global-states";
 
 @import "components/buttons";
-@import "components/_banner";
+@import "components/_header";
 @import "components/_icon-list";
 @import "components/_dialog";
 @import "components/_sections";
+@import "components/_form";
 @import "components/_footer";
+@import "components/_views";
+
+
+body, html {
+  &.is-fixed {
+    overflow: hidden;
+  }
+}
 
 // Links
 //

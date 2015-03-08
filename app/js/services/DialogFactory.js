@@ -19,6 +19,7 @@ angular.module('btford.modal', []).
                 controllerAs  = config.controllerAs,
                 container     = angular.element(config.container || document.body),
                 element       = null,
+                dialogCounter = 0,
                 html,
                 scope;
 
@@ -40,6 +41,17 @@ angular.module('btford.modal', []).
                 });
             }
 
+            function setDialogCounter(value) {
+                dialogCounter = value;
+                console.log(dialogCounter);
+
+                if(dialogCounter > 0) {
+                    angular.element(document.querySelectorAll('body, html')).addClass('is-fixed');
+                } else {
+                    angular.element(document.querySelectorAll('body, html')).removeClass('is-fixed');
+                }
+            }
+
             function attach (html, locals) {
                 element = angular.element(html);
                 if (element.length === 0) {
@@ -47,6 +59,7 @@ angular.module('btford.modal', []).
                 }
                 $animate.enter(element, container);
                 scope = $rootScope.$new();
+                scope.closeIt = deactivate;
                 if (locals) {
                     for (var prop in locals) {
                         scope[prop] = locals[prop];
@@ -57,9 +70,13 @@ angular.module('btford.modal', []).
                     scope[controllerAs] = ctrl;
                 }
                 $compile(element)(scope);
+
+                setDialogCounter(++dialogCounter);
             }
 
             function deactivate () {
+                setDialogCounter(--dialogCounter);
+
                 var deferred = $q.defer();
                 if (element) {
                     $animate.leave(element, function () {
