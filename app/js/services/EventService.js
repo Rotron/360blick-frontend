@@ -47,11 +47,16 @@ app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'btf
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function(event, data) {
             loginModal.deactivate();
             var nick = data ? data.nick : null;
+            $rootScope.currentUser = nick;
             that.redirect(nick);
         });
         $rootScope.$on(AUTH_EVENTS.registerSuccess, function(event, data) {
             var nick = data ? data.nick : null;
+            $rootScope.currentUser = nick;
             that.redirect(nick);
         });
-        $rootScope.$on(AUTH_EVENTS.logoutSuccess, this.redirectLandingPage);
+        $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
+            $rootScope.currentUser = '';
+            that.redirectLandingPage();
+        });
     }]);

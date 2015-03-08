@@ -1,5 +1,5 @@
-app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'AUTH_EVENTS',
-    function (RequestService, SessionService, $rootScope, AUTH_EVENTS) {
+app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'AUTH_EVENTS', '$rootScope',
+    function (RequestService, SessionService, $rootScope, AUTH_EVENTS, $rootScope) {
 
     this.login = function (credentials) {
         RequestService.post('users/login', credentials, function(res){
@@ -44,4 +44,8 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
         return (this.isAuthenticated() &&
         authorizedRoles.indexOf(SessionService.userRole) !== -1);
     };
+
+        $rootScope.isAuthenticated = this.isAuthenticated;
+        $rootScope.isAuthorized = this.isAuthorized;
+
 }]);
