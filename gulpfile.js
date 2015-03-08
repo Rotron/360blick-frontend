@@ -42,7 +42,7 @@ gulp.task('webserver-styleguide', function() {
  **/
 gulp.task('sass', function() {
     return gulp.src('app/sass/main.scss')
-        .pipe(sass())
+        .pipe(sass({errLogToConsole: true}))
         .pipe(gulp.dest('app/css'));
 });
 

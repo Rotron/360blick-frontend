@@ -1,15 +1,16 @@
 <nav-header></nav-header>
+<div id="view--user">
+    <div ng-if="currentUser">Welcome, {{ currentUser.name }}</div>
 
-<div ng-if="currentUser">Welcome, {{ currentUser.name }}</div>
+    <div ng-switch on="currentUser.role">
+        <div ng-switch-when="userRoles.admin">Role: admin.</div>
+        <div ng-switch-when="userRoles.editor">Role: editor.</div>
+        <div ng-switch-default>Role: You're something else.</div>
+    </div>
 
-<div ng-switch on="currentUser.role">
-    <div ng-switch-when="userRoles.admin">You're admin.</div>
-    <div ng-switch-when="userRoles.editor">You're editor.</div>
-    <div ng-switch-default>You're something else.</div>
+    <button ui-sref="user" class="btn btn--round">Gallery</button>
+    <button ui-sref="user.assets" class="btn btn--round">Assets</button>
+    <button ui-sref="user.settings" class="btn btn--round">Settings</button>
+    <button ui-sref="user.blick" class="btn btn--round">Blick</button>
+    <div ui-view="userContent" class="reveal-animation"></div>
 </div>
-
-<button ui-sref="user">Gallery</button>
-<button ui-sref="user.assets">Assets</button>
-<button ui-sref="user.settings">Settings</button>
-<button ui-sref="user.blick">Blick</button>
-<div ui-view="userContent" class="reveal-animation"></div>

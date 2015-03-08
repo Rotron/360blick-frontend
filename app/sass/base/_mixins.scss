@@ -1,3 +1,29 @@
+$base: 5px;
+
+$size-huge: 100px;
+$size-large: 50px;
+$size-medium: 34px;
+$size-title: 22px;
+$size-content: 14px;
+
+// todo: mixins for typography styles, huge, title etc...
+
+@mixin font-light {
+  font-weight: 300;
+}
+
+@mixin font-normal {
+  font-weight: 400;
+}
+
+@mixin font-medium {
+  font-weight: 500;
+}
+
+@mixin font-bold {
+  font-weight: 700;
+}
+
 @mixin ellipsis() {
   overflow: hidden;
   white-space: nowrap;
