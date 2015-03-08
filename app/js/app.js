@@ -97,24 +97,64 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
-        .state('user.assets', {
-            url: "/assets",
-            views: {
-                "userContent@user": {
-                    templateUrl: "views/user/assets.html",
-                    controller: "UserAssetsController"
-                }
-            },
-            data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-            }
-        })
         .state('user.settings', {
             url: "/settings",
             views: {
                 "userContent@user": {
                     templateUrl: "views/user/settings.html",
                     controller: "UserSettingsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('user.project', {
+            url: "/project/:projectId",
+            views: {
+                "userContent@user": {
+                    templateUrl: "views/project/index.html",
+                    controller: "ProjectController"
+                },
+                "projectContent@user.project": {
+                    templateUrl: "views/project/scenes.html",
+                    controller: "ProjectScenesController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('user.project.scenes', {
+            url: "/scenes",
+            views: {
+                "projectContent@user.project": {
+                    templateUrl: "views/project/scenes.html",
+                    controller: "ProjectScenesController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('user.project.assets', {
+            url: "/assets",
+            views: {
+                "projectContent@user.project": {
+                    templateUrl: "views/project/assets.html",
+                    controller: "ProjectAssetsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('user.project.settings', {
+            url: "/settings",
+            views: {
+                "projectContent@user.project": {
+                    templateUrl: "views/project/settings.html",
+                    controller: "ProjectSettingsController"
                 }
             },
             data: {

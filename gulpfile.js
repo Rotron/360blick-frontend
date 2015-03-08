@@ -86,7 +86,7 @@ gulp.task('templateCache', function () {
 /**
  * Multiple-Tasks
  */
-gulp.task('default', ['inject', 'sass', 'templateCache']);
+gulp.task('default', ['sass', 'templateCache', 'inject']);
 gulp.task('serve', ['webserver', 'watch']);
 gulp.task('serve-styleguide', ['webserver-styleguide', 'watch-styleguide']);
 gulp.task('serve-all', ['webserver', 'webserver-styleguide', 'watch', 'watch-styleguide']);

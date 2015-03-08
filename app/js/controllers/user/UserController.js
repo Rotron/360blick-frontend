@@ -5,6 +5,7 @@ app.controller('UserController', ['$scope', '$stateParams', 'RequestService', fu
 
     function getAllProjects(){
         RequestService.post('projects/get_own_projects', {}, function(res) {
+                console.log(res);
                 $scope.projects = res.projects;
             }, function(error) {
                 console.log(error);
