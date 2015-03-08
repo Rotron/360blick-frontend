@@ -1,5 +1,20 @@
+// Buttons
+//
+// Markup: <button href="" class="btn btn--round {$modifiers}">Button</button>
+//
+// .btn--round        - default style
+// .btn--sign-up      - Sign up
+// .btn--sign-in      - Sign in
+// .btn--submit       - Submit
+//
+// Styleguide 2
 .btn {
   cursor: pointer;
+  @include blick-transition;
+
+  &:hover {
+    opacity: .8;
+  }
 }
 
 .btn--round {

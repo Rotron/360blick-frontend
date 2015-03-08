@@ -137,35 +137,13 @@ $link-external: #0000FF;
   }
 }
 
-// A button suitable
-//
-// Markup: <a href="" class="{$modifiers}">Link</a>
-//
-// :hover             - Subtle hover highlight.
-// .star-given        - A highlight indicating you've already given a star.
-// .star-given:hover  - Subtle hover highlight on top of star-given styling.
-// .disabled          - Dims the button to indicate it cannot be used.
-//
-// Styleguide 2
-a.button.star{
-
-  &.star-given{
-    background-color: #008000;
-  }
-    &.disabled{
-      background-color: red;
-  }
-}
-
-
-
 /*
  The animate class is apart of the element and the ng-enter class
  is attached to the element once the enter animation event is triggered
 */
 .reveal-animation.ng-enter {
-  -webkit-transition: 1s linear all; /* Safari/Chrome */
-  transition: 1s linear all; /* All other modern browsers and IE10+ */
+  -webkit-transition: .5s linear all; /* Safari/Chrome */
+  transition: .5s linear all; /* All other modern browsers and IE10+ */
 
   /* The animation preparation code */
   opacity: 0;
