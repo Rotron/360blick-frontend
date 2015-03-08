@@ -8,15 +8,13 @@
 // .external - external link styles
 //
 // Styleguide 4.x
-.banner {
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
-  height: 40px;
-  border: 1px solid blue;
-  background: green;
-  color: yellow;
-
-  &.external {
-    background: yellow;
-    color: #0f0;
-  }
+  background: $primary-1;
+  background: rgba($primary-1, 0.3);
+  z-index: 3;
+  padding: 5px;
 }
