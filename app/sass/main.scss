@@ -42,11 +42,8 @@
 
   A modifier class is a verb combined with the purpose it has to describe the state of the component,
   which are separated with a “-” (dash).
+
 */
-
-
-
-
 
 @import "base/reset";
 @import "base/mixins";
@@ -55,14 +52,12 @@
 @import "base/grid";
 @import "base/colors";
 
-@import "partials/_buttons.scss";
-
-@import "modules/_banner.scss";
-@import "modules/_icon-list.scss";
-@import "modules/_dialog.scss";
-
-@import "layouts/_landingpage.scss";
-@import "layouts/footer";
+@import "components/buttons";
+@import "components/_banner";
+@import "components/_icon-list";
+@import "components/_dialog";
+@import "components/_sections";
+@import "components/_footer";
 
 // Links
 //

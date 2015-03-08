@@ -7,3 +7,15 @@
 @mixin blick-transition($property: all) {
   transition: $property 0.15s ease-in;
 }
+
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: 64em) { @content ; }
+  }
+  @else if $point == tablet {
+    @media (max-width: 37.5em)  { @content ; }
+  }
+  @else if $point == mobile-only {
+    @media (max-width: 37.5em)  { @content ; }
+  }
+}
