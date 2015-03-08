@@ -1,19 +1,21 @@
-<div class="dialog fade">
-    <div class="dialog-content">
-        <div class="dialog-header">
-            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="dialog-title">Login</h4>
+<div class="dialog">
+    <div class="dialog_content">
+        <div class="dialog_header">
+            <button type="button" class="dialog_close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="dialog_title">Login</h4>
         </div>
-        <div class="dialog-body">
-            <form name="loginForm" ng-controller="LoginController"
-                  ng-submit="login(credentials)" novalidate>
-                <label for="login">Username:</label>
-                <input type="text" id="login"
-                       ng-model="credentials.login">
-                <label for="password">Password:</label>
-                <input type="password" id="password"
-                       ng-model="credentials.password">
-                <button type="submit">Login</button>
+        <div class="dialog_body">
+            <form name="loginForm" class="container"
+                  ng-controller="LoginController" ng-submit="login(credentials)" novalidate>
+                <fieldset class="row">
+                    <placeholder-input value="credentials.login" label="Username" type="text"></placeholder-input>
+                </fieldset>
+                <fieldset class="row">
+                    <placeholder-input value="credentials.password" label="Password" type="password"></placeholder-input>
+                </fieldset>
+                <div class="row">
+                    <button class="btn btn--round btn--submit">Login</button>
+                </div>
             </form>
         </div>
     </div>

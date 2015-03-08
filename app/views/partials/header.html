@@ -1,3 +1,10 @@
 <header class="header">
-    Header<button ng-click="logout()">logout</button>
+    <div class="container">
+        <div class="col span-6">360blick</div>
+        <div class="col span-6 has-text-right">
+            <button ui-sref="login" class="btn btn--round btn--sign-in">sign in</button>
+            <button ui-sref="user({username: 'david'})">GO: David</button>
+            <button ng-click="logout()" class="btn btn--round">logout</button>
+        </div>
+    </div>
 </header>
