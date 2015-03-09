@@ -6,3 +6,4 @@ dist
 app/bower_components
 app/css
 app/js/templates.js
+app/index.html
