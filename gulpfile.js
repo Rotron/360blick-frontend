@@ -21,7 +21,7 @@ gulp.task('inject', function() {
 gulp.task('webserver', function() {
     gulp.src('./app')
         .pipe(webserver({
-            livereload: true,
+            livereload: false,
             open: true,
             fallback: 'index.html'
         }));
