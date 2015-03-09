@@ -8,10 +8,12 @@ var gulp = require('gulp'),
     //angularFilesort = require('gulp-angular-filesort'),
     gulpkss = require('gulp-kss'),
     templateCache = require('gulp-angular-templatecache'),
-    rename = require("gulp-rename")
+    rename = require("gulp-rename"),
+    install = require("gulp-install"),
+    bower = require('gulp-bower'),
     wiredep = require('wiredep').stream;
 
-gulp.task('inject', function() {
+gulp.task('inject', ['bower', 'npm'], function() {
     gulp.src('./app/index-template.html')
         .pipe(wiredep())
         .pipe(inject(gulp.src('./app/js/**/*.js'), {relative: true}))
@@ -88,6 +90,19 @@ gulp.task('templateCache', function () {
         }))
         .pipe(gulp.dest('app/js'));
 });
+
+gulp.task('npm', function () {
+    gulp.src(['./package.json'])
+        .pipe(install());
+});
+
+
+gulp.task('bower', function () {
+    return bower()
+        .pipe(gulp.dest('app/bower_components'))
+});
+
+
 
 /**
  * Multiple-Tasks
