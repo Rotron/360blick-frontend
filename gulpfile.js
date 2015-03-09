@@ -7,13 +7,17 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     //angularFilesort = require('gulp-angular-filesort'),
     gulpkss = require('gulp-kss'),
-    templateCache = require('gulp-angular-templatecache');
+    templateCache = require('gulp-angular-templatecache'),
+    wiredep = require('wiredep').stream;
 
 gulp.task('inject', function() {
     gulp.src('./app/index.html')
+        .pipe(wiredep())
         .pipe(inject(gulp.src('./app/js/**/*.js'), {relative: true}))
         .pipe(gulp.dest('./app'));
+
 });
+
 
 /**
  * Webserver
