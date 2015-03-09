@@ -13,7 +13,8 @@
     "angular-cryptography": "~1.0.1",
     "angular-carousel": "~0.3.10",
     "angular-modal-service": "~0.5.0",
-    "cryptojslib": "~3.1.2"
+    "cryptojslib": "~3.1.2",
+    "threejs": "r70"
   },
   "devDependencies": {
     "angular-mocks": "1.2.15",
