@@ -8,13 +8,15 @@ var gulp = require('gulp'),
     //angularFilesort = require('gulp-angular-filesort'),
     gulpkss = require('gulp-kss'),
     templateCache = require('gulp-angular-templatecache'),
+    rename = require("gulp-rename")
     wiredep = require('wiredep').stream;
 
 gulp.task('inject', function() {
-    gulp.src('./app/index.html')
+    gulp.src('./app/index-template.html')
         .pipe(wiredep())
         .pipe(inject(gulp.src('./app/js/**/*.js'), {relative: true}))
-        .pipe(gulp.dest('./app'));
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('./app/'));
 
 });
 
