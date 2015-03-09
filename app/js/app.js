@@ -167,18 +167,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     $urlRouterProvider.otherwise("/");
 }]);
 
-app.run(['$rootScope', 'AuthService', 'EventService', 'USER_ROLES', 'AUTH_EVENTS',
-    function ($rootScope, AuthService, EventService, USER_ROLES, AUTH_EVENTS) {
+app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS',
+    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS) {
 
-        $rootScope.currentUser = null;
+        AuthService.reloadLocalCredentials();
+
+        $rootScope.currentUser = SessionService.getUser().nick;
         $rootScope.userRoles = USER_ROLES;
         $rootScope.isAuthorized = AuthService.isAuthorized;
 
-        $rootScope.setCurrentUser = function (user) {
-            $rootScope.currentUser = user;
-        };
-
-        AuthService.reloadLocalCredentials();
 
         $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
 

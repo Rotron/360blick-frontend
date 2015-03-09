@@ -3,7 +3,6 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
 
     this.login = function (credentials) {
         RequestService.post('users/login', credentials, function(res){
-            $rootScope.setCurrentUser(credentials);
             // TODO: Backend, res.data.role
                 console.log(res);
             SessionService.create(res.token, res.nick, res.email, 'editor');
