@@ -48,6 +48,30 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('gettingStarted', {
+            url: "/getting-started",
+            views: {
+                "app": {
+                    templateUrl: "views/gettingStarted/index.html",
+                    controller: "GettingStartedController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
+        .state('documentation', {
+            url: "/documentation",
+            views: {
+                "app": {
+                    templateUrl: "views/documentation/index.html",
+                    controller: "DocumentationController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
         .state('register', {
             url: "/register",
             views: {
@@ -108,6 +132,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
+        .state('user.settings.account', {
+            url: "/account",
+            views: {
+                "userContent@user": {
+                    templateUrl: "views/user/accountSettings.html",
+                    controller: "AccountSettingsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
         .state('user.project', {
             url: "/project/:projectId",
             views: {
@@ -140,22 +176,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
-        .state('editor', {
-            url: "/:username/project/:projectId/scenes/:sceneId",
-            views: {
-                "app": {
-                    templateUrl: "views/editor/editor.html",
-                    controller: "EditorController"
-                },
-                "subNavigation@editor": {
-                    templateUrl: "views/subNavigation/editor.html",
-                    controller: "EditorController"
-                }
-            },
-            data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-            }
-        })
         .state('user.project.assets', {
             url: "/assets",
             views: {
@@ -179,6 +199,22 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             data: {
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
+        })
+        .state('editor', {
+            url: "/:username/project/:projectId/scenes/:sceneId",
+            views: {
+                "app": {
+                    templateUrl: "views/editor/editor.html",
+                    controller: "EditorController"
+                },
+                "subNavigation@editor": {
+                    templateUrl: "views/subNavigation/editor.html",
+                    controller: "EditorController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
         });
 
     $locationProvider.html5Mode(true);
@@ -186,8 +222,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     $urlRouterProvider.otherwise("/");
 }]);
 
-app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS',
-    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS) {
+app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService',
+    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS, ModalService) {
 
         AuthService.reloadLocalCredentials();
 
