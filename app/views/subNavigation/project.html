@@ -1,11 +1,16 @@
-<div>
-    <li class="nav-tabs__item">
-        <button ui-sref="user.project.scenes({projectId: projectId})" class="nav-tabs__btn">Scenes</button>
-    </li>
-    <li class="nav-tabs__item">
-        <button ui-sref="user.project.assets({projectId: projectId})" class="nav-tabs__btn">Assets</button>
-    </li>
-    <li class="nav-tabs__item">
-        <button ui-sref="user.project.settings({projectId: projectId})" class="nav-tabs__btn">Settings</button>
-    </li>
-</div>
+<nav>
+    <ul class="nav-tabs">
+        <li class="nav-tabs__item">
+            <button class="nav-tabs__btn nav-tabs__btn--menu"><i class="fa fa-bars"></i></button>
+        </li>
+        <li class="nav-tabs__item">
+            <button ui-sref="user.project.scenes({projectId: projectId})" class="nav-tabs__btn"><i class="fa fa-cube"></i>Scenes</button>
+        </li>
+        <li class="nav-tabs__item">
+            <button ui-sref="user.project.assets({projectId: projectId})" class="nav-tabs__btn"><i class="fa fa-picture-o"></i>Assets</button>
+        </li>
+        <li class="nav-tabs__item">
+            <button ui-sref="user.project.settings({projectId: projectId})" class="nav-tabs__btn"><i class="fa fa-cog"></i>Settings</button>
+        </li>
+    </ul>
+</nav>

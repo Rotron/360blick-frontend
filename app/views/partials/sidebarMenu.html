@@ -2,7 +2,7 @@
     <a ui-sref="user" ui-sref-active="is-active" class="sidebar-menu__title">360blick</a>
     <ul class="menu-list">
         <li class="menu-primary__item">
-            <a ui-sref="user" ui-sref-active="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-folder-open"></i>Projects</a>
+            <a ui-sref="user" ui-sref-active-eq="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-folder-open"></i>Projects</a>
             <ul class="menu-secondary">
                 <li class="menu-secondary__item">
                     <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-secondary__title"><i class="fa fa-plus"></i>New Project</a>
@@ -13,10 +13,10 @@
             </ul>
         </li>
         <li class="menu-primary__item">
-            <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-primary__title"><i class="fa fa-user"></i>Account</a>
+            <a ui-sref="user.settings.account" ui-sref-active="is-active" class="menu-primary__title"><i class="fa fa-user"></i>Account</a>
         </li>
         <li class="menu-primary__item">
-            <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-primary__title"><i class="fa fa-cog"></i>Settings</a>
+            <a ui-sref="user.settings" ui-sref-active-eq="is-active" class="menu-primary__title"><i class="fa fa-cog"></i>Settings</a>
         </li>
         <li class="menu-primary__item">
             <a ng-click="openModal('help')" ui-sref-active="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-question-circle"></i>Learn & Help</a>

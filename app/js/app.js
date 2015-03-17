@@ -132,6 +132,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
+        .state('user.settings.account', {
+            url: "/account",
+            views: {
+                "userContent@user": {
+                    templateUrl: "views/user/accountSettings.html",
+                    controller: "AccountSettingsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
         .state('user.project', {
             url: "/project/:projectId",
             views: {
@@ -164,22 +176,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
-        .state('editor', {
-            url: "/:username/project/:projectId/scenes/:sceneId",
-            views: {
-                "app": {
-                    templateUrl: "views/editor/editor.html",
-                    controller: "EditorController"
-                },
-                "subNavigation@editor": {
-                    templateUrl: "views/subNavigation/editor.html",
-                    controller: "EditorController"
-                }
-            },
-            data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-            }
-        })
         .state('user.project.assets', {
             url: "/assets",
             views: {
@@ -198,6 +194,22 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 "projectContent@user.project": {
                     templateUrl: "views/project/settings.html",
                     controller: "ProjectSettingsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('editor', {
+            url: "/:username/project/:projectId/scenes/:sceneId",
+            views: {
+                "app": {
+                    templateUrl: "views/editor/editor.html",
+                    controller: "EditorController"
+                },
+                "subNavigation@editor": {
+                    templateUrl: "views/subNavigation/editor.html",
+                    controller: "EditorController"
                 }
             },
             data: {
