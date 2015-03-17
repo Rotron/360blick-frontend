@@ -1,6 +1,14 @@
-<div class="hotfix-container">
-    <button ng-click="openModal('newProject')" class="btn btn--round">Neues Projekt anlegen</button>
+<div class="interaction-bar container">
+    <div class="col span-6">
+        <button ng-click="openModal('newProject')" class="btn btn--dotted"><i class="fa fa-plus"></i>New Project</button>
+    </div>
+    <div class="col span-6 has-text-right">
+        <button class="btn btn--dropdown btn--dropdown--light">Most Recent<i class="fa fa-chevron-down"></i></button>
+        <button class="btn"><i class="fa fa-th-list"></i></button>
+        <button class="btn"><i class="fa fa-th"></i></button>
+    </div>
 </div>
+
 <div>
     <div ng-repeat="project in projects" ui-sref="user.project.scenes({projectId: project.id})" class="hotfix-container">
         <h2>{{project.title}}: {{project.description}}</h2>

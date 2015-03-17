@@ -11,7 +11,6 @@
 .btn {
   cursor: pointer;
   border-radius: 3px;
-  padding: 0 $base * 4;
   @include blick-transition;
 
   &:hover {
@@ -20,6 +19,7 @@
 }
 
 .btn--cta {
+  padding: 0 $base * 4;
   background: $primary-cta;
   height: $base * 10;
   color: $secondary-light;
@@ -28,6 +28,25 @@
 
 .btn--cta--danger {
   background: $cta-0;
+}
+
+.btn--dotted {
+  height: $base * 10;
+  color: $secondary-2;
+  font-size: $font-size-large;
+  border: 2px dotted $secondary-2;
+  padding: 0 $base * 4;
+  font-weight: $font-weight-light;
+
+  .fa {
+    margin-right: $base * 2;
+    font-size: 16px;
+  }
+
+  &:hover {
+    border-color: $secondary-0;
+    color: $secondary-0;
+  }
 }
 
 .btn--dropdown {

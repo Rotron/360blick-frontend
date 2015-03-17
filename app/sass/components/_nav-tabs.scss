@@ -1,8 +1,10 @@
 .nav-tabs {
+  font-size: 0;
 }
 
 .nav-tabs__item {
   display: inline-block;
+  font-size: $font-size-xlarge;
 }
 
 .nav-tabs__btn {
@@ -16,7 +18,7 @@
     margin: 0 $base * 2;
   }
 
-  &:hover, &:focus {
+  &:hover {
     background: $secondary-2;
   }
 
