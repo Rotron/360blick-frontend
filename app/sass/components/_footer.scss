@@ -18,7 +18,6 @@
     border-bottom: 1px solid $primary-0;
     text-transform: uppercase;
     @include blick-transition(border-color);
-    @include font-normal;
 
     &:hover {
       border-color: $secondary-1;

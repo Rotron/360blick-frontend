@@ -36,7 +36,6 @@ $icon-list-radius-minor: 80px;
 
 .icon-list__title {
   display: block;
-  @include font-bold;
   font-size: 22px;
   text-transform: uppercase;
 }
@@ -59,7 +58,6 @@ $icon-list-radius-minor: 80px;
 }
 
 .icon-list__text {
-  @include font-light;
   line-height: 1.2;
 }
 

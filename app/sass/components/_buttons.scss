@@ -21,13 +21,12 @@
   border-radius: 40px;
   padding: 15px 25px;
   text-transform: uppercase;
-  background: $tertiary-1;
+  background: $primary-cta;
   color: $secondary-1;
-  @include font-light;
 }
 
 .btn--sign-up {
-  background: $primary-3;
+  background: $primary-2;
   color: $secondary-1;
   padding: 20px 35px;
 }

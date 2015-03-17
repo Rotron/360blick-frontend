@@ -1,10 +1,42 @@
 <nav class="sidebar-menu">
-    <ul>
-        <li>
-            <a ui-sref="user" ui-sref-active="is-active">Projects</a>
+    <a ui-sref="user" ui-sref-active="is-active" class="sidebar-menu__title">360blick</a>
+    <ul class="menu-list">
+        <li class="menu-primary__item">
+            <a ui-sref="user" ui-sref-active="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-folder-open"></i>Projects</a>
+            <ul class="menu-secondary">
+                <li class="menu-secondary__item">
+                    <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-secondary__title"><i class="fa fa-plus"></i>New Project</a>
+                </li>
+                <li class="menu-secondary__item">
+                    <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-secondary__title">Bergstationen</a>
+                </li>
+                <li class="menu-secondary__item">
+                    <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-secondary__title">Talstationen</a>
+                </li>
+            </ul>
         </li>
-        <li>
-            <a ui-sref="user.settings" ui-sref-active="is-active">Settings</a>
+        <li class="menu-primary__item">
+            <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-primary__title"><i class="fa fa-user"></i>Account</a>
+        </li>
+        <li class="menu-primary__item">
+            <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-primary__title"><i class="fa fa-cog"></i>Settings</a>
+        </li>
+        <li class="menu-primary__item">
+            <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-question-circle"></i>Learn & Help</a>
+            <ul class="menu-secondary">
+                <li class="menu-secondary__item">
+                    <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-secondary__title">Getting Started</a>
+                </li>
+                <li class="menu-secondary__item">
+                    <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-secondary__title">Documentation</a>
+                </li>
+                <li class="menu-secondary__item">
+                    <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-secondary__title">Help</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-primary__item">
+            <a ui-sref="user.settings" ui-sref-active="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-comments-o"></i>Feedback</a>
         </li>
     </ul>
 </nav>
