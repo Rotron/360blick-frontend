@@ -1,7 +1,5 @@
 <div class="hotfix-container">
-    <placeholder-input value="newProject.title" label="Title" type="text"></placeholder-input>
-    <placeholder-input value="newProject.description" label="Description" type="text"></placeholder-input>
-    <button ng-click="createNewProject()" class="btn btn--round">Neues Projekt anlegen</button>
+    <button ng-click="openModal('newProject')" class="btn btn--round">Neues Projekt anlegen</button>
 </div>
 <div>
     <div ng-repeat="project in projects" ui-sref="user.project.scenes({projectId: project.id})" class="hotfix-container">
