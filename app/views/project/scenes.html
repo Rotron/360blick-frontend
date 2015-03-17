@@ -6,6 +6,6 @@
     <placeholder-input value="newScene.title" label="Title" type="text"></placeholder-input>
     <button ng-click="createNewScene()" class="btn btn--round">Neues Szene anlegen</button>
 </div>
-<div ng-repeat="scene in scenes" class="hotfix-container">
+<div ng-repeat="scene in scenes" class="hotfix-container" ui-sref="user.project.scenes.scene({sceneId: scene.id})">
     <h2>{{scene.title}}</h2>
 </div>

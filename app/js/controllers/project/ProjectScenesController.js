@@ -7,7 +7,7 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     function getAllScenes(){
         RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
-                $scope.scenes = res.data.scenes;
+                $scope.scenes = res.data;
             }, function(error) {
                 console.log(error);
             }
