@@ -2,6 +2,7 @@
 
 app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', function ($scope, $stateParams, RequestService) {
     $scope.username = $stateParams.username;
+    $scope.projectId = $stateParams.projectId;
 
     $scope.scenes = [];
 

@@ -140,11 +140,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
-        .state('user.project.scenes.scene', {
-            url: "/:sceneId",
+        .state('editor', {
+            url: "/:username/project/:projectId/scenes/:sceneId",
             views: {
-                "app@": {
+                "app": {
                     templateUrl: "views/editor/editor.html",
+                    controller: "EditorController"
+                },
+                "subNavigation@editor": {
+                    templateUrl: "views/subNavigation/editor.html",
                     controller: "EditorController"
                 }
             },
