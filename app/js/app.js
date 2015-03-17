@@ -40,8 +40,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/",
             views: {
                 "app": {
-                    templateUrl: "views/main.html",
-                    controller: "MainController"
+                    templateUrl: "views/landingpage/index.html",
+                    controller: "LandingpageController"
                 }
             },
             data: {
@@ -72,15 +72,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
-        .state('editor', {
-            url: "/editor",
-            views: {
-                "app": {
-                    templateUrl: "views/editor/editor.html",
-                    controller: "EditorController"
-                }
-            }
-        })
         .state('user', {
             url: "/:username",
             views: {
@@ -90,7 +81,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 },
                 "userContent@user": {
                     templateUrl: "views/user/gallery.html",
-                    controller: "UserGalleryController"
+                    controller: "UserProjectsController"
+                },
+                "subNavigation@user": {
+                    templateUrl: "views/subNavigation/projects.html",
+                    controller: "UserProjectsController"
                 }
             },
             data: {
@@ -102,6 +97,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             views: {
                 "userContent@user": {
                     templateUrl: "views/user/settings.html",
+                    controller: "UserSettingsController"
+                },
+                "subNavigation@user": {
+                    templateUrl: "views/subNavigation/settings.html",
                     controller: "UserSettingsController"
                 }
             },
@@ -119,6 +118,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 "projectContent@user.project": {
                     templateUrl: "views/project/scenes.html",
                     controller: "ProjectScenesController"
+                },
+                "subNavigation@user": {
+                    templateUrl: "views/subNavigation/project.html",
+                    controller: "ProjectController"
                 }
             },
             data: {

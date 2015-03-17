@@ -35,6 +35,15 @@ gulp.task('webserver', function() {
         }));
 });
 
+gulp.task('webserver-build', function() {
+    gulp.src('./build')
+        .pipe(webserver({
+            livereload: false,
+            open: true,
+            fallback: 'index.html'
+        }));
+});
+
 gulp.task('webserver-styleguide', function() {
     gulp.src('./styleguide')
         .pipe(webserver({
@@ -102,6 +111,14 @@ gulp.task('bower', function () {
         .pipe(gulp.dest('app/bower_components'))
 });
 
+gulp.task('build-copy-files', ['default'], function () {
+    gulp.src('app/index.html')
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('build', ['default', 'build-copy-files'], function () {
+
+});
 
 
 /**
@@ -109,5 +126,6 @@ gulp.task('bower', function () {
  */
 gulp.task('default', ['sass', 'templateCache', 'inject']);
 gulp.task('serve', ['webserver', 'watch']);
+gulp.task('serve-build', ['webserver-build']);
 gulp.task('serve-styleguide', ['webserver-styleguide', 'watch-styleguide']);
 gulp.task('serve-all', ['webserver', 'webserver-styleguide', 'watch', 'watch-styleguide']);
