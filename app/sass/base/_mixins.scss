@@ -1,28 +1,24 @@
 $base: 5px;
 
+// only landingpage
 $size-huge: 100px;
 $size-large: 50px;
 $size-medium: 34px;
 $size-title: 22px;
 $size-content: 14px;
 
+
 // todo: mixins for typography styles, huge, title etc...
+$font-size-large: 18px;
+$font-size-medium: 16px;
 
-@mixin font-light {
-  font-weight: 300;
-}
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 800;
 
-@mixin font-normal {
-  font-weight: 400;
-}
-
-@mixin font-medium {
-  font-weight: 500;
-}
-
-@mixin font-bold {
-  font-weight: 700;
-}
+$banner-height: 80px;
 
 @mixin ellipsis() {
   overflow: hidden;

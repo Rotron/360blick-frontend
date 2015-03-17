@@ -2074,18 +2074,21 @@ input[placeholder], [placeholder], *[placeholder] {
   margin-bottom: 5px; }
 
 .menu-primary__title {
-  color: #ECF0F1;
+  color: #FFFFFF;
   padding: 10px;
   display: block;
   border-top: 1px solid #2F3B48;
-  border-bottom: 1px solid #2F3B48; }
+  font-size: 18px; }
   .menu-primary__title .fa {
     margin-right: 10px; }
+  .menu-primary__title.has-menu-secondary, .menu-primary__title:last-child {
+    border-bottom: 1px solid #2F3B48; }
 
 .menu-secondary__title {
   color: #FFFFFF;
   padding: 10px 10px 10px 25px;
-  display: block; }
+  display: block;
+  font-size: 16px; }
   .menu-secondary__title .fa {
     margin-right: 10px; }
   .menu-secondary__title:hover {
