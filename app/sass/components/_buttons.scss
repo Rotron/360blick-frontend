@@ -10,6 +10,8 @@
 // Styleguide 2
 .btn {
   cursor: pointer;
+  border-radius: 3px;
+  padding: 0 $base * 4;
   @include blick-transition;
 
   &:hover {
@@ -17,26 +19,32 @@
   }
 }
 
-.btn--round {
-  border-radius: 40px;
-  padding: 15px 25px;
-  text-transform: uppercase;
+.btn--cta {
   background: $primary-cta;
-  color: $secondary-1;
+  height: $base * 10;
+  color: $secondary-light;
+  font-size: $font-size-large;
 }
 
-.btn--sign-up {
-  background: $primary-2;
-  color: $secondary-1;
-  padding: 20px 35px;
+.btn--cta--danger {
+  background: $cta-0;
 }
 
-.btn--sign-in {
-  background: $primary-2;
-  color: $secondary-1;
-}
+.btn--dropdown {
+  position: relative;
+  padding: 0 $base * 10;
 
-.btn--submit {
-  background: $primary-2;
-  color: $secondary-1;
+  .fa {
+    position: absolute;
+    left: $base * 2;
+    font-size: 22px;
+
+    &:last-child {
+      left: auto;
+      right: $base * 2;
+      font-size: 14px;
+      height: 100%;
+      line-height: 18px;
+    }
+  }
 }
