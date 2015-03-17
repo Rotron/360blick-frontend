@@ -80,7 +80,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                     controller: "UserController"
                 },
                 "userContent@user": {
-                    templateUrl: "views/user/gallery.html",
+                    templateUrl: "views/user/projects.html",
                     controller: "UserProjectsController"
                 },
                 "subNavigation@user": {
@@ -134,6 +134,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 "projectContent@user.project": {
                     templateUrl: "views/project/scenes.html",
                     controller: "ProjectScenesController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('user.project.scenes.scene', {
+            url: "/:sceneId",
+            views: {
+                "app@": {
+                    templateUrl: "views/editor/editor.html",
+                    controller: "EditorController"
                 }
             },
             data: {
