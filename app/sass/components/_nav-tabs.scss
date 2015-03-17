@@ -1,6 +1,4 @@
 .nav-tabs {
-  position: relative;
-  margin: $base * 2 0;
 }
 
 .nav-tabs__item {
@@ -9,12 +7,26 @@
 
 .nav-tabs__btn {
   font-size: 18px;
-  background: $secondary-2;
-  border-radius: $base;
-  padding: $base;
   color: $secondary-0;
+  cursor: pointer;
+  height: $banner-height - 1px;
+  padding: 0 $base * 4 0 $base;
+
+  .fa {
+    margin: 0 $base * 2;
+  }
+
+  &:hover, &:focus {
+    background: $secondary-2;
+  }
 
   &.is-active {
-    background: $primary-highlight;
+    background: $secondary-2;
+    color: $primary-cta;
   }
+}
+
+.nav-tabs__btn--menu {
+  width: $banner-height;
+  padding: 0;
 }

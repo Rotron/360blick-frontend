@@ -14,7 +14,7 @@
   color: $secondary-3;
   font-size: 30px;
   padding: $base * 5 $base;
-  height: $banner-height;
+  height: $banner-height - 1px;
   display: block;
   @include blick-transition;
   font-weight: $font-weight-bold;
@@ -31,13 +31,14 @@
 }
 
 .menu-primary__title {
-  color: $secondary-3;
+  color: $secondary-light;
   padding: $base * 3 $base $base * 3 $base * 3;
   display: block;
   font-size: $font-size-large;
   border-top: 1px solid $primary-0;
   @include blick-transition;
   font-weight: $font-weight-semi-bold;
+  cursor: pointer;
 
   .fa {
     margin-right: $base * 2;
@@ -65,12 +66,13 @@
 }
 
 .menu-secondary__title {
-  color: $secondary-3;
+  color: $secondary-light;
   padding: $base * 3 $base * 3 $base * 3 $base * 9;
   display: block;
   font-size: $font-size-medium;
   @include blick-transition;
   font-weight: $font-weight-light;
+  cursor: pointer;
 
   .fa {
     margin-right: $base * 2;
