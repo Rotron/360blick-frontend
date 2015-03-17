@@ -3,8 +3,8 @@
     <section class="section section--gallery row">
         <h1 class="section--gallery__title">360blick</h1>
         <p class="section--gallery__subtitle">interactive panorama experiences</p>
-        <button ui-sref="register" class="btn btn--round btn--sign-up section--gallery__sign-up" ng-if="!isAuthenticated()">sign up</button>
-        <button ui-sref="user({username: currentUser})" class="btn btn--round btn--sign-up section--gallery__sign-up" ng-if="isAuthenticated()">Your profile</button>
+        <button ui-sref="register" class="btn btn--cta section--gallery__sign-up" ng-if="!isAuthenticated()">sign up</button>
+        <button ui-sref="user({username: currentUser})" class="btn btn--cta section--gallery__sign-up" ng-if="isAuthenticated()">Your profile</button>
     </section>
     <section class="section section--features row">
         <ul class="icon-list">
