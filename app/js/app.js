@@ -48,6 +48,30 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('gettingStarted', {
+            url: "/getting-started",
+            views: {
+                "app": {
+                    templateUrl: "views/gettingStarted/index.html",
+                    controller: "GettingStartedController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
+        .state('documentation', {
+            url: "/documentation",
+            views: {
+                "app": {
+                    templateUrl: "views/documentation/index.html",
+                    controller: "DocumentationController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
         .state('register', {
             url: "/register",
             views: {
@@ -186,8 +210,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     $urlRouterProvider.otherwise("/");
 }]);
 
-app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS',
-    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS) {
+app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService',
+    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS, ModalService) {
 
         AuthService.reloadLocalCredentials();
 

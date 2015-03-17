@@ -1,11 +1,6 @@
-app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'btfModal', '$state',
-    function (RequestService, $rootScope, AUTH_EVENTS, btfModal, $state) {
+app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'ModalService', '$state',
+    function (RequestService, $rootScope, AUTH_EVENTS, ModalService, $state) {
 
-        var loginModal = btfModal({
-            controller: 'LoginController',
-            controllerAs: 'ctrl',
-            templateUrl: 'partials/login.html'
-        });
 
         this.redirect = function (nick) {
             var redirectState = {
@@ -31,7 +26,7 @@ app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'btf
 
         this.handleAuthorization = function(data){
             this.saveNextState(data);
-            loginModal.activate();
+            ModalService.openModal('login');
         };
 
         var that = this;
@@ -42,10 +37,10 @@ app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'btf
             that.handleAuthorization(data);
         });
         $rootScope.$on(AUTH_EVENTS.sessionTimeout, function() {
-            loginModal.activate();
+            ModalService.openModal('login');
         });
         $rootScope.$on(AUTH_EVENTS.loginSuccess, function(event, data) {
-            loginModal.deactivate();
+            ModalService.closeModal('login');
             var nick = data ? data.nick : null;
             $rootScope.currentUser = nick;
             that.redirect(nick);
