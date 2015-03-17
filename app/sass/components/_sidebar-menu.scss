@@ -5,4 +5,57 @@
   bottom: 0;
   width: 20%;
   border: 2px solid red;
+  background: $primary-2;
+}
+
+.sidebar-menu__title {
+  text-align: center;
+  color: $secondary-3;
+  font-size: 30px;
+  padding: $base * 4 $base;
+}
+
+.menu-primary {
+}
+
+.menu-primary__item {
+  margin-bottom: $base;
+}
+
+.menu-primary__title {
+  color: $secondary-2;
+  padding: $base * 2;
+  display: block;
+  border-top: 1px solid $primary-0;
+  border-bottom: 1px solid $primary-0;
+
+  .fa {
+    margin-right: $base * 2;
+  }
+}
+
+.menu-secondary {
+
+}
+
+.menu-secondary__item {
+
+}
+
+.menu-secondary__title {
+  color: $secondary-3;
+  padding: $base * 2 $base * 2 $base * 2 $base * 5;
+  display: block;
+
+  .fa {
+    margin-right: $base * 2;
+  }
+
+  &:hover {
+    background-color: $primary-1;
+  }
+
+  &.is-active {
+    background-color: $primary-cta;
+  }
 }

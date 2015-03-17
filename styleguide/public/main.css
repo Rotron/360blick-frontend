@@ -2061,7 +2061,37 @@ input[placeholder], [placeholder], *[placeholder] {
   top: 0;
   bottom: 0;
   width: 20%;
-  border: 2px solid red; }
+  border: 2px solid red;
+  background: #415162; }
+
+.sidebar-menu__title {
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 30px;
+  padding: 20px 5px; }
+
+.menu-primary__item {
+  margin-bottom: 5px; }
+
+.menu-primary__title {
+  color: #ECF0F1;
+  padding: 10px;
+  display: block;
+  border-top: 1px solid #2F3B48;
+  border-bottom: 1px solid #2F3B48; }
+  .menu-primary__title .fa {
+    margin-right: 10px; }
+
+.menu-secondary__title {
+  color: #FFFFFF;
+  padding: 10px 10px 10px 25px;
+  display: block; }
+  .menu-secondary__title .fa {
+    margin-right: 10px; }
+  .menu-secondary__title:hover {
+    background-color: #2C3E50; }
+  .menu-secondary__title.is-active {
+    background-color: #5BA5D8; }
 
 .icon-list__item {
   display: inline-block;
