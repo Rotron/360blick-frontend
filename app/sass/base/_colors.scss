@@ -6,8 +6,9 @@ $primary-cta: #5BA5D8;
 
 $secondary-0: #A7A6A8; // or 959395
 $secondary-1: #D2CFCF;
-$secondary-2: #ECF0F1;
-$secondary-3: #FFFFFF;
+$secondary-2: #E5E7E8;
+$secondary-3: #ECF0F1;
+$secondary-light: #FFFFFF;
 
 $cta-0: #F35E60;
 $cta-1: #7AF476;
@@ -23,6 +24,7 @@ $colors:
   secondary-1 $secondary-1,
   secondary-2 $secondary-2,
   secondary-3 $secondary-3,
+  secondary-light $secondary-light,
   cta-0 $cta-0,
   cta-1 $cta-1;
 

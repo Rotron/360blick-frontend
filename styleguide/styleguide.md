@@ -20,6 +20,7 @@ Following all color variables with their value.
 <div class="sg-color sg-color-secondary-1"><span class="sg-color-info">$secondary-1</span></div>
 <div class="sg-color sg-color-secondary-2"><span class="sg-color-info">$secondary-2</span></div>
 <div class="sg-color sg-color-secondary-3"><span class="sg-color-info">$secondary-3</span></div>
+<div class="sg-color sg-color-secondary-light"><span class="sg-color-info">$secondary-light</span></div>
 
 ### CTA Colors
 
