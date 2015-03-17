@@ -9,12 +9,12 @@
 
 .nav-tabs__btn {
   font-size: 18px;
-  background: $tertiary-1;
+  background: $secondary-2;
   border-radius: $base;
   padding: $base;
   color: $secondary-0;
 
   &.is-active {
-    background: $primary-3;
+    background: $primary-highlight;
   }
 }

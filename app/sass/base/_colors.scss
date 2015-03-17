@@ -1,29 +1,28 @@
-$primary-0: #22313B;
-$primary-1: #2b3e4b;
-$primary-2: #0E4D6F;
-$primary-3: #4099C6;
-$primary-4: #98D7F4;
+$primary-0: #2F3B48;
+$primary-1: #2C3E50;
+$primary-2: #415162;
+$primary-highlight: #384758;
+$primary-cta: #5BA5D8;
 
-$secondary-0: #edebe4;
-$secondary-1: #FFFFFF;
-
-$tertiary-0: #5f6470;
-$tertiary-1: #6F8694;
+$secondary-0: #A7A6A8; // or 959395
+$secondary-1: #D2CFCF;
+$secondary-2: #ECF0F1;
+$secondary-3: #FFFFFF;
 
 $cta-0: #F35E60;
 $cta-1: #7AF476;
 
 // Color-Collection
 $colors:
-  primary-0 $primary-0 #fff,
-  primary-1 $primary-1 #fff,
+  primary-0 $primary-0,
+  primary-1 $primary-1,
   primary-2 $primary-2,
-  primary-3 $primary-3,
-  primary-4 $primary-4,
+  primary-highlight $primary-highlight,
+  primary-cta $primary-cta,
   secondary-0 $secondary-0,
   secondary-1 $secondary-1,
-  tertiary-0 $tertiary-0,
-  tertiary-1 $tertiary-1,
+  secondary-2 $secondary-2,
+  secondary-3 $secondary-3,
   cta-0 $cta-0,
   cta-1 $cta-1;
 
