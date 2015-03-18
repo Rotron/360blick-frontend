@@ -231,6 +231,9 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
         $rootScope.userRoles = USER_ROLES;
         $rootScope.isAuthorized = AuthService.isAuthorized;
 
+        $rootScope.sidebarMenu = { isActive: true };
+        // debugging
+        $rootScope.console = console;
 
         $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
 

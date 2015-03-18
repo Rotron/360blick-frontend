@@ -45,9 +45,9 @@ angular.module('btford.modal', []).
                 dialogCounter = value;
 
                 if(dialogCounter > 0) {
-                    angular.element(document.querySelectorAll('body, html')).addClass('is-fixed');
+                    angular.element(document.querySelectorAll('body, html')).addClass('has-open-dialog');
                 } else {
-                    angular.element(document.querySelectorAll('body, html')).removeClass('is-fixed');
+                    angular.element(document.querySelectorAll('body, html')).removeClass('has-open-dialog');
                 }
             }
 

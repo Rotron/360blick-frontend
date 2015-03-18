@@ -1,5 +1,8 @@
 $dialog-header-height: $base * 10;
 
+
+
+
 .dialog {
   position: fixed;
   top: 0;
@@ -10,6 +13,43 @@ $dialog-header-height: $base * 10;
   background: rgba($primary-0, .9);
   padding: $base * 14;
   z-index: 4;
+  opacity: 1;
+  @include blick-transition(all, .25s);
+
+  &.ng-enter {
+    opacity: 0;
+
+    .dialog__content {
+      transform: scale3d(.95, .95, 1);
+    }
+  }
+
+  &.ng-enter-active {
+    opacity: 1;
+
+    .dialog__content {
+      @include blick-transition(all, .2s);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  &.ng-leave {
+    opacity: 1;
+
+    .dialog__content {
+      @include blick-transition(all, .15s);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  &.ng-leave-active {
+    opacity: 0;
+
+    .dialog__content {
+      @include blick-transition(all, .15s);
+      transform: scale3d(.95, .95, 1);
+    }
+  }
 }
 
 .dialog__content {

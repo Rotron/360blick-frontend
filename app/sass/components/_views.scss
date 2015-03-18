@@ -1,17 +1,59 @@
+body, html {
+  background: $primary-0;
+  @include blick-transition;
+}
+
+.app-container {
+  transform: scale(1) translateZ(0);
+  @include blick-transition(all, .35s);
+}
+
+// body, html
+.has-open-dialog {
+  overflow: hidden;
+
+  .app-container {
+    transform: scale3d(0.95, 0.95, 1);
+  }
+}
+
 #view--root {
 }
 
 #view--user {
 }
 
+#view--user__wrapper {
+}
+
+#view--user__wrapper__content{
+}
+
 #view--editor {
 
 }
 
-.view--user-wrapper{
-  width: 80%;
-  margin-left: 20%;
+.view, .view__wrapper {
+  width: 100%;
+  height: 100%;
 }
 
-.view--user-wrapper__content{
+.view__wrapper.has-sidebar-menu {
+  margin-left: 0;
+  background: $secondary-light;
+  position: relative;
+  z-index: 1;
+  @include blick-transition(all, .3s);
+  transform: translateZ(0)
+}
+
+.sidebar-menu-active {
+  .view__wrapper.has-sidebar-menu {
+    width: 80%;
+    margin-left: 20%;
+  }
+
+  .sidebar-menu {
+    transform: translateX(0%) translateZ(0);
+  }
 }

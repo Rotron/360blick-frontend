@@ -27,7 +27,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="app-container" ui-view="app"></div>
+    <div class="app-container sidebar-menu-active" ui-view="app" ng-class="{'sidebar-menu-active': sidebarMenu.isActive, 'sidebar-menu-inactive': !sidebarMenu.isActive}"></div>
     <div class="modal" ng-include="modalTemplateUrl"></div>
 
 
