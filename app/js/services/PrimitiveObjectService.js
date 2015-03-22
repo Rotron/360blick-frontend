@@ -1,10 +1,34 @@
 app.service('PrimitiveObjectService',[ function() {
 
-    var supportedObjects = [
+/*    var supportedObjects = [
         'sphere',
         'cube',
         'plane',
         'cylinder'
+    ];*/
+
+    var supportedObjects = [
+        {
+            title: '3D Primitives',
+            items: [
+                'sphere',
+                'cube',
+                'plane',
+                'cylinder'
+            ]
+        }, {
+            title: '2D Primitives',
+            items: [
+                'empty',
+                'empty'
+            ]
+        }, {
+            title: 'Models',
+            items: [
+                'empty',
+                'empty'
+            ]
+        }
     ];
 
     var container = angular.element(document.getElementById('editor-view-container'))[0];
@@ -14,7 +38,7 @@ app.service('PrimitiveObjectService',[ function() {
         object.material.transparent = true;
     }
 
-    this.getObject = function(type){
+    this.getObject = function(type) {
 
         if(supportedObjects.indexOf(type) == -1){
             throw 'selected object not supported';
@@ -42,10 +66,10 @@ app.service('PrimitiveObjectService',[ function() {
         setMaterialProperties(object);
 
         return object;
-    }
+    };
 
     this.getSupportedObjectTypes = function(){
         return supportedObjects;
-    }
+    };
 
 }]);

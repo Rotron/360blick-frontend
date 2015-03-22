@@ -1,6 +1,6 @@
 app.service('ObjectSelectionService',['$rootScope', 'EditorService', function($rootScope, EditorService) {
     //only suitable for editor
-    var container = angular.element(document.getElementById('editor-view-container'))[0];
+    var container = angular.element(document.getElementById('editor-scene-container'))[0];
     var editorHeader = angular.element(document.getElementById('editor-header'))[0];
     var intersects;
     var vector = new THREE.Vector3();

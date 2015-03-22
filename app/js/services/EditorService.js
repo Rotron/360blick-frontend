@@ -4,7 +4,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     var that = this;
 
     this.init = function(){
-        this.container = angular.element(document.getElementById('editor-view-container'))[0];
+        this.container = angular.element(document.getElementById('editor-scene-container'))[0];
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera( 75, this.container.clientWidth / this.container.clientHeight, 0.1, 1000 );
         this.renderer = new THREE.WebGLRenderer({
