@@ -1,7 +1,5 @@
 .primitives-list {
-  border: 1px dashed pink;
-  padding: $base;
-  margin: $base 0;
+  padding: 0 $base * 2;
 }
 
 .primitives-list__item {

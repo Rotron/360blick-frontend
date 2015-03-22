@@ -1,5 +1,4 @@
 .filter-switch {
-  border: 1px dashed pink;
   padding: $base;
   margin: $base 0;
   font-size: 0;
@@ -8,9 +7,9 @@
 
 .filter-switch__option {
   padding: $base * 2;
-  color: $secondary-light;
   font-size: 14px;
   border: 1px solid $primary-0;
+  color: $primary-0;
   border-left: none;
   cursor: pointer;
   @include blick-transition;
@@ -26,9 +25,11 @@
 
   &.active {
     background: $primary-highlight;
+    color: $secondary-light;
   }
 
   &:hover {
     background: $primary-1;
+    color: $secondary-light;
   }
 }
