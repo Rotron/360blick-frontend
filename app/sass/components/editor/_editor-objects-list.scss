@@ -1,0 +1,35 @@
+.editor-objects-list {
+
+}
+
+.editor-objects-list__item {
+  border: 1px dashed yellow;
+  padding: $base;
+  margin: $base 0;
+}
+
+.editor-objects-list__header {
+  border: 1px dashed yellow;
+  padding: $base;
+  margin: $base 0;
+}
+
+.editor-object__header__icon {
+  border: 1px dashed pink;
+}
+
+.editor-object__header__title {
+  border: 1px dashed green;
+}
+
+.editor-object__header__interaction {
+  border: 1px dashed pink;
+  padding: 1px;
+  margin: 1px 0;
+}
+
+.editor-object__header__interaction__button {
+  border: 1px dashed red;
+  padding: 1px;
+  margin: 1px 0;
+}

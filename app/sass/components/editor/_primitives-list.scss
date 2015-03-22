@@ -1,0 +1,11 @@
+.primitives-list {
+  border: 1px dashed pink;
+  padding: $base;
+  margin: $base 0;
+}
+
+.primitives-list__item {
+  border: 1px dashed green;
+  padding: $base;
+  margin: $base 0;
+}

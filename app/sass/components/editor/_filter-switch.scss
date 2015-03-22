@@ -1,0 +1,34 @@
+.filter-switch {
+  border: 1px dashed pink;
+  padding: $base;
+  margin: $base 0;
+  font-size: 0;
+  text-align: center;
+}
+
+.filter-switch__option {
+  padding: $base * 2;
+  color: $secondary-light;
+  font-size: 14px;
+  border: 1px solid $primary-0;
+  border-left: none;
+  cursor: pointer;
+  @include blick-transition;
+
+  &:first-child {
+    border-left: 1px solid $primary-0;
+    border-radius: 4px 0 0 4px;
+  }
+
+  &:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+
+  &.active {
+    background: $primary-highlight;
+  }
+
+  &:hover {
+    background: $primary-1;
+  }
+}

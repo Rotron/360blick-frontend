@@ -1,0 +1,45 @@
+@import "editor-toolbar";
+@import "editor-objects-list";
+@import "filter-switch";
+@import "primitives-list";
+
+.editor-scene {
+}
+
+.editor-sidebar {
+  background: $primary-2;
+  width: 300px;
+  position: fixed;
+  right: 0;
+  top: $banner-height;
+  bottom: 0;
+  overflow: scroll;
+  color: $secondary-light;
+}
+
+.editor-sidebar__top {
+  border: 2px solid red;
+}
+
+.editor-settings {
+  border: 1px dashed yellow;
+  padding: $base;
+  margin: $base 0;
+  display: none;
+}
+
+.editor-objects {
+  border: 1px dashed yellow;
+  padding: $base;
+  margin: $base 0;
+}
+
+.editor-sidebar__bottom {
+  border: 2px solid yellow;
+}
+
+.editor-sidebar__supported {
+  border: 1px dashed yellow;
+  padding: $base;
+  margin: $base 0;
+}

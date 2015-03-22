@@ -65,9 +65,9 @@
 @import "components/_nav-tabs";
 @import "components/_user-banner";
 @import "components/_footer";
-@import "components/_editor";
-@import "components/_editor-toolbar";
 @import "components/_views";
+
+@import "components/editor/editor";
 
 .hotfix-container {
   padding: 10px 20px;
