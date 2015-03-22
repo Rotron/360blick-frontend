@@ -88,9 +88,10 @@
             <button class="filter-switch__option">Effects</button>
         </nav>
         <div class="editor-sidebar__supported">
-            <ul class="primitives-list">
-                <li class="primitives-list__item" ng-repeat="type in supportedPrimitiveObjects" ng-click="addNewObject(type)">
-                    {{type}}
+            <ul class="primitives-list container">
+                <li class="primitives-list__item col span-3" ng-repeat="type in supportedPrimitiveObjects" ng-click="addNewObject(type)">
+                    <i class="fa fa-cube"></i>
+                    <h2 class="primitives-list__title">{{type}}<h2>
                 </li>
             </ul>
         </div>
