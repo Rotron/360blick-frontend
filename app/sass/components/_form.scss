@@ -41,6 +41,7 @@
   position: relative;
   height: $input-sidebar-height;
   display: block;
+  overflow: hidden;
 }
 
 .input--sidebar__label__unit {
@@ -52,6 +53,7 @@
   padding: 0 $base;
   background: $primary-0;
   font-size: 12px;
+  border-radius: 0px 4px 4px 0px;
 }
 
 .input--sidebar__field {

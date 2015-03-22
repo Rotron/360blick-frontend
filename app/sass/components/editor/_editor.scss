@@ -2,6 +2,8 @@
 @import "filter-switch";
 @import "toggle-list";
 @import "selection-list";
+@import "xyz-interaction";
+@import "sidebar-transform";
 
 .editor-scene {
 }
@@ -21,13 +23,13 @@
 }
 
 .editor-settings {
-  padding: $base * 2 0;
+  padding: $base 0;
   margin: $base 0;
   display: none;
 }
 
 .editor-objects {
-  padding: $base * 2 0;
+  padding: $base 0;
 }
 
 .editor-sidebar__bottom {
