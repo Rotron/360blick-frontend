@@ -90,15 +90,15 @@
             <button class="filter-switch__option active">Objects</button>
             <button class="filter-switch__option">Effects</button>
         </nav>
-        <ul class="primitives-group-list">
-            <li class="primitives-group-list__item" ng-repeat="primitives in supportedPrimitiveObjects" ng-click="addNewObject(primitives.title)">
-                <div class="primitives-group-list__header">
-                    <h2 class="primitives-group-list__title">{{primitives.title}}</h2>
+        <ul class="toggle-list--small">
+            <li class="toggle-list--small__item" ng-repeat="primitives in supportedPrimitiveObjects" ng-click="addNewObject(primitives.title)">
+                <div class="toggle-list--small__header">
+                    <h2 class="toggle-list--small__title">{{primitives.title}}</h2>
                 </div>
-                <ul class="primitives-object-list container">
-                    <li class="primitives-object-list__item col span-3" ng-repeat="primitive in primitives.items track by $index">
+                <ul class="selection-list container">
+                    <li class="selection-list__item col span-3" ng-repeat="primitive in primitives.items track by $index">
                         <i class="fa fa-cube"></i>
-                        <h4 class="primitives-object-list__title">{{primitive}}</h4>
+                        <h4 class="selection-list__title">{{primitive}}</h4>
                     </li>
                 </ul>
             </li>

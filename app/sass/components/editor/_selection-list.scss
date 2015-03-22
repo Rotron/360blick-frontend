@@ -1,16 +1,8 @@
-.primitives-group-list {
-}
-
-.primitives-group-list__header {
-  background: $primary-0;
+.selection-list {
   padding: $base * 2;
 }
 
-.primitives-object-list {
-  padding: $base * 2;
-}
-
-.primitives-object-list__item {
+.selection-list__item {
   padding: $base;
   text-align: center;
   border-radius: 4px;
@@ -25,7 +17,7 @@
   }
 }
 
-.primitives-object-list__title {
+.selection-list__title {
   font-size: 10px;
   margin-top: $base;
 }

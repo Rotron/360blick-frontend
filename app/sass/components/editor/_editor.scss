@@ -1,7 +1,9 @@
-@import "editor-toolbar";
 @import "editor-objects-list";
+
+@import "editor-toolbar";
 @import "filter-switch";
-@import "primitives-list";
+@import "toggle-list";
+@import "selection-list";
 
 .editor-scene {
 }
