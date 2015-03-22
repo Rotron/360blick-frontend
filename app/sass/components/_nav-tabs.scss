@@ -43,6 +43,22 @@
 
 .nav-tabs--label__item {
   @extend .nav-tabs__item;
+
+  &.has-right-splitter {
+    margin-right: 1px;
+    position: relative;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      width: 1px;
+      height: 20px;
+      background: $secondary-2;
+      position: absolute;
+      top: 50%;
+      margin-top: -10px;
+    }
+  }
 }
 
 .nav-tabs--label__btn{

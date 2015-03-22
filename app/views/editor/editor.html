@@ -37,14 +37,6 @@
 </nav>
 <div class="editor-scene" id="editor-scene-container"></div>
 <div class="editor-sidebar">
-
-    <div>
-        --------------------<br>
-        <i ng-click="zoomIn()" class="fa fa-plus-square"></i>
-        <i ng-click="zoomOut()" class="fa fa-minus-square"></i>
-        <br>--------------------
-    </div>
-
     <div class="editor-sidebar__top">
         <nav class="filter-switch">
             <button class="filter-switch__option active">Objects</button>
@@ -52,7 +44,6 @@
         </nav>
         <div class="editor-settings">Editor Settings</div>
         <div class="editor-objects">
-            <!-- todo: refactor to toggle-list -->
             <ul class="toggle-list">
                 <li ng-repeat="item in sceneObjects" class="toggle-list__item" ng-class="{active: item.id == currentSelected.id}">
                     <div class="toggle-list__header container">
@@ -67,7 +58,6 @@
                             </button>
                         </div>
                     </div>
-
                     <div class="sidebar-transform">
                         <div class="container">
                             <div class="col span-3 sidebar-transform__title">&nbsp;</div>
