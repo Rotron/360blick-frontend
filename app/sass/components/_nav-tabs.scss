@@ -64,7 +64,7 @@
 .nav-tabs--label__btn{
   @extend .nav-tabs__btn;
   padding: 0 $base;
-  font-size: 22px;
+  font-size: 20px;
   @include blick-transition;
   position: relative;
 
@@ -85,7 +85,7 @@
   left: 0;
   width: 100%;
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
   opacity: 0;
   color: $secondary-0;
   @include blick-transition;
