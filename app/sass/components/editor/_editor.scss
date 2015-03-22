@@ -2,6 +2,8 @@
 @import "filter-switch";
 @import "toggle-list";
 @import "selection-list";
+@import "xyz-interaction";
+@import "sidebar-transform";
 
 .editor-scene {
   position: fixed;
@@ -14,7 +16,7 @@
 
 .editor-sidebar {
   background: $primary-2;
-  width: 300px;
+  width: $editor-sidebar-width;
   position: fixed;
   right: 0;
   top: $banner-height;
@@ -25,17 +27,16 @@
 }
 
 .editor-sidebar__top {
-  border: 2px solid red;
 }
 
 .editor-settings {
-  padding: $base * 2 0;
+  padding: $base 0;
   margin: $base 0;
   display: none;
 }
 
 .editor-objects {
-  padding: $base * 2 0;
+  padding: $base 0;
 }
 
 .editor-sidebar__bottom {
@@ -51,4 +52,11 @@
   width: 100%;
   color: $primary-0;
   cursor: row-resize;
+}
+
+.editor-options-list {
+}
+
+.editor-options-list__item {
+  padding: $base 0;
 }

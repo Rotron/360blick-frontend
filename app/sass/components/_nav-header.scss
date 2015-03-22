@@ -5,6 +5,17 @@
   border-bottom: 1px solid $secondary-1;
 }
 
-.header__padbox {
+.has-header-pad {
   padding: $base * 3 $base * 3 $base * 3 0;
+}
+
+.header__subnav {
+  padding-right: $editor-sidebar-width;
+}
+
+.header__info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: $editor-sidebar-width;
 }

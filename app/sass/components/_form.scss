@@ -33,3 +33,42 @@
 .input__field[type=password] {
   background: $secondary-2;
 }
+
+.input--sidebar {
+}
+
+.input--sidebar__label {
+  position: relative;
+  height: $input-sidebar-height;
+  display: block;
+  overflow: hidden;
+}
+
+.input--sidebar__label__unit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: $input-sidebar-height;
+  line-height: $input-sidebar-height;
+  padding: 0 $base;
+  background: $primary-0;
+  font-size: 12px;
+  border-radius: 0px 4px 4px 0px;
+}
+
+.input--sidebar__field {
+  width: 100%;
+  border: 2px solid $primary-0;
+  background: $primary-2;
+  padding: 0 $base;
+  height: $input-sidebar-height;
+  line-height: $input-sidebar-height;
+  outline: none;
+  border-radius: 4px;
+  color: $secondary-light;
+  @include blick-transition(all, .25s);
+
+  &:focus {
+    background: $primary-highlight;
+  }
+}

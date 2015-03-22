@@ -8,7 +8,12 @@
 }
 
 .toggle-list__item {
-
+  &.active{
+    .toggle-list__header {
+      background: $primary-cta;
+    }
+    border: 3px solid $primary-cta;
+  }
 }
 
 .toggle-list--small {

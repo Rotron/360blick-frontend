@@ -12,10 +12,6 @@
   cursor: pointer;
   border-radius: 3px;
   @include blick-transition;
-
-  &:hover {
-    opacity: .8;
-  }
 }
 
 .btn--cta {
@@ -24,10 +20,18 @@
   height: $base * 10;
   color: $secondary-light;
   font-size: $font-size-large;
+
+  &:hover {
+    opacity: .8;
+  }
 }
 
 .btn--cta--danger {
   background: $cta-0;
+
+  &:hover {
+    opacity: .8;
+  }
 }
 
 .btn--dotted {

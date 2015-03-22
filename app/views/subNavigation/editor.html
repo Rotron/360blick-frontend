@@ -1,11 +1,57 @@
-<nav>
-    <ul class="nav-tabs">
-        <li class="nav-tabs__item">
-            <button class="nav-tabs__btn nav-tabs__btn--menu"  ui-sref="user.project.scenes({projectId: projectId})"><i class="fa fa-arrow-left"></i></button>
-        </li>
-        <li class="nav-tabs__item">
-            <button ui-sref="user.project.scenes({projectId: projectId})" class="nav-tabs__btn" ui-sref-active="is-active"><i class="fa fa-plus-square-o"></i>Create Scene</button>
-        </li>
-    </ul>
-</nav>
+<div class="container">
+    <nav class="col span-4">
+        <ul class="nav-tabs">
+            <li class="nav-tabs__item">
+                <button class="nav-tabs__btn nav-tabs__btn--menu"  ui-sref="user.project.scenes({projectId: projectId})"><i class="fa fa-arrow-left"></i></button>
+            </li>
+            <li class="nav-tabs__item">
+                <button ui-sref="user.project.scenes({projectId: projectId})" class="nav-tabs__btn" ui-sref-active="is-active"><i class="fa fa-plus-square-o"></i>Create Scene</button>
+            </li>
+        </ul>
+    </nav>
+    <div class="col span-4 has-header-pad has-text-center">
+        <button class="btn btn--cta">Scenes</button>
+    </div>
+    <div class="col span-4 has-text-right">
+        <ul class="nav-tabs--label">
+            <li class="nav-tabs--label__item">
+                <button class="nav-tabs--label__btn">
+                    <i ng-click="zoomOut()" class="fa fa-search-minus"></i>
+                    <span class="nav-tabs--label__title">Zoom</span>
+                </button>
+            </li>
+            <li class="nav-tabs--label__item has-right-splitter">
+                <button class="nav-tabs--label__btn">
+                    <i ng-click="zoomIn()" class="fa fa-search-plus"></i>
+                    <span class="nav-tabs--label__title">Zoom</span>
+                </button>
+            </li>
+            <li class="nav-tabs--label__item has-right-splitter">
+                <button class="nav-tabs--label__btn">
+                    <i class="fa fa-eye-slash"></i>
+                    <span class="nav-tabs--label__title">Toolbar</span>
+                </button>
+            </li>
+            <li class="nav-tabs--label__item">
+                <button class="nav-tabs--label__btn">
+                    <i class="fa fa-undo"></i>
+                    <span class="nav-tabs--label__title">Undo</span>
+                </button>
+            </li>
+            <li class="nav-tabs--label__item">
+                <button class="nav-tabs--label__btn">
+                    <i class="fa fa-repeat"></i>
+                    <span class="nav-tabs--label__title">Redo</span>
+                </button>
+            </li>
+            <li class="nav-tabs--label__item">
+                <button class="nav-tabs--label__btn">
+                    <i class="fa fa-floppy-o"></i>
+                    <span class="nav-tabs--label__title">Save</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+
 

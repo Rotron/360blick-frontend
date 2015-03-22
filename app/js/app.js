@@ -225,6 +225,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService',
     function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS, ModalService) {
 
+        $rootScope.editorControllerLoaded = false;
+
         AuthService.reloadLocalCredentials();
 
         $rootScope.currentUser = SessionService.getUser().nick;

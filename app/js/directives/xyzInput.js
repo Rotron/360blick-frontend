@@ -6,6 +6,7 @@ app.directive('xyzInput',[ function() {
         templateUrl: 'views/partials/xyzInput.html',
         scope: {
             title: "@",
+            icon: "@",
             item: "="
         },
         link: function(scope) {

@@ -1,5 +1,15 @@
-<div>
-    <div>
-        {{title}}: <input type="number" ng-model="item" min="{{min}}" max="{{max}}" step="{{step || 1}}">
+<div class="minmax-interaction container">
+    <!-- todo: refactor minmax and xyz to editor-option -->
+    <div class="minmax-interaction__title col span-3">{{title}}</div>
+    <div class="minmax-interaction__slider col span-6">
+        <div class="input-slider">slider</div>
+    </div>
+    <div class="col span-3">
+        <div class="input--sidebar">
+            <label class="input--sidebar__label">
+                <span class="input--sidebar__label__unit">%</span>
+                <input class="input--sidebar__field" type="number" ng-model="item" min="{{min}}" max="{{max}}" step="{{step || 1}}">
+            </label>
+        </div>
     </div>
 </div>

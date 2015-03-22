@@ -1,25 +1,47 @@
 <li class="toggle-list__item" ng-class="{active: item.id == currentSelected.id}">
     <div class="toggle-list__header container">
         <div class="col span-2 toggle-list__header__icon"><i class="fa fa-cube"></i></div>
-        <div class="col span-8 toggle-list__header__title" >Cube</div>
+        <div class="col span-8 toggle-list__header__title" >{{item.type}} {{item.id}}: {{item.geometry.type}}</div>
         <div class="col span-2 has-text-right toggle-list__header__interaction">
             <button class="toggle-list__header__interaction__button">
                 <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
             </button>
-            <button class="toggle-list__header__interaction__button">
+            <button class="toggle-list__header__interaction__button" ng-click="open = !open">
                 <i class="fa fa-chevron-down"></i>
             </button>
         </div>
     </div>
-    <ul class="toggle-list--small" ng-class="{'selected': item.detailsOpen || item.id == currentSelected.id}">
-        <li class="toggle-list--small__item">
-            {{item.type}} {{item.id}}: {{item.geometry.type}}
-        </li>
-        <li class="toggle-list--small__item">
-            <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
-            <xyz-input title="Position" item="item.position"></xyz-input>
-            <xyz-input title="Rotation" item="item.rotation"></xyz-input>
-            <xyz-input title="Skalierung" item="item.scale"></xyz-input>
-        </li>
-    </ul>
+    <div class="toggle-list__body" ng-if="open">
+        <div class="sidebar-transform">
+            <div class="container">
+                <div class="col span-3 sidebar-transform__title">&nbsp;</div>
+                <div class="col span-3 sidebar-transform__title">x</div>
+                <div class="col span-3 sidebar-transform__title">y</div>
+                <div class="col span-3 sidebar-transform__title">z</div>
+            </div>
+            <xyz-input title="Position" icon="fa-expand" item="item.position"></xyz-input>
+            <xyz-input title="Rotation" icon="fa-arrows" item="item.rotation"></xyz-input>
+            <xyz-input title="Skalierung" icon="fa-arrows-h" item="item.scale"></xyz-input>
+        </div>
+
+        <ul class="toggle-list--small" ng-class="{'selected': item.detailsOpen || item.id == currentSelected.id}">
+            <li class="toggle-list--small__item">
+                <div class="toggle-list--small__header">
+                    <h2 class="toggle-list--small__title">Material</h2>
+                </div>
+                <ul class="editor-options-list">
+                    <li class="editor-options-list__item">
+                        <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
+                    </li>
+                </ul>
+            </li>
+            <li class="toggle-list--small__item">
+                <div class="toggle-list--small__header">
+                    <h2 class="toggle-list--small__title">Shadow</h2>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
 </li>

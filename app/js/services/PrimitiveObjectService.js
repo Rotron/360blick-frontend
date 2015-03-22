@@ -40,11 +40,10 @@ app.service('PrimitiveObjectService',[ function() {
 
     this.getObject = function(type) {
 
-        if(supportedObjects.indexOf(type) == -1){
-            throw 'selected object not supported';
-        }
-        var objectCamera = new THREE.PerspectiveCamera( 75, container.clientWidth / container.clientHeight, 0.1, 1000 );
-        var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
+//        if(supportedObjects.indexOf(type) == -1){
+//            throw 'selected object not supported';
+//        }
+        var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x0088DA, specular: 0x000099, shininess: 30, shading: THREE.FlatShading } );
         var geometry;
 
         switch(type) {
@@ -62,7 +61,6 @@ app.service('PrimitiveObjectService',[ function() {
                 break;
         }
         var object = new THREE.Mesh( geometry, material );
-        object.add(objectCamera);
         setMaterialProperties(object);
 
         return object;

@@ -13,7 +13,6 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
 
         });
         this.renderer.setSize( this.container[0].clientWidth, this.container[0].clientHeight );
-        this.container.empty();
         this.container[0].appendChild( this.renderer.domElement );
 
         var axes = new THREE.AxisHelper(100);
@@ -26,7 +25,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         this.camera.position.y = 5;
         this.camera.lookAt(new THREE.Vector3(0,0,0));
 
-        var light = new THREE.PointLight( 0xff0000, 1, 100 );
+        var light = new THREE.PointLight( 0xffffff, 1, 100 );
         light.position.set( 10, 10, 10 );
         this.scene.add( light );
 
@@ -51,7 +50,9 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
 
     this.addNewPrimitive = function(type){
         var object = PrimitiveObjectService.getObject(type);
+        console.log(object);
         this.scene.add(object);
+        console.log(this.scene);
     }
 
 }]);
