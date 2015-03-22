@@ -4,6 +4,12 @@
 @import "selection-list";
 
 .editor-scene {
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: $banner-height;
+  z-index: 0;
 }
 
 .editor-sidebar {
@@ -15,6 +21,7 @@
   bottom: 0;
   overflow: scroll;
   color: $secondary-light;
+  z-index: 100;
 }
 
 .editor-sidebar__top {

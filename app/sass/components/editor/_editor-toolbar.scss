@@ -4,6 +4,7 @@
   position: fixed;
   top: $banner-height;
   bottom: 0;
+  z-index: 100;
 }
 
 .editor-toolbar__list {}

@@ -4,23 +4,23 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     var that = this;
 
     this.init = function(){
-        this.container = angular.element(document.getElementById('editor-scene-container'))[0];
+        this.container = angular.element(document.getElementById('editor-scene-container'));
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera( 75, this.container.clientWidth / this.container.clientHeight, 0.1, 1000 );
+        this.camera = new THREE.PerspectiveCamera( 75, this.container[0].clientWidth / this.container[0].clientHeight, 0.1, 1000 );
         this.renderer = new THREE.WebGLRenderer({
             precision: 'highp',
             antialias: true
 
         });
-        console.log(this.container);
-        this.renderer.setSize( this.container.clientWidth, this.container.clientHeight );
-        this.container.appendChild( this.renderer.domElement );
+        this.renderer.setSize( this.container[0].clientWidth, this.container[0].clientHeight );
+        this.container.empty();
+        this.container[0].appendChild( this.renderer.domElement );
 
-//        var axes = new THREE.AxisHelper(100);
-//        axes.position.y = 0.001;
-//        this.scene.add(axes);
-//        var gridXZ = new THREE.GridHelper(100, 1);
-//        this.scene.add(gridXZ);
+        var axes = new THREE.AxisHelper(100);
+        axes.position.y = 0.001;
+        this.scene.add(axes);
+        var gridXZ = new THREE.GridHelper(100, 1);
+        this.scene.add(gridXZ);
 
         this.camera.position.z = 10;
         this.camera.position.y = 5;
@@ -31,7 +31,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         this.scene.add( light );
 
 
-        WindowResizeService.init(this.renderer, this.camera, this.container);
+        WindowResizeService.init(this.renderer, this.camera, this.container[0]);
 
         function render() {
             requestAnimationFrame( render );
@@ -51,7 +51,6 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
 
     this.addNewPrimitive = function(type){
         var object = PrimitiveObjectService.getObject(type);
-        console.log(object);
         this.scene.add(object);
     }
 
