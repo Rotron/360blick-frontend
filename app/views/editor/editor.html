@@ -54,31 +54,7 @@
         <div class="editor-objects">
             <!-- todo: refactor to toggle-list -->
             <ul class="toggle-list">
-                <li ng-repeat="item in sceneObjects" class="toggle-list__item" ng-class="{active: item.id == currentSelected.id}">
-                    <div class="toggle-list__header container">
-                        <div class="col span-2 toggle-list__header__icon"><i class="fa fa-cube"></i></div>
-                        <div class="col span-8 toggle-list__header__title" >Cube</div>
-                        <div class="col span-2 has-text-right toggle-list__header__interaction">
-                            <button class="toggle-list__header__interaction__button">
-                                <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
-                            </button>
-                            <button class="toggle-list__header__interaction__button">
-                                <i class="fa fa-chevron-down"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <ul class="toggle-list--small" ng-class="{'selected': item.detailsOpen || item.id == currentSelected.id}">
-                        <li class="toggle-list--small__item">
-                            {{item.type}} {{item.id}}: {{item.geometry.type}}
-                        </li>
-                        <li class="toggle-list--small__item">
-                            <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
-                            <xyz-input title="Position" item="item.position"></xyz-input>
-                            <xyz-input title="Rotation" item="item.rotation"></xyz-input>
-                            <xyz-input title="Skalierung" item="item.scale"></xyz-input>
-                        </li>
-                    </ul>
-                </li>
+                <editor-object ng-repeat="item in sceneObjects"></editor-object>
             </ul>
         </div>
     </div>
