@@ -9,10 +9,11 @@
 
 .nav-tabs__btn {
   font-size: $font-size-large;
-  color: $secondary-0;
+  color: $secondary-1;
   cursor: pointer;
   height: $banner-height - 1px;
   padding: 0 $base * 4 0 $base;
+  @include blick-transition;
 
   .fa {
     margin: 0 $base * 2;
@@ -20,6 +21,7 @@
 
   &:hover {
     background: $secondary-2;
+    color: $secondary-0;
   }
 
   &.is-active {
@@ -31,4 +33,44 @@
 .nav-tabs__btn--menu {
   width: $banner-height;
   padding: 0;
+}
+
+.nav-tabs--label {
+  display: inline-block;
+  font-size: $font-size-xlarge;
+  padding-right: $base * 2;
+}
+
+.nav-tabs--label__item {
+  @extend .nav-tabs__item;
+}
+
+.nav-tabs--label__btn{
+  @extend .nav-tabs__btn;
+  padding: 0 $base;
+  font-size: 22px;
+  @include blick-transition;
+  position: relative;
+
+  &:hover {
+    background: none;
+    color: $secondary-0;
+
+    .nav-tabs--label__title {
+      opacity: 1;
+    }
+  }
+}
+
+.nav-tabs--label__title{
+  display: block;
+  position: absolute;
+  bottom: $base * 2;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0;
+  color: $secondary-0;
+  @include blick-transition;
 }

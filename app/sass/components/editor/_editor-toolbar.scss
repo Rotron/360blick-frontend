@@ -4,6 +4,7 @@
   position: fixed;
   top: $banner-height;
   bottom: 0;
+  overflow: scroll;
 }
 
 .editor-toolbar__list {}

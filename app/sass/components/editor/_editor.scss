@@ -10,7 +10,7 @@
 
 .editor-sidebar {
   background: $primary-2;
-  width: 300px;
+  width: $editor-sidebar-width;
   position: fixed;
   right: 0;
   top: $banner-height;
