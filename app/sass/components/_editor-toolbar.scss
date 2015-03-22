@@ -1,0 +1,46 @@
+.editor-toolbar {
+  background: $primary-2;
+  width: $banner-height;
+  position: fixed;
+  top: $banner-height;
+  bottom: 0;
+}
+
+.editor-toolbar__list {}
+
+.editor-toolbar__item {
+  color: $secondary-light;
+  height: $banner-height * 0.8;
+  text-align: center;
+  padding-top: $base * 4;
+  cursor: pointer;
+  @include blick-transition;
+
+  .fa {
+    font-size: 20px;
+  }
+
+  &.has-bottom-seperator {
+    border-bottom: 1px solid $primary-0;
+  }
+
+  &:hover {
+    background: $primary-1;
+
+    .editor-toolbar__title {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    background: $primary-cta;
+    border-bottom: $primary-cta;
+  }
+}
+
+.editor-toolbar__title {
+  @include blick-transition;
+  opacity: 0;
+  padding-top: $base;
+  font-size: 10px;
+}
