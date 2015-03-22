@@ -1,5 +1,5 @@
-.xyz-interaction {
-}
+// todo: refactor minmax and xyz to editor-option
+.xyz-interaction { }
 
 .xyz-interaction__title {
   height: $input-sidebar-height;
@@ -10,4 +10,18 @@
 
 .xyz-interaction__item {
   padding: 1px;
+}
+
+// todo: refactor minmax and xyz to editor-option
+.minmax-interaction { }
+
+.minmax-interaction__title {
+  height: $input-sidebar-height;
+  line-height: $input-sidebar-height;
+}
+
+
+.minmax-interaction__slider {
+  height: $input-sidebar-height;
+  line-height: $input-sidebar-height;
 }
