@@ -1,3 +1,12 @@
-.editor-wrapper {
-  padding-left: $banner-height;
+.editor-scene {
+}
+
+.editor-sidebar {
+  background: $primary-2;
+  width: 300px;
+  position: fixed;
+  right: 0;
+  top: $banner-height;
+  bottom: 0;
+  overflow: scroll;
 }

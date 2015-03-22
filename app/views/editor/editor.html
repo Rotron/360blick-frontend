@@ -35,32 +35,58 @@
         </li>
     </ul>
 </nav>
-<div class="editor-wrapper">
-    <div class="editor-view" id="editor-view-container"></div>
-    <div class="editor-sidebar">
-        <div class="objects-wrapper">
-            <div class="scene-object" ng-repeat="item in sceneObjects" ng-class="{active: item.id == currentSelected.id}">
-                <div class="scene-object-inner">
-                    <div class="scene-object-description">
-                        {{item.type}} {{item.id}}: {{item.geometry.type}}
-                    </div>
-                    <div class="scene-object-buttons">
-                        <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
-                    </div>
-                </div>
-                <div class="scene-object-details" ng-if="item.detailsOpen || item.id == currentSelected.id">
-                    <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
-                    <xyz-input title="Position" item="item.position"></xyz-input>
-                    <xyz-input title="Rotation" item="item.rotation"></xyz-input>
-                    <xyz-input title="Skalierung" item="item.scale"></xyz-input>
+<div class="editor-scene" id="editor-view-container"></div>
+<div class="editor-sidebar">
 
-                </div>
-            </div>
+    <div>
+        --------------------<br>
+        <i ng-click="zoomIn()" class="fa fa-plus-square"></i>
+        <i ng-click="zoomOut()" class="fa fa-minus-square"></i>
+        <br>--------------------
+    </div>
+
+    <div class="editor-sidebar__top">
+        <button>Objects</button>
+        <button>Settings</button>
+        <div class="editor-settings">Editor Settings</div>
+        <div class="editor-objects">
+            <ul class="editor-objects-list">
+                <li ng-repeat="item in sceneObjects" class="editor-objects-list__item" ng-class="{active: item.id == currentSelected.id}">
+                    <div class="editor-objects-list__title container">
+                        <div class="col span-2"><i class="fa fa-cube"></i></div>
+                        <div class="col span-8">Cube</div>
+                        <div class="col span-2 has-text-right">
+                            <button>
+                                <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
+                            </button>
+                            <button>
+                                <i class="fa fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {{item.type}} {{item.id}}: {{item.geometry.type}}
+                    <ul class="editor-details-list" ng-if="item.detailsOpen || item.id == currentSelected.id">
+                        <li class="editor-details-list__item">
+                            <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
+                            <xyz-input title="Position" item="item.position"></xyz-input>
+                            <xyz-input title="Rotation" item="item.rotation"></xyz-input>
+                            <xyz-input title="Skalierung" item="item.scale"></xyz-input>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-        <div class="objects-wrapper">
-            <div class="primitive-object" ng-repeat="type in supportedPrimitiveObjects" ng-click="addNewObject(type)">
-                {{type}}
-            </div>
+    </div>
+
+    <div class="editor-sidebar__bottom">
+        <button>Objects</button>
+        <button>Settings</button>
+        <div class="editor-sidebar__supported">
+            <ul class="primitives-list">
+                <li class="primitives-list__item" ng-repeat="type in supportedPrimitiveObjects" ng-click="addNewObject(type)">
+                    {{type}}
+                </li>
+            </ul>
         </div>
     </div>
 </div>
