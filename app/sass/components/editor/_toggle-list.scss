@@ -4,6 +4,11 @@
 .toggle-list__header {
   background: $primary-0;
   padding: $base * 2;
+  cursor: pointer;
+}
+
+.toggle-list__item {
+
 }
 
 .toggle-list--small {
@@ -13,4 +18,27 @@
 .toggle-list--small__header {
   background: $primary-0;
   padding: $base;
+}
+
+.toggle-list--small__item {
+  // todo: is-heading-state
+  //padding: $base;
+}
+
+.toggle-list__header__icon {
+}
+
+.toggle-list__header__title {
+}
+
+.toggle-list__header__interaction {
+}
+
+.toggle-list__header__interaction__button {
+  color: $secondary-light;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+  }
 }
