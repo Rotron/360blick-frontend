@@ -8,7 +8,7 @@
   overflow: scroll;
   padding-bottom: $base * 20;
   @include blick-transition(all, .3s);
-  transform: translateX(-30%) translateZ(0);
+  transform: translateX(-30%);
 }
 
 .sidebar-menu__title {
