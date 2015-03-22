@@ -1,11 +1,24 @@
 <div class="hotfix-container">
-    scenes von {{projectId}}
+    Scenes of {{projectId}}
 </div>
 <div class="hotfix-container">
-    <label>Titel</label>
     <placeholder-input value="newScene.title" label="Title" type="text"></placeholder-input>
     <button ng-click="createNewScene()" class="btn btn--round">Neues Szene anlegen</button>
 </div>
-<div ng-repeat="scene in scenes" class="hotfix-container" ui-sref="editor({username: username, projectId: projectId, sceneId: scene.id})">
-    <h2>{{scene.title}}</h2>
-</div>
+
+<ul class="overview-list container">
+    <li ng-repeat="scene in scenes" ui-sref="editor({username: username, projectId: projectId, sceneId: scene.id})" class="overview-list__item col span-6">
+        <div class="overview-list__asset" style="background-image:url(http://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg);">
+            <div class="overview-list__color" style="background-color:rgba(100,100,160, 0.5);"></div>
+            <div class="overview-list__content container">
+                <div class="col span-8">
+                    <h2 class="overview-list__title">{{scene.title}}</h2>
+                    <time class="overview-list__modified" datetime="2000-01-30 18:00">Last modified: {{scene.description}}</time>
+                </div>
+                <div class="col span-4 has-text-right">
+                    <button class="btn btn--cta">Edit</button>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

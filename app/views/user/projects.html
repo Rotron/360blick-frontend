@@ -9,8 +9,19 @@
     </div>
 </div>
 
-<div>
-    <div ng-repeat="project in projects" ui-sref="user.project.scenes({projectId: project.id})" class="hotfix-container">
-        <h2>{{project.title}}: {{project.description}}</h2>
-    </div>
-</div>
+<ul class="overview-list container">
+    <li ng-repeat="project in projects" ui-sref="user.project.scenes({projectId: project.id})" class="overview-list__item col span-6">
+        <div class="overview-list__asset" style="background-image:url(http://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg);">
+            <div class="overview-list__color" style="background-color:rgba(100,100,160, 0.5);"></div>
+            <div class="overview-list__content container">
+                <div class="col span-8">
+                    <h2 class="overview-list__title">{{project.title}}</h2>
+                    <time class="overview-list__modified" datetime="2000-01-30 18:00">Last modified: {{project.description}}</time>
+                </div>
+                <div class="col span-4 has-text-right">
+                    <button class="btn btn--cta">Edit</button>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
