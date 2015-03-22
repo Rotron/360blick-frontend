@@ -71,11 +71,20 @@
                         <li class="toggle-list--small__item">
                             {{item.type}} {{item.id}}: {{item.geometry.type}}
                         </li>
+                        <li></li>
+                        <li class="toggle-list--small__item">
+                            <div class="container">
+                                <div class="col span-3">&nbsp;</div>
+                                <div class="col span-3">x</div>
+                                <div class="col span-3">y</div>
+                                <div class="col span-3">z</div>
+                            </div>
+                            <xyz-input title="Position" icon="" labels="true" item="item.position"></xyz-input>
+                            <xyz-input title="Rotation" icon="" labels="false" item="item.rotation"></xyz-input>
+                            <xyz-input title="Skalierung" icon="" labels="false" item="item.scale"></xyz-input>
+                        </li>
                         <li class="toggle-list--small__item">
                             <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
-                            <xyz-input title="Position" item="item.position"></xyz-input>
-                            <xyz-input title="Rotation" item="item.rotation"></xyz-input>
-                            <xyz-input title="Skalierung" item="item.scale"></xyz-input>
                         </li>
                     </ul>
                 </li>
