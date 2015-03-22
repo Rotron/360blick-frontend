@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('NewProjectController', ['$scope', '$stateParams', 'RequestService', function ($scope, $stateParams, RequestService) {
+app.controller('NewProjectController', ['$scope', '$rootScope', '$stateParams', 'RequestService', 'Project', function ($scope, $rootScope, $stateParams, RequestService, Project) {
 
     $scope.newProject = {
         title: null,
@@ -8,13 +8,6 @@ app.controller('NewProjectController', ['$scope', '$stateParams', 'RequestServic
     };
 
     $scope.createNewProject = function(){
-        if($scope.newProject.title){
-            RequestService.post('projects/create', {project: $scope.newProject}, function(res) {
-                    $scope.projects.push(res.data);
-                }, function(error) {
-                    console.log(error);
-                }
-            );
-        }
+        Project.create($scope.newProject);
     }
 }]);
