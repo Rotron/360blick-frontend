@@ -7,26 +7,21 @@ app.service('Project', ['RequestService', function (RequestService) {
 
     var subscribers = [];
 
-    function onSuccess(res){
-        all.projects = res.data;
-        update();
-    }
-
     function update(){
         angular.forEach(subscribers, function(callback){
             callback(all.projects);
         })
     }
 
+    function onSuccess(res){
+        all.projects = res.data;
+        update();
+    }
+
     this.get = function(callback){
         subscribers.push(callback);
         return all.projects;
     };
-
-    RequestService.post('projects/get_own_projects', {}, onSuccess.bind(this), function(error) {
-            console.log(error);
-        }
-    );
 
     this.create = function(newProject){
         if(newProject.title){
@@ -38,7 +33,7 @@ app.service('Project', ['RequestService', function (RequestService) {
                 }
             );
         }
-    }
+    };
 
     this.delete = function(projectId){
         if(newProject.title){
@@ -50,6 +45,12 @@ app.service('Project', ['RequestService', function (RequestService) {
                 }
             );
         }
-    }
+    };
+
+    RequestService.post('projects/get_own_projects', {}, onSuccess.bind(this), function(error) {
+            console.log(error);
+        }
+    );
 
 }]);
+
