@@ -3,13 +3,19 @@ $input-height: $base * 8;
 $input-sidebar-height: $base * 6;
 $editor-sidebar-width: 300px;
 
+// z-index
+$zindex-sidebar: 100;
+$zindex-header: 200;
+$zindex-dropdown: 300;
+$zindex-dialog: 400;
+$zindex-dialog-auth: 500;
+
 // only landingpage
 $size-huge: 100px;
 $size-large: 50px;
 $size-medium: 34px;
 $size-title: 22px;
 $size-content: 14px;
-
 
 // todo: mixins for typography styles, huge, title etc...
 $font-size-xlarge: 20px;
