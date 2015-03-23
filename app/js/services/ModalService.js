@@ -20,6 +20,11 @@ app.service('ModalService',['$rootScope', 'btfModal', function($rootScope, btfMo
             controller: 'NewProjectController',
             controllerAs: 'ctrl',
             templateUrl: 'partials/newProject.html'
+        }),
+        'newScene': btfModal({
+            controller: 'NewSceneController',
+            controllerAs: 'ctrl',
+            templateUrl: 'partials/newScene.html'
         })
     };
 
