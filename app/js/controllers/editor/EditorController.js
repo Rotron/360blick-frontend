@@ -1,7 +1,10 @@
 'use strict';
 
-  app.controller('EditorController', ['$scope', '$rootScope', 'AuthService', 'EditorService', 'PrimitiveObjectService', 'ObjectSelectionService', function ($scope, $rootScope, AuthService, EditorService, PrimitiveObjectService, ObjectSelectionService) {
+  app.controller('EditorController', ['$scope', '$rootScope', 'AuthService', 'EditorService', 'PrimitiveObjectService', '$stateParams', function ($scope, $rootScope, AuthService, EditorService, PrimitiveObjectService, $stateParams) {
 
+      $scope.projectId = $stateParams['projectId'];
+      $scope.username = $stateParams['username'];
+      
       function initController(){
           EditorService.init();
 
