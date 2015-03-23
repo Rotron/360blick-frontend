@@ -16,6 +16,15 @@
   }
 }
 
+.toggle-list__body {
+  max-height: 0px;
+  overflow: hidden;
+  @include blick-transition;
+  &.selected {
+    max-height: 2000px;
+  }
+}
+
 .toggle-list--small {
 
 }

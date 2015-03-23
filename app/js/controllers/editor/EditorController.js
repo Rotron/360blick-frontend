@@ -18,12 +18,6 @@
 
           $scope.sceneObjects = EditorService.getObjects();
 
-          $scope.currentSelected = undefined;
-          $rootScope.$on('objectSelected', function(event, object){
-              $scope.currentSelected = object;
-              $scope.$apply();
-          });
-
           $scope.supportedPrimitiveObjects = PrimitiveObjectService.getSupportedObjectTypes();
       }
 

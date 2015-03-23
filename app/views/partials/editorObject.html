@@ -1,5 +1,5 @@
-<li class="toggle-list__item" ng-class="{active: item.id == currentSelected.id}">
-    <div class="toggle-list__header container" ng-click="active = !active">
+<li class="toggle-list__item" ng-class="{active: isActive}">
+    <div class="toggle-list__header container" ng-click="setActive(); ">
         <div class="col span-2 toggle-list__header__icon"><i class="fa fa-cube"></i></div>
         <div class="col span-8 toggle-list__header__title" >{{item.type}} {{item.id}}: {{item.geometry.type}}</div>
         <div class="col span-2 has-text-right toggle-list__header__interaction">
@@ -11,7 +11,7 @@
             </button>
         </div>
     </div>
-    <div class="toggle-list__body" ng-class="{'active': active}">
+    <div class="toggle-list__body" ng-class="{'selected': item.detailsOpen}">
         <div class="sidebar-transform">
             <div class="container">
                 <div class="col span-3 sidebar-transform__title">&nbsp;</div>
@@ -24,7 +24,7 @@
             <xyz-input title="Skalierung" icon="fa-arrows-h" item="item.scale"></xyz-input>
         </div>
 
-        <ul class="toggle-list--small" ng-class="{'selected': item.detailsOpen || item.id == currentSelected.id}">
+        <ul class="toggle-list--small">
             <li class="toggle-list--small__item">
                 <div class="toggle-list--small__header">
                     <h2 class="toggle-list--small__title">Material</h2>

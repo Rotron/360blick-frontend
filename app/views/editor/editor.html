@@ -45,7 +45,7 @@
         <div class="editor-settings">Editor Settings</div>
         <div class="editor-objects">
             <ul class="toggle-list">
-                <editor-object ng-repeat="item in sceneObjects"></editor-object>
+                <editor-object ng-repeat="item in sceneObjects" ng-if="item.type != 'Line' && item.type != 'PointLight'"></editor-object>
             </ul>
         </div>
     </div>

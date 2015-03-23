@@ -12,14 +12,15 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
             antialias: true
 
         });
+        this.renderer.setClearColor( 0x1C2229, 1);
         this.renderer.setSize( this.container[0].clientWidth, this.container[0].clientHeight );
         this.container[0].appendChild( this.renderer.domElement );
 
-        var axes = new THREE.AxisHelper(100);
-        axes.position.y = 0.001;
-        this.scene.add(axes);
-        var gridXZ = new THREE.GridHelper(100, 1);
-        this.scene.add(gridXZ);
+//        var axes = new THREE.AxisHelper(100);
+//        axes.position.y = 0.001;
+//        this.scene.add(axes);
+//        var gridXZ = new THREE.GridHelper(100, 1);
+//        this.scene.add(gridXZ);
 
         this.camera.position.z = 10;
         this.camera.position.y = 5;
@@ -50,9 +51,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
 
     this.addNewPrimitive = function(type){
         var object = PrimitiveObjectService.getObject(type);
-        console.log(object);
         this.scene.add(object);
-        console.log(this.scene);
     }
 
 }]);
