@@ -71,3 +71,28 @@
     }
   }
 }
+
+.btn--select {
+  position: relative;
+  border-radius: 0;
+  width: 100%;
+  height: $base * 10;
+  background: $secondary-3;
+  padding: $base * 4;
+  padding-right: $base * 5;
+  text-align: left;
+  margin-bottom: 5px;
+  .fa {
+    position: absolute;
+    left: $base * 2;
+    font-size: 22px;
+
+    &:last-child {
+      left: auto;
+      right: $base * 2;
+      font-size: 14px;
+      height: 100%;
+      line-height: 13px;
+    }
+  }
+}
