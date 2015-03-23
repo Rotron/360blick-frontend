@@ -72,3 +72,28 @@
     background: $primary-highlight;
   }
 }
+
+.input--select {
+  width: 100%;
+  .input__label--select {
+    line-height: $base * 2;
+    padding: $base * 4;
+    @include blick-transition();
+  }
+  &.is-focused, &.is-filled  {
+    .input__label--select {
+      line-height: $base * 2;
+      padding: $base;
+      padding-left: $base * 4;
+      color: $secondary-0;
+      opacity: 1;
+    }
+  }
+}
+
+.input__field.input--select__field {
+  width: 100%;
+  height: $base * 10;
+  background: $secondary-3;
+  padding: $base * 4;
+}
