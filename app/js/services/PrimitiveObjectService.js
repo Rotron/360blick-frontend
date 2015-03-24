@@ -48,7 +48,7 @@ app.service('PrimitiveObjectService',[ function() {
 
         switch(type) {
             case 'sphere':
-                geometry = new THREE.SphereGeometry( 1, 200, 200 );
+                geometry = new THREE.SphereGeometry( 1, 100, 100 );
                 break;
             case 'cube':
                 geometry = new THREE.BoxGeometry( 1, 1, 1 );

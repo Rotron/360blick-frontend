@@ -35,7 +35,7 @@
         </li>
     </ul>
 </nav>
-<div class="editor-scene" id="editor-scene-container"></div>
+<editor-scene class="editor-scene"></editor-scene>
 <div class="editor-sidebar">
     <div class="editor-sidebar__top">
         <nav class="filter-switch">
@@ -45,7 +45,7 @@
         <div class="editor-settings">Editor Settings</div>
         <div class="editor-objects">
             <ul class="toggle-list">
-                <editor-object ng-repeat="item in sceneObjects" ng-if="item.type != 'Line' && item.type != 'PointLight'"></editor-object>
+                <editor-object ng-repeat="item in getSceneObjects()" ng-if="item.type != 'Line' && item.type != 'PointLight'"></editor-object>
             </ul>
         </div>
     </div>
@@ -61,7 +61,7 @@
             <button class="filter-switch__option">Effects</button>
         </nav>
         <ul class="toggle-list--small">
-            <li class="toggle-list--small__item" ng-repeat="primitives in supportedPrimitiveObjects">
+            <li class="toggle-list--small__item" ng-repeat="primitives in getSupportedPrimitiveObjects()">
                 <div class="toggle-list--small__header">
                     <h2 class="toggle-list--small__title">{{primitives.title}}</h2>
                 </div>

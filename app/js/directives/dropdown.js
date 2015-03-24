@@ -4,7 +4,8 @@ app.directive('dropdown',[function() {
         replace: true,
         scope: {
             data: '=',
-            onSelect: '='
+            onSelect: '=',
+            classSuffix: '@'
         },
         link: function(scope, element, attrs) {
             scope.active = false;

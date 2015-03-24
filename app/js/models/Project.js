@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('Project', ['RequestService', function (RequestService) {
+app.service('Project', ['RequestService', '$stateParams', '$rootScope', function (RequestService, $stateParams, $rootScope) {
     var all = {
         projects: []
     };
@@ -19,6 +19,12 @@ app.service('Project', ['RequestService', function (RequestService) {
     }
 
     this.get = function(callback){
+        if(all.projects.length < 1 || $rootScope.currentUser != $stateParams['username']){
+            RequestService.post('projects/get_own_projects', {}, onSuccess.bind(this), function(error) {
+                    console.log(error);
+                }
+            );
+        }
         subscribers.push(callback);
         return all.projects;
     };
@@ -46,11 +52,6 @@ app.service('Project', ['RequestService', function (RequestService) {
             );
         }
     };
-
-    RequestService.post('projects/get_own_projects', {}, onSuccess.bind(this), function(error) {
-            console.log(error);
-        }
-    );
 
 }]);
 
