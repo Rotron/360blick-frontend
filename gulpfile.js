@@ -13,16 +13,6 @@ var gulp = require('gulp'),
     bower = require('gulp-bower'),
     wiredep = require('wiredep').stream;
 
-gulp.task('inject', ['bower', 'npm'], function() {
-    gulp.src('./app/index-template.html')
-        .pipe(wiredep())
-        .pipe(inject(gulp.src('./app/js/**/*.js'), {relative: true}))
-        .pipe(rename('index.html'))
-        .pipe(gulp.dest('./app/'));
-
-});
-
-
 /**
  * Webserver
  */
@@ -56,21 +46,21 @@ gulp.task('webserver-styleguide', function() {
 
 /**
  * Styles
- **/
+ */
 gulp.task('sass', function() {
     return gulp.src('app/sass/main.scss')
         .pipe(sass({errLogToConsole: true}))
         .pipe(gulp.dest('app/css'));
 });
 
-gulp.task('watch', function() {
-    gulp.watch('app/sass/**/*.scss', ['sass']);
-    gulp.watch('app/views/**/*.html', ['templateCache']);
+gulp.task('css-copy', ['sass'], function() {
+    gulp.src('app/css/main.css')
+        .pipe(gulp.dest('styleguide/public'));
 });
 
 /**
  * Styleguide
- **/
+ */
 gulp.task('watch-styleguide', function() {
     gulp.watch(['app/sass/**/*.scss', 'styleguide/template/**/*'], ['kss', 'sass', 'css-copy']);
 });
@@ -86,12 +76,9 @@ gulp.task('kss', function() {
         .pipe(gulp.dest('styleguide/'))
 });
 
-gulp.task('css-copy', ['sass'], function() {
-    gulp.src('app/css/main.css')
-        .pipe(gulp.dest('styleguide/public'));
-});
-
-
+/**
+ * Templates
+ */
 gulp.task('templateCache', function () {
     gulp.src('app/views/**/*.html')
         .pipe(templateCache({
@@ -100,17 +87,22 @@ gulp.task('templateCache', function () {
         .pipe(gulp.dest('app/js'));
 });
 
+/**
+ * Install deps
+ */
 gulp.task('npm', function () {
     gulp.src(['./package.json'])
         .pipe(install());
 });
-
 
 gulp.task('bower', function () {
     return bower()
         .pipe(gulp.dest('app/bower_components'))
 });
 
+/**
+ * Build process
+ */
 gulp.task('build-copy-files', ['default'], function () {
     gulp.src('app/index.html')
         .pipe(gulp.dest('build'));
@@ -120,6 +112,25 @@ gulp.task('build', ['default', 'build-copy-files'], function () {
 
 });
 
+/**
+ * Inject files into index.html
+ */
+gulp.task('inject', ['bower', 'npm'], function() {
+    gulp.src('./app/index-template.html')
+        .pipe(wiredep())
+        .pipe(inject(gulp.src('./app/js/**/*.js'), {relative: true}))
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('./app/'));
+});
+
+/**
+ * Watcher
+ */
+gulp.task('watch', function() {
+    gulp.watch('app/sass/**/*.scss', ['sass']);
+    gulp.watch('app/js/**/*.js', ['inject']);
+    gulp.watch('app/views/**/*.html', ['templateCache']);
+});
 
 /**
  * Multiple-Tasks
