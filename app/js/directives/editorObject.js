@@ -5,6 +5,7 @@ app.directive('editorObject', ['$rootScope', function ($rootScope) {
         replace: true,
         link: function(scope, elem, attrs) {
             $rootScope.$on('objectSelected', function(event, object){
+                console.log(object);
                 if(scope.item.id == object.id){
                     scope.isActive = true;
 //                    if(!scope.item.detailsOpen){
