@@ -8,7 +8,6 @@ set :repo_url, 'git@bitbucket.org:360blick/frida.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
 set :deploy_to, '/home/blick/www'
 
 # Default value for :scm is :git
@@ -36,6 +35,14 @@ set :deploy_to, '/home/blick/www'
 # set :keep_releases, 5
 
 namespace :deploy do
+
+  task :build do
+    on roles(:all) do
+      execute "cd #{deploy_to}/current/ && npm install && gulp build"
+    end
+  end
+
+  before :finishing, :build
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
