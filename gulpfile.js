@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    $ = require('gulp-load-plugins')(),
     sass = require('gulp-sass'),
     plumber = require('gulp-plumber'),
     inject = require('gulp-inject'),
@@ -103,12 +104,39 @@ gulp.task('bower', function () {
 /**
  * Build process
  */
-gulp.task('build-copy-files', ['default'], function () {
-    gulp.src('app/index.html')
-        .pipe(gulp.dest('build'));
+
+// Optimize images
+gulp.task('build-images', function () {
+    return gulp.src('app/images/**/*')
+        .pipe($.cache($.imagemin({
+            progressive: true,
+            interlaced: true
+        })))
+        .pipe(gulp.dest('build/images'))
+        .pipe($.size({title: 'images'}));
 });
 
-gulp.task('build', ['default', 'build-copy-files'], function () {
+gulp.task('build-copy-files', ['default'], function () {
+    var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+    return gulp.src('app/index.html')
+        .pipe(assets)
+        .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
+//        .pipe($.if('*.css', $.uncss({
+//            html: [
+//                'app/index.html'
+//            ]
+//        })))
+//        // Concatenate and minify styles
+//        // In case you are still using useref build blocks
+//        .pipe($.if('*.css', $.csso()))
+        .pipe(assets.restore())
+        .pipe($.useref())
+        .pipe($.if('*.html', $.minifyHtml())) //TODO: comment in
+        .pipe(gulp.dest('build'))
+        .pipe($.size({title: 'html'}));
+});
+
+gulp.task('build', ['default', 'build-copy-files', 'build-images'], function () {
 
 });
 
