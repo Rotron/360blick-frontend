@@ -96,6 +96,26 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('user.scenetemplates', {
+            url: "/scenetemplates",
+            views: {
+                "app": {
+                    templateUrl: "user/index.html",
+                    controller: "UserController"
+                },
+                "userContent@user": {
+                    templateUrl: "sceneTemplates/sceneTemplates.html",
+                    controller: "SceneTemplatesController"
+                },
+                "subNavigation@user": {
+                    templateUrl: "subNavigation/projects.html",
+                    controller: "UserProjectsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
         .state('user', {
             url: "/:username",
             views: {
