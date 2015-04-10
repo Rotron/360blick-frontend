@@ -116,27 +116,23 @@ gulp.task('build-images', function () {
         .pipe($.size({title: 'images'}));
 });
 
-gulp.task('build-copy-files', ['default'], function () {
+gulp.task('build', ['default', 'build-images'], function () {
     var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+    /*copy files*/
+    gulp.src('app/.htaccess')
+    .pipe(gulp.dest('build'));
+    gulp.src('app/fonts/*')
+    .pipe(gulp.dest('build/fonts'));
+    /*concat and minify*/
     return gulp.src('app/index.html')
         .pipe(assets)
         .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-//        .pipe($.if('*.css', $.uncss({
-//            html: [
-//                'app/index.html'
-//            ]
-//        })))
-//        // Concatenate and minify styles
-//        // In case you are still using useref build blocks
-//        .pipe($.if('*.css', $.csso()))
+        .pipe($.if('*.css', $.csso()))
         .pipe(assets.restore())
         .pipe($.useref())
         .pipe($.if('*.html', $.minifyHtml())) //TODO: comment in
         .pipe(gulp.dest('build'))
         .pipe($.size({title: 'html'}));
-});
-
-gulp.task('build', ['default', 'build-copy-files', 'build-images'], function () {
 
 });
 
