@@ -113,7 +113,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 }
             },
             data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+                authorizedRoles: [USER_ROLES.admin]
             }
         })
         .state('user', {
