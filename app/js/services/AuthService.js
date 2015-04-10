@@ -1,5 +1,5 @@
-app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'AUTH_EVENTS', '$rootScope',
-    function (RequestService, SessionService, $rootScope, AUTH_EVENTS, $rootScope) {
+app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'AUTH_EVENTS',
+    function (RequestService, SessionService, $rootScope, AUTH_EVENTS) {
 
     this.login = function (credentials) {
         RequestService.post('users/login', credentials, function(res){

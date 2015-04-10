@@ -20,7 +20,7 @@ app.service('Project', ['RequestService', '$stateParams', '$rootScope', function
 
     this.get = function(callback){
         if(all.projects.length < 1 || $rootScope.currentUser != $stateParams['username']){
-            RequestService.post('projects/get_own_projects', {}, onSuccess.bind(this), function(error) {
+            RequestService.post('projects/get_projects', {user_nick: $rootScope.currentUser}, onSuccess.bind(this), function(error) {
                     console.log(error);
                 }
             );

@@ -25,12 +25,17 @@ app.service('ModalService',['$rootScope', 'btfModal', function($rootScope, btfMo
             controller: 'NewSceneController',
             controllerAs: 'ctrl',
             templateUrl: 'partials/newScene.html'
+        }),
+        'newSceneTemplate': btfModal({
+            controller: 'NewSceneTemplateController',
+            controllerAs: 'ctrl',
+            templateUrl: 'partials/newSceneTemplate.html'
         })
     };
 
     this.openModal = function(modalName){
         if(!modals[modalName]){
-            console.error('Modal does not exist in ModalService');
+            console.error('Modal "' + modalName + '" does not exist in ModalService');
         }
         modals[modalName].activate();
     };
