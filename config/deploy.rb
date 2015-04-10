@@ -38,7 +38,7 @@ namespace :deploy do
 
   task :build do
     on roles(:all) do
-      execute "cd #{deploy_to}/current/ && npm install && gulp build"
+      execute "cd #{deploy_to}/current/ && npm install --production && gulp build"
     end
   end
 
