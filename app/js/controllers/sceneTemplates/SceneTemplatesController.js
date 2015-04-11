@@ -10,6 +10,5 @@ app.controller('SceneTemplatesController', ['$scope', 'SceneTemplates', '$rootSc
         $scope.templates.push(data);
     });
 
-    console.log('test');
 }]);
 
