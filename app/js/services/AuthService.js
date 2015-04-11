@@ -3,9 +3,7 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
 
     this.login = function (credentials) {
         RequestService.post('users/login', credentials, function(res){
-            // TODO: Backend, res.data.role
-                console.log(res);
-            SessionService.create(res.token, res.nick, res.email, 'editor');
+            SessionService.create(res.token, res.nick, res.email, res.role);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: res.nick});
             },
         function(){
@@ -39,9 +37,8 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
         if (!angular.isArray(authorizedRoles)) {
             authorizedRoles = [authorizedRoles];
         }
-
         return (this.isAuthenticated() &&
-        authorizedRoles.indexOf(SessionService.userRole) !== -1);
+        authorizedRoles.indexOf(SessionService.getRole()) !== -1);
     };
 
         $rootScope.isAuthenticated = this.isAuthenticated;
