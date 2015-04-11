@@ -3,9 +3,8 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
 
     this.login = function (credentials) {
         RequestService.post('users/login', credentials, function(res){
-            // TODO: Backend, res.data.role
                 console.log(res);
-            SessionService.create(res.token, res.nick, res.email, 'editor');
+            SessionService.create(res.token, res.nick, res.email, res.userRole);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: res.nick});
             },
         function(){

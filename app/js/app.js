@@ -249,9 +249,12 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
 
         AuthService.reloadLocalCredentials();
 
+//        console.log(SessionService.getUser());
+
         $rootScope.currentUser = SessionService.getUser().nick;
         $rootScope.userRoles = USER_ROLES;
         $rootScope.isAuthorized = AuthService.isAuthorized;
+        $rootScope.isAdmin = SessionService.isAdmin;
 
         $rootScope.sidebarMenu = { isActive: true };
         // debugging
