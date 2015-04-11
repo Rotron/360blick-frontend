@@ -4,7 +4,7 @@
   "description": "more perspective for content",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:360blick/360blick-frontend.git"
+    "url": "git@bitbucket.org:360blick/frida.git"
   },
   "dependencies": {
     "gulp": "^3.8.10",
