@@ -12,7 +12,7 @@
     "gulp-open": "^0.3.1",
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^1.2.4",
+    "gulp-sass": "^1.2.0",
     "wiredep": "^2.2.2",
     "gulp-angular-filesort": "^1.0.4",
     "gulp-angular-templatecache": "^1.5.0",
@@ -37,7 +37,6 @@
     "gulp-jshint": "^1.6.3",
     "gulp-minify-html": "0.1.5",
     "gulp-replace": "^0.5.0",
-    "gulp-sass": "^1.2.0",
     "gulp-sourcemaps": "^1.3.0",
     "gulp-useref": "^1.0.1",
     "opn": "^1.0.0",
@@ -46,12 +45,13 @@
     "run-sequence": "^1.0.1"
   },
   "devDependencies": {
+    "apache-server-configs": "^2.7.1",
+    "browser-sync": "^1.3.0",
     "gulp-kss": "0.0.2",
+    "gulp-preprocess": "^1.2.0",
     "karma": "^0.12.28",
     "karma-ng-html2js-preprocessor": "^0.1.2",
-    "karma-ng-scenario": "^0.1.0",
-    "apache-server-configs": "^2.7.1",
-    "browser-sync": "^1.3.0"
+    "karma-ng-scenario": "^0.1.0"
   },
   "engines": {
     "node": ">=0.10.0"
