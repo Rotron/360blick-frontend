@@ -1,6 +1,8 @@
 'use strict';
 
-app.controller('SceneTemplatesController', ['$scope', 'SceneTemplates', '$rootScope', function ($scope, SceneTemplates, $rootScope) {
+app.controller('SceneTemplatesController', ['$scope', 'SceneTemplates', '$rootScope', '$stateParams', function ($scope, SceneTemplates, $rootScope, $stateParams) {
+
+    $scope.username = $stateParams.username;
 
     $scope.templates = SceneTemplates.get(function(sceneTemplates){
         $scope.templates = sceneTemplates;

@@ -21,7 +21,7 @@
                     <a ng-click="openModal('newSceneTemplate')" ui-sref-active="is-active" class="menu-secondary__title"><i class="fa fa-plus"></i>New Scenetemplate</a>
                 </li>
                 <li class="menu-secondary__item" ng-repeat="template in sceneTemplates track by $index">
-                    <a ui-sref="app" ui-sref-active="is-active" class="menu-secondary__title">{{template.title}}</a>
+                    <a ui-sref="template({templateId: template.id})" ui-sref-active="is-active" class="menu-secondary__title">{{template.title}}</a>
                 </li>
             </ul>
         </li>
