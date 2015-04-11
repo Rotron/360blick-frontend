@@ -38,11 +38,11 @@ namespace :deploy do
 
   task :build do
     on roles(:all) do
-      execute "cd #{deploy_to}/current/ && npm install --production && gulp build"
+      # execute "cd #{deploy_to}/current/ && npm install --production && gulp build"
     end
   end
 
-  before :finishing, :build
+  # before :finishing, :build
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
