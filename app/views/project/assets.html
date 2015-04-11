@@ -1,1 +1,28 @@
-assets von {{projectId}}
+<div class="interaction-bar container">
+    <div class="col span-6">
+        <button ng-click="openModal('newProject')" class="btn btn--dotted"><i class="fa fa-upload"></i>Upload</button>
+    </div>
+    <div class="col span-6 has-text-right">
+        <button class="btn btn--dropdown btn--dropdown--light">Most Recent<i class="fa fa-chevron-down"></i></button>
+        <button class="btn"><i class="fa fa-th-list"></i></button>
+        <button class="btn"><i class="fa fa-th"></i></button>
+    </div>
+</div>
+
+<ul class="overview-list container">
+    <li ng-repeat="project in projects" ui-sref="user.project.scenes({projectId: project.id})" class="overview-list__item col span-6">
+        <div class="overview-list__asset" style="background-image:url(http://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg);">
+            <div class="overview-list__color" style="background-color:rgba(100,100,160, 0.5);"></div>
+            <div class="overview-list__content container">
+                <div class="col span-8">
+                    <h2 class="overview-list__title">{{project.title}}</h2>
+                    <time class="overview-list__modified" datetime="2000-01-30 18:00">Last modified: {{project.description}}</time>
+                </div>
+                <div class="col span-4 has-text-right">
+                    <button ng-click="deleteProject(project.id)" class="btn btn--cta--danger">Delete</button>
+                    <button class="btn btn--cta">Edit</button>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
