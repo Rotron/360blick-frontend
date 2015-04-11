@@ -15,15 +15,7 @@
         </li>
         <!--    Scenetemplates   -->
         <li class="menu-primary__item">
-            <a ui-sref="user.scenetemplates" ui-sref-active-eq="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-folder-open"></i>Scenetemplates</a>
-            <ul class="menu-secondary">
-                <li class="menu-secondary__item">
-                    <a ng-click="openModal('newSceneTemplate')" ui-sref-active="is-active" class="menu-secondary__title"><i class="fa fa-plus"></i>New Scenetemplate</a>
-                </li>
-                <li class="menu-secondary__item" ng-repeat="template in sceneTemplates">
-                    <a ui-sref="app" ui-sref-active="is-active" class="menu-secondary__title">{{template.title}}</a>
-                </li>
-            </ul>
+            <a ui-sref="user.scenetemplates" ui-sref-active-eq="is-active" class="menu-primary__title"><i class="fa fa-file-o"></i>Templates</a>
         </li>
         <li class="menu-primary__item">
             <a ui-sref="user.settings.account" ui-sref-active="is-active" class="menu-primary__title"><i class="fa fa-user"></i>Account</a>

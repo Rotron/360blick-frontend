@@ -5,6 +5,10 @@ app.service('RequestService', ['$http', 'SessionService', function ($http, Sessi
     // users/register
     // users/login
     // users/logout
+    var url = 'http://localhost:3000/api/v1';
+    // @if NODE_ENV = 'PRODUCTION'
+    url = 'https://blick.herokuapp.com';
+    // @endif
 
     /**
      * usage:
@@ -17,7 +21,7 @@ app.service('RequestService', ['$http', 'SessionService', function ($http, Sessi
         };
 
         return $http
-            .post('http://localhost:3000/api/v1/' + action + '.json', { user: user, data: data })
+            .post(url + '/' + action + '.json', { user: user, data: data })
             .success(function(res){
                 callback(res);
             })
@@ -36,7 +40,7 @@ app.service('RequestService', ['$http', 'SessionService', function ($http, Sessi
     this.get = function(action, data, callback, errorCallback){
 
         return $http
-            .get('http://localhost:3000/api/v1/' + action + '.json', { params: data })
+            .get(url + '/' + action + '.json', { params: data })
             .success(function(res){
                 callback(res);
             })

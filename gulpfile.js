@@ -12,6 +12,7 @@ var gulp = require('gulp'),
     rename = require("gulp-rename"),
     install = require("gulp-install"),
     bower = require('gulp-bower'),
+    preprocess = require('gulp-preprocess'),
     wiredep = require('wiredep').stream;
 
 /**
@@ -116,7 +117,15 @@ gulp.task('build-images', function () {
         .pipe($.size({title: 'images'}));
 });
 
-gulp.task('build', ['default', 'build-images'], function () {
+
+gulp.task('preprocess-build', function(){
+    gulp.src('./app/js/**/*.js')
+        .pipe(preprocess({context: { NODE_ENV: 'PRODUCTION', DEBUG: true}}))
+        .pipe(gulp.dest('./app/tmp'));
+});
+
+gulp.task('build', ['preprocess-build', 'sass', 'templateCache', 'inject', 'build-images'], function () {
+
     var assets = $.useref.assets({searchPath: '{.tmp,app}'});
     /*copy files*/
     gulp.src('app/.htaccess')
@@ -126,7 +135,7 @@ gulp.task('build', ['default', 'build-images'], function () {
     /*concat and minify*/
     return gulp.src('app/index.html')
         .pipe(assets)
-        .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
+//        .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
         .pipe($.if('*.css', $.csso()))
         .pipe(assets.restore())
         .pipe($.useref())
@@ -142,9 +151,16 @@ gulp.task('build', ['default', 'build-images'], function () {
 gulp.task('inject', ['bower', 'npm'], function() {
     gulp.src('./app/index-template.html')
         .pipe(wiredep())
-        .pipe(inject(gulp.src('./app/js/**/*.js'), {relative: true}))
+        .pipe(inject(gulp.src('./app/tmp/**/*.js'), {relative: true}))
         .pipe(rename('index.html'))
         .pipe(gulp.dest('./app/'));
+});
+
+
+gulp.task('preprocessor', function(){
+    gulp.src('./app/js/**/*.js')
+    .pipe(preprocess())
+    .pipe(gulp.dest('./app/tmp'));
 });
 
 /**
@@ -152,15 +168,15 @@ gulp.task('inject', ['bower', 'npm'], function() {
  */
 gulp.task('watch', function() {
     gulp.watch('app/sass/**/*.scss', ['sass']);
-    gulp.watch('app/js/**/*.js', ['inject']);
+    gulp.watch('app/js/**/*.js', ['preprocessor', 'inject']);
     gulp.watch('app/views/**/*.html', ['templateCache']);
 });
 
 /**
  * Multiple-Tasks
  */
-gulp.task('default', ['sass', 'templateCache', 'inject']);
-gulp.task('serve', ['webserver', 'watch']);
+gulp.task('default', ['preprocessor', 'sass', 'templateCache', 'inject']);
+gulp.task('serve', ['preprocessor', 'inject', 'webserver', 'watch']);
 gulp.task('serve-build', ['webserver-build']);
 gulp.task('serve-styleguide', ['webserver-styleguide', 'watch-styleguide']);
 gulp.task('serve-all', ['webserver', 'webserver-styleguide', 'watch', 'watch-styleguide']);
