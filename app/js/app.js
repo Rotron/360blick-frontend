@@ -117,13 +117,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             }
         })
         .state('template', {
-            url: "/template/:templateId",
+            url: "/:username/template/:templateId",
             views: {
                 "app": {
                     templateUrl: "editor/editor.html",
                     controller: "EditorController"
                 },
-                "subNavigation@editor": {
+                "subNavigation@template": {
                     templateUrl: "subNavigation/editor.html",
                     controller: "EditorController"
                 }
