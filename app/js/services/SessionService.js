@@ -33,8 +33,11 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
     };
 
     this.isAdmin = function () {
-        return true;//TODO: remove if backend is finished
         return this.userRole == USER_ROLES.admin;
+    };
+
+    this.getRole = function () {
+        return this.userRole;
     };
 
     this.setLocalCredentials = function () {
