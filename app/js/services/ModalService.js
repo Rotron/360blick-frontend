@@ -4,32 +4,37 @@ app.service('ModalService',['$rootScope', 'btfModal', function($rootScope, btfMo
         'login': btfModal({
             controller: 'LoginController',
             controllerAs: 'ctrl',
-            templateUrl: 'partials/login.html'
+            templateUrl: 'partials/dialog/login.html'
         }),
         'help': btfModal({
             controller: 'HelpController',
             controllerAs: 'ctrl',
-            templateUrl: 'partials/help.html'
+            templateUrl: 'partials/dialog/help.html'
         }),
         'feedback': btfModal({
             controller: 'FeedbackController',
             controllerAs: 'ctrl',
-            templateUrl: 'partials/feedback.html'
+            templateUrl: 'partials/dialog/feedback.html'
         }),
         'newProject': btfModal({
             controller: 'NewProjectController',
             controllerAs: 'ctrl',
-            templateUrl: 'partials/newProject.html'
+            templateUrl: 'partials/dialog/newProject.html'
         }),
         'newScene': btfModal({
             controller: 'NewSceneController',
             controllerAs: 'ctrl',
-            templateUrl: 'partials/newScene.html'
+            templateUrl: 'partials/dialog/newScene.html'
         }),
         'newSceneTemplate': btfModal({
             controller: 'NewSceneTemplateController',
             controllerAs: 'ctrl',
-            templateUrl: 'partials/newSceneTemplate.html'
+            templateUrl: 'partials/dialog/newSceneTemplate.html'
+        }),
+        'newAsset': btfModal({
+            controller: 'NewAssetController',
+            controllerAs: 'ctrl',
+            templateUrl: 'partials/dialog/newAsset.html'
         })
     };
 
