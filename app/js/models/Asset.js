@@ -44,6 +44,7 @@ app.service('Asset', ['RequestService', '$stateParams', '$rootScope', function (
     };
 
     this.delete = function(assetId){
+        // TODO: get new implementation from project
         if(newProject.title){
             RequestService.post('projects/assets/delete', {asset: {id: assetId}}, function(res) {
                     all.assets.push(res.data);

@@ -1,7 +1,6 @@
 'use strict';
 
-app.service('Project', ['RequestService', '$stateParams', '$rootScope',
-    function (RequestService, $stateParams, $rootScope) {
+app.service('Project', ['RequestService', '$stateParams', '$rootScope', function (RequestService, $stateParams, $rootScope) {
 
     var all = {
         projects: []
@@ -13,6 +12,11 @@ app.service('Project', ['RequestService', '$stateParams', '$rootScope',
         angular.forEach(subscribers, function(callback){
             callback(all.projects);
         })
+    }
+
+    function removeProjectFromArray(project) {
+        var index = $scope.project.indexOf(project);
+        $scope.project.splice(index, 1);
     }
 
     function onSuccess(res){
@@ -27,32 +31,32 @@ app.service('Project', ['RequestService', '$stateParams', '$rootScope',
                 }
             );
         }
+
         subscribers.push(callback);
         return all.projects;
     };
 
     this.create = function(newProject){
-        if(newProject.title){
-            RequestService.post('projects/create', {project: newProject}, function(res) {
-                    all.projects.push(res.data);
-                    update();
-                }, function(error) {
-                    console.log(error);
-                }
-            );
-        }
+        if(newProject.title) return;
+
+        RequestService.post('projects/create', {project: newProject}, function(res) {
+                all.projects.push(res.data);
+                update();
+            }, function(error) {
+                console.log(error);
+            }
+        );
     };
 
     this.delete = function(projectId){
-        if(newProject.title){
-            RequestService.post('projects/create', {project: {id: projectId}}, function(res) {
-                    all.projects.push(res.data);
-                    update();
-                }, function(error) {
-                    console.log(error);
-                }
-            );
-        }
+        // TODO: uncomment when issue closed in backend
+/*        RequestService.post('POST /api/v1/projects/delete.json', {project: {id: projectId}}, function(res) {
+                removeProjectFromArray();
+                update();
+            }, function(error) {
+                console.log(error);
+            }
+        );*/
     };
 
 }]);
