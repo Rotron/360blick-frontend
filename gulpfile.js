@@ -86,8 +86,8 @@ gulp.task('templateCache', function () {
     gulp.src('app/views/**/*.html')
         .pipe(templateCache({
             standalone: true,
-            templateHeader: "'use strict';",
-            templateFooter: '\n'
+            templateHeader: "'use strict';angular.module('templates', []).run(['$templateCache', function($templateCache) {",
+            templateFooter: '}]);\n'
         }))
         .pipe(gulp.dest('app/js'));
 });
