@@ -13,6 +13,7 @@ var gulp = require('gulp'),
     install = require("gulp-install"),
     bower = require('gulp-bower'),
     preprocess = require('gulp-preprocess'),
+    del = require('del'), //be careful!! rm -rf
     wiredep = require('wiredep').stream;
 
 /**
@@ -164,8 +165,11 @@ gulp.task('inject', ['bower', 'npm'], function() {
         .pipe(gulp.dest('./app/'));
 });
 
+gulp.task('clean-tmp', function () {
+    del.sync('app/tmp/**');//be careful!! rm -rf
+});
 
-gulp.task('preprocessor', function(){
+gulp.task('preprocessor', ['clean-tmp'], function(){
     gulp.src('./app/js/**/*.js')
     .pipe(preprocess())
     .pipe(gulp.dest('./app/tmp'));
