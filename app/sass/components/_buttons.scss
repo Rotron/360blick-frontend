@@ -38,8 +38,13 @@
   }
 }
 
-.btn--cta--danger {
+.btn--danger {
   background: $cta-0;
+  // FIXME: Use padding: 0 $base * 4
+  padding: 0 $base * 2;
+  height: $base * 10;
+  color: $secondary-light;
+  font-size: $font-size-large;
 
   &:hover {
     opacity: .8;
