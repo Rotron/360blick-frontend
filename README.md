@@ -8,6 +8,6 @@ On every push tests will run on Codeship. Only Commits to the master branch will
 
 ## Team
 
-* David Neubauer
 * Julian Schwarz
+* David Neubauer
 * Joscha Probst
