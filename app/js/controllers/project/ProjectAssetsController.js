@@ -1,11 +1,12 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestService', function ($scope, $stateParams, RequestService) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestService', 'Asset', function ($scope, $stateParams, RequestService, Asset) {
     $scope.username = $stateParams.username;
 
-    function getAllProjectAssets(){
+    console.log('asset controller');
+
+/*    function getProjectAssets() {
         RequestService.post('projects/assets/get_from_project', {project: {id: $stateParams['projectId']}}, function(res) {
-                console.log(res.data);
                 $scope.assets = res.data;
             }, function(error) {
                 console.log(error);
@@ -13,6 +14,6 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestSer
         );
     }
 
-    getAllProjectAssets();
+    getProjectAssets();*/
 
 }]);
