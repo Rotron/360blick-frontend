@@ -1,6 +1,6 @@
 # 360blick
 
-Interactive Panorama Editor with 3D Content
+Interactive Panorama Editor with 3D Content.
 
 ## Continous Delivery and Deployment
 
