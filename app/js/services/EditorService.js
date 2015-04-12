@@ -17,9 +17,9 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
 //        this.scene.add(gridXZ);
 
         //TODO: check why exporter has a problem with point light
-//        var light = new THREE.PointLight( 0x808080, 1, 100 );
-//        light.position.set( 10, 10, 10 );
-//        scene.add( light );
+        var light = new THREE.HemisphereLight( 0x0000ff, 0x00ff00, 0.8 );
+        light.position.set( 10, 10, 10 );
+        scene.add( light );
         return scene;
     }
 

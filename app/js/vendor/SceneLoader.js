@@ -352,7 +352,9 @@ THREE.SceneLoader.prototype = {
                         var intensity = objJSON.intensity;
                         var distance = objJSON.distance;
                         var position = objJSON.position;
-                        var rotation = objJSON.rotation;
+                        var rotation = objJSON.rotation || [1, 0, 1];
+                        console.log(objJSON);
+
 
                         switch ( objJSON.type ) {
 
@@ -374,14 +376,14 @@ THREE.SceneLoader.prototype = {
                                 light = new THREE.SpotLight( color, intensity, distance, 1 );
                                 light.angle = objJSON.angle;
                                 light.position.fromArray( position );
-                                light.target.set( position[ 0 ], position[ 1 ] - distance, position[ 2 ] );
-                                light.target.applyEuler( new THREE.Euler( rotation[ 0 ], rotation[ 1 ], rotation[ 2 ], 'XYZ' ) );
+                                light.target.position.set( position[ 0 ], position[ 1 ] - distance, position[ 2 ] );
+                                light.target.position.applyEuler( new THREE.Euler( rotation[ 0 ], rotation[ 1 ], rotation[ 2 ], 'XYZ' ) );
                                 break;
 
                             case 'HemisphereLight':
                                 light = new THREE.DirectionalLight( color, intensity, distance );
-                                light.target.set( position[ 0 ], position[ 1 ] - distance, position[ 2 ] );
-                                light.target.applyEuler( new THREE.Euler( rotation[ 0 ], rotation[ 1 ], rotation[ 2 ], 'XYZ' ) );
+                                light.target.position.set( position[ 0 ], position[ 1 ] - distance, position[ 2 ] );
+                                light.target.position.applyEuler( new THREE.Euler( rotation[ 0 ], rotation[ 1 ], rotation[ 2 ], 'XYZ' ) );
                                 break;
 
                             case 'AreaLight':
