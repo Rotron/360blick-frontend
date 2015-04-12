@@ -9,5 +9,5 @@ On every push tests will run on Codeship. Only Commits to the master branch will
 ## Team
 
 * David Neubauer
-* Joscha Probst
 * Julian Schwarz
+* Joscha Probst
