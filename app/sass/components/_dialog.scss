@@ -53,7 +53,7 @@ $dialog-header-height: $base * 10;
 }
 
 .dialog__content {
-  background: $secondary-0;
+  background: $secondary-light;
   color: $primary-0;
   width: 600px;
   height: 400px;
@@ -62,11 +62,10 @@ $dialog-header-height: $base * 10;
 
 .dialog__close {
   background: $cta-0;
-  color: $secondary-1;
+  color: $secondary-light;
   position: absolute;
   right: 0;
   top: 0;
-  color: $secondary-1;
   height: $dialog-header-height;
   width: $dialog-header-height;
   cursor: pointer;
@@ -74,7 +73,7 @@ $dialog-header-height: $base * 10;
 
 .dialog__header {
   background: $primary-1;
-  color: $secondary-1;
+  color: $secondary-light;
   position: relative;
   height: $dialog-header-height;
   padding: 0 $base * 3;
