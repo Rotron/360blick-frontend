@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('NewSceneController', ['$scope', 'RequestService', '$stateParams', '$rootScope', 'Project', '$state', function ($scope, RequestService, $stateParams, $rootScope, Project, $state) {
+app.controller('NewSceneController', ['$scope', 'RequestService', '$stateParams', '$rootScope', 'Project', '$state', 'SceneTemplate', function ($scope, RequestService, $stateParams, $rootScope, Project, $state, SceneTemplate) {
 
 
     $scope.currentProjectId = $stateParams['projectId'];
@@ -26,6 +26,14 @@ app.controller('NewSceneController', ['$scope', 'RequestService', '$stateParams'
         $scope.currentProjectId = id;
     };
 
+    $scope.templates = SceneTemplate.get(function(templates){
+        $scope.templates = templates;
+    });
+
+    $scope.onTemplateSelect = function(id){
+        $scope.currentTemplateId = id;
+    };
+
     $scope.newScene = {
         title: null,
         description: null
@@ -35,12 +43,16 @@ app.controller('NewSceneController', ['$scope', 'RequestService', '$stateParams'
         var data = {
             project: {id: $scope.currentProjectId},
             scene: {
-                title: $scope.newScene.title
+                title: $scope.newScene.title,
+                template_id: $scope.currentTemplateId
             }
         };
 
+        console.log(data);
+
         if($scope.newScene.title){
             RequestService.post('scenes/create', data, function(res) {
+                    console.log(res);
                     //if a scene is added to another than current project the view is switched to the other project
                     if($stateParams['projectId'] != $scope.currentProjectId){
                         $state.go('user.project.scenes', {username: $stateParams['username'], projectId: $scope.currentProjectId})

@@ -1,4 +1,4 @@
-app.directive('sidebarMenu', ['Project', 'SceneTemplates', '$rootScope', '$stateParams', function (Project, SceneTemplates, $rootScope, $stateParams) {
+app.directive('sidebarMenu', ['Project', 'SceneTemplate', '$rootScope', '$stateParams', function (Project, SceneTemplate, $rootScope, $stateParams) {
     return {
         restrict: 'E',
         templateUrl: 'partials/sidebarMenu.html',
@@ -11,7 +11,7 @@ app.directive('sidebarMenu', ['Project', 'SceneTemplates', '$rootScope', '$state
                 scope.projects = projects;
             });
 
-            scope.sceneTemplates = SceneTemplates.get(function(sceneTemplates){
+            scope.sceneTemplates = SceneTemplate.get(function(sceneTemplates){
                 scope.sceneTemplates = sceneTemplates;
             });
 

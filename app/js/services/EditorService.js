@@ -28,6 +28,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
      * @param res
      */
     function resolveScene(res) {
+        console.log(res);
         if(res.data.file) {
 
             var sceneLoader = new THREE.SceneLoader();

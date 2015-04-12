@@ -6,8 +6,13 @@
         </div>
         <div class="dialog__body container">
             <div class="col span-6">
+                Projekt
                 <fieldset class="row">
                     <dropdown template-name="select" on-select="onProjectSelect" data="{'currentItemId': currentProjectId, 'items': projects, 'currentItemName': currentProjectName}"></dropdown>
+                </fieldset>
+                Template
+                <fieldset class="row">
+                    <dropdown template-name="select" on-select="onTemplateSelect" data="{'currentItemId': currentTemplateId, 'items': templates}"></dropdown>
                 </fieldset>
                 <fieldset class="row">
                     <placeholder-input value="newScene.title" label="Title" type="text" class-suffix="select"></placeholder-input>
