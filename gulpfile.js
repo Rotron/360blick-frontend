@@ -85,7 +85,9 @@ gulp.task('kss', function() {
 gulp.task('templateCache', function () {
     gulp.src('app/views/**/*.html')
         .pipe(templateCache({
-            standalone: true
+            standalone: true,
+            templateHeader: "'use strict';",
+            templateFooter: '\n'
         }))
         .pipe(gulp.dest('app/js'));
 });
