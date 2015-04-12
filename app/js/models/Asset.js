@@ -1,7 +1,6 @@
 'use strict';
 
-app.service('Asset', ['RequestService', '$stateParams', '$rootScope',
-    function (RequestService, $stateParams, $rootScope) {
+app.service('Asset', ['RequestService', '$stateParams', '$rootScope', function (RequestService, $stateParams, $rootScope) {
 
     var all = {
         assets: []
@@ -20,7 +19,7 @@ app.service('Asset', ['RequestService', '$stateParams', '$rootScope',
         update();
     }
 
-    this.get = function(projectId, callback){
+    this.get = function(projectId, callback) {
         if(all.assets.length < 1 || $rootScope.currentUser != $stateParams['username']){
             RequestService.post('projects/assets/get_from_project', {project: {id: projectId}}, onSuccess.bind(this), function(error) {
                     console.log(error);
