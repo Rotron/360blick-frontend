@@ -1,90 +1,89 @@
-// FIXME: Joscha, there is no need to nest this classes!!!
 .dropdown {
   position: relative;
-  .dropdown__toggle {
-    position: absolute;
-    display: none;
-    width: auto;
-    z-index: $zindex-dropdown;
-    &.active{
-      display: block;
-    }
-  }
-  .dropdown__list {
+}
+.dropdown__toggle {
+  position: absolute;
+  display: none;
+  width: auto;
+  z-index: $zindex-dropdown;
+  &.active{
     display: block;
-    z-index: 50;
   }
-  .dropdown__ghost {
-    position: fixed;
-    z-index: $zindex-dropdown;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: none;
-    &.active{
-      display: block;
-    }
+}
+.dropdown__list {
+  display: block;
+  z-index: 50;
+}
+.dropdown__ghost {
+  position: fixed;
+  z-index: $zindex-dropdown;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  &.active{
+    display: block;
   }
-  .dropdown__list--default {
-    width: 200px;
-    background: $primary-2;
-    border-radius: 3px;
-    margin-top: 10px;
-    .dropdown__list__item {
-      width: 100%;
-      height: $base * 10;
-      color: $secondary-3;
-      padding: $base * 4;
-      cursor: pointer;
-      @include blick-transition;
-      &:hover{
-        background: $primary-1;
-      }
-      &:first-child {
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        position: relative;
-        &:before {
-          content: '';
-          display: block;
-          border-width: 5px 5px;
-          border-color: transparent;
-          border-bottom-color: $primary-2;
-          border-style: solid;
-          position: absolute;
-          top: -10px;
-          @include blick-transition;
-        }
-        &:hover {
-          &:before {
-            border-bottom-color: $primary-1;
-          }
-        }
-      }
-      &:last-child {
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
-      }
-    }
-  }
-  .dropdown__toggle--select {
+}
+.dropdown__list--default {
+  width: 200px;
+  background: $primary-2;
+  border-radius: 3px;
+  margin-top: 10px;
+  .dropdown__list__item {
     width: 100%;
-  }
-
-  .dropdown__list--select {
-    background-color: $secondary-3;
-    border-top: 1px solid $secondary-2;
-    max-height: $base * 100;
-    overflow-y: scroll;
-    .dropdown__list__item {
-      height: $base * 10;
-      padding: $base * 4;
-      cursor: pointer;
-      @include blick-transition();
-      &:hover{
-        background: $secondary-2;
+    height: $base * 10;
+    color: $secondary-3;
+    padding: $base * 4;
+    cursor: pointer;
+    @include blick-transition;
+    &:hover{
+      background: $primary-1;
+    }
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      position: relative;
+      &:before {
+        content: '';
+        display: block;
+        border-width: 5px 5px;
+        border-color: transparent;
+        border-bottom-color: $primary-2;
+        border-style: solid;
+        position: absolute;
+        top: -10px;
+        @include blick-transition;
       }
+      &:hover {
+        &:before {
+          border-bottom-color: $primary-1;
+        }
+      }
+    }
+    &:last-child {
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+}
+.dropdown__toggle--select {
+  width: 100%;
+}
+
+.dropdown__list--select {
+  background-color: $secondary-3;
+  border-top: 1px solid $secondary-2;
+  max-height: $base * 100;
+  overflow-y: scroll;
+  .dropdown__list__item {
+    height: $base * 10;
+    padding: $base * 4;
+    cursor: pointer;
+    @include blick-transition();
+    &:hover{
+      background: $secondary-2;
     }
   }
 }

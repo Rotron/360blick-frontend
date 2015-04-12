@@ -125,13 +125,13 @@ gulp.task('preprocess-build', function(){
         .pipe(gulp.dest('./app/tmp'));
 });
 
-gulp.task('build', ['preprocess-build', 'sass', 'templateCache', 'inject', 'build-images'], function () {
+gulp.task('clean-build-folder', function () {
+    del.sync('build/**');//be careful!! rm -rf
+});
+
+gulp.task('build', ['clean-build-folder', 'preprocess-build', 'sass', 'templateCache', 'inject', 'build-images'], function () {
 
     var assets = $.useref.assets({searchPath: '{.tmp,app}'});
-
-    // FIXME: Clean directory to remove deleted files
-/*    gulp.src('./app/build*//*')
-        .pipe(clean());*/
 
     /*copy files*/
     gulp.src('app/.htaccess')
