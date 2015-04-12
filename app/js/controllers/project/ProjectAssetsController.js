@@ -2,8 +2,14 @@
 
 app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestService', 'Asset', function ($scope, $stateParams, RequestService, Asset) {
     $scope.username = $stateParams.username;
+    var projectId = $stateParams['projectId'];
 
     $scope.assets = [];
+
+    function removeAssetFromArray(asset) {
+        var index = $scope.assets.indexOf(asset);
+        $scope.assets.splice(index, 1);
+    }
 
     $scope.getAssetBackgroundImage = function getAssetBackgroundImage(asset) {
         return {
@@ -11,8 +17,16 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestSer
         };
     };
 
+    $scope.deleteProjectAsset = function deleteAsset(asset) {
+        RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
+                removeAssetFromArray(asset);
+            }, function(error) {
+                console.log(error);
+            }
+        );
+    };
+
     function getProjectAssets() {
-        var projectId = $stateParams['projectId'];
 
         RequestService.post('projects/assets/get_from_project', {project: {id: projectId}}, function(res) {
                 $scope.assets = res.data;
