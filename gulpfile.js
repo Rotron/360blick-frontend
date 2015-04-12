@@ -151,7 +151,8 @@ gulp.task('build', ['preprocess-build', 'sass', 'templateCache', 'inject', 'buil
 gulp.task('inject', ['bower', 'npm'], function() {
     gulp.src('./app/index-template.html')
         .pipe(wiredep())
-        .pipe(inject(gulp.src('./app/tmp/**/*.js'), {relative: true}))
+        .pipe(inject(gulp.src('./app/tmp/vendor/*.js', {read: false}), {name: 'vendor', relative: true}))
+        .pipe(inject(gulp.src(['./app/tmp/**/*.js', '!app/tmp/vendor{,/**}']), { relative: true }))
         .pipe(rename('index.html'))
         .pipe(gulp.dest('./app/'));
 });
