@@ -10,10 +10,10 @@
                     <dropdown template-name="select" on-select="onProjectSelect" data="{'currentItemId': currentProjectId, 'items': projects, 'currentItemName': currentProjectName}"></dropdown>
                 </fieldset>
                 <fieldset class="row">
-                    <placeholder-input value="newScene.title" label="Title" type="text" class-suffix="select"></placeholder-input>
+                    <placeholder-input value="newScene.title" label="Title" type="text" class-suffix="text"></placeholder-input>
                 </fieldset>
                 <fieldset class="row">
-                    <placeholder-input value="newScene.description" label="Description" type="text" class-suffix="select"></placeholder-input>
+                    <placeholder-input value="newScene.description" label="Description" type="text" class-suffix="text"></placeholder-input>
                 </fieldset>
                 <div class="row">
                     <button ng-click="createNewScene(); closeIt()" class="btn btn--cta btn--submit">Create</button>
