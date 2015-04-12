@@ -127,11 +127,18 @@ gulp.task('preprocess-build', function(){
 gulp.task('build', ['preprocess-build', 'sass', 'templateCache', 'inject', 'build-images'], function () {
 
     var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+
+    // FIXME: Clean directory to remove deleted files
+/*    gulp.src('./app/build*//*')
+        .pipe(clean());*/
+
     /*copy files*/
     gulp.src('app/.htaccess')
     .pipe(gulp.dest('build'));
+
     gulp.src('app/fonts/*')
     .pipe(gulp.dest('build/fonts'));
+
     /*concat and minify*/
     return gulp.src('app/index.html')
         .pipe(assets)
