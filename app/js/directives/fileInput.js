@@ -7,7 +7,7 @@ app.directive('fileInput', ['$timeout', 'RequestService', function ($timeout, Re
             value: '=',
             label: '@',
             classSuffix: '@',
-            uploadData: '@'
+            uploadData: '='
         },
         link: function($scope, elem, attrs) {
             $scope.isFocused = false;
@@ -27,9 +27,7 @@ app.directive('fileInput', ['$timeout', 'RequestService', function ($timeout, Re
             $scope.upload = function(files, event) {
 
                 angular.forEach(files, function(file) {
-                    // FIXME: remove hardcoded
-                    // var data = $scope.uploadData;
-                    var data = {project: {id: 1}};
+                    var data = $scope.uploadData;
                     var fileReader = new FileReader();
 
                     fileReader.readAsBinaryString(file);

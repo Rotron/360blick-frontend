@@ -4,7 +4,13 @@ app.controller('NewAssetController', ['$scope', '$rootScope', '$stateParams', 'R
     function ($scope, $rootScope, $stateParams, RequestService, Project, Asset) {
 
     $scope.currentProjectId = $stateParams['projectId'];
-    $scope.uploadData = {project: {id: $scope.currentProjectId}};
+
+    $scope.newAsset = {
+        title: null,
+        file: null,
+        description: null,
+        uploadData: {project: {id: $scope.currentProjectId}}
+    };
 
     function setCurrentProjectName(){
         for (var i in $scope.projects) {
@@ -26,12 +32,6 @@ app.controller('NewAssetController', ['$scope', '$rootScope', '$stateParams', 'R
 
     $scope.onProjectSelect = function(id){
         $scope.currentProjectId = id;
-    };
-
-    $scope.newAsset = {
-        title: null,
-        file: null,
-        description: null
     };
 
     $scope.createNewAsset = function() {
