@@ -123,6 +123,22 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin]
             }
         })
+        .state('template', {
+            url: "/:username/template/:templateId",
+            views: {
+                "app": {
+                    templateUrl: "editor/editor.html",
+                    controller: "EditorController"
+                },
+                "subNavigation@template": {
+                    templateUrl: "subNavigation/editor.html",
+                    controller: "EditorController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin]
+            }
+        })
         .state('user', {
             url: "/:username",
             views: {
