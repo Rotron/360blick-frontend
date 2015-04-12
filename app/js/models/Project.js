@@ -1,6 +1,8 @@
 'use strict';
 
-app.service('Project', ['RequestService', '$stateParams', '$rootScope', function (RequestService, $stateParams, $rootScope) {
+app.service('Project', ['RequestService', '$stateParams', '$rootScope',
+    function (RequestService, $stateParams, $rootScope) {
+
     var all = {
         projects: []
     };
@@ -43,7 +45,7 @@ app.service('Project', ['RequestService', '$stateParams', '$rootScope', function
 
     this.delete = function(projectId){
         if(newProject.title){
-            RequestService.post('projects/create', {project: newProject}, function(res) {
+            RequestService.post('projects/create', {project: {id: projectId}}, function(res) {
                     all.projects.push(res.data);
                     update();
                 }, function(error) {
@@ -54,4 +56,3 @@ app.service('Project', ['RequestService', '$stateParams', '$rootScope', function
     };
 
 }]);
-

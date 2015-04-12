@@ -1,6 +1,7 @@
 'use strict';
+app.service('SceneTemplate', ['RequestService',
+    function (RequestService) {
 
-app.service('SceneTemplate', ['RequestService', '$stateParams', '$rootScope', function (RequestService, $stateParams, $rootScope) {
     var all = {
         templates: []
     };
@@ -53,4 +54,3 @@ app.service('SceneTemplate', ['RequestService', '$stateParams', '$rootScope', fu
     };
 
 }]);
-

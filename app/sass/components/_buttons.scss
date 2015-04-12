@@ -14,6 +14,18 @@
   @include blick-transition;
 }
 
+.btn--submit {
+  padding: 0 $base * 4;
+  background: $secondary-0;
+  height: $base * 10;
+  color: $secondary-light;
+  font-size: $font-size-large;
+
+  &:hover {
+    opacity: .8;
+  }
+}
+
 .btn--cta {
   padding: 0 $base * 4;
   background: $primary-cta;

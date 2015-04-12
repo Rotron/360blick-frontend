@@ -1,0 +1,7 @@
+<div class="input input--{{classSuffix}}" ng-class="{'is-filled': value, 'is-focused': isFocused}" ng-click="setFocus()">
+    <!--<label class="input__label input__label--{{classSuffix}}">{{label}}</label>-->
+
+    <button class="btn btn--cta" type="file" ng-model="value" ng-file-select accept="'image/*'" ng-file-change="upload($files, $event)">Upload</button>
+
+    <!-- <input type="file" class="input__field input--{{classSuffix}}__field" ng-model="value" ng-change="onChange()" ng-blur="onBlur()"> -->
+</div>
