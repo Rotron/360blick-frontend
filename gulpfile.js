@@ -133,27 +133,36 @@ gulp.task('clean-build-folder', function () {
     del.sync('build/**');//be careful!! rm -rf
 });
 
-gulp.task('build', ['clean-build-folder', 'preprocess-build', 'sass', 'templateCache', 'inject', 'build-images'], function () {
+gulp.task('build', function () {
+    runSequence('clean-build-folder',
+        'preprocess-build',
+        'sass',
+        'templateCache',
+        'inject',
+        'build-images',
+        function(){
+            var assets = $.useref.assets({searchPath: '{.tmp,app}'});
 
-    var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+            /*copy files*/
+            gulp.src('app/.htaccess')
+                .pipe(gulp.dest('build'));
 
-    /*copy files*/
-    gulp.src('app/.htaccess')
-    .pipe(gulp.dest('build'));
+            gulp.src('app/fonts/*')
+                .pipe(gulp.dest('build/fonts'));
 
-    gulp.src('app/fonts/*')
-    .pipe(gulp.dest('build/fonts'));
-
-    /*concat and minify*/
-    return gulp.src('app/index.html')
-        .pipe(assets)
+            /*concat and minify*/
+            return gulp.src('app/index.html')
+                .pipe(assets)
 //        .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-        .pipe($.if('*.css', $.csso()))
-        .pipe(assets.restore())
-        .pipe($.useref())
-        .pipe($.if('*.html', $.minifyHtml())) //TODO: comment in
-        .pipe(gulp.dest('build'))
-        .pipe($.size({title: 'html'}));
+                .pipe($.if('*.css', $.csso()))
+                .pipe(assets.restore())
+                .pipe($.useref())
+                .pipe($.if('*.html', $.minifyHtml()))
+                .pipe(gulp.dest('build'))
+                .pipe($.size({title: 'html'}));
+        });
+
+
 
 });
 
