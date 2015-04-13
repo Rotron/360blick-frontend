@@ -2,6 +2,7 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
     function (RequestService, SessionService, $rootScope, AUTH_EVENTS) {
 
     this.login = function (credentials) {
+
         RequestService.post('users/login', credentials, function(res){
 
             SessionService.create(res.token, res.nick, res.email, res.role);
