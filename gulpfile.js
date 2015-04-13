@@ -15,6 +15,7 @@ var gulp = require('gulp'),
     preprocess = require('gulp-preprocess'),
     karma = require('gulp-karma'),
     del = require('del'), //be careful!! rm -rf
+    runSequence = require('run-sequence'),
     wiredep = require('wiredep').stream;
 
 /**
@@ -83,11 +84,11 @@ gulp.task('kss', function() {
 /**
  * Templates
  */
-gulp.task('templateCache', ['preprocess-build'], function () {
+gulp.task('templateCache', function () {
     gulp.src('app/views/**/*.html')
         .pipe(templateCache({
             standalone: true,
-            templateHeader: "'use strict';angular.module('templates').run(['$templateCache', function($templateCache) {",
+            templateHeader: "'use strict';angular.module('templates', []).run(['$templateCache', function($templateCache) {",
             templateFooter: '}]);\n'
         }))
         .pipe(gulp.dest('app/js'));
@@ -122,7 +123,7 @@ gulp.task('build-images', function () {
 });
 
 
-gulp.task('preprocess-build', function(){
+gulp.task('preprocess-build', ['templateCache'], function(){
     gulp.src('./app/js/**/*.js')
         .pipe(preprocess({context: { NODE_ENV: 'PRODUCTION', DEBUG: true}}))
         .pipe(gulp.dest('./app/tmp'));
@@ -159,7 +160,7 @@ gulp.task('build', ['clean-build-folder', 'preprocess-build', 'sass', 'templateC
 /**
  * Inject files into index.html
  */
-gulp.task('inject', ['bower', 'npm', 'templateCache'], function() {
+gulp.task('inject', ['bower', 'npm', 'preprocessor'], function() {
     gulp.src('./app/index-template.html')
         .pipe(wiredep())
         .pipe(inject(gulp.src('./app/tmp/vendor/*.js', {read: false}), {name: 'vendor', relative: true}))
@@ -172,7 +173,7 @@ gulp.task('clean-tmp', function () {
     del.sync('app/tmp/**');//be careful!! rm -rf
 });
 
-gulp.task('preprocessor', ['clean-tmp'], function(){
+gulp.task('preprocessor', function(){
     gulp.src('./app/js/**/*.js')
     .pipe(preprocess())
     .pipe(gulp.dest('./app/tmp'));
@@ -204,15 +205,22 @@ gulp.task('test', function() {
  */
 gulp.task('watch', function() {
     gulp.watch('app/sass/**/*.scss', ['sass']);
-    gulp.watch('app/js/**/*.js', ['preprocessor', 'inject']);
+    gulp.watch('app/js/**/*.js', ['inject']);
     gulp.watch('app/views/**/*.html', ['templateCache']);
 });
 
 /**
  * Multiple-Tasks
  */
-gulp.task('default', ['preprocessor', 'sass', 'templateCache', 'inject']);
-gulp.task('serve', ['preprocessor', 'inject', 'webserver', 'watch']);
+
+gulp.task('default', ['sass', 'templateCache', 'inject']);
+gulp.task('serve', function(){
+    runSequence('clean-tmp',
+        'sass',
+        'templateCache',
+        'inject',
+        ['webserver', 'watch']);
+});
 gulp.task('serve-build', ['webserver-build']);
 gulp.task('serve-styleguide', ['webserver-styleguide', 'watch-styleguide']);
 gulp.task('serve-all', ['webserver', 'webserver-styleguide', 'watch', 'watch-styleguide']);
