@@ -13,6 +13,7 @@ var gulp = require('gulp'),
     install = require("gulp-install"),
     bower = require('gulp-bower'),
     preprocess = require('gulp-preprocess'),
+    karma = require('gulp-karma'),
     del = require('del'), //be careful!! rm -rf
     wiredep = require('wiredep').stream;
 
@@ -175,6 +176,27 @@ gulp.task('preprocessor', ['clean-tmp'], function(){
     gulp.src('./app/js/**/*.js')
     .pipe(preprocess())
     .pipe(gulp.dest('./app/tmp'));
+});
+
+/**
+ * Testing
+ */
+gulp.task('test', function() {
+
+    var testFiles = [
+        '.app/test/**/*.js'
+    ];
+
+    // Be sure to return the stream
+    return gulp.src(testFiles)
+        .pipe(karma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            // Make sure failed tests cause gulp to exit non-zero
+            throw err;
+        });
 });
 
 /**

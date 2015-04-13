@@ -24,7 +24,7 @@ app.service('RequestService', ['$http', '$upload', 'SessionService', function ($
         // TODO: Cleanup ENV
         var url = 'http://localhost:3000/api/v1';
         // @if NODE_ENV = 'PRODUCTION'
-        url = 'https://blick.herokuapp.com';
+        url = 'https://blick.herokuapp.com/api/v1';
         // @endif
 
         return url + '/' + action + '.json';
