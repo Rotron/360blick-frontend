@@ -87,7 +87,7 @@ gulp.task('templateCache', ['preprocess-build'], function () {
     gulp.src('app/views/**/*.html')
         .pipe(templateCache({
             standalone: true,
-            templateHeader: "'use strict';angular.module('templatesx', []).run(['$templateCache', function($templateCache) {",
+            templateHeader: "'use strict';angular.module('templates').run(['$templateCache', function($templateCache) {",
             templateFooter: '}]);\n'
         }))
         .pipe(gulp.dest('app/js'));

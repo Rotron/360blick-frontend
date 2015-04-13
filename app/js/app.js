@@ -7,7 +7,7 @@ var app = angular.module('360blickFrontendApp', [
     'ui.router',
     'angularFileUpload',
     'btford.modal',
-    'templatesx',
+    'templates',
     'mdo-angular-cryptography'
 ]);
 
@@ -303,3 +303,5 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
             }
          });
 }]);
+
+angular.module('templates', []);
