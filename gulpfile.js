@@ -83,7 +83,7 @@ gulp.task('kss', function() {
 /**
  * Templates
  */
-gulp.task('templateCache', function () {
+gulp.task('templateCache', ['preprocess-build'], function () {
     gulp.src('app/views/**/*.html')
         .pipe(templateCache({
             standalone: true,
@@ -122,7 +122,7 @@ gulp.task('build-images', function () {
 });
 
 
-gulp.task('preprocess-build', ['templateCache'], function(){
+gulp.task('preprocess-build', function(){
     gulp.src('./app/js/**/*.js')
         .pipe(preprocess({context: { NODE_ENV: 'PRODUCTION', DEBUG: true}}))
         .pipe(gulp.dest('./app/tmp'));
