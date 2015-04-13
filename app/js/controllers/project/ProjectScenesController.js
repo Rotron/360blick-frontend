@@ -6,7 +6,7 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     $scope.scenes = [];
 
-    function getAllScenes(){
+    function getAllScenes() {
         RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
                 $scope.scenes = res.data;
             }, function(error) {

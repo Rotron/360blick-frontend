@@ -5,6 +5,8 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
     this.email = null;
     this.userRole = USER_ROLES.guest;
 
+    var _this = this;
+
     this.create = function (token, nick, email, userRole) {
         this.token = token;
         this.nick = nick;
@@ -32,6 +34,13 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
         }
     };
 
+    this.isAdmin = function () {
+        return _this.userRole == USER_ROLES.admin;
+    };
+
+    this.getRole = function () {
+        return this.userRole;
+    };
     this.setLocalCredentials = function () {
         var userData = JSON.stringify(this.getUser());
         var encrypted = $crypto.encrypt(userData, '360crd');

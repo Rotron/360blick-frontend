@@ -14,6 +14,18 @@
   @include blick-transition;
 }
 
+.btn--submit {
+  padding: 0 $base * 4;
+  background: $secondary-0;
+  height: $base * 10;
+  color: $secondary-light;
+  font-size: $font-size-large;
+
+  &:hover {
+    opacity: .8;
+  }
+}
+
 .btn--cta {
   padding: 0 $base * 4;
   background: $primary-cta;
@@ -26,8 +38,13 @@
   }
 }
 
-.btn--cta--danger {
+.btn--danger {
   background: $cta-0;
+  // FIXME: Use padding: 0 $base * 4
+  padding: 0 $base * 2;
+  height: $base * 10;
+  color: $secondary-light;
+  font-size: $font-size-large;
 
   &:hover {
     opacity: .8;
@@ -68,6 +85,30 @@
       font-size: 14px;
       height: 100%;
       line-height: 18px;
+    }
+  }
+}
+
+.btn--select {
+  position: relative;
+  border-radius: 0;
+  width: 100%;
+  height: $base * 10;
+  background: $secondary-3;
+  padding: $base * 4;
+  padding-right: $base * 5;
+  text-align: left;
+  .fa {
+    position: absolute;
+    left: $base * 2;
+    font-size: 22px;
+
+    &:last-child {
+      left: auto;
+      right: $base * 2;
+      font-size: 14px;
+      height: 100%;
+      line-height: 13px;
     }
   }
 }

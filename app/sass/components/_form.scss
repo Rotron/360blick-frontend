@@ -1,37 +1,36 @@
+fieldset {
+  margin-bottom: $base;
+}
+
 .input {
   position: relative;
-  margin-bottom: $base;
 
-  &.is-focused {
+  &.is-focused, &.is-filled {
     .input__label {
-      opacity: .6;
-    }
-  }
-
-  &.is-filled {
-    .input__label {
-      opacity: .2;
+      line-height: $base * 2;
+      opacity: .5;
     }
   }
 }
 
 .input__label {
+  @include blick-transition;
   position: absolute;
-  line-height: $base * 6;
+  line-height: $base * 8;
   padding: $base;
   cursor: text;
 }
 
 .input__field {
-  line-height: $base * 6;
-  height: $base * 8;
+  line-height: $base * 8;
+  height: $base * 10;
   padding: $base;
 }
 
 .input__field[type=text],
 .input__field[type=email],
 .input__field[type=password] {
-  background: $secondary-2;
+  background: $secondary-3;
 }
 
 .input--sidebar {
@@ -72,3 +71,33 @@
     background: $primary-highlight;
   }
 }
+
+// TODO: Joscha, why has the Select Label Animation?? There is also a dropdown class... remove .input--select!
+/*
+.input--select {
+  width: 100%;
+
+  .input__label--select {
+    line-height: $base * 2;
+    padding: $base * 4;
+    @include blick-transition();
+  }
+
+  &.is-focused, &.is-filled  {
+    .input__label--select {
+      line-height: $base * 2;
+      padding: $base;
+      padding-left: $base * 4;
+      color: $secondary-0;
+      opacity: 1;
+    }
+  }
+}
+
+.input__field.input--select__field {
+  width: 100%;
+  height: $base * 10;
+  background: $secondary-3;
+  padding: $base * 4;
+}
+*/

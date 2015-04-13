@@ -5,6 +5,7 @@ var app = angular.module('360blickFrontendApp', [
     'ngSanitize',
     'ngAnimate',
     'ui.router',
+    'angularFileUpload',
     'btford.modal',
     'templates',
     'mdo-angular-cryptography'
@@ -35,12 +36,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.withCredentials = true;
+    delete $httpProvider.defaults.headers.common["X-Requested-With"];
+    $httpProvider.defaults.headers.common["Accept"] = "application/json";
+    $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+
     $stateProvider
         .state('app', {
             url: "/",
             views: {
                 "app": {
-                    templateUrl: "views/landingpage/index.html",
+                    templateUrl: "landingpage/index.html",
                     controller: "LandingpageController"
                 }
             },
@@ -52,7 +59,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/getting-started",
             views: {
                 "app": {
-                    templateUrl: "views/gettingStarted/index.html",
+                    templateUrl: "gettingStarted/index.html",
                     controller: "GettingStartedController"
                 }
             },
@@ -64,7 +71,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/documentation",
             views: {
                 "app": {
-                    templateUrl: "views/documentation/index.html",
+                    templateUrl: "documentation/index.html",
                     controller: "DocumentationController"
                 }
             },
@@ -76,7 +83,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/register",
             views: {
                 "app": {
-                    templateUrl: "views/auth/register.html",
+                    templateUrl: "auth/register.html",
                     controller: "RegisterController"
                 }
             },
@@ -88,7 +95,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/login",
             views: {
                 "app": {
-                    templateUrl: "views/auth/login.html",
+                    templateUrl: "auth/login.html",
                     controller: "LoginController"
                 }
             },
@@ -96,19 +103,55 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('user.scenetemplates', {
+            url: "/scenetemplates",
+            views: {
+                "app": {
+                    templateUrl: "user/index.html",
+                    controller: "UserController"
+                },
+                "userContent@user": {
+                    templateUrl: "sceneTemplates/sceneTemplates.html",
+                    controller: "SceneTemplatesController"
+                },
+                "subNavigation@user": {
+                    templateUrl: "subNavigation/projects.html",
+                    controller: "UserProjectsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin]
+            }
+        })
+        .state('template', {
+            url: "/:username/template/:templateId",
+            views: {
+                "app": {
+                    templateUrl: "editor/editor.html",
+                    controller: "EditorController"
+                },
+                "subNavigation@template": {
+                    templateUrl: "subNavigation/editor.html",
+                    controller: "EditorController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin]
+            }
+        })
         .state('user', {
             url: "/:username",
             views: {
                 "app": {
-                    templateUrl: "views/user/index.html",
+                    templateUrl: "user/index.html",
                     controller: "UserController"
                 },
                 "userContent@user": {
-                    templateUrl: "views/user/projects.html",
+                    templateUrl: "user/projects.html",
                     controller: "UserProjectsController"
                 },
                 "subNavigation@user": {
-                    templateUrl: "views/subNavigation/projects.html",
+                    templateUrl: "subNavigation/projects.html",
                     controller: "UserProjectsController"
                 }
             },
@@ -120,11 +163,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/settings",
             views: {
                 "userContent@user": {
-                    templateUrl: "views/user/settings.html",
+                    templateUrl: "user/settings.html",
                     controller: "UserSettingsController"
                 },
                 "subNavigation@user": {
-                    templateUrl: "views/subNavigation/settings.html",
+                    templateUrl: "subNavigation/settings.html",
                     controller: "UserSettingsController"
                 }
             },
@@ -136,7 +179,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/account",
             views: {
                 "userContent@user": {
-                    templateUrl: "views/user/accountSettings.html",
+                    templateUrl: "user/accountSettings.html",
                     controller: "AccountSettingsController"
                 }
             },
@@ -148,15 +191,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/project/:projectId",
             views: {
                 "userContent@user": {
-                    templateUrl: "views/project/index.html",
+                    templateUrl: "project/index.html",
                     controller: "ProjectController"
                 },
                 "projectContent@user.project": {
-                    templateUrl: "views/project/scenes.html",
+                    templateUrl: "project/scenes.html",
                     controller: "ProjectScenesController"
                 },
                 "subNavigation@user": {
-                    templateUrl: "views/subNavigation/project.html",
+                    templateUrl: "subNavigation/project.html",
                     controller: "ProjectController"
                 }
             },
@@ -168,7 +211,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/scenes",
             views: {
                 "projectContent@user.project": {
-                    templateUrl: "views/project/scenes.html",
+                    templateUrl: "project/scenes.html",
                     controller: "ProjectScenesController"
                 }
             },
@@ -180,7 +223,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/assets",
             views: {
                 "projectContent@user.project": {
-                    templateUrl: "views/project/assets.html",
+                    templateUrl: "project/assets.html",
                     controller: "ProjectAssetsController"
                 }
             },
@@ -192,7 +235,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/settings",
             views: {
                 "projectContent@user.project": {
-                    templateUrl: "views/project/settings.html",
+                    templateUrl: "project/settings.html",
                     controller: "ProjectSettingsController"
                 }
             },
@@ -204,11 +247,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             url: "/:username/project/:projectId/scenes/:sceneId",
             views: {
                 "app": {
-                    templateUrl: "views/editor/editor.html",
+                    templateUrl: "editor/editor.html",
                     controller: "EditorController"
                 },
                 "subNavigation@editor": {
-                    templateUrl: "views/subNavigation/editor.html",
+                    templateUrl: "subNavigation/editor.html",
                     controller: "EditorController"
                 }
             },
@@ -229,9 +272,12 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
 
         AuthService.reloadLocalCredentials();
 
+//        console.log(SessionService.getUser());
+
         $rootScope.currentUser = SessionService.getUser().nick;
         $rootScope.userRoles = USER_ROLES;
         $rootScope.isAuthorized = AuthService.isAuthorized;
+        $rootScope.isAdmin = SessionService.isAdmin;
 
         $rootScope.sidebarMenu = { isActive: true };
         // debugging

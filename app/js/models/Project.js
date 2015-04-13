@@ -1,16 +1,12 @@
 'use strict';
 
-app.service('Project', ['RequestService', function (RequestService) {
+app.service('Project', ['RequestService', '$stateParams', '$rootScope', function (RequestService, $stateParams, $rootScope) {
+
     var all = {
         projects: []
     };
 
     var subscribers = [];
-
-    function onSuccess(res){
-        all.projects = res.data;
-        update();
-    }
 
     function update(){
         angular.forEach(subscribers, function(callback){
@@ -18,38 +14,49 @@ app.service('Project', ['RequestService', function (RequestService) {
         })
     }
 
+    function removeProjectFromArray(project) {
+        var index = $scope.project.indexOf(project);
+        $scope.project.splice(index, 1);
+    }
+
+    function onSuccess(res){
+        all.projects = res.data;
+        update();
+    }
+
     this.get = function(callback){
+        if(all.projects.length < 1 || $rootScope.currentUser != $stateParams['username']){
+            RequestService.post('projects/get_projects', {user_nick: $rootScope.currentUser}, onSuccess.bind(this), function(error) {
+                    console.log(error);
+                }
+            );
+        }
+
         subscribers.push(callback);
         return all.projects;
     };
 
-    RequestService.post('projects/get_own_projects', {}, onSuccess.bind(this), function(error) {
-            console.log(error);
-        }
-    );
-
     this.create = function(newProject){
-        if(newProject.title){
-            RequestService.post('projects/create', {project: newProject}, function(res) {
-                    all.projects.push(res.data);
-                    update();
-                }, function(error) {
-                    console.log(error);
-                }
-            );
-        }
-    }
+        if(newProject.title) return;
+
+        RequestService.post('projects/create', {project: newProject}, function(res) {
+                all.projects.push(res.data);
+                update();
+            }, function(error) {
+                console.log(error);
+            }
+        );
+    };
 
     this.delete = function(projectId){
-        if(newProject.title){
-            RequestService.post('projects/create', {project: newProject}, function(res) {
-                    all.projects.push(res.data);
-                    update();
-                }, function(error) {
-                    console.log(error);
-                }
-            );
-        }
-    }
+        // TODO: uncomment when issue closed in backend
+/*        RequestService.post('POST /api/v1/projects/delete.json', {project: {id: projectId}}, function(res) {
+                removeProjectFromArray();
+                update();
+            }, function(error) {
+                console.log(error);
+            }
+        );*/
+    };
 
 }]);

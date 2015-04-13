@@ -1,0 +1,29 @@
+<div class="dialog">
+    <div class="dialog__content">
+        <div class="dialog__header">
+            <button class="dialog__close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="dialog__title">New Scene</h4>
+        </div>
+        <div class="dialog__body container">
+            <div class="col span-6">
+                Projekt
+                <fieldset class="row">
+                    <dropdown template-name="select" on-select="onProjectSelect" data="{'currentItemId': currentProjectId, 'items': projects, 'currentItemName': currentProjectName}"></dropdown>
+                </fieldset>
+                Template
+                <fieldset class="row">
+                    <dropdown template-name="select" on-select="onTemplateSelect" data="{'currentItemId': currentTemplateId, 'items': templates}"></dropdown>
+                </fieldset>
+                <fieldset class="row">
+                    <placeholder-input value="newScene.title" label="Title" type="text" class-suffix="text"></placeholder-input>
+                </fieldset>
+                <fieldset class="row">
+                    <placeholder-input value="newScene.description" label="Description" type="text" class-suffix="text"></placeholder-input>
+                </fieldset>
+                <div class="row">
+                    <button ng-click="createNewScene(); closeIt()" class="btn btn--cta btn--submit">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

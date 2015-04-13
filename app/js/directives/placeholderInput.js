@@ -3,7 +3,12 @@ app.directive('placeholderInput', [ function (AuthService) {
         restrict: 'E',
         templateUrl: 'partials/placeholderInput.html',
         replace: true,
-        scope: { value: '=', label: '@', type: '@' },
+        scope: {
+            value: '=',
+            label: '@',
+            type: '@' ,
+            classSuffix: '@'
+        },
         link: function(scope, elem, attrs) {
             scope.isFocused = false;
 

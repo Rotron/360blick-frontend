@@ -1,0 +1,22 @@
+<div class="dialog">
+    <div class="dialog__content">
+        <div class="dialog__header">
+            <button class="dialog__close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="dialog__title">New Asset</h4>
+        </div>
+        <div class="dialog__body">
+            <fieldset class="row">
+                <placeholder-input value="newAsset.title" label="Title" type="text" class-suffix="text"></placeholder-input>
+            </fieldset>
+            <fieldset class="row">
+                <file-input value="newAsset.file" label="File" class-suffix="file" upload-data="newAsset.uploadData"></file-input>
+            </fieldset>
+            <fieldset class="row">
+                <placeholder-input value="newAsset.description" label="Description" type="text" class-suffix="text"></placeholder-input>
+            </fieldset>
+            <div class="row">
+                <button ng-click="createNewAsset(); closeIt()" class="btn btn--submit">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
