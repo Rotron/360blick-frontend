@@ -121,7 +121,7 @@ gulp.task('build-images', function () {
 });
 
 
-gulp.task('preprocess-build', function(){
+gulp.task('preprocess-build', ['templateCache'], function(){
     gulp.src('./app/js/**/*.js')
         .pipe(preprocess({context: { NODE_ENV: 'PRODUCTION', DEBUG: true}}))
         .pipe(gulp.dest('./app/tmp'));
@@ -158,7 +158,7 @@ gulp.task('build', ['clean-build-folder', 'preprocess-build', 'sass', 'templateC
 /**
  * Inject files into index.html
  */
-gulp.task('inject', ['bower', 'npm'], function() {
+gulp.task('inject', ['bower', 'npm', 'templateCache'], function() {
     gulp.src('./app/index-template.html')
         .pipe(wiredep())
         .pipe(inject(gulp.src('./app/tmp/vendor/*.js', {read: false}), {name: 'vendor', relative: true}))
