@@ -7,7 +7,7 @@ var app = angular.module('360blickFrontendApp', [
     'ui.router',
     'angularFileUpload',
     'btford.modal',
-    'templates',
+    'templatesx',
     'mdo-angular-cryptography'
 ]);
 
