@@ -37,7 +37,7 @@ app.service('Project', ['RequestService', '$stateParams', '$rootScope', function
     };
 
     this.create = function(newProject){
-        if(newProject.title) return;
+        if(!newProject.title) return;
 
         RequestService.post('projects/create', {project: newProject}, function(res) {
                 all.projects.push(res.data);
