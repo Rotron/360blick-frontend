@@ -303,3 +303,5 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
             }
          });
 }]);
+
+angular.module('templates', []);
