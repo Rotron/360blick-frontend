@@ -31,6 +31,7 @@
   background: $primary-2;
   border-radius: 3px;
   margin-top: 10px;
+  // FIXME: change to .dropdown__list--default__item
   .dropdown__list__item {
     width: 100%;
     height: $base * 10;
