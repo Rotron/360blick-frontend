@@ -20,6 +20,7 @@ module.exports = function(config) {
     files: [
         'build/scripts/vendor.js',
         'build/scripts/main.min.js',
+        'app/bower_components/angular-mocks/angular-mocks.js',
         'test/**/*.js'
     ],
 
