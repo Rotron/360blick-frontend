@@ -21,7 +21,7 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
      * @return {String}
      */
     function getFullActionUrl(action) {
-        return ENV_CONFIG.api + action + '.json';
+        return ENV_CONFIG.api + '/' + action + '.json';
     }
     /**
      * getFullActionUrl
