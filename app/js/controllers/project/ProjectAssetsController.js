@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestService', 'Asset', function ($scope, $stateParams, RequestService, Asset) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', 'Asset', function ($scope, $stateParams, ENV_CONFIG, RequestService, Asset) {
     $scope.username = $stateParams.username;
     var projectId = $stateParams['projectId'];
 
@@ -13,7 +13,7 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestSer
 
     $scope.getAssetBackgroundImage = function getAssetBackgroundImage(asset) {
         return {
-            'background-image': 'url(' + asset.file.url + ')'
+            'background-image': 'url(' + ENV_CONFIG.assets + asset.file.url + ')'
         };
     };
 

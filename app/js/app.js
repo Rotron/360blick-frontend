@@ -11,6 +11,19 @@ var app = angular.module('360blickFrontendApp', [
     'mdo-angular-cryptography'
 ]);
 
+// TODO: Cleanup ENV
+var api_url = 'http://localhost:3000/api/v1/';
+var assets_url = 'http://localhost:3000/';
+// @if NODE_ENV = 'PRODUCTION'
+api_url = 'https://blick.herokuapp.com/api/v1/';
+assets_url = 'https://blick.herokuapp.com/';
+// @endif
+
+app.constant('ENV_CONFIG', {
+    api: api_url,
+    assets: assets_url
+});
+
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
     loginFailed: 'auth-login-failed',

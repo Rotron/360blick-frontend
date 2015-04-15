@@ -1,4 +1,4 @@
-app.service('RequestService', ['$http', '$upload', 'SessionService', function ($http, $upload, SessionService) {
+app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService', function ($http, $upload, ENV_CONFIG, SessionService) {
 
     /**
      * getCredentialsObject
@@ -21,13 +21,7 @@ app.service('RequestService', ['$http', '$upload', 'SessionService', function ($
      * @return {String}
      */
     function getFullActionUrl(action) {
-        // TODO: Cleanup ENV
-        var url = 'http://localhost:3000/api/v1';
-        // @if NODE_ENV = 'PRODUCTION'
-        url = 'https://blick.herokuapp.com/api/v1';
-        // @endif
-
-        return url + '/' + action + '.json';
+        return ENV_CONFIG.api + action + '.json';
     }
     /**
      * getFullActionUrl
