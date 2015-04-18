@@ -220,6 +220,21 @@ THREE.SceneExporter.prototype = {
 
                 ];
 
+            } else if ( o instanceof THREE.AreaLight ) {
+
+                var output = [
+
+                    '\t\t' + LabelString( getObjectName( o ) ) + ' : {',
+                    '	"type"      : "AreaLight",',
+                    '	"color"     : ' + o.color.getHex() + ',',
+                    '	"position" : ' + Vector3String( o.position ) + ',',
+                    '	"rotation" : ' + Vector3String( o.rotation ) + ',',
+                    '	"width" : ' + o.width + ',',
+                    '	"height" : ' + o.height + ',',
+                    '	"intensity" : ' + o.intensity + ( o.children.length ? ',' : '' )
+
+                ];
+
             } else if ( o instanceof THREE.DirectionalLight ) {
 
                 var output = [

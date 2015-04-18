@@ -7,18 +7,12 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
      * returns new default scene with lightning
      * @returns {Scene}
      */
-    function getNewScene(){
+    this.getNewScene = function(){
         var scene = new THREE.Scene();
 
-//        var axes = new THREE.AxisHelper(100);
-//        axes.position.y = 0.001;
-//        this.scene.add(axes);
-//        var gridXZ = new THREE.GridHelper(100, 1);
-//        this.scene.add(gridXZ);
-
         //TODO: check why exporter has a problem with point light
-        var light = new THREE.HemisphereLight( 0x0000ff, 0x00ff00, 0.8 );
-        light.position.set( 10, 10, 10 );
+        var light = new THREE.HemisphereLight( 0x0000ff, 1, 0.8 );
+        light.position.set( 10, 11, 12 );
         scene.add( light );
         return scene;
     }
@@ -37,7 +31,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
                 _this.render();
             }, '.');
         } else {
-            _this.scene = getNewScene();
+            _this.scene = _this.getNewScene();
             _this.render();
         }
     }

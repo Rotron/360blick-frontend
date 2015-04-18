@@ -353,8 +353,6 @@ THREE.SceneLoader.prototype = {
                         var distance = objJSON.distance;
                         var position = objJSON.position;
                         var rotation = objJSON.rotation || [1, 0, 1];
-                        console.log(objJSON);
-
 
                         switch ( objJSON.type ) {
 
@@ -381,16 +379,16 @@ THREE.SceneLoader.prototype = {
                                 break;
 
                             case 'HemisphereLight':
-                                light = new THREE.DirectionalLight( color, intensity, distance );
-                                light.target.position.set( position[ 0 ], position[ 1 ] - distance, position[ 2 ] );
-                                light.target.position.applyEuler( new THREE.Euler( rotation[ 0 ], rotation[ 1 ], rotation[ 2 ], 'XYZ' ) );
+                                light = new THREE.HemisphereLight( objJSON.skyColor, objJSON.groundColor, objJSON.intensity );
+                                light.position.set( objJSON.position[0], objJSON.position[1], objJSON.position[2] );
                                 break;
 
                             case 'AreaLight':
                                 light = new THREE.AreaLight(color, intensity);
-                                light.position.fromArray( position );
-                                light.width = objJSON.size;
-                                light.height = objJSON.size_y;
+                                light.position.set(  objJSON.position[0], objJSON.position[1], objJSON.position[2]  );
+                                light.rotation.set(  objJSON.rotation[0], objJSON.rotation[1], objJSON.rotation[2]  );
+                                light.width = objJSON.width;
+                                light.height = objJSON.height;
                                 break;
 
                         }

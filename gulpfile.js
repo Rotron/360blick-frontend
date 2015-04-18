@@ -209,6 +209,24 @@ gulp.task('test', function() {
         });
 });
 
+gulp.task('testLocal', function() {
+
+    var testFiles = [
+        '.app/test/**/*.js'
+    ];
+
+    // Be sure to return the stream
+    return gulp.src(testFiles)
+        .pipe(karma({
+            configFile: 'karmaLocal.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            // Make sure failed tests cause gulp to exit non-zero
+            throw err;
+        });
+});
+
 /**
  * Watcher
  */
