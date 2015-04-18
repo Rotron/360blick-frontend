@@ -257,7 +257,6 @@ THREE.SceneExporter.prototype = {
                     '	"color"          : ' + o.color.getHex() + ',',
                     '	"intensity"      : ' + o.intensity + ',',
                     '	"position"       : ' + Vector3String( o.position ) + ',',
-                    '	"decay"          : ' + o.decay + ',',
                     '	"distance"       : ' + o.distance + ( o.children.length ? ',' : '' )
 
                 ];

@@ -88,6 +88,20 @@ describe('Vendor:SceneImporterExporter', function () {
             }
         });
 
+        it('PointLight', function () {
+            light = new THREE.PointLight( 0xff0000, 1, 100 );
+            light.position.set( 50, 50, 50 );
+            originalScene.add( light );
+            exportScene();
+            importScene();
+            for(var i = 0; i < originalScene.children.length; i++){
+                expect(originalScene.children[i].type).toEqual(importedScene.children[i].type);
+                expect(originalScene.children[i].hex).toEqual(importedScene.children[i].hex);
+                expect(originalScene.children[i].intensity).toEqual(importedScene.children[i].intensity);
+                expect(originalScene.children[i].position).toEqual(importedScene.children[i].position);
+            }
+        });
+
 
     });
 
