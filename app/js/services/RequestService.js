@@ -13,8 +13,8 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
         };
     }
     /**
-     * getFullActionUrl
-     * e.g. getFullActionUrl()
+     * RequestService.getFullActionUrl
+     * e.g. RequestService.getFullActionUrl('users/login')
      *
      * @param {String} action e.g. 'users/login'
      *
@@ -24,8 +24,8 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
         return ENV_CONFIG.api + '/' + action + '.json';
     };
     /**
-     * getFullActionUrl
-     * e.g. getFullActionUrl()
+     * RequestService.getFullActionUrl
+     * e.g. RequestService.getFullActionUrl()
      *
      * Helper Function for module ng-file-upload
      *
