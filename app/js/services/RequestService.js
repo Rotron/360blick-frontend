@@ -20,9 +20,9 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
      *
      * @return {String}
      */
-    function getFullActionUrl(action) {
+    this.getFullActionUrl = function(action) {
         return ENV_CONFIG.api + '/' + action + '.json';
-    }
+    };
     /**
      * getFullActionUrl
      * e.g. getFullActionUrl()
@@ -31,7 +31,7 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
      *
      * TODO: Refactor to Recursive
      */
-    function formDataAppender(fd, key, val) {
+    this.formDataAppender = function(fd, key, val) {
         if (angular.isObject(val)) {
             angular.forEach(val, function(val_in, key_in) {
                 if(angular.isObject(val_in)) {
@@ -58,7 +58,7 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
     this.post = function(action, data, callback, errorCallback) {
 
         return $http
-            .post(getFullActionUrl(action), { user: getCredentialsObject(), data: data })
+            .post(this.getFullActionUrl(action), { user: getCredentialsObject(), data: data })
             .success(function(res){
                 callback(res);
             })
@@ -88,7 +88,7 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
     this.get = function(action, data, callback, errorCallback) {
 
         return $http
-            .get(getFullActionUrl(action), { params: data })
+            .get(this.getFullActionUrl(action), { params: data })
             .success(function(res){
                 callback(res);
             })
@@ -117,10 +117,10 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
         data = data || {};
 
         return $upload.upload({
-            url: getFullActionUrl(action),
+            url: this.getFullActionUrl(action),
             method: 'post',
             fileFormDataName: 'data[asset][file]',
-            formDataAppender: formDataAppender,
+            formDataAppender: this.formDataAppender,
             fields: { user: getCredentialsObject(), data: data},
             file: file
         }).progress(function(event) {
