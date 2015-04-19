@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Vendor:SceneImporterExporter', function () {
+describe('Vendor:SceneImporterExporter: ', function () {
 
     beforeEach(module('360blickFrontendApp'));
 
@@ -40,7 +40,7 @@ describe('Vendor:SceneImporterExporter', function () {
         expect(originalScene.children.length).toEqual(importedScene.children.length);
     });
 
-    describe('lights', function () {
+    describe('lights: ', function () {
 
         it('HemisphereLight', function () {
             light = new THREE.HemisphereLight( 0x0000ff, 0x00ff00, 0.8 );
@@ -103,6 +103,52 @@ describe('Vendor:SceneImporterExporter', function () {
         });
 
 
+    });
+
+    describe('primitives: ', function () {
+        it('Geometry:', function () {
+            var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+            var cube = new THREE.Mesh( geometry, material );
+            originalScene.add( cube );
+            exportScene();
+            importScene();
+            for(var i = 0; i < originalScene.children.length; i++){
+                expect(originalScene.children[i].type).toEqual(importedScene.children[i].type);
+                expect(originalScene.children[i].position).toEqual(importedScene.children[i].position);
+                expect(originalScene.children[i].rotation[0]).toEqual(importedScene.children[i].rotation[0]);
+                expect(originalScene.children[i].width).toEqual(importedScene.children[i].width);
+                expect(originalScene.children[i].height).toEqual(importedScene.children[i].height);
+                expect(originalScene.children[i].depth).toEqual(importedScene.children[i].depth);
+                expect(originalScene.children[i].scale).toEqual(importedScene.children[i].scale);
+                expect(originalScene.children[i].visible).toEqual(importedScene.children[i].visible);
+                expect(originalScene.children[i].vertices).toEqual(importedScene.children[i].vertices);
+                expect(originalScene.children[i].faces).toEqual(importedScene.children[i].faces);
+            }
+        });
+    });
+
+    describe('Meshmaterial: ', function () {
+
+        function equalMaterial(material){
+            var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            var cube = new THREE.Mesh( geometry, material );
+            originalScene.add( cube );
+            exportScene();
+            importScene();
+            for(var i = 0; i < originalScene.children.length; i++){
+                expect(originalScene.children[i].material.side).toEqual(importedScene.children[i].material.side);
+            }
+        }
+        it('MeshBasicMaterial:', function () {
+            equalMaterial(new THREE.MeshBasicMaterial( {color: 0x00ff00, opacity: 0.6, side: THREE.DoubleSide} ));
+        });
+        it('MeshPhongMaterial:', function () {
+            equalMaterial(new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0x009900, opacity: 0.7, shininess: 30, shading: THREE.FlatShading, side: THREE.DoubleSide } ));
+        });
+        it('MeshLambertMaterial:', function () {
+            equalMaterial(new THREE.MeshLambertMaterial({ color : 'red', opacity: 0.8, side: THREE.DoubleSide }));
+        });
     });
 
 });

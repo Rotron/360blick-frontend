@@ -297,7 +297,6 @@ THREE.SceneLoader.prototype = {
                                 }
 
                             } else {
-
                                 object = new THREE.Mesh( geometry, material );
 
                             }
@@ -331,7 +330,6 @@ THREE.SceneLoader.prototype = {
                                 object.scale.fromArray( scl );
 
                             }
-
                             object.visible = objJSON.visible;
                             object.castShadow = objJSON.castShadow;
                             object.receiveShadow = objJSON.receiveShadow;
@@ -1043,22 +1041,6 @@ THREE.SceneLoader.prototype = {
                 } else if ( parID === "shading" ) {
 
                     matJSON.parameters[ parID ] = ( matJSON.parameters[ parID ] === "flat" ) ? THREE.FlatShading : THREE.SmoothShading;
-
-                } else if ( parID === "side" ) {
-
-                    if ( matJSON.parameters[ parID ] == "double" ) {
-
-                        matJSON.parameters[ parID ] = THREE.DoubleSide;
-
-                    } else if ( matJSON.parameters[ parID ] == "back" ) {
-
-                        matJSON.parameters[ parID ] = THREE.BackSide;
-
-                    } else {
-
-                        matJSON.parameters[ parID ] = THREE.FrontSide;
-
-                    }
 
                 } else if ( parID === "blending" ) {
 
