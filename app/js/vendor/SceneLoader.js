@@ -351,7 +351,6 @@ THREE.SceneLoader.prototype = {
                         var distance = objJSON.distance;
                         var position = objJSON.position;
                         var rotation = objJSON.rotation || [1, 0, 1];
-
                         switch ( objJSON.type ) {
 
                             case 'AmbientLight':
@@ -508,9 +507,7 @@ THREE.SceneLoader.prototype = {
                 if ( object !== undefined && objJSON.children !== undefined ) {
 
                     handle_children( object, objJSON.children );
-
                 }
-
             }
 
         };

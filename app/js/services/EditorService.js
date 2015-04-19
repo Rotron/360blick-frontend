@@ -22,12 +22,12 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
      * @param res
      */
     function resolveScene(res) {
-        console.log(res);
         if(res.data.file) {
 
             var sceneLoader = new THREE.SceneLoader();
             sceneLoader.parse(JSON.parse(res.data.file), function (e) {
                 _this.scene = e.scene;
+                console.log(_this.scene);
                 _this.render();
             }, '.');
         } else {
