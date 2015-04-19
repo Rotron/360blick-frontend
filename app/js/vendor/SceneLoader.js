@@ -1078,7 +1078,7 @@ THREE.SceneLoader.prototype = {
 
             }
 
-            if ( matJSON.parameters.opacity !== undefined && matJSON.parameters.opacity < 1.0 ) {
+            if ( matJSON.parameters.opacity !== undefined && matJSON.parameters.opacity < 1.0 && matJSON.parameters.transparent == 'undefined') {
 
                 matJSON.parameters.transparent = true;
 

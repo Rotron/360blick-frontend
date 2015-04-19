@@ -138,16 +138,20 @@ describe('Vendor:SceneImporterExporter: ', function () {
             importScene();
             for(var i = 0; i < originalScene.children.length; i++){
                 expect(originalScene.children[i].material.side).toEqual(importedScene.children[i].material.side);
+                expect(originalScene.children[i].material.opacity).toEqual(importedScene.children[i].material.opacity);
+                expect(originalScene.children[i].material.color).toEqual(importedScene.children[i].material.color);
+                expect(originalScene.children[i].material.transparent).toEqual(importedScene.children[i].material.transparent);
+                expect(originalScene.children[i].material.alphaTest).toEqual(importedScene.children[i].material.alphaTest);
             }
         }
         it('MeshBasicMaterial:', function () {
-            equalMaterial(new THREE.MeshBasicMaterial( {color: 0x00ff00, opacity: 0.6, side: THREE.DoubleSide} ));
+            equalMaterial(new THREE.MeshBasicMaterial( {color: 0x00ff00, opacity: 0.6, side: THREE.DoubleSide, visible: false } ));
         });
         it('MeshPhongMaterial:', function () {
             equalMaterial(new THREE.MeshPhongMaterial( { color: 0xdddddd, specular: 0x009900, opacity: 0.7, shininess: 30, shading: THREE.FlatShading, side: THREE.DoubleSide } ));
         });
         it('MeshLambertMaterial:', function () {
-            equalMaterial(new THREE.MeshLambertMaterial({ color : 'red', opacity: 0.8, side: THREE.DoubleSide }));
+            equalMaterial(new THREE.MeshLambertMaterial({ color : 'red', opacity: 0.8, side: THREE.DoubleSide, visible: true }));
         });
     });
 

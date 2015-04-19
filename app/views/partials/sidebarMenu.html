@@ -8,7 +8,7 @@
                 <li class="menu-secondary__item">
                     <a ng-click="openModal('newProject')" ui-sref-active="is-active" class="menu-secondary__title"><i class="fa fa-plus"></i>New Project</a>
                 </li>
-                <li class="menu-secondary__item" ng-repeat="project in projects">
+                <li class="menu-secondary__item" ng-repeat="project in projects | orderBy:'title'">
                     <a ui-sref="user.project({projectId: project.id})" ui-sref-active="is-active" class="menu-secondary__title">{{project.title}}</a>
                 </li>
             </ul>
