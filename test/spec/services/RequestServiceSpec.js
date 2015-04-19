@@ -6,12 +6,12 @@ describe('Service: RequestService', function() {
 
     var RequestService, ENV_CONFIG, scope;
 
-    beforeEach(inject(function (_RequestService_, _ENV_CONFIG_, $rootScope) {
+    beforeEach(inject(['RequestService', 'ENV_CONFIG', '$rootScope', function (RequestServ, env_conf, $rootScope) {
         scope = $rootScope.$new();
 
-        RequestService = _RequestService_;
-        ENV_CONFIG = _ENV_CONFIG_;
-    }));
+        RequestService = RequestServ;
+        ENV_CONFIG = env_conf;
+    }]));
 
     describe('getFullActionUrl', function() {
 
