@@ -15,7 +15,7 @@ app.service('Asset', ['RequestService', '$stateParams', '$rootScope', function (
     }
 
     function onSuccess(res){
-        all.projects = res.data;
+        all.assets = res.data;
         update();
     }
 
