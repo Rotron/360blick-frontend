@@ -36,6 +36,16 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         }
     }
 
+
+    document.onkeydown = function(event) {
+        if (event.keyCode == 37) {
+            _this.camera.rotation.y += Math.PI/200;
+        }
+        if (event.keyCode == 39) {
+            _this.camera.rotation.y -= Math.PI/200;
+        }
+    }
+
     this.render = function() {
         requestAnimationFrame( _this.render );
         _this.renderer.render( _this.scene, _this.camera );
@@ -56,7 +66,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
 
         this.camera.position.z = 10;
         this.camera.position.y = 5;
-        this.camera.lookAt(new THREE.Vector3(0,0,0));
+        this.camera.lookAt(new THREE.Vector3(0,5,0));
 
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
 
