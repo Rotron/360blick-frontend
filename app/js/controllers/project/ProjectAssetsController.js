@@ -27,14 +27,9 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
     };
 
     function getProjectAssets() {
-
-        RequestService.post('projects/assets/get_from_project', {project: {id: projectId}}, function(res) {
-                $scope.assets = res.data;
-                console.log($scope.assets);
-            }, function(error) {
-                console.log(error);
-            }
-        );
+        $scope.assets = Asset.get(projectId, function(assets){
+            $scope.assets = assets;
+        });
     }
 
     getProjectAssets();

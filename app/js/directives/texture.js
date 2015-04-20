@@ -9,7 +9,6 @@ app.directive('texture',[ function() {
             item: "="
         },
         link: function(scope) {
-
         }
     };
 }]);

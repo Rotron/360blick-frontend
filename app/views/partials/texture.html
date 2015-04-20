@@ -5,7 +5,7 @@
             <i class="fa fa-eye"></i>
             <i class="fa fa-pencil"></i>
             <i class="fa fa-trash-o"></i>
-            <i class="fa fa-file-image-o"></i>
+            <i class="fa fa-file-image-o" ng-click="$root.openModal('selectTexture', {item: item})"></i>
         </div>
     </div>
     <div ng-class="{'open': open}">
@@ -14,13 +14,13 @@
                 Wireframes
             </div>
             <div class="col span-3">
-                <input type="checkbox" ng-model="item.wireframe">
+                <input type="checkbox" ng-model="item.material.wireframe">
             </div>
             <div class="col span-9">
                 Double Sided
             </div>
             <div class="col span-3">
-                <input type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="item.side">
+                <input type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="item.material.side">
             </div>
         </div>
         <div class="container">
@@ -31,7 +31,7 @@
                 <div class="input--sidebar">
                     <label class="input--sidebar__label">
                         <span class="input--sidebar__label__unit">px</span>
-                        <input class="input--sidebar__field" type="number" ng-model="item.x">
+                        <input class="input--sidebar__field" type="number" ng-model="item.material.x">
                     </label>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="input--sidebar">
                     <label class="input--sidebar__label">
                         <span class="input--sidebar__label__unit">px</span>
-                        <input class="input--sidebar__field" type="number" ng-model="item.x">
+                        <input class="input--sidebar__field" type="number" ng-model="item.material.x">
                     </label>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="input--sidebar">
                     <label class="input--sidebar__label">
                         <span class="input--sidebar__label__unit">px</span>
-                        <input class="input--sidebar__field" type="number" ng-model="item.x">
+                        <input class="input--sidebar__field" type="number" ng-model="item.material.x">
                     </label>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 <div class="input--sidebar">
                     <label class="input--sidebar__label">
                         <span class="input--sidebar__label__unit">px</span>
-                        <input class="input--sidebar__field" type="number" ng-model="item.x">
+                        <input class="input--sidebar__field" type="number" ng-model="item.material.x">
                     </label>
                 </div>
             </div>

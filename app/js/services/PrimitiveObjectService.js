@@ -1,4 +1,4 @@
-app.service('PrimitiveObjectService',[ function() {
+app.service('PrimitiveObjectService',['RequestService', function(RequestService) {
 
 /*    var supportedObjects = [
         'sphere',
@@ -70,5 +70,13 @@ app.service('PrimitiveObjectService',[ function() {
     this.getSupportedObjectTypes = function(){
         return supportedObjects;
     };
+
+    this.mapTexture = function(item, assetUrl){
+        THREE.ImageUtils.crossOrigin = '';
+        item.material = new THREE.MeshPhongMaterial( {
+            side: THREE.DoubleSide,
+            map: THREE.ImageUtils.loadTexture('http://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg')
+        } );
+    }
 
 }]);
