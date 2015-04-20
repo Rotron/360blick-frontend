@@ -11,7 +11,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         var scene = new THREE.Scene();
 
         //TODO: check why exporter has a problem with point light
-        var light = new THREE.HemisphereLight( 0x0000ff, 1, 0.8 );
+        var light = new THREE.HemisphereLight( 0xffffff, 1, 0.8 );
         light.position.set( 10, 11, 12 );
         scene.add( light );
         return scene;
