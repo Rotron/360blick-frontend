@@ -9,10 +9,8 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
      */
     this.getNewScene = function(){
         var scene = new THREE.Scene();
-
-        //TODO: check why exporter has a problem with point light
-        var light = new THREE.HemisphereLight( 0xffffff, 1, 0.8 );
-        light.position.set( 10, 11, 12 );
+        var light = new THREE.PointLight( 0xffffff, 1, 0 );
+        light.position.set( 0, 5, 10 );
         scene.add( light );
         return scene;
     }
@@ -23,11 +21,9 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
      */
     function resolveScene(res) {
         if(res.data.file) {
-
             var sceneLoader = new THREE.SceneLoader();
             sceneLoader.parse(JSON.parse(res.data.file), function (e) {
                 _this.scene = e.scene;
-                console.log(_this.scene);
                 _this.render();
             }, '.');
         } else {
@@ -36,7 +32,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         }
     }
 
-
+    //TODO: move to shortcutservice
     document.onkeydown = function(event) {
         if (event.keyCode == 37) {
             _this.camera.rotation.y += Math.PI/200;

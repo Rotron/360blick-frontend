@@ -44,7 +44,6 @@ app.service('PrimitiveObjectService',['RequestService', function(RequestService)
 //            throw 'selected object not supported';
 //        }
         var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x0088DA, specular: 0x000099, shininess: 30, shading: THREE.FlatShading, side: THREE.DoubleSide } );
-        console.log(material);
         var geometry;
 
         switch(type) {

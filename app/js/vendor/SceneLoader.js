@@ -150,6 +150,9 @@ THREE.SceneLoader.prototype = {
                 return source_url;
 
             } else {
+                if(source_url.substr(0, 4) == 'http'){
+                    return source_url;
+                }
 
                 return urlBase + source_url;
 
@@ -712,9 +715,7 @@ THREE.SceneLoader.prototype = {
         // because of closure in the calling context loop
 
         var generateTextureCallback = function ( count ) {
-
             return function () {
-
                 callbackTexture( count );
 
             };
@@ -930,14 +931,12 @@ THREE.SceneLoader.prototype = {
                 var loader = THREE.Loader.Handlers.get( url_array[ 0 ] );
 
                 if ( loader !== null ) {
-
                     texture = loader.load( url_array, generateTextureCallback( count ) );
 
                     if ( textureJSON.mapping !== undefined )
                         texture.mapping = textureJSON.mapping;
 
                 } else {
-
                     texture = THREE.ImageUtils.loadTextureCube( url_array, textureJSON.mapping, generateTextureCallback( count ) );
 
                 }
@@ -954,9 +953,9 @@ THREE.SceneLoader.prototype = {
                     texture = loader.load( fullUrl, textureCallback );
 
                 } else {
-
                     texture = new THREE.Texture();
                     loader = new THREE.ImageLoader();
+                    loader.crossOrigin = '';//for loading images from foreign servers
 
                     ( function ( texture ) {
 
