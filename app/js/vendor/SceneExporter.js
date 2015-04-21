@@ -426,6 +426,26 @@ THREE.SceneExporter.prototype = {
 
                 ];
 
+            } else if ( g instanceof THREE.CylinderGeometry ) {
+
+                console.log(g);
+
+                var output = [
+
+                    '\t' + LabelString( getGeometryName( g ) ) + ': {',
+                    '	"type"    : "cylinder",',
+                    '	"radiusTop"  : '  + (g.parameters.radiusTop || 20)  + ',',
+                    '	"radiusBottom"  : ' + (g.parameters.radiusBottom || 20) + ',',
+                    '	"height"  : ' + (g.parameters.height || 100) + ',',
+                    '	"radiusSegments"  : ' + (g.parameters.radiusSegments || 8) + ',',
+                    '	"heightSegments"  : ' + (g.parameters.heightSegments || 1) + ',',
+                    '	"openEnded"  : ' + (g.parameters.openEnded || 0) + ',',
+                    '	"thetaStart"  : ' + (g.parameters.thetaStart || 0) + ',',
+                    '	"thetaLength"  : ' + (g.parameters.thetaLength || (2 * Math.PI)),
+                    '}'
+
+                ];
+
             } else if ( g instanceof THREE.Geometry ) {
 
                 if ( g.sourceType === "ascii" || g.sourceType === "ctm" || g.sourceType === "stl" || g.sourceType === "vtk" ) {

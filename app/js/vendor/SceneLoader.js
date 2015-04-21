@@ -834,7 +834,7 @@ THREE.SceneLoader.prototype = {
 
             } else if ( geoJSON.type === "cylinder" ) {
 
-                geometry = new THREE.CylinderGeometry( geoJSON.topRad, geoJSON.botRad, geoJSON.height, geoJSON.radSegs, geoJSON.heightSegs );
+                geometry = new THREE.CylinderGeometry( geoJSON.radiusTop, geoJSON.radiusBottom, geoJSON.height, geoJSON.radiusSegments, geoJSON.heightSegments, geoJSON.openEnded, geoJSON.thetaStart, geoJSON.thetaLength );
                 geometry.name = geoID;
                 result.geometries[ geoID ] = geometry;
 
