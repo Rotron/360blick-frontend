@@ -13,7 +13,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         light.position.set( 0, 5, 10 );
         scene.add( light );
         return scene;
-    }
+    };
 
     /**
      * parse scene loaded from api
@@ -24,6 +24,9 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
             var sceneLoader = new THREE.SceneLoader();
             sceneLoader.parse(JSON.parse(res.data.file), function (e) {
                 _this.scene = e.scene;
+                if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
+                    $rootScope.$apply();
+                }
                 _this.render();
             }, '.');
         } else {

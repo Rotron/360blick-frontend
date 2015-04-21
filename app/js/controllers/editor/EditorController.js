@@ -14,9 +14,10 @@
       }
 
       $scope.save = function(){
+          console.log(EditorService.scene);
           var exporter = new THREE.SceneExporter();
           var sceneJson = JSON.stringify(exporter.parse(EditorService.scene));
-
+          console.log(sceneJson);
           var scene = {
               file: sceneJson
           };

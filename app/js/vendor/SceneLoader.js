@@ -175,8 +175,9 @@ THREE.SceneLoader.prototype = {
             var mat, dst, pos, rot, scl, quat;
 
             for ( var objID in children ) {
-
+                console.log(children[objID]);
                 // check by id if child has already been handled,
+                // if not, create new object
                 // if not, create new object
 
                 var object = result.objects[ objID ];
@@ -191,6 +192,8 @@ THREE.SceneLoader.prototype = {
                         if ( objJSON.loading === undefined ) {
 
                             material = result.materials[ objJSON.material ];
+
+                            console.log('mat:', material);
 
                             objJSON.loading = true;
 
@@ -224,6 +227,7 @@ THREE.SceneLoader.prototype = {
                             var needsTangents = false;
 
                             material = result.materials[ objJSON.material ];
+                            console.log('mat2:', material);
                             needsTangents = material instanceof THREE.ShaderMaterial;
 
                             pos = objJSON.position;
@@ -648,7 +652,6 @@ THREE.SceneLoader.prototype = {
         };
 
         function async_callback_gate() {
-
             var progress = {
 
                 totalModels : total_models,
@@ -661,7 +664,7 @@ THREE.SceneLoader.prototype = {
             scope.callbackProgress( progress, result );
 
             scope.onLoadProgress();
-
+            console.log('yxc:', counter_models, counter_textures);
             if ( counter_models === 0 && counter_textures === 0 ) {
 
                 finalize();
@@ -703,7 +706,7 @@ THREE.SceneLoader.prototype = {
         };
 
         var callbackTexture = function ( count ) {
-
+            console.log('tex');
             counter_textures -= count;
             async_callback_gate();
 
@@ -882,9 +885,11 @@ THREE.SceneLoader.prototype = {
         for ( textureID in data.textures ) {
 
             textureJSON = data.textures[ textureID ];
+            console.log('texJSON', textureJSON);
 
             if ( textureJSON.url instanceof Array ) {
 
+                console.log('init counter textures:', counter_textures);
                 counter_textures += textureJSON.url.length;
 
                 for ( var n = 0; n < textureJSON.url.length; n ++ ) {
@@ -896,7 +901,7 @@ THREE.SceneLoader.prototype = {
             } else {
 
                 counter_textures += 1;
-
+                console.log('init counter textures2:', counter_textures);
                 scope.onLoadStart();
 
             }
@@ -931,18 +936,21 @@ THREE.SceneLoader.prototype = {
                 var loader = THREE.Loader.Handlers.get( url_array[ 0 ] );
 
                 if ( loader !== null ) {
+                    console.log('x');
                     texture = loader.load( url_array, generateTextureCallback( count ) );
 
                     if ( textureJSON.mapping !== undefined )
                         texture.mapping = textureJSON.mapping;
 
                 } else {
+                    console.log('y');
                     texture = THREE.ImageUtils.loadTextureCube( url_array, textureJSON.mapping, generateTextureCallback( count ) );
 
                 }
 
             } else {
-
+                console.log('z');
+                console.log(textureJSON.url, data.urlBaseType);
                 var fullUrl = get_url( textureJSON.url, data.urlBaseType );
                 var textureCallback = generateTextureCallback( 1 );
 
@@ -958,7 +966,7 @@ THREE.SceneLoader.prototype = {
                     loader.crossOrigin = '';//for loading images from foreign servers
 
                     ( function ( texture ) {
-
+                        console.log('fullurl:', fullUrl)
                         loader.load( fullUrl, function ( image ) {
 
                             texture.image = image;
