@@ -86,4 +86,7 @@ $dialog-header-height: $base * 10;
 
 .dialog__body {
   padding: $base * 3;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
