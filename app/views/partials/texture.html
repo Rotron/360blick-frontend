@@ -8,45 +8,41 @@
             <i class="fa fa-file-image-o" ng-click="$root.openModal('selectTexture', {item: item})"></i>
         </div>
     </div>
-    <div ng-class="{'open': open}">
+    <div ng-class="{'selected': open}" ng-if="item.material.map">
         <div class="container">
             <div class="col span-9">
-                Wireframes
-            </div>
-            <div class="col span-3">
-                <input type="checkbox" ng-model="item.material.wireframe">
-            </div>
-            <div class="col span-9">
-                Double Sided
-            </div>
-            <div class="col span-3">
-                <input type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="item.material.side">
-            </div>
-        </div>
-        <div class="container">
-            <div class="col span-9">
-                Width
+                Repeat X
             </div>
             <div class="col span-3 xyz-interaction__item">
                 <div class="input--sidebar">
                     <label class="input--sidebar__label">
                         <span class="input--sidebar__label__unit">px</span>
-                        <input class="input--sidebar__field" type="number" ng-model="item.material.x">
+                        <input class="input--sidebar__field" type="number" ng-model="item.material.map.repeat.x">
                     </label>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="col span-9">
-                Height
+                Repeat Y
             </div>
             <div class="col span-3 xyz-interaction__item">
                 <div class="input--sidebar">
                     <label class="input--sidebar__label">
                         <span class="input--sidebar__label__unit">px</span>
-                        <input class="input--sidebar__field" type="number" ng-model="item.material.x">
+                        <input class="input--sidebar__field" type="number" ng-model="item.material.map.repeat.y">
                     </label>
                 </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="input--sidebar">
+                <min-max-value title="Offset X" item="item.material.map.offset.x" minimum="0" maximum="1" step-size="0.01"></min-max-value>
+            </div>
+        </div>
+        <div class="container">
+            <div class="input--sidebar">
+                <min-max-value title="Offset Y" item="item.material.map.offset.y" minimum="0" maximum="1" step-size="0.01"></min-max-value>
             </div>
         </div>
         <div class="container">
@@ -57,7 +53,7 @@
                 <div class="input--sidebar">
                     <label class="input--sidebar__label">
                         <span class="input--sidebar__label__unit">px</span>
-                        <input class="input--sidebar__field" type="number" ng-model="item.material.x">
+                        <input class="input--sidebar__field" type="number" ng-model="item.material.map.wrapT">
                     </label>
                 </div>
             </div>
@@ -70,7 +66,7 @@
                 <div class="input--sidebar">
                     <label class="input--sidebar__label">
                         <span class="input--sidebar__label__unit">px</span>
-                        <input class="input--sidebar__field" type="number" ng-model="item.material.x">
+                        <input class="input--sidebar__field" type="number" ng-model="item.material.map.wrapS">
                     </label>
                 </div>
             </div>

@@ -412,14 +412,36 @@ THREE.SceneExporter.prototype = {
 
             } else if ( g instanceof THREE.PlaneGeometry ) {
 
+                console.log(g);
+
                 var output = [
 
                     '\t' + LabelString( getGeometryName( g ) ) + ': {',
                     '	"type"    : "plane",',
-                    '	"width"  : '  + g.width  + ',',
-                    '	"height"  : ' + g.height + ',',
-                    '	"widthSegments"  : ' + g.widthSegments + ',',
-                    '	"heightSegments" : ' + g.heightSegments,
+                    '	"width"  : '  + g.parameters.width  + ',',
+                    '	"height"  : ' + g.parameters.height + ',',
+                    '	"widthSegments"  : ' + (g.parameters.widthSegments || 1) + ',',
+                    '	"heightSegments" : ' + (g.parameters.heightSegments || 1),
+                    '}'
+
+                ];
+
+            } else if ( g instanceof THREE.CylinderGeometry ) {
+
+                console.log(g);
+
+                var output = [
+
+                    '\t' + LabelString( getGeometryName( g ) ) + ': {',
+                    '	"type"    : "cylinder",',
+                    '	"radiusTop"  : '  + (g.parameters.radiusTop || 20)  + ',',
+                    '	"radiusBottom"  : ' + (g.parameters.radiusBottom || 20) + ',',
+                    '	"height"  : ' + (g.parameters.height || 100) + ',',
+                    '	"radiusSegments"  : ' + (g.parameters.radiusSegments || 8) + ',',
+                    '	"heightSegments"  : ' + (g.parameters.heightSegments || 1) + ',',
+                    '	"openEnded"  : ' + (g.parameters.openEnded || 0) + ',',
+                    '	"thetaStart"  : ' + (g.parameters.thetaStart || 0) + ',',
+                    '	"thetaLength"  : ' + (g.parameters.thetaLength || (2 * Math.PI)),
                     '}'
 
                 ];
@@ -594,11 +616,12 @@ THREE.SceneExporter.prototype = {
             // here would be also an option to use data URI
             // with embedded image from "t.image.src"
             // (that's a side effect of using FileReader to load images)
-
+            console.log(t);
+            var url = t.sourceFile || t.image.src;
             var output = [
 
                 '\t' + LabelString( getTextureName( t ) ) + ': {',
-                '	"url"    : "' + t.sourceFile + '",',
+                '	"url"    : "' + url + '",',
                 '	"repeat" : ' + Vector2String( t.repeat ) + ',',
                 '	"offset" : ' + Vector2String( t.offset ) + ',',
                 '	"magFilter" : ' + NumConstantString( t.magFilter ) + ',',
@@ -608,6 +631,7 @@ THREE.SceneExporter.prototype = {
 
             ];
 
+            console.log('output:', output);
             return generateMultiLineString( output, '\n\t\t' );
 
         }

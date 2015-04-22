@@ -1,4 +1,4 @@
-app.service('PrimitiveObjectService',['RequestService', function(RequestService) {
+app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', function(RequestService, ENV_CONFIG) {
 
 /*    var supportedObjects = [
         'sphere',
@@ -74,7 +74,7 @@ app.service('PrimitiveObjectService',['RequestService', function(RequestService)
         THREE.ImageUtils.crossOrigin = '';
         item.material = new THREE.MeshPhongMaterial( {
             side: THREE.DoubleSide,
-            map: THREE.ImageUtils.loadTexture('http://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Confluent_de_la_Belvitte_dans_la_Mortagne_02.jpg/1920px-Confluent_de_la_Belvitte_dans_la_Mortagne_02.jpg')
+            map: THREE.ImageUtils.loadTexture(ENV_CONFIG.assets + assetUrl)
         } );
     }
 
