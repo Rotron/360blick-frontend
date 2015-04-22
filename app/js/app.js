@@ -5,7 +5,6 @@ var app = angular.module('360blickFrontendApp', [
     'ngSanitize',
     'ngAnimate',
     'ui.router',
-    'angularFileUpload',
     'btford.modal',
     'templates',
     'sun.scrollable',
