@@ -49,12 +49,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-    /*$httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.withCredentials = true;
-    delete $httpProvider.defaults.headers.common["X-Requested-With"];
-    $httpProvider.defaults.headers.common["Accept"] = "application/json";
-    $httpProvider.defaults.headers.common["Content-Type"] = "application/json";*/
-
     $stateProvider
         .state('app', {
             url: "/",
@@ -308,6 +302,7 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
                 event.preventDefault();
                 if (AuthService.isAuthenticated()) {
                     // user is not allowed
+                    console.log(AuthService.isAuthenticated());
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {next: next, params: nextParams});
                 } else {
                     // user is not logged in

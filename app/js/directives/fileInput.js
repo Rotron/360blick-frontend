@@ -29,10 +29,10 @@ app.directive('fileInput', ['$timeout', 'RequestService', function ($timeout, Re
                 angular.forEach(files, function(file) {
                     var data = $scope.uploadData;
 
-                    //TODO: mock: remove when assets/update is implemented in backend
+                    //FIXME: replace title when assets/update is implemented in backend
                     data.asset = {
                         title: 'asset_' + Math.floor((Math.random() * 1000) + 1)
-                    }
+                    };
                     var fileReader = new FileReader();
 
                     fileReader.readAsBinaryString(file);

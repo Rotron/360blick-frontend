@@ -42,7 +42,10 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
         return this.userRole;
     };
     this.setLocalCredentials = function () {
+
         var userData = JSON.stringify(this.getUser());
+        console.log(userData);
+
         var encrypted = $crypto.encrypt(userData, '360crd');
         localStorage.setItem('blick-ls', encrypted);
     };
