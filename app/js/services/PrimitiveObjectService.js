@@ -1,4 +1,4 @@
-app.service('PrimitiveObjectService',[ function() {
+app.service('PrimitiveObjectService',['RequestService', function(RequestService) {
 
 /*    var supportedObjects = [
         'sphere',
@@ -43,7 +43,7 @@ app.service('PrimitiveObjectService',[ function() {
 //        if(supportedObjects.indexOf(type) == -1){
 //            throw 'selected object not supported';
 //        }
-        var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x0088DA, specular: 0x000099, shininess: 30, shading: THREE.FlatShading } );
+        var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x0088DA, specular: 0x000099, shininess: 30, shading: THREE.FlatShading, side: THREE.DoubleSide } );
         var geometry;
 
         switch(type) {
@@ -69,5 +69,13 @@ app.service('PrimitiveObjectService',[ function() {
     this.getSupportedObjectTypes = function(){
         return supportedObjects;
     };
+
+    this.mapTexture = function(item, assetUrl){
+        THREE.ImageUtils.crossOrigin = '';
+        item.material = new THREE.MeshPhongMaterial( {
+            side: THREE.DoubleSide,
+            map: THREE.ImageUtils.loadTexture('http://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Confluent_de_la_Belvitte_dans_la_Mortagne_02.jpg/1920px-Confluent_de_la_Belvitte_dans_la_Mortagne_02.jpg')
+        } );
+    }
 
 }]);

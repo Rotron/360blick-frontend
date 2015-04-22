@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestService', 'Asset', function ($scope, $stateParams, RequestService, Asset) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', 'Asset', function ($scope, $stateParams, ENV_CONFIG, RequestService, Asset) {
     $scope.username = $stateParams.username;
     var projectId = $stateParams['projectId'];
 
@@ -13,7 +13,7 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestSer
 
     $scope.getAssetBackgroundImage = function getAssetBackgroundImage(asset) {
         return {
-            'background-image': 'url(' + asset.file.url + ')'
+            'background-image': 'url(' + ENV_CONFIG.assets + asset.file.url + ')'
         };
     };
 
@@ -27,14 +27,9 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'RequestSer
     };
 
     function getProjectAssets() {
-
-        RequestService.post('projects/assets/get_from_project', {project: {id: projectId}}, function(res) {
-                $scope.assets = res.data;
-                console.log($scope.assets);
-            }, function(error) {
-                console.log(error);
-            }
-        );
+        $scope.assets = Asset.get(projectId, function(assets){
+            $scope.assets = assets;
+        });
     }
 
     getProjectAssets();

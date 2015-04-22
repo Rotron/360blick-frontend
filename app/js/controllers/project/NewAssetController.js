@@ -35,8 +35,7 @@ app.controller('NewAssetController', ['$scope', '$rootScope', '$stateParams', 'R
     };
 
     $scope.createNewAsset = function() {
-        console.log(Asset.create);
-        //Asset.create($scope.currentProjectId, $scope.newAsset);
+
     };
 
 }]);

@@ -220,6 +220,21 @@ THREE.SceneExporter.prototype = {
 
                 ];
 
+            } else if ( o instanceof THREE.AreaLight ) {
+
+                var output = [
+
+                    '\t\t' + LabelString( getObjectName( o ) ) + ' : {',
+                    '	"type"      : "AreaLight",',
+                    '	"color"     : ' + o.color.getHex() + ',',
+                    '	"position" : ' + Vector3String( o.position ) + ',',
+                    '	"rotation" : ' + Vector3String( o.rotation ) + ',',
+                    '	"width" : ' + o.width + ',',
+                    '	"height" : ' + o.height + ',',
+                    '	"intensity" : ' + o.intensity + ( o.children.length ? ',' : '' )
+
+                ];
+
             } else if ( o instanceof THREE.DirectionalLight ) {
 
                 var output = [
@@ -242,7 +257,6 @@ THREE.SceneExporter.prototype = {
                     '	"color"          : ' + o.color.getHex() + ',',
                     '	"intensity"      : ' + o.intensity + ',',
                     '	"position"       : ' + Vector3String( o.position ) + ',',
-                    '	"decay"          : ' + o.decay + ',',
                     '	"distance"       : ' + o.distance + ( o.children.length ? ',' : '' )
 
                 ];
@@ -458,6 +472,7 @@ THREE.SceneExporter.prototype = {
                     '		"reflectivity"  : ' + m.reflectivity + ',',
                     '		"transparent" : ' + m.transparent + ',',
                     '		"opacity" : ' 	+ m.opacity + ',',
+                    '		"side" : ' 	+ m.side + ',',
                     '		"wireframe" : ' + m.wireframe + ',',
                     '		"wireframeLinewidth" : ' + m.wireframeLinewidth,
                     '	}',
@@ -484,6 +499,7 @@ THREE.SceneExporter.prototype = {
                     '		"reflectivity"  : ' + m.reflectivity + ',',
                     '		"transparent" : ' + m.transparent + ',',
                     '		"opacity" : ' 	+ m.opacity + ',',
+                    '		"side" : ' 	+ m.side + ',',
                     '		"wireframe" : ' + m.wireframe + ',',
                     '		"wireframeLinewidth" : ' + m.wireframeLinewidth,
                     '	}',
@@ -514,6 +530,7 @@ THREE.SceneExporter.prototype = {
                     '		"reflectivity"  : ' + m.reflectivity + ',',
                     '		"transparent" : ' + m.transparent + ',',
                     '		"opacity" : ' 	+ m.opacity + ',',
+                    '		"side" : ' 	+ m.side + ',',
                     '		"wireframe" : ' + m.wireframe + ',',
                     '		"wireframeLinewidth" : ' + m.wireframeLinewidth,
                     '	}',
@@ -530,6 +547,7 @@ THREE.SceneExporter.prototype = {
                     '	"parameters"  : {',
                     '		"transparent" : ' + m.transparent + ',',
                     '		"opacity" : ' 	+ m.opacity + ',',
+                    '		"side" : ' 	+ m.side + ',',
                     '		"wireframe" : ' + m.wireframe + ',',
                     '		"wireframeLinewidth" : ' + m.wireframeLinewidth,
                     '	}',
@@ -546,6 +564,7 @@ THREE.SceneExporter.prototype = {
                     '	"parameters"  : {',
                     '		"transparent" : ' + m.transparent + ',',
                     '		"opacity" : ' 	+ m.opacity + ',',
+                    '		"side" : ' 	+ m.side + ',',
                     '		"wireframe" : ' + m.wireframe + ',',
                     '		"wireframeLinewidth" : ' + m.wireframeLinewidth,
                     '	}',

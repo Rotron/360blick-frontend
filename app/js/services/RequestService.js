@@ -1,4 +1,4 @@
-app.service('RequestService', ['$http', '$upload', 'SessionService', function ($http, $upload, SessionService) {
+app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService', function ($http, $upload, ENV_CONFIG, SessionService) {
 
     /**
      * getCredentialsObject
@@ -13,31 +13,25 @@ app.service('RequestService', ['$http', '$upload', 'SessionService', function ($
         };
     }
     /**
-     * getFullActionUrl
-     * e.g. getFullActionUrl()
+     * RequestService.getFullActionUrl
+     * e.g. RequestService.getFullActionUrl('users/login')
      *
      * @param {String} action e.g. 'users/login'
      *
      * @return {String}
      */
-    function getFullActionUrl(action) {
-        // TODO: Cleanup ENV
-        var url = 'http://localhost:3000/api/v1';
-        // @if NODE_ENV = 'PRODUCTION'
-        url = 'https://blick.herokuapp.com/api/v1';
-        // @endif
-
-        return url + '/' + action + '.json';
-    }
+    this.getFullActionUrl = function(action) {
+        return ENV_CONFIG.api + '/' + action + '.json';
+    };
     /**
-     * getFullActionUrl
-     * e.g. getFullActionUrl()
+     * RequestService.getFullActionUrl
+     * e.g. RequestService.getFullActionUrl()
      *
      * Helper Function for module ng-file-upload
      *
      * TODO: Refactor to Recursive
      */
-    function formDataAppender(fd, key, val) {
+    this.formDataAppender = function(fd, key, val) {
         if (angular.isObject(val)) {
             angular.forEach(val, function(val_in, key_in) {
                 if(angular.isObject(val_in)) {
@@ -64,7 +58,7 @@ app.service('RequestService', ['$http', '$upload', 'SessionService', function ($
     this.post = function(action, data, callback, errorCallback) {
 
         return $http
-            .post(getFullActionUrl(action), { user: getCredentialsObject(), data: data })
+            .post(this.getFullActionUrl(action), { user: getCredentialsObject(), data: data })
             .success(function(res){
                 callback(res);
             })
@@ -94,7 +88,7 @@ app.service('RequestService', ['$http', '$upload', 'SessionService', function ($
     this.get = function(action, data, callback, errorCallback) {
 
         return $http
-            .get(getFullActionUrl(action), { params: data })
+            .get(this.getFullActionUrl(action), { params: data })
             .success(function(res){
                 callback(res);
             })
@@ -123,10 +117,10 @@ app.service('RequestService', ['$http', '$upload', 'SessionService', function ($
         data = data || {};
 
         return $upload.upload({
-            url: getFullActionUrl(action),
+            url: this.getFullActionUrl(action),
             method: 'post',
             fileFormDataName: 'data[asset][file]',
-            formDataAppender: formDataAppender,
+            formDataAppender: this.formDataAppender,
             fields: { user: getCredentialsObject(), data: data},
             file: file
         }).progress(function(event) {

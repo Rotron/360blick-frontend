@@ -150,6 +150,9 @@ THREE.SceneLoader.prototype = {
                 return source_url;
 
             } else {
+                if(source_url.substr(0, 4) == 'http'){
+                    return source_url;
+                }
 
                 return urlBase + source_url;
 
@@ -297,7 +300,6 @@ THREE.SceneLoader.prototype = {
                                 }
 
                             } else {
-
                                 object = new THREE.Mesh( geometry, material );
 
                             }
@@ -331,7 +333,6 @@ THREE.SceneLoader.prototype = {
                                 object.scale.fromArray( scl );
 
                             }
-
                             object.visible = objJSON.visible;
                             object.castShadow = objJSON.castShadow;
                             object.receiveShadow = objJSON.receiveShadow;
@@ -353,9 +354,6 @@ THREE.SceneLoader.prototype = {
                         var distance = objJSON.distance;
                         var position = objJSON.position;
                         var rotation = objJSON.rotation || [1, 0, 1];
-                        console.log(objJSON);
-
-
                         switch ( objJSON.type ) {
 
                             case 'AmbientLight':
@@ -381,16 +379,16 @@ THREE.SceneLoader.prototype = {
                                 break;
 
                             case 'HemisphereLight':
-                                light = new THREE.DirectionalLight( color, intensity, distance );
-                                light.target.position.set( position[ 0 ], position[ 1 ] - distance, position[ 2 ] );
-                                light.target.position.applyEuler( new THREE.Euler( rotation[ 0 ], rotation[ 1 ], rotation[ 2 ], 'XYZ' ) );
+                                light = new THREE.HemisphereLight( objJSON.skyColor, objJSON.groundColor, objJSON.intensity );
+                                light.position.set( objJSON.position[0], objJSON.position[1], objJSON.position[2] );
                                 break;
 
                             case 'AreaLight':
                                 light = new THREE.AreaLight(color, intensity);
-                                light.position.fromArray( position );
-                                light.width = objJSON.size;
-                                light.height = objJSON.size_y;
+                                light.position.set(  objJSON.position[0], objJSON.position[1], objJSON.position[2]  );
+                                light.rotation.set(  objJSON.rotation[0], objJSON.rotation[1], objJSON.rotation[2]  );
+                                light.width = objJSON.width;
+                                light.height = objJSON.height;
                                 break;
 
                         }
@@ -512,9 +510,7 @@ THREE.SceneLoader.prototype = {
                 if ( object !== undefined && objJSON.children !== undefined ) {
 
                     handle_children( object, objJSON.children );
-
                 }
-
             }
 
         };
@@ -719,9 +715,7 @@ THREE.SceneLoader.prototype = {
         // because of closure in the calling context loop
 
         var generateTextureCallback = function ( count ) {
-
             return function () {
-
                 callbackTexture( count );
 
             };
@@ -937,14 +931,12 @@ THREE.SceneLoader.prototype = {
                 var loader = THREE.Loader.Handlers.get( url_array[ 0 ] );
 
                 if ( loader !== null ) {
-
                     texture = loader.load( url_array, generateTextureCallback( count ) );
 
                     if ( textureJSON.mapping !== undefined )
                         texture.mapping = textureJSON.mapping;
 
                 } else {
-
                     texture = THREE.ImageUtils.loadTextureCube( url_array, textureJSON.mapping, generateTextureCallback( count ) );
 
                 }
@@ -961,9 +953,9 @@ THREE.SceneLoader.prototype = {
                     texture = loader.load( fullUrl, textureCallback );
 
                 } else {
-
                     texture = new THREE.Texture();
                     loader = new THREE.ImageLoader();
+                    loader.crossOrigin = '';//for loading images from foreign servers
 
                     ( function ( texture ) {
 
@@ -1046,22 +1038,6 @@ THREE.SceneLoader.prototype = {
 
                     matJSON.parameters[ parID ] = ( matJSON.parameters[ parID ] === "flat" ) ? THREE.FlatShading : THREE.SmoothShading;
 
-                } else if ( parID === "side" ) {
-
-                    if ( matJSON.parameters[ parID ] == "double" ) {
-
-                        matJSON.parameters[ parID ] = THREE.DoubleSide;
-
-                    } else if ( matJSON.parameters[ parID ] == "back" ) {
-
-                        matJSON.parameters[ parID ] = THREE.BackSide;
-
-                    } else {
-
-                        matJSON.parameters[ parID ] = THREE.FrontSide;
-
-                    }
-
                 } else if ( parID === "blending" ) {
 
                     matJSON.parameters[ parID ] = matJSON.parameters[ parID ] in THREE ? THREE[ matJSON.parameters[ parID ] ] : THREE.NormalBlending;
@@ -1098,7 +1074,7 @@ THREE.SceneLoader.prototype = {
 
             }
 
-            if ( matJSON.parameters.opacity !== undefined && matJSON.parameters.opacity < 1.0 ) {
+            if ( matJSON.parameters.opacity !== undefined && matJSON.parameters.opacity < 1.0 && matJSON.parameters.transparent == 'undefined') {
 
                 matJSON.parameters.transparent = true;
 

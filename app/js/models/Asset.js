@@ -15,7 +15,7 @@ app.service('Asset', ['RequestService', '$stateParams', '$rootScope', function (
     }
 
     function onSuccess(res){
-        all.projects = res.data;
+        all.assets = res.data;
         update();
     }
 
@@ -31,6 +31,7 @@ app.service('Asset', ['RequestService', '$stateParams', '$rootScope', function (
     };
 
     this.create = function(projectId, newAsset){
+        console.log(newAsset);
         console.log('asset create');
         if(newAsset.title){
             RequestService.post('projects/assets/create', {project: {id: projectId}, asset: newAsset}, function(res) {
