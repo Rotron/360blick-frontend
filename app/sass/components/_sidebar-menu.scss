@@ -5,10 +5,12 @@
   bottom: 0;
   width: 20%;
   background: $primary-2;
-  overflow: scroll;
-  padding-bottom: $base * 20;
   @include blick-transition(all, .3s);
   transform: translateX(-30%);
+
+  .menu-list {
+    padding-bottom: $base * 20;
+  }
 }
 
 .sidebar-menu__title {

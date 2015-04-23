@@ -15,7 +15,7 @@ describe('Service: RequestService', function() {
 
     describe('getFullActionUrl', function() {
 
-        it('should return valid url', function(){
+        it('return valid url', function(){
             var url = RequestService.getFullActionUrl('user');
             expect(url).toEqual(ENV_CONFIG.api + '/user.json');
         });
