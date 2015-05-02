@@ -1,4 +1,4 @@
-app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams) {
+app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService', function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService) {
 
 
     var _this = this;
@@ -38,10 +38,10 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     //TODO: move to shortcutservice
     document.onkeydown = function(event) {
         if (event.keyCode == 37) {
-            _this.camera.rotation.y += Math.PI/200;
+            CameraService.rotate(Math.PI/200);
         }
         if (event.keyCode == 39) {
-            _this.camera.rotation.y -= Math.PI/200;
+            CameraService.rotate(-(Math.PI/200));
         }
     }
 
@@ -53,7 +53,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     this.init = function(container){
         this.container = container;
         this.scene = {};
-        this.camera = new THREE.PerspectiveCamera( 75, this.container[0].clientWidth / this.container[0].clientHeight, 0.1, 1000 );
+        this.camera = CameraService.init(this.container);
         this.renderer = new THREE.WebGLRenderer({
             precision: 'highp',
             antialias: true
@@ -62,10 +62,6 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         this.renderer.setClearColor( 0x1C2229, 1);
         this.renderer.setSize( this.container[0].clientWidth, this.container[0].clientHeight );
         this.container[0].appendChild( this.renderer.domElement );
-
-        this.camera.position.z = 10;
-        this.camera.position.y = 5;
-        this.camera.lookAt(new THREE.Vector3(0,5,0));
 
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
 
@@ -78,8 +74,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     };
 
     this.zoomIn = function(zoomFactor){
-        this.camera.fov *= zoomFactor;
-        this.camera.updateProjectionMatrix();
+        CameraService.zoom(zoomFactor);
     };
 
     this.getObjects = function(){

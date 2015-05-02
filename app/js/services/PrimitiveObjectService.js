@@ -1,4 +1,4 @@
-app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', function(RequestService, ENV_CONFIG) {
+app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraService', function(RequestService, ENV_CONFIG, CameraService) {
 
 /*    var supportedObjects = [
         'sphere',
@@ -62,7 +62,11 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', function(R
         }
         var object = new THREE.Mesh( geometry, material );
         setMaterialProperties(object);
-
+        var cameralookAt = CameraService.getLookAtPoint(20);
+        object.position.x = cameralookAt.x;
+        object.position.y = cameralookAt.y;
+        object.position.z = cameralookAt.z;
+        object.rotation.y = CameraService.getCamera().rotation.y;
         return object;
     };
 
