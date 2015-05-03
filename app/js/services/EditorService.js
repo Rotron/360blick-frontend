@@ -24,6 +24,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
             var sceneLoader = new THREE.SceneLoader();
             sceneLoader.parse(JSON.parse(res.data.file), function (e) {
                 _this.scene = e.scene;
+                console.log(_this.scene);
                 if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
                     $rootScope.$apply();
                 }
@@ -56,11 +57,13 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         this.camera = CameraService.init(this.container);
         this.renderer = new THREE.WebGLRenderer({
             precision: 'highp',
-            antialias: true
+            antialias: true,
+            alpha: true
 
         });
         this.renderer.setClearColor( 0x1C2229, 1);
         this.renderer.setSize( this.container[0].clientWidth, this.container[0].clientHeight );
+        this.renderer.shadowMapEnabled = true;
         this.container[0].appendChild( this.renderer.domElement );
 
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
