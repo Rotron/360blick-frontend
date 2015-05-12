@@ -48,7 +48,7 @@
             <div class="editor-settings">Editor Settings</div>
             <div class="editor-objects">
                 <ul class="toggle-list">
-                    <editor-object ng-repeat="item in getSceneObjects()" ng-if="item.type != 'Line' && item.type != 'PointLight' && item.type != 'HemisphereLight'"></editor-object>
+                    <editor-object ng-repeat="item in getSceneObjects()" ng-if="!hiddenTypes[item.type]"></editor-object>
                 </ul>
             </div>
         </div>

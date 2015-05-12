@@ -9,7 +9,8 @@ app.directive('minMaxValue',[ function() {
             item: "=",
             step: "@stepSize",
             min: "@minimum",
-            max: "@maximum"
+            max: "@maximum",
+            measure: "@measure"
         },
         link: function(scope) {
 
