@@ -53,6 +53,7 @@
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-ng-scenario": "^0.1.0",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-phantomjs-shim": "^1.0.0",
     "opn": "^1.0.0",
     "psi": "^1.0.4",
     "require-dir": "^0.1.0",

@@ -44,13 +44,12 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function
      * @param errorCallback {Function}
      */
     this.post = function(action, data, callback, errorCallback) {
-
         return $http
             .post(getFullActionUrl(action), getPostFields(data))
-            .success(function(res){
+            .success(function(res) {
                 callback(res);
             })
-            .error(function(res){
+            .error(function(res) {
                errorCallback(res);
 
                 /* $rootScope.$broadcast({
@@ -74,7 +73,6 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function
      * @param errorCallback {Function}
      */
     this.get = function(action, data, callback, errorCallback) {
-
         return $http
             .get(getFullActionUrl(action), { params: data })
             .success(function(res){
@@ -144,7 +142,6 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function
      *
      */
     this.upload = function(scope, element, data) {
-
         var config = getUploadConfig(data);
         var dropzone = new Dropzone(element[0], config.options);
 
