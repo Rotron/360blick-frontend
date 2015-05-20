@@ -1,5 +1,5 @@
-app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService',
-    function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService) {
+app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService', 'HistoryService',
+    function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService, HistoryService) {
 
 
     var _this = this;
@@ -88,6 +88,23 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
     this.addNewPrimitive = function(type){
         var object = PrimitiveObjectService.getObject(type);
         this.scene.add(object);
+        HistoryService.queue({
+            message: 'object [' + type + '] added',
+            cb: (function() {
+                this.scene.remove(object);
+                console.log(this.scene);
+            }).bind(this)
+        });
+    }
+
+    this.remove = function(object){
+        this.scene.remove(object);
+        HistoryService.queue({
+            message: 'object removed',
+            cb: (function() {
+                this.scene.add(object);
+            }).bind(this)
+        });
     }
 
 }]);

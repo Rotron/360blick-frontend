@@ -11,10 +11,10 @@ app.directive('historyInput',['HistoryService', '$timeout', function(HistoryServ
                 $timeout.cancel( scope.timer );
                 if(scope.oldValue != scope.ngModel) {
                     HistoryService.queue({
-                        message: 'test',
-                        old: scope.oldValue,
+                        message: 'value changed',
+                        data: scope.oldValue,
                         cb: function() {
-                            scope.ngModel = this.old;
+                            scope.ngModel = this.data;
                         }
                     });
                     scope.oldValue = scope.ngModel;

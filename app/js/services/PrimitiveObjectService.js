@@ -137,7 +137,7 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         }
         var object = new THREE.Mesh( geometry, material );
         this.setMaterialProperties(object);
-        this.setObjectShadow(object);
+        //this.setObjectShadow(object);
         var cameralookAt = CameraService.getLookAtPoint(20);
         object.position.x = cameralookAt.x;
         object.position.y = cameralookAt.y;
