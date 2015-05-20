@@ -13,10 +13,6 @@ describe('Service: AssetStoreService', function() {
 
     describe('inheritance', function() {
 
-        xit('getIdentityObject implemented', function(){
-            expect(AssetStoreService.getIdentityObject(0, 0)).toEqual(jasmine.any(Object));
-        });
-
         it('parent methods', function() {
             expect(AssetStoreService.getData).toBeDefined();
         });
