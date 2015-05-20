@@ -24,4 +24,5 @@ app.service('AssetStoreService', ['DataStoreFactory', function (DataStoreFactory
     };
 
     return new DataStoreFactory(api);
+
 }]);
