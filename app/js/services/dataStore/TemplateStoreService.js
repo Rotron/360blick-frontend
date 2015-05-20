@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('SceneTemplateStoreService', ['DataStoreFactory', function (DataStoreFactory) {
+app.service('TemplateStoreService', ['DataStoreFactory', function (DataStoreFactory) {
 
     var api = {
         get: {
