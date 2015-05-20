@@ -1,6 +1,7 @@
 'use strict';
 
-  app.controller('EditorController', ['$scope', '$rootScope', 'AuthService', 'EditorService', 'PrimitiveObjectService', '$stateParams', '$state', 'RequestService', function ($scope, $rootScope, AuthService, EditorService, PrimitiveObjectService, $stateParams, $state, RequestService) {
+  app.controller('EditorController', ['$scope', '$rootScope', 'AuthService', 'EditorService', 'PrimitiveObjectService', '$stateParams', '$state', 'RequestService', 'HistoryService',
+      function ($scope, $rootScope, AuthService, EditorService, PrimitiveObjectService, $stateParams, $state, RequestService, HistoryService) {
 
       $scope.projectId = $stateParams['projectId'];
       $scope.username = $stateParams['username'];
@@ -15,10 +16,14 @@
 
       $scope.zoomIn = function(){
           EditorService.zoomIn(0.9);
-      }
+      };
       $scope.zoomOut = function(){
           EditorService.zoomIn(1.1);
-      }
+      };
+
+      $scope.goBack = function(){
+          HistoryService.goBack();
+      };
 
       $scope.save = function(){
           console.log(EditorService.scene);
@@ -43,11 +48,11 @@
                   console.log(error);
               }
           );
-      }
+      };
 
       $scope.addNewObject = function(type){
           EditorService.addNewPrimitive(type);
-      }
+      };
 
       $scope.getSceneObjects = function(){
           return EditorService.getObjects();

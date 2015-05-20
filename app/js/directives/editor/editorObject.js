@@ -1,7 +1,7 @@
 app.directive('editorObject', ['$rootScope', function ($rootScope) {
     return {
         restrict: 'E',
-        templateUrl: 'partials/editorObject.html',
+        templateUrl: 'partials/editor/editorObject.html',
         replace: true,
         link: function(scope, elem, attrs) {
             $rootScope.$on('objectSelected', function(event, object) {

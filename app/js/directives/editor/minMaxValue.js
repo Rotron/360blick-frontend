@@ -3,7 +3,7 @@ app.directive('minMaxValue',[ function() {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'partials/minMaxValue.html',
+        templateUrl: 'partials/editor/minMaxValue.html',
         scope: {
             title: "@",
             item: "=",
