@@ -1,4 +1,4 @@
-app.directive('editorObject', ['$rootScope', function ($rootScope) {
+app.directive('editorObject', ['$rootScope', 'EditorService', function ($rootScope, EditorService) {
     return {
         restrict: 'E',
         templateUrl: 'partials/editor/editorObject.html',
@@ -25,7 +25,11 @@ app.directive('editorObject', ['$rootScope', function ($rootScope) {
                     scope.item.detailsOpen = !scope.item.detailsOpen;
                 }
                 $rootScope.$emit('objectSelected', scope.item);
-            }
+            };
+
+            scope.remove = function(object) {
+                EditorService.remove(object);
+            };
 
         }
     };

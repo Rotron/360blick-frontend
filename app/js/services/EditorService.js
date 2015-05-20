@@ -92,7 +92,6 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
             message: 'object [' + type + '] added',
             cb: (function() {
                 this.scene.remove(object);
-                console.log(this.scene);
             }).bind(this)
         });
     }
