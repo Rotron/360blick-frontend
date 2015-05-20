@@ -5,20 +5,20 @@ app.service('AssetStoreService', ['DataStoreFactory', function (DataStoreFactory
     var api = {
         get: {
             url: 'projects/assets/get_from_project',
-            data: function(projectId) {
-                return {project: {id: projectId}};
+            data: function(identityObject) {
+                return {project: {id: identityObject.projectId}};
             }
         },
         create: {
             url: 'projects/assets/create',
-            data: function(projectId, newAsset) {
-                return {project: {id: projectId}, asset: newAsset};
+            data: function(identityObject) {
+                return {project: {id: identityObject.projectId}, asset: identityObject.newAsset};
             }
         },
         delete: {
             url: 'projects/assets/delete',
-            data: function(assetId) {
-                return {asset: {id: assetId}};
+            data: function(identityObject) {
+                return {asset: {id: identityObject.assetId}};
             }
         }
     };
