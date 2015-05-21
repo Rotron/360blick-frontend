@@ -48,8 +48,6 @@ app.controller('NewSceneController', ['$scope', 'RequestService', '$stateParams'
             }
         };
 
-        console.log(data);
-
         if($scope.newScene.title){
             RequestService.post('scenes/create', data, function(res) {
                     console.log(res);

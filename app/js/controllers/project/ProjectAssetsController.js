@@ -11,9 +11,9 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
     };
 
     $scope.deleteAsset = function(asset) {
-        AssetStoreService.delete({assetId: asset.id}, asset);
+        AssetStoreService.deleteData({assetId: asset.id}, asset);
     };
 
-    $scope.assets = AssetStoreService.get({projectId: projectId});
+    $scope.assets = AssetStoreService.getData({projectId: projectId});
 
 }]);

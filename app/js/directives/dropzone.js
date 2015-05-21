@@ -6,7 +6,7 @@ app.directive('dropzone',['AssetStoreService', function(AssetStoreService) {
         },
         link: function(scope, element) {
             element.addClass('dropzone');
-            AssetStoreService.create(scope, element);
+            AssetStoreService.createData(scope, element);
         }
     }
 }]);

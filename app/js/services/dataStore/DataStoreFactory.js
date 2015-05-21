@@ -32,7 +32,7 @@ app.factory('DataStoreFactory', ['RequestService', '$stateParams', '$rootScope',
         this.data.items.splice(index, 1);
     };
 
-    DataStore.prototype.get = function(identityObject, callback) {
+    DataStore.prototype.getData = function(identityObject, callback) {
         if(this.data.items.length < 1 || !this.isOwnProfile()) {
             RequestService.post(this.api.get.url, this.api.get.data(identityObject), (function(res) {
                     this.data.items = res.data;
@@ -47,7 +47,7 @@ app.factory('DataStoreFactory', ['RequestService', '$stateParams', '$rootScope',
         return this.data;
     };
 
-    DataStore.prototype.create = function(identityObject, callback) {
+    DataStore.prototype.createData = function(identityObject, callback) {
         RequestService.post(this.api.create.url, this.api.create.data(identityObject), (function(res) {
                 this.data.items.push(res.data);
                 callback && callback(res.data);
@@ -58,7 +58,7 @@ app.factory('DataStoreFactory', ['RequestService', '$stateParams', '$rootScope',
         );
     };
 
-    DataStore.prototype.delete = function(identityObject, item, callback) {
+    DataStore.prototype.deleteData = function(identityObject, item, callback) {
         RequestService.post(this.api.delete.url, this.api.delete.data(identityObject), (function(res) {
                 this.removeItemFromData(item);
                 callback && callback(res.data);

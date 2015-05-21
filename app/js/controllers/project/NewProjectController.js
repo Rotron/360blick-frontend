@@ -8,6 +8,6 @@ app.controller('NewProjectController', ['$scope', '$rootScope', '$stateParams', 
     };
 
     $scope.createNewProject = function(){
-        Project.create($scope.newProject);
+        Project.createData($scope.newProject);
     }
 }]);

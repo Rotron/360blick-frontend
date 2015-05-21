@@ -24,7 +24,7 @@ app.controller('NewAssetController', ['$scope', '$stateParams', function ($scope
         }
     }
 
-    ProjectStoreService.get({currentUser: currentUser}, function(projects){
+    ProjectStoreService.getData({currentUser: currentUser}, function(projects){
         $scope.projects = projects;
         setCurrentProjectName();
     });

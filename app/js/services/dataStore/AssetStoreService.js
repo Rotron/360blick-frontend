@@ -26,13 +26,11 @@ app.service('AssetStoreService', ['DataStoreFactory', 'RequestService', '$rootSc
     var AssetStore = new DataStoreFactory(api);
 
     $rootScope.$on('newAsset', (function(event, data) {
-        console.log(data, AssetStore.data.items);
         AssetStore.data.items.push(data);
-        console.log(AssetStore.data.items);
 
     }).bind(this));
 
-    AssetStore.create = function(scope, element) {
+    AssetStore.createData = function(scope, element) {
         RequestService.upload(scope, element);
     };
 
