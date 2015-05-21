@@ -1,4 +1,4 @@
-app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraService', function(RequestService, ENV_CONFIG, CameraService) {
+app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraService', 'SUPPORTED_OBJECTS', function(RequestService, ENV_CONFIG, CameraService, SUPPORTED_OBJECTS) {
 
     var planeFragmentShader = [
 
@@ -40,30 +40,6 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         color: 0x0000FF
     });
     planeMaterial.transparent = true;
-
-    var supportedObjects = [
-        {
-            title: '3D Primitives',
-            items: [
-                'sphere',
-                'cube',
-                'plane',
-                'cylinder'
-            ]
-        }, {
-            title: '2D Primitives',
-            items: [
-                'empty',
-                'empty'
-            ]
-        }, {
-            title: 'Models',
-            items: [
-                'empty',
-                'empty'
-            ]
-        }
-    ];
 
     var container = angular.element(document.getElementById('editor-view-container'))[0];
 
@@ -147,7 +123,7 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
     };
 
     this.getSupportedObjectTypes = function(){
-        return supportedObjects;
+        return SUPPORTED_OBJECTS;
     };
 
     this.mapTexture = function(item, assetUrl){

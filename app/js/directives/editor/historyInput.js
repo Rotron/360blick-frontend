@@ -9,12 +9,15 @@ app.directive('historyInput',['HistoryService', '$timeout', function(HistoryServ
 
             scope.writeToHistory = function() {
 
+                //get editorObject of which the property was changed
                 scope.$emit('getEditorObject', function(editorObject) {
                     scope.editorObject = editorObject
                 });
 
+                //cancel timeout to prevent duplicated writing to history
                 $timeout.cancel( scope.timer );
-                if(scope.oldValue != scope.ngModel) {
+
+                if(scope.oldValue != scope.ngModel || scope.oldValue == 'undefined') {
                     HistoryService.queue({
                         message: scope.editorObject.name + ' changed',
                         uuid: scope.editorObject.uuid,
@@ -34,6 +37,9 @@ app.directive('historyInput',['HistoryService', '$timeout', function(HistoryServ
                 scope.oldValue = scope.ngModel;
             });
 
+            /**
+             * write to history after 2s when a value was changed
+             */
             element.bind('change', function() {
                 $timeout.cancel( scope.timer );
                 scope.timer = $timeout(scope.writeToHistory, 2000);
