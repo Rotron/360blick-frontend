@@ -8,12 +8,18 @@ app.directive('historyInput',['HistoryService', '$timeout', function(HistoryServ
         link: function(scope, element, attrs) {
 
             scope.writeToHistory = function() {
+
+                scope.$emit('getEditorObject', function(editorObject) {
+                    scope.editorObject = editorObject
+                });
+
                 $timeout.cancel( scope.timer );
                 if(scope.oldValue != scope.ngModel) {
                     HistoryService.queue({
-                        message: 'value changed',
+                        message: scope.editorObject.name + ' changed',
+                        uuid: scope.editorObject.uuid,
                         data: scope.oldValue,
-                        cb: function() {
+                        callback: function() {
                             scope.ngModel = this.data;
                         }
                     });

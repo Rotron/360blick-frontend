@@ -25,7 +25,6 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
             var sceneLoader = new THREE.SceneLoader();
             sceneLoader.parse(JSON.parse(res.data.file), function (e) {
                 _this.scene = e.scene;
-                console.log(_this.scene);
                 if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
                     $rootScope.$apply();
                 }
@@ -90,7 +89,8 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
         this.scene.add(object);
         HistoryService.queue({
             message: 'object [' + type + '] added',
-            cb: (function() {
+            uuid: object.uuid,
+            callback: (function() {
                 this.scene.remove(object);
             }).bind(this)
         });
@@ -100,7 +100,8 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
         this.scene.remove(object);
         HistoryService.queue({
             message: 'object removed',
-            cb: (function() {
+            uuid: object.uuid,
+            callback: (function() {
                 this.scene.add(object);
             }).bind(this)
         });

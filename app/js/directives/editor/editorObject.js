@@ -4,6 +4,11 @@ app.directive('editorObject', ['$rootScope', 'EditorService', function ($rootSco
         templateUrl: 'partials/editor/editorObject.html',
         replace: true,
         link: function(scope, elem, attrs) {
+
+            scope.$on('getEditorObject', function(mass, callback) {
+                callback(scope.item);
+            });
+
             $rootScope.$on('objectSelected', function(event, object) {
                 if(scope.item.id == object.id){
                     scope.isActive = true;
