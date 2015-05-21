@@ -17,7 +17,6 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     getAllScenes();
 
-
     $rootScope.$on('newSceneCreated', function(event, data){
         $scope.scenes.push(data);
     });

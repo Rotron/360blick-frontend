@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('AssetStoreService', ['DataStoreFactory', function (DataStoreFactory) {
+app.service('AssetStoreService', ['DataStoreFactory', 'RequestService', '$rootScope', function (DataStoreFactory, RequestService, $rootScope) {
 
     var api = {
         get: {
@@ -23,6 +23,19 @@ app.service('AssetStoreService', ['DataStoreFactory', function (DataStoreFactory
         }
     };
 
-    return new DataStoreFactory(api);
+    var AssetStore = new DataStoreFactory(api);
+
+    $rootScope.$on('newAsset', (function(event, data) {
+        console.log(data, AssetStore.data.items);
+        AssetStore.data.items.push(data);
+        console.log(AssetStore.data.items);
+
+    }).bind(this));
+
+    AssetStore.create = function(scope, element) {
+        RequestService.upload(scope, element);
+    };
+
+    return AssetStore;
 
 }]);

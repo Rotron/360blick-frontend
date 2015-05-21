@@ -1,4 +1,4 @@
-app.directive('dropzone',['RequestService', function(RequestService) {
+app.directive('dropzone',['AssetStoreService', function(AssetStoreService) {
     return {
         restrict: 'E',
         scope: {
@@ -6,7 +6,7 @@ app.directive('dropzone',['RequestService', function(RequestService) {
         },
         link: function(scope, element) {
             element.addClass('dropzone');
-            RequestService.upload(scope, element, scope.uploadData);
+            AssetStoreService.create(scope, element);
         }
     }
 }]);

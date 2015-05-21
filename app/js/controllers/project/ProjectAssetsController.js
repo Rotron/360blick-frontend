@@ -1,15 +1,8 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', 'Asset', function ($scope, $stateParams, ENV_CONFIG, RequestService, Asset) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', 'AssetStoreService', function ($scope, $stateParams, ENV_CONFIG, RequestService, AssetStoreService) {
     $scope.username = $stateParams.username;
     var projectId = $stateParams['projectId'];
-
-    $scope.assets = [];
-
-    function removeAssetFromArray(asset) {
-        var index = $scope.assets.indexOf(asset);
-        $scope.assets.splice(index, 1);
-    }
 
     $scope.getAssetBackgroundImage = function getAssetBackgroundImage(asset) {
         return {
@@ -17,25 +10,10 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
         };
     };
 
-    $scope.deleteProjectAsset = function deleteAsset(asset) {
-        RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
-                removeAssetFromArray(asset);
-            }, function(error) {
-                console.log(error);
-            }
-        );
+    $scope.deleteAsset = function(asset) {
+        AssetStoreService.delete({assetId: asset.id}, asset);
     };
 
-    function getProjectAssets() {
-        $scope.assets = Asset.get(projectId, function(assets){
-            $scope.assets = assets;
-        });
-    }
-
-    getProjectAssets();
-
-/*    $rootScope.$on('newAssetCreated', function(event, data){
-        $scope.scenes.push(data);
-    });*/
+    $scope.assets = AssetStoreService.get({projectId: projectId});
 
 }]);

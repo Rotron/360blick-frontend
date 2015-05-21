@@ -1,4 +1,4 @@
-app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function ($http, ENV_CONFIG, SessionService) {
+app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootScope', function ($http, ENV_CONFIG, SessionService, $rootScope) {
     /**
      * getCredentialsObject
      * e.g. getCredentialsObject()
@@ -130,8 +130,8 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function
                         formDataAppender(formData, val, key);
                     });
                 },
-                'success': function (file, response) {
-
+                'success': function (file, res) {
+                    $rootScope.$broadcast('newAsset', res.data);
                 }
             }
         };
@@ -141,9 +141,11 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function
      * e.g. RequestService.upload(scope, element, data)
      *
      */
-    this.upload = function(scope, element, data) {
-        var config = getUploadConfig(data);
+    this.upload = function(scope, element) {
+        var config = getUploadConfig(scope.uploadData);
         var dropzone = new Dropzone(element[0], config.options);
+
+        console.log('upppp');
 
         angular.forEach(config.eventHandlers, function (handler, event) {
             dropzone.on(event, handler);
