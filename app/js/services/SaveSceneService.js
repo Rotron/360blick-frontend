@@ -9,7 +9,7 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
 
     this.setGeneralValues = function(reducedObject, object) {
         angular.extend(reducedObject, {
-            id:         object.id || undefined,
+            id:         object.custom && object.custom.id || undefined,
             objecttype: this.getObjectType(object),
             name:       object.name,
             positionX:  object.position.x,

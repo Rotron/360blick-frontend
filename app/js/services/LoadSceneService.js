@@ -1,14 +1,25 @@
-app.service('LoadSceneService', ['RequestService', function (RequestService) {
+app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', function (RequestService, PrimitiveObjectService) {
 
     var _this = this;
 
     this.resolve = function(res, callback) {
-        var scene = new THREE.Scene();
-        res.data.forEach(function(sceneObject) {
-            if(sceneObject.name != null) {
-                console.log(sceneObject.name);
-            }
-        });
+
+        var scene;
+        if(res.data.length){
+            scene = new THREE.Scene();
+            var objectToAdd = {};
+            res.data.forEach(function(sceneObject) {
+                var id = sceneObject.id;
+                if(sceneObject.name != null) {
+                    objectToAdd = PrimitiveObjectService.getObject(sceneObject.objecttype, sceneObject);
+                    objectToAdd.custom = {
+                        id: id
+                    };
+                    scene.add(objectToAdd);
+                }
+            });
+        }
+
         callback(scene);
     };
 

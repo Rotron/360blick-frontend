@@ -10,8 +10,11 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
      */
     this.getNewScene = function(){
         var scene = new THREE.Scene();
-        var light = new THREE.PointLight( 0xffffff, 1, 0 );
-        light.position.set( 0, 5, 10 );
+        var light = PrimitiveObjectService.getObject('PointLight', {
+            positionX: 0,
+            positionY: 5,
+            positionZ: 10
+        });
         scene.add( light );
         return scene;
     };

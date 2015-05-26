@@ -43,11 +43,6 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
 
     var container = angular.element(document.getElementById('editor-view-container'))[0];
 
-    this.setMaterialProperties = function(object){
-        object.material.side = THREE.DoubleSide;
-        object.material.transparent = true;
-    };
-
     this.setObjectShadow = function(object){
 
         //set object properties
@@ -85,37 +80,107 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         console.log(object);
     };
 
-    this.getObject = function(type) {
-
-//        if(supportedObjects.indexOf(type) == -1){
-//            throw 'selected object not supported';
-//        }
-        var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x0088DA, specular: 0x000099, shininess: 30, shading: THREE.FlatShading, side: THREE.DoubleSide } );
-        var geometry;
-
+    this.getGeometry = function(type, properties) {
         switch(type) {
-            case 'sphere':
-                geometry = new THREE.SphereGeometry( 1, 100, 100 );
+            case 'SphereGeometry':
+                return new THREE.SphereGeometry(
+                    properties.radius       || 1,
+                    properties.widthSeg     || 100,
+                    properties.heightSeg    || 100
+                );
                 break;
-            case 'cube':
-                geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            case 'BoxGeometry':
+                return new THREE.BoxGeometry(
+                    properties.width        || 1,
+                    properties.height       || 1,
+                    properties.depth        || 1,
+                    properties.widthSeg     || 1,
+                    properties.heightSeg    || 1,
+                    properties.depthSeg     || 1
+                );
                 break;
-            case 'plane':
-                geometry = new THREE.PlaneGeometry( 1, 4, 6 );
+            case 'PlaneGeometry':
+                return new THREE.PlaneGeometry(
+                    properties.width        || 1,
+                    properties.height       || 4,
+                    properties.widthSeg     || 6,
+                    properties.heightSeg    || 6
+                );
                 break;
-            case 'cylinder':
-                geometry = new THREE.CylinderGeometry( 1, 1, 5, 200 );
+            case 'CylinderGeometry':
+                return new THREE.CylinderGeometry(
+                    properties.radiusTop    || 1,
+                    properties.radiusBottom || 1,
+                    properties.height       || 5,
+                    properties.radiusSeg    || 200,
+                    properties.heightSeg    || 200
+                );
                 break;
         }
-        var object = new THREE.Mesh( geometry, material );
-        this.setMaterialProperties(object);
-        //this.setObjectShadow(object);
+    };
+
+    this.getMaterial = function(properties) {
+        console.log(properties);
+        var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x0088DA, specular: 0x000099, shininess: 30, shading: THREE.FlatShading, side: THREE.DoubleSide } );
+        material.side = THREE.DoubleSide;
+        material.transparent = true;
+        return material;
+    };
+
+    this.setDefault = function(object) {
         var cameralookAt = CameraService.getLookAtPoint(20);
         object.position.x = cameralookAt.x;
         object.position.y = cameralookAt.y;
         object.position.z = cameralookAt.z;
         object.rotation.y = CameraService.getCamera().rotation.y;
+    };
+
+    this.setPosition = function(object, properties) {
+        if(typeof properties.positionX == 'number')
+            object.position.set(properties.positionX, properties.positionY, properties.positionZ);
+    };
+
+    this.setRotation = function(object, properties) {
+        if(typeof properties.rotationX == 'number')
+            object.rotation.set(properties.rotationX, properties.rotationY, properties.rotationZ);
+    };
+
+    this.setScale = function(object, properties) {
+        if(typeof properties.scaleX == 'number')
+            object.scale.set(properties.scaleX, properties.scaleY, properties.scaleZ);
+    };
+
+    this.getObject = function(type, properties) {
+
+        properties = typeof properties !== 'undefined' ? properties : {};
+
+        if(type == 'PointLight' || type == 'DirectionalLight'){
+            return this.getLight(type, properties);
+        }
+
+        var object = new THREE.Mesh( this.getGeometry(type, properties), this.getMaterial(properties) );
+        this.setDefault(object);
+        this.setPosition(object, properties);
+        this.setRotation(object, properties);
+        this.setScale(object, properties);
         return object;
+    };
+
+    this.getColor = function(hexString) {
+        return 0xffffff; //TODO: get real color value from imported object
+    };
+
+    this.getLight = function(type, properties) {
+        console.log(properties.hex);
+        switch(type) {
+            case 'PointLight':
+                return new THREE.PointLight(
+                    this.getColor(properties.hex),
+                    properties.intensity || 1,
+                    properties.distance  || 0
+                );
+                break;
+        }
     };
 
     this.getSupportedObjectTypes = function(){

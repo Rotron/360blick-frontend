@@ -24,22 +24,46 @@ angular.module('constants', [])
         {
             title: '3D Primitives',
             items: [
-                'sphere',
-                'cube',
-                'plane',
-                'cylinder'
+                {
+                    name: 'Sphere',
+                    objecttype: 'SphereGeometry'
+                },
+                {
+                    name: 'Cube',
+                    objecttype: 'BoxGeometry'
+                },
+                {
+                    name: 'Plane',
+                    objecttype: 'PlaneGeometry'
+                },
+                {
+                    name: 'Cylinder',
+                    objecttype: 'CylinderGeometry'
+                }
             ]
         }, {
             title: '2D Primitives',
             items: [
-                'empty',
-                'empty'
+                {
+                    name: 'empty1',
+                    objecttype: 'empty1'
+                },
+                {
+                    name: 'empty1',
+                    objecttype: 'empty1'
+                }
             ]
         }, {
             title: 'Models',
             items: [
-                'empty',
-                'empty'
+                {
+                    name: 'empty1',
+                    objecttype: 'empty1'
+                },
+                {
+                    name: 'empty1',
+                    objecttype: 'empty1'
+                }
             ]
         }
     ]);
