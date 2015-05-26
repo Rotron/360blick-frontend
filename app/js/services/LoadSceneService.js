@@ -6,7 +6,7 @@ app.service('LoadSceneService', ['RequestService', function (RequestService) {
 
             callback(res);
         }, function(error) {
-            console.log(error);
+            console.error(error);
         });
     }
 

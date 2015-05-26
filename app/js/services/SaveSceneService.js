@@ -24,11 +24,32 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
         });
     };
 
+    this.setMaterial = function(reducedObject, object) {
+        angular.extend(reducedObject, {
+            material: {
+                name:       object.material.name,
+                color:      object.material.color.getHexString(),
+                mapImage:   object.material.map && object.material.map.image.currentSrc,
+                mapOffsetX: object.material.map && object.material.map.offset.x,
+                mapOffsetY: object.material.map && object.material.map.offset.y,
+                mapRepeatX: object.material.map && object.material.map.repeat.x,
+                mapRepeatY: object.material.map && object.material.map.repeat.y,
+                ambient:    object.material.ambient.getHexString(),
+                specular:   object.material.specular.getHexString(),
+                shininess:  object.material.shininess,
+                shading:    object.material.shading,
+                side:       object.material.side
+            }
+        });
+    };
+
     this.getReducedObject = function(object) {
         var reducedObject = {};
         this.setGeneralValues(reducedObject, object);
 
-        if(reducedObject.type == 'BoxGeometry') {
+        if(object.type == 'Mesh') this.setMaterial(reducedObject, object);
+
+        if(reducedObject.objecttype == 'BoxGeometry') {
             angular.extend(reducedObject, {
                 width:  object.geometry.parameters.width,
                 height: object.geometry.parameters.height,
@@ -38,7 +59,7 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
                 depthSeg:  object.geometry.depthSegments
             });
         }
-        if(reducedObject.type == 'PlaneGeometry') {
+        if(reducedObject.objecttype == 'PlaneGeometry') {
             angular.extend(reducedObject, {
                 width:  object.geometry.parameters.width,
                 height: object.geometry.parameters.height,
@@ -46,14 +67,14 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
                 heightSeg: object.geometry.heightSegments
             });
         }
-        if(reducedObject.type == 'SphereGeometry') {
+        if(reducedObject.objecttype == 'SphereGeometry') {
             angular.extend(reducedObject, {
                 radius:  object.geometry.parameters.radius,
                 widthSeg:  object.geometry.widthSegments,
                 heightSeg: object.geometry.heightSegments
             });
         }
-        if(reducedObject.type == 'CylinderGeometry') {
+        if(reducedObject.objecttype == 'CylinderGeometry') {
             angular.extend(reducedObject, {
                 radiusTop:  object.geometry.parameters.radiusTop,
                 radiusBottom:  object.geometry.parameters.radiusBottom,
@@ -62,7 +83,7 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
                 radiusSeg: object.geometry.radiusSegments
             });
         }
-        if(reducedObject.type == 'PointLight') {
+        if(reducedObject.objecttype == 'PointLight') {
             angular.extend(reducedObject, {
                 hex:  object.color.getHexString(),
                 intensity: object.intensity,
@@ -70,7 +91,6 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
             });
         }
 
-        console.log(reducedObject);
         return reducedObject;
     };
 
@@ -79,9 +99,7 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
         EditorService.getObjects().forEach(function(object) {
            changedObjects.push(_this.getReducedObject(object));
         });
-        console.log(changedObjects);
         RequestService.post('sceneobjects/update', {scene_id: sceneId, is_templatescene: false, sceneobjects: JSON.stringify(changedObjects)}, function(res) {
-                console.log(res);
                 $rootScope.$broadcast('sceneSaved');
             }, function(error) {
                 console.log(error);
