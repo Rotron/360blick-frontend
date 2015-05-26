@@ -1,5 +1,5 @@
-app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService', 'HistoryService',
-    function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService, HistoryService) {
+app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService', 'HistoryService', 'LoadSceneService',
+    function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService, HistoryService, LoadSceneService) {
 
 
     var _this = this;
@@ -34,6 +34,10 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
             _this.scene = _this.getNewScene();
             _this.render();
         }
+    }
+
+    function resolveScene2(res) {
+        console.log(res);
     }
 
     //TODO: move to shortcutservice
@@ -73,6 +77,7 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
         } else {
             RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
         }
+        LoadSceneService.getScene($stateParams['sceneId'], resolveScene2);
 
     };
 

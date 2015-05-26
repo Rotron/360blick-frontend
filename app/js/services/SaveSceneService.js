@@ -8,8 +8,8 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
     };
 
     this.setGeneralValues = function(reducedObject, object) {
-        console.log(object);
         angular.extend(reducedObject, {
+            id:         object.id || undefined,
             objecttype: this.getObjectType(object),
             name:       object.name,
             positionX:  object.position.x,
@@ -65,21 +65,22 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
         if(reducedObject.type == 'PointLight') {
             angular.extend(reducedObject, {
                 hex:  object.color.getHexString(),
-                intesity: object.intensity, //FIXME: spelling intesity (intensity) in backend
+                intensity: object.intensity,
                 distance: object.distance
             });
         }
 
-
+        console.log(reducedObject);
         return reducedObject;
     };
 
-    this.save = function(){
+    this.save = function(sceneId){
         var changedObjects = [];
         EditorService.getObjects().forEach(function(object) {
            changedObjects.push(_this.getReducedObject(object));
         });
-        RequestService.post('sceneobjects/update', {sceneobjects: JSON.stringify(changedObjects)}, function(res) {
+        console.log(changedObjects);
+        RequestService.post('sceneobjects/update', {scene_id: sceneId, is_templatescene: false, sceneobjects: JSON.stringify(changedObjects)}, function(res) {
                 console.log(res);
                 $rootScope.$broadcast('sceneSaved');
             }, function(error) {

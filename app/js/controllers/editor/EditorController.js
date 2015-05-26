@@ -26,7 +26,7 @@
       };
 
       $scope.save = function(){
-            SaveSceneService.save();
+            SaveSceneService.save($stateParams['sceneId']);
       };
 
       $scope.addNewObject = function(type){
