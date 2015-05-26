@@ -1,10 +1,20 @@
 app.service('LoadSceneService', ['RequestService', function (RequestService) {
 
-    this.getScene = function(sceneId, callback) {
-        RequestService.post('sceneobjects/get', {scene_id: sceneId, is_templatescene: false}, function(res) {
+    var _this = this;
 
+    this.resolve = function(res, callback) {
+        var scene = new THREE.Scene();
+        res.data.forEach(function(sceneObject) {
+            if(sceneObject.name != null) {
+                console.log(sceneObject.name);
+            }
+        });
+        callback(scene);
+    };
 
-            callback(res);
+    this.getScene = function(sceneId, isTemplateScene, callback) {
+        RequestService.post('sceneobjects/get', {scene_id: sceneId, is_templatescene: isTemplateScene}, function(res) {
+            _this.resolve(res, callback);
         }, function(error) {
             console.error(error);
         });

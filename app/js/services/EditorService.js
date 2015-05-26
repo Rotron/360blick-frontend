@@ -20,24 +20,16 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
      * parse scene loaded from api
      * @param res
      */
-    function resolveScene(res) {
-        if(res.data.file) {
-            var sceneLoader = new THREE.SceneLoader();
-            sceneLoader.parse(JSON.parse(res.data.file), function (e) {
-                _this.scene = e.scene;
-                if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
-                    $rootScope.$apply();
-                }
-                _this.render();
-            }, '.');
+    function resolveScene(scene) {
+        if(scene) {
+            _this.scene = scene;
+            if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
+                $rootScope.$apply();
+            }
         } else {
             _this.scene = _this.getNewScene();
-            _this.render();
         }
-    }
-
-    function resolveScene2(res) {
-        console.log(res);
+        _this.render();
     }
 
     //TODO: move to shortcutservice
@@ -71,13 +63,8 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
         this.container[0].appendChild( this.renderer.domElement );
 
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
-
-        if($state.current.name == 'template'){
-            RequestService.get('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
-        } else {
-            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
-        }
-        LoadSceneService.getScene($stateParams['sceneId'], resolveScene2);
+        var isTemplateScene = $state.current.name == 'template';
+        LoadSceneService.getScene($stateParams['sceneId'], isTemplateScene, resolveScene);
 
     };
 

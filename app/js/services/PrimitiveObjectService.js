@@ -83,11 +83,7 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
 
         object.add(shadowLight);
         console.log(object);
-    }
-
-    this.updateObjectShadow = function(object){
-
-    }
+    };
 
     this.getObject = function(type) {
 
