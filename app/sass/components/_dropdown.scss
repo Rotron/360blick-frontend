@@ -69,6 +69,7 @@
     }
   }
 }
+
 .dropdown__toggle--select {
   width: 100%;
 }
@@ -78,6 +79,8 @@
   border-top: 1px solid $secondary-2;
   max-height: $base * 100;
   overflow-y: scroll;
+  text-align: left;
+
   .dropdown__list__item {
     height: $base * 10;
     padding: $base * 4;
