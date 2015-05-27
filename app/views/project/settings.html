@@ -8,9 +8,9 @@
 
 <ol class="export-list">
     <li class="export-list__item" ng-repeat="export in exports" ng-click="startDownload(export)">
-        <div>project.title: {{export.project_title}}</div>
+        <div>project: {{export.project_title}}</div>
         <div>Amount Assets: {{export.amount_assets}}</div>
-        <div>Created at: {{export.created_at | date:'yyyy-MM-dd hh:mm'}}</div>
+        <div>Created at: {{export.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</div>
         <div>size: {{export.size | fileSize}}</div>
     </li>
 </ol>

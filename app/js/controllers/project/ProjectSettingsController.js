@@ -12,16 +12,18 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
     $scope.generateExport = function($event) {
         $event.stopPropagation();
 
-        $scope.exportUrl = null;
-
         RequestService.post('projects/export/zip', {project: {id: $scope.projectId}}, function(res) {
-                $scope.exportUrl = res.data;
-                $rootScope.$broadcast('newExport', res.data);
+                $rootScope.$broadcast('newExport', res.data.exportZipModel);
             }, function(error) {
                 console.log(error);
             }
         );
     };
+
+    $rootScope.$on('newExport', function(event, data) {
+        console.log(data);
+        $scope.exports.push(data);
+    });
 
     RequestService.post('projects/export/get_zip_files', {project: {id: $scope.projectId}}, function(res) {
             $scope.exports = res.data.userZipFiles;
