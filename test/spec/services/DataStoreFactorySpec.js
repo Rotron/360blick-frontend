@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Factory: DataStoreFactory', function() {
+xdescribe('Factory: DataStoreFactory', function() {
 
     beforeEach(module('360blickFrontendApp'));
 
