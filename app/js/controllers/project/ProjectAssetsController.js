@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', 'AssetStoreService', function ($scope, $stateParams, ENV_CONFIG, RequestService, AssetStoreService) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', '$rootScope', function ($scope, $stateParams, ENV_CONFIG, RequestService, $rootScope) {
     $scope.username = $stateParams.username;
     var projectId = $stateParams['projectId'];
 
@@ -10,10 +10,57 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
         };
     };
 
-    $scope.deleteAsset = function(asset) {
-        AssetStoreService.deleteData({assetId: asset.id}, asset);
+    $scope.assets = [];
+
+    function getAllAssets() {
+        RequestService.post('projects/assets/get_from_project', {project: {id: $stateParams['projectId']}}, function(res) {
+                $scope.assets = res.data;
+            }, function(error) {
+                console.log(error);
+            }
+        );
+    }
+
+    getAllAssets();
+
+    $scope.deleteAsset = function(asset, $event) {
+        $event.stopPropagation();
+
+        RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
+                $rootScope.$broadcast('removeAsset', res.data);;
+            }, function(error) {
+                console.log(error);
+            }
+        );
     };
 
-    $scope.assets = AssetStoreService.getData({projectId: projectId});
+    $rootScope.$on('removeAsset', function(event, data) {
+        $scope.assets.splice($scope.assets.indexOf(data), 1);
+    });
+
+    $rootScope.$on('newAsset', function(event, data) {
+        $scope.assets.push(data);
+    });
+
+    $scope.onOrderSelect = function(id) {
+        $scope.order.predicate = predicateOptions[id];
+        console.log($scope.order.predicate );
+    };
+
+    var predicateOptions = ['updated_at', 'title'];
+
+    $scope.order = {
+        reverse: true,
+        predicate: predicateOptions[0],
+        items: [
+            {
+                id: 0,
+                title: 'Most Recent'
+            }, {
+                id: 1,
+                title: 'Title'
+            }
+        ]
+    };
 
 }]);

@@ -27,7 +27,6 @@ app.service('AssetStoreService', ['DataStoreFactory', 'RequestService', '$rootSc
 
     $rootScope.$on('newAsset', (function(event, data) {
         AssetStore.data.items.push(data);
-
     }).bind(this));
 
     AssetStore.createData = function(scope, element) {

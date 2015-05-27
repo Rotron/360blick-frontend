@@ -12,7 +12,7 @@ app.service('ProjectStoreService', ['DataStoreFactory', function (DataStoreFacto
         create: {
             url: 'projects/create',
             data: function(identityObject) {
-                return {project: identityObject.newProject};
+                return {project: identityObject};
             }
         },
         delete: {

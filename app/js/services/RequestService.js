@@ -138,14 +138,12 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
     }
     /**
      * RequestService.upload
-     * e.g. RequestService.upload(scope, element, data)
+     * e.g. RequestService.upload(scope, element)
      *
      */
     this.upload = function(scope, element) {
         var config = getUploadConfig(scope.uploadData);
         var dropzone = new Dropzone(element[0], config.options);
-
-        console.log('upppp');
 
         angular.forEach(config.eventHandlers, function (handler, event) {
             dropzone.on(event, handler);

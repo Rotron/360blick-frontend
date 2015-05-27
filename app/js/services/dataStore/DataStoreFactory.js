@@ -1,14 +1,11 @@
 'use strict';
 
-app.factory('DataStoreFactory', ['RequestService', '$stateParams', '$rootScope', function (RequestService, $stateParams, $rootScope) {
+app.factory('DataStoreFactory', ['RequestService', '$stateParams', '$rootScope', '$crypto', function (RequestService, $stateParams, $rootScope, $crypto) {
 
     var DataStore = function(api) {
         this.api = api;
 
-        this.data = {
-            items: []
-        };
-
+        this.data = {};
         this.subscribers = [];
     };
 
@@ -26,25 +23,35 @@ app.factory('DataStoreFactory', ['RequestService', '$stateParams', '$rootScope',
         }).bind(this));
     };
 
-    // TODO: find with response data
+    // FIXME: support multidimensional, find with response data
     DataStore.prototype.removeItemFromData = function(item) {
         var index = this.data.items.indexOf(item);
         this.data.items.splice(index, 1);
     };
 
+    DataStore.prototype.isAlreadyFetched = function(identityObject) {
+        return this.data.hasOwnProperty(JSON.stringify(identityObject));
+    };
+
     DataStore.prototype.getData = function(identityObject, callback) {
-        if(this.data.items.length < 1 || !this.isOwnProfile()) {
-            RequestService.post(this.api.get.url, this.api.get.data(identityObject), (function(res) {
-                    this.data.items = res.data;
-                    callback && callback(res.data);
-                    this.notify();
-                }).bind(this), function(error) {
-                    console.log(error);
-                }
-            );
+
+        if(!this.isAlreadyFetched.call(this, identityObject)) {
+            this.data[JSON.stringify(identityObject)] = {items: []};
+            this.fetchData.call(this, identityObject, callback);
         }
 
-        return this.data;
+        return this.data[JSON.stringify(identityObject)];
+    };
+
+    DataStore.prototype.fetchData = function(identityObject, callback) {
+        RequestService.post(this.api.get.url, this.api.get.data(identityObject), (function(res) {
+                this.data[JSON.stringify(identityObject)].items = res.data;
+                callback && callback(res.data);
+                this.notify();
+            }).bind(this), (function(error) {
+                console.log(error);
+            }).bind(this)
+        );
     };
 
     DataStore.prototype.createData = function(identityObject, callback) {

@@ -24,9 +24,11 @@ describe('Factory: DataStoreFactory', function() {
 
     describe('subscription', function() {
 
-        it('add subscription in getData', function(){
+        it('subscription gets pushed', function(){
             var dataStore = new DataStoreFactory(apiDefaults);
-            dataStore.getData(0, function(){});
+
+            dataStore.subscribe(function(){});
+
             expect(dataStore.subscribers.length).toEqual(1);
         });
 
@@ -34,7 +36,17 @@ describe('Factory: DataStoreFactory', function() {
             var dataStore = new DataStoreFactory(apiDefaults);
             var mockCallback = jasmine.createSpy('callback');
 
-            dataStore.getData(0, mockCallback);
+            dataStore.subscribe(mockCallback);
+
+            dataStore.notify();
+            expect(mockCallback).toHaveBeenCalled();
+        });
+
+        it('notify runs callback', function(){
+            var dataStore = new DataStoreFactory(apiDefaults);
+            var mockCallback = jasmine.createSpy('callback');
+
+            dataStore.subscribe(mockCallback);
 
             dataStore.notify();
             expect(mockCallback).toHaveBeenCalled();
