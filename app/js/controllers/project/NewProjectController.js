@@ -4,7 +4,8 @@ app.controller('NewProjectController', ['$scope', 'RequestService', '$rootScope'
 
     $scope.newProject = {
         title: null,
-        description: null
+        description: null,
+        is_private: true
     };
 
     $scope.createNewProject = function() {

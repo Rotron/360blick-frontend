@@ -9,7 +9,7 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
 
         $scope.exportUrl = null;
 
-        RequestService.post('projects/export/zip', {project_id: $scope.projectId}, function(res) {
+        RequestService.post('projects/export/zip', {project: {id: $scope.projectId}}, function(res) {
                 $scope.exportUrl = res.data;
             }, function(error) {
                 console.log(error);
