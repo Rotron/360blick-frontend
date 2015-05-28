@@ -1,4 +1,4 @@
-app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraService', 'SUPPORTED_OBJECTS', function(RequestService, ENV_CONFIG, CameraService, SUPPORTED_OBJECTS) {
+app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraService', 'SUPPORTED_OBJECTS', '$rootScope', function(RequestService, ENV_CONFIG, CameraService, SUPPORTED_OBJECTS, $rootScope) {
 
     var planeFragmentShader = [
 
@@ -161,7 +161,7 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         var object = new THREE.Mesh( this.getGeometry(type, properties), this.getMaterial(properties) );
 
         if(properties.material && properties.material.mapImage) {
-            this.mapTexture(object, properties.material.mapImage);
+            this.mapTexture(object, properties.material.mapImage, properties);
         }
         this.setDefault(object);
         this.setPosition(object, properties);
@@ -191,12 +191,21 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         return SUPPORTED_OBJECTS;
     };
 
-    this.mapTexture = function(item, assetUrl){
+    this.mapTexture = function(item, assetUrl, parameters){
         THREE.ImageUtils.crossOrigin = '';
         item.material = new THREE.MeshPhongMaterial( {
             side: THREE.DoubleSide,
             map: THREE.ImageUtils.loadTexture(ENV_CONFIG.assets + assetUrl)
         } );
+        if(parameters.material && parameters.material.mapOffsetX){
+            item.material.map.offset.x = parameters.material.mapOffsetX;
+            item.material.map.offset.y = parameters.material.mapOffsetY;
+            item.material.map.repeat.x = parameters.material.mapRepeatX;
+            item.material.map.repeat.y = parameters.material.mapRepeatY;
+        }
+        if ($rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
+            $rootScope.$apply();
+        }
     }
 
 }]);
