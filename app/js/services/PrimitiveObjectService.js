@@ -159,6 +159,10 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         }
 
         var object = new THREE.Mesh( this.getGeometry(type, properties), this.getMaterial(properties) );
+
+        if(properties.material && properties.material.mapImage) {
+            this.mapTexture(object, properties.material.mapImage);
+        }
         this.setDefault(object);
         this.setPosition(object, properties);
         this.setRotation(object, properties);

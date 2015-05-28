@@ -1,4 +1,4 @@
-app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService', function ($rootScope, EditorService, RequestService) {
+app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService', 'ENV_CONFIG', function ($rootScope, EditorService, RequestService, ENV_CONFIG) {
 
     var _this = this;
 
@@ -24,12 +24,19 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
         });
     };
 
+    this.getMapImage = function(object) {
+        if(object.material.map && object.material.map.image) {
+            return object.material.map.image.currentSrc.replace(ENV_CONFIG.assets, '');
+        }
+        return null;
+    };
+
     this.setMaterial = function(reducedObject, object) {
         angular.extend(reducedObject, {
             material: {
                 name:       object.material.name,
                 color:      object.material.color.getHexString(),
-                mapImage:   object.material.map && object.material.map.image.currentSrc,
+                mapImage:   this.getMapImage(object),
                 mapOffsetX: object.material.map && object.material.map.offset.x,
                 mapOffsetY: object.material.map && object.material.map.offset.y,
                 mapRepeatX: object.material.map && object.material.map.repeat.x,
