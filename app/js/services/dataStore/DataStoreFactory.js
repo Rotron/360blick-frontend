@@ -5,7 +5,9 @@ app.factory('DataStoreFactory', ['RequestService', '$stateParams', '$rootScope',
     var DataStore = function(api) {
         this.api = api;
 
-        this.data = {};
+        this.data = {
+            items: []
+        };
         this.subscribers = [];
     };
 
