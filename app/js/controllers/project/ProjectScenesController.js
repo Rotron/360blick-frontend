@@ -21,7 +21,7 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
         $event.stopPropagation();
 
         RequestService.post('scenes/delete', {scene: {id: scene.id}}, function(res) {
-                $rootScope.$broadcast('removeScene', res.data);
+                $rootScope.$broadcast('removeScene', scene);
             }, function(error) {
                 console.log(error);
             }

@@ -27,7 +27,7 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
         $event.stopPropagation();
 
         RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
-                $rootScope.$broadcast('removeAsset', res.data);;
+                $rootScope.$broadcast('removeAsset', asset);;
             }, function(error) {
                 console.log(error);
             }
@@ -44,7 +44,6 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
 
     $scope.onOrderSelect = function(id) {
         $scope.order.predicate = predicateOptions[id];
-        console.log($scope.order.predicate );
     };
 
     var predicateOptions = ['updated_at', 'title'];

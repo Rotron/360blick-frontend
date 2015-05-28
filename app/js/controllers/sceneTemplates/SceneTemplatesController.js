@@ -20,7 +20,7 @@ app.controller('SceneTemplatesController', ['$scope', '$rootScope', '$stateParam
         $event.stopPropagation();
 
         RequestService.post('templatescenes/delete', {scene: {id: scene.id}}, function (res) {
-                $rootScope.$broadcast('removeTemplate', res.data);
+                $rootScope.$broadcast('removeTemplate', scene);
             }, function (error) {
                 console.log(error);
             }

@@ -20,7 +20,7 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
         $event.stopPropagation();
 
         RequestService.post('projects/delete', {project: {id: project.id}}, function (res) {
-                $rootScope.$broadcast('removeProject', res.data);
+                $rootScope.$broadcast('removeProject', project);
             }, function (error) {
                 console.log(error);
             }
@@ -37,7 +37,6 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
 
     $scope.onOrderSelect = function(id) {
         $scope.order.predicate = predicateOptions[id];
-        console.log($scope.order.predicate );
     };
 
     var predicateOptions = ['updated_at', 'title'];
