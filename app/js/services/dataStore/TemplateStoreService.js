@@ -12,7 +12,7 @@ app.service('TemplateStoreService', ['DataStoreFactory', function (DataStoreFact
         create: {
             url: 'templatescenes/create',
             data: function(identityObject) {
-                return {scene: identityObject.newSceneTemplate};
+                return {scene: {title: identityObject.newSceneTemplate}};
             }
         },
         delete: {
