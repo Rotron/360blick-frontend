@@ -40,7 +40,7 @@ app.directive('sidebarMenu', ['RequestService', '$rootScope', '$stateParams', fu
             getAllTemplates();
 
             $rootScope.$on('removeTemplate', function(event, data) {
-                $scope.projects.splice($scope.sceneTemplates.indexOf(data), 1);
+                $scope.sceneTemplates.splice($scope.sceneTemplates.indexOf(data), 1);
             });
 
             $rootScope.$on('newTemplate', function(event, data) {

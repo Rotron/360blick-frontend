@@ -70,6 +70,12 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
         var id = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
         LoadSceneService.getScene(id, isTemplateScene, resolveScene);
 
+        if(isTemplateScene){
+            RequestService.post('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
+        } else {
+            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
+        }
+
     };
 
     this.zoomIn = function(zoomFactor){
