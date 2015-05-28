@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('NewSceneTemplateController', ['$scope', 'RequestService', '$rootScope', function ($scope, RequestService, $rootScope) {
+app.controller('NewSceneTemplateController', ['$scope', 'TemplateStoreService', function ($scope, TemplateStoreService) {
 
 
     $scope.newScene = {
@@ -8,18 +8,7 @@ app.controller('NewSceneTemplateController', ['$scope', 'RequestService', '$root
         description: null
     };
 
-    $scope.createNewSceneTemplate = function(){
-        var scene = {
-            title: $scope.newSceneTemplate.title
-        };
-
-        if($scope.newSceneTemplate.title){
-            RequestService.post('templatescenes/create', {scene: scene}, function(res) {
-                    $rootScope.$emit('newSceneTemplateCreated', res.data);
-                }, function(error) {
-                    console.log(error);
-                }
-            );
-        }
-    }
+    $scope.createNewSceneTemplate = function() {
+        TemplateStoreService.createData({newSceneTemplate: $scope.newSceneTemplate.title});
+    };
 }]);

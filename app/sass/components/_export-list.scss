@@ -1,0 +1,18 @@
+.export-list {
+}
+
+.export-list__item {
+  border-bottom: 1px solid $secondary-2;
+
+  &:first-child {
+    border: 1px solid $secondary-2;
+  }
+
+  &:hover {
+    background: $secondary-1;
+  }
+}
+
+.export-list__link {
+  display: block;
+}

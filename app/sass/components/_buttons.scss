@@ -11,7 +11,7 @@
 .btn {
   cursor: pointer;
   border-radius: 3px;
-  @include blick-transition;
+  @include blick-transition(opacity);
 }
 
 .btn--submit {
@@ -38,10 +38,9 @@
   }
 }
 
-.btn--danger {
+.btn--danger, .btn--success {
   background: $cta-0;
-  // FIXME: Use padding: 0 $base * 4
-  padding: 0 $base * 2;
+  padding: 0 $base * 4;
   height: $base * 10;
   color: $secondary-light;
   font-size: $font-size-large;
@@ -49,6 +48,10 @@
   &:hover {
     opacity: .8;
   }
+}
+
+.btn--success {
+  background: $cta-1;
 }
 
 .btn--dotted {
@@ -94,21 +97,27 @@
   border-radius: 0;
   width: 100%;
   height: $base * 10;
+  line-height: $base * 10;
   background: $secondary-3;
-  padding: $base * 4;
-  padding-right: $base * 5;
+  padding: 0 $base * 3;
   text-align: left;
+
   .fa {
     position: absolute;
-    left: $base * 2;
-    font-size: 22px;
+    right: $base * 2;
+    top: 50%;
+    margin-top: -8px;
 
     &:last-child {
-      left: auto;
       right: $base * 2;
       font-size: 14px;
-      height: 100%;
-      line-height: 13px;
     }
   }
+}
+
+.btn--select--light {
+  background: $secondary-light;
+  border: 2px solid $secondary-3;
+  color: $secondary-2;
+  border-radius: 2px;
 }

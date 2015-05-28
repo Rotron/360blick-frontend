@@ -9,8 +9,9 @@ app.directive('dropdown',[function() {
         },
         link: function(scope, element, attrs) {
             scope.active = false;
+
             scope.select = {
-                value: undefined
+                value: null
             };
 
             scope.toggleDropdown = function() {

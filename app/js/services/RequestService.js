@@ -1,4 +1,4 @@
-app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function ($http, ENV_CONFIG, SessionService) {
+app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootScope', function ($http, ENV_CONFIG, SessionService, $rootScope) {
     /**
      * getCredentialsObject
      * e.g. getCredentialsObject()
@@ -44,13 +44,12 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function
      * @param errorCallback {Function}
      */
     this.post = function(action, data, callback, errorCallback) {
-
         return $http
             .post(getFullActionUrl(action), getPostFields(data))
-            .success(function(res){
+            .success(function(res) {
                 callback(res);
             })
-            .error(function(res){
+            .error(function(res) {
                errorCallback(res);
 
                 /* $rootScope.$broadcast({
@@ -74,7 +73,6 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function
      * @param errorCallback {Function}
      */
     this.get = function(action, data, callback, errorCallback) {
-
         return $http
             .get(getFullActionUrl(action), { params: data })
             .success(function(res){
@@ -132,20 +130,19 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', function
                         formDataAppender(formData, val, key);
                     });
                 },
-                'success': function (file, response) {
-
+                'success': function (file, res) {
+                    $rootScope.$broadcast('newAsset', res.data);
                 }
             }
         };
     }
     /**
      * RequestService.upload
-     * e.g. RequestService.upload(scope, element, data)
+     * e.g. RequestService.upload(scope, element)
      *
      */
-    this.upload = function(scope, element, data) {
-
-        var config = getUploadConfig(data);
+    this.upload = function(scope, element) {
+        var config = getUploadConfig(scope.uploadData);
         var dropzone = new Dropzone(element[0], config.options);
 
         angular.forEach(config.eventHandlers, function (handler, event) {

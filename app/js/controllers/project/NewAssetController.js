@@ -1,8 +1,6 @@
 'use strict';
 
-app.controller('NewAssetController', ['$scope', '$rootScope', '$stateParams', 'RequestService', 'Project', 'Asset',
-    function ($scope, $rootScope, $stateParams, RequestService, Project, Asset) {
-
+app.controller('NewAssetController', ['$scope', '$stateParams', '$rootScope', function ($scope, $stateParams, $rootScope) {
     $scope.currentProjectId = $stateParams['projectId'];
 
     $scope.newAsset = {
@@ -10,32 +8,6 @@ app.controller('NewAssetController', ['$scope', '$rootScope', '$stateParams', 'R
         file: null,
         description: null,
         uploadData: {project: {id: $scope.currentProjectId}}
-    };
-
-    function setCurrentProjectName(){
-        for (var i in $scope.projects) {
-            if($scope.projects[i].id == $scope.currentProjectId){
-                $scope.currentProjectName = $scope.projects[i].title;
-                return;
-            }
-        }
-    }
-
-    $scope.projects = Project.get(function(projects){
-        $scope.projects = projects;
-        setCurrentProjectName();
-    });
-
-    if($scope.projects.length > 0){
-        setCurrentProjectName();
-    }
-
-    $scope.onProjectSelect = function(id){
-        $scope.currentProjectId = id;
-    };
-
-    $scope.createNewAsset = function() {
-
     };
 
 }]);
