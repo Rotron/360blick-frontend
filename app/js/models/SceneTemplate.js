@@ -22,7 +22,7 @@ app.service('SceneTemplate', ['RequestService',
     this.get = function(callback){
         if(all.templates.length < 1){
             RequestService.get('templatescenes/all', {}, onSuccess.bind(this), function(error) {
-                    console.log(error);
+                    //console.log(error);
                 }
             );
         }

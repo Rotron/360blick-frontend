@@ -1,4 +1,4 @@
-app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService', 'ENV_CONFIG', function ($rootScope, EditorService, RequestService, ENV_CONFIG) {
+app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService', 'ENV_CONFIG', '$state', function ($rootScope, EditorService, RequestService, ENV_CONFIG, $state) {
 
     var _this = this;
 
@@ -106,7 +106,8 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
         EditorService.getObjects().forEach(function(object) {
            changedObjects.push(_this.getReducedObject(object));
         });
-        RequestService.post('sceneobjects/update', {scene_id: sceneId, is_templatescene: false, sceneobjects: JSON.stringify(changedObjects)}, function(res) {
+        var isTemplateScene = $state.current.name == 'template';
+        RequestService.post('sceneobjects/update', {scene_id: sceneId, is_templatescene: isTemplateScene, sceneobjects: JSON.stringify(changedObjects)}, function(res) {
                 $rootScope.$broadcast('sceneSaved');
             }, function(error) {
                 console.log(error);

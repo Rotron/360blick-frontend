@@ -120,7 +120,6 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
     };
 
     this.getMaterial = function(properties) {
-        console.log(properties);
         var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x0088DA, specular: 0x000099, shininess: 30, shading: THREE.FlatShading, side: THREE.DoubleSide } );
         material.side = THREE.DoubleSide;
         material.transparent = true;
@@ -175,7 +174,6 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
     };
 
     this.getLight = function(type, properties) {
-        console.log(properties.hex);
         switch(type) {
             case 'PointLight':
                 return new THREE.PointLight(

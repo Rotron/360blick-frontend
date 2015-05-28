@@ -67,7 +67,8 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
 
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
         var isTemplateScene = $state.current.name == 'template';
-        LoadSceneService.getScene($stateParams['sceneId'], isTemplateScene, resolveScene);
+        var id = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
+        LoadSceneService.getScene(id, isTemplateScene, resolveScene);
 
     };
 

@@ -26,7 +26,8 @@
       };
 
       $scope.save = function(){
-            SaveSceneService.save($stateParams['sceneId']);
+            var id = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
+            SaveSceneService.save(id);
       };
 
       $scope.addNewObject = function(type){
