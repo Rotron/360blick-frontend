@@ -44,6 +44,7 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
      * @param errorCallback {Function}
      */
     this.post = function(action, data, callback, errorCallback) {
+        errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : function(error) { console.log(error); };
         return $http
             .post(getFullActionUrl(action), getPostFields(data))
             .success(function(res) {
@@ -73,6 +74,7 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
      * @param errorCallback {Function}
      */
     this.get = function(action, data, callback, errorCallback) {
+        errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : function(error) { console.log(error); };
         return $http
             .get(getFullActionUrl(action), { params: data })
             .success(function(res){

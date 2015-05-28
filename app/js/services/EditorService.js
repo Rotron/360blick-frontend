@@ -69,7 +69,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
 
         if($state.current.name == 'template'){
-            RequestService.get('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
+            RequestService.post('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
         } else {
             RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
         }
