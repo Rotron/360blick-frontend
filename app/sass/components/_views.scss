@@ -16,6 +16,27 @@ body, html {
   }
 }
 
+#view--login {
+  max-width: 540px;
+  padding: $base * 20 $base * 2;
+  margin: 0 auto;
+
+  h1 {
+    text-align: center;
+    padding: $base * 8 0;
+
+    a {
+      outline: none;
+      font-size: $base * 14;
+      color: $primary-cta;
+    }
+  }
+
+  .btn {
+    width: 40%;
+  }
+}
+
 #view--root {
 }
 

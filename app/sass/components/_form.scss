@@ -1,5 +1,5 @@
 fieldset {
-  margin-bottom: $base;
+  margin-bottom: $base * 2;
 }
 
 .input {
@@ -7,8 +7,14 @@ fieldset {
 
   &.is-focused, &.is-filled {
     .input__label {
-      line-height: $base * 2;
-      opacity: .5;
+      line-height: $base * 3;
+      color: $primary-cta;
+    }
+
+    .input__field[type=text],
+    .input__field[type=email],
+    .input__field[type=password] {
+      border-color: $primary-cta;
     }
   }
 }
@@ -16,21 +22,33 @@ fieldset {
 .input__label {
   @include blick-transition;
   position: absolute;
-  line-height: $base * 8;
-  padding: $base;
+  line-height: $base * 3;
+  padding: $base * 2;
   cursor: text;
+  color: $secondary-0;
+  font-size: 13px;
 }
 
 .input__field {
-  line-height: $base * 8;
-  height: $base * 10;
-  padding: $base;
+  line-height: $base * 9;
+  height: $base * 12;
+  font-size: $base * 3;
+  padding: $base * 2;
+  width: 100%;
 }
 
 .input__field[type=text],
 .input__field[type=email],
 .input__field[type=password] {
-  background: $secondary-3;
+  @include blick-transition;
+  background: $secondary-light;
+  border: 2px solid $secondary-2;
+  padding-top: $base * 4;
+  border-radius: 3px;
+
+  &:hover {
+    border-color: $secondary-0;
+  }
 }
 
 .input--sidebar {
