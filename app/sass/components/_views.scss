@@ -16,7 +16,8 @@ body, html {
   }
 }
 
-#view--login {
+#view--login,
+#view--register {
   max-width: 540px;
   padding: $base * 20 $base * 2;
   margin: 0 auto;
