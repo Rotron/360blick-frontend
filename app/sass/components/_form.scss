@@ -5,7 +5,7 @@ fieldset {
 .input {
   position: relative;
 
-  &.is-focused, &.is-filled {
+  &.is-focused {
     .input__label {
       line-height: $base * 3;
       color: $primary-cta;
