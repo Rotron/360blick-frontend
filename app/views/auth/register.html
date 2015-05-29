@@ -1,21 +1,24 @@
-<div id="view--register">
-    <h1><a href="/">360blick</a></h1>
-    <form name="registerForm" class="container"
-          ng-submit="register(credentials)" novalidate>
-        <fieldset class="row">
-            <placeholder-input value="credentials.nick" label="Username" type="text"></placeholder-input>
-        </fieldset>
-        <fieldset class="row">
-            <placeholder-input value="credentials.email" label="Email" type="email"></placeholder-input>
-        </fieldset>
-        <fieldset class="row">
-            <placeholder-input value="credentials.password" label="Password" type="password"></placeholder-input>
-        </fieldset>
-        <div class="row">
-            <button class="btn btn--round btn--submit">Login</button>
-        </div>
-    </form>
-    <ul class="tiny-list">
-        <li class="tiny-list__item"><a href="#">Already got an Account?</a></li>
-    </ul>
+<div id="view--register" class="view container">
+    <div id="view--register__wrapper" class="view__wrapper">
+        <h1><a href="/">360blick</a></h1>
+        <form name="registerForm" class="container"
+              ng-submit="register(credentials)" novalidate>
+            <fieldset class="row">
+                <placeholder-input value="credentials.nick" label="Username" type="text" has-initial-focus="true"></placeholder-input>
+            </fieldset>
+            <fieldset class="row">
+                <placeholder-input value="credentials.email" label="Email" type="email"></placeholder-input>
+            </fieldset>
+            <fieldset class="row">
+                <placeholder-input value="credentials.password" label="Password" type="password"></placeholder-input>
+            </fieldset>
+            <div class="row">
+                <button class="btn btn--round btn--submit">Login</button>
+            </div>
+        </form>
+        <ul class="tiny-list">
+            <li class="tiny-list__item"><a ui-sref="login">Already got an Account?</a></li>
+        </ul>
+    </div>
 </div>
+
