@@ -34,18 +34,19 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
     this.setMaterial = function(reducedObject, object) {
         angular.extend(reducedObject, {
             material: {
-                name:       object.material.name,
-                color:      object.material.color.getHexString(),
-                mapImage:   this.getMapImage(object),
-                mapOffsetX: object.material.map && object.material.map.offset.x,
-                mapOffsetY: object.material.map && object.material.map.offset.y,
-                mapRepeatX: object.material.map && object.material.map.repeat.x,
-                mapRepeatY: object.material.map && object.material.map.repeat.y,
-                ambient:    object.material.ambient.getHexString(),
-                specular:   object.material.specular.getHexString(),
-                shininess:  object.material.shininess,
-                shading:    object.material.shading,
-                side:       object.material.side
+                name:           object.material.name,
+                color:          object.material.color.getHexString(),
+                mapImage:       this.getMapImage(object),
+                mapOffsetX:     object.material.map && object.material.map.offset.x,
+                mapOffsetY:     object.material.map && object.material.map.offset.y,
+                mapRepeatX:     object.material.map && object.material.map.repeat.x,
+                mapRepeatY:     object.material.map && object.material.map.repeat.y,
+                ambient:        object.material.ambient.getHexString(),
+                specular:       object.material.specular.getHexString(),
+                shininess:      object.material.shininess,
+                shading:        object.material.shading,
+                side:           object.material.side,
+                mapWireframes:  object.material.wireframe
             }
         });
     };

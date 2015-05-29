@@ -117,11 +117,12 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
             side: THREE.DoubleSide,
             map: THREE.ImageUtils.loadTexture(ENV_CONFIG.assets + assetUrl)
         } );
-        if(parameters && parameters.material && parameters.material.mapOffsetX){
+        if(parameters && parameters.material && typeof parameters.material.mapOffsetX !== 'undefined'){
             item.material.map.offset.x = parameters.material.mapOffsetX;
             item.material.map.offset.y = parameters.material.mapOffsetY;
             item.material.map.repeat.x = parameters.material.mapRepeatX;
             item.material.map.repeat.y = parameters.material.mapRepeatY;
+            item.material.wireframe    = parameters.material.mapWireframes;
         }
         if ($rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
             $rootScope.$apply();
