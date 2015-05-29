@@ -86,6 +86,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('newsletter', {
+            url: "/newsletter",
+            views: {
+                "app": {
+                    templateUrl: "newsletter/index.html",
+                    controller: "NewsletterController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
         .state('register', {
             url: "/register",
             views: {
