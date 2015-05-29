@@ -1,19 +1,21 @@
-<div id="view--login">
-    <h1><a href="/">360blick</a></h1>
-    <form name="loginForm" class="container"
-          ng-submit="login(credentials)" novalidate>
-        <fieldset class="row">
-            <placeholder-input value="credentials.login" label="Username" type="text" has-initial-focus="true"></placeholder-input>
-        </fieldset>
-        <fieldset class="row">
-            <placeholder-input value="credentials.password" label="Password" type="password"></placeholder-input>
-        </fieldset>
-        <div class="row">
-            <button class="btn btn--round btn--submit">Login</button>
-        </div>
-    </form>
-    <ul class="tiny-list">
-        <li class="tiny-list__item"><a href="#">Forgot your password or username?</a></li>
-        <li class="tiny-list__item"><a href="#">Create an Account</a></li>
-    </ul>
+<div id="view--login" class="view container">
+    <div id="view--login__wrapper" class="view__wrapper">
+        <h1><a href="/">360blick</a></h1>
+        <form name="loginForm" class="container"
+              ng-submit="login(credentials)" novalidate>
+            <fieldset class="row">
+                <placeholder-input value="credentials.login" label="Username" type="text" has-initial-focus="true"></placeholder-input>
+            </fieldset>
+            <fieldset class="row">
+                <placeholder-input value="credentials.password" label="Password" type="password"></placeholder-input>
+            </fieldset>
+            <div class="row">
+                <button class="btn btn--round btn--submit">Login</button>
+            </div>
+        </form>
+        <ul class="tiny-list">
+            <li class="tiny-list__item"><a href="#">Forgot your password or username?</a></li>
+            <li class="tiny-list__item"><a href="#">Create an Account</a></li>
+        </ul>
+    </div>
 </div>

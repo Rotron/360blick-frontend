@@ -1,7 +1,4 @@
-$dialog-header-height: $base * 10;
-
-
-
+$dialog-header-height: $base * 12;
 
 .dialog {
   position: fixed;
@@ -11,7 +8,7 @@ $dialog-header-height: $base * 10;
   height: 100%;
   background: $primary-0;
   background: rgba($primary-0, .9);
-  padding: $base * 14;
+  padding: $base * 20;
   z-index: 4;
   opacity: 1;
   @include blick-transition(all, .25s);
@@ -53,22 +50,31 @@ $dialog-header-height: $base * 10;
 }
 
 .dialog__content {
-  background: $secondary-light;
   color: $primary-0;
-  width: 600px;
-  height: 400px;
+  width: 670px;
+  height: 420px;
   margin: 0 auto;
+  border-radius: 3px;
 }
 
 .dialog__close {
   background: $cta-0;
   color: $secondary-light;
   position: absolute;
-  right: 0;
-  top: 0;
-  height: $dialog-header-height;
-  width: $dialog-header-height;
+  right: 17px;
+  top:  50%;
+  margin-top: -16px;
+  font-size: 18px;
+  line-height: 32px;
+  height: 32px;
+  width: 32px;
   cursor: pointer;
+  border-radius: 3px;
+  @include blick-transition;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .dialog__header {
@@ -76,7 +82,8 @@ $dialog-header-height: $base * 10;
   color: $secondary-light;
   position: relative;
   height: $dialog-header-height;
-  padding: 0 $base * 3;
+  padding: 0 $base * 4;
+  border-radius: 3px 3px 0 0;
 }
 
 .dialog__title {
@@ -85,8 +92,10 @@ $dialog-header-height: $base * 10;
 }
 
 .dialog__body {
-  padding: $base * 3;
+  background: $secondary-light;
+  padding: $base * 6 $base * 4;
   position: relative;
   width: 100%;
   height: 100%;
+  border-radius: 0 0 3px 3px;
 }
