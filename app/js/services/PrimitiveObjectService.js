@@ -123,6 +123,7 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
             item.material.map.repeat.x = parameters.material.mapRepeatX;
             item.material.map.repeat.y = parameters.material.mapRepeatY;
             item.material.wireframe    = parameters.material.mapWireframes;
+            item.material.opacity      = parameters.material.opacity;
         }
         if ($rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
             $rootScope.$apply();

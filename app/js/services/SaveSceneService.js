@@ -46,7 +46,8 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
                 shininess:      object.material.shininess,
                 shading:        object.material.shading,
                 side:           object.material.side,
-                mapWireframes:  object.material.wireframe
+                mapWireframes:  object.material.wireframe,
+                opacity:        object.material.opacity
             }
         });
     };

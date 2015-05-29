@@ -1,4 +1,26 @@
-app.directive('minMaxValue',[ function() {
+app.directive('customNgModel',['$timeout', function($timeout) {
+    return {
+        restrict: 'A',
+        scope: {
+            model: "="
+        },
+        link: function(scope, element) {
+            $timeout(function() {
+                $(element).on('input', function() {
+                    scope.model = $(this).val();
+                    if (scope.$$phase != '$apply' && scope.$$phase != '$digest') {
+                        scope.$apply();
+                    }
+                })
+            });
+            scope.$watch('model', function(val) {
+                    $(element).val(val);
+            })
+        }
+    };
+}]);
+
+app.directive('minMaxValue',[function() {
 
     return {
         restrict: 'E',

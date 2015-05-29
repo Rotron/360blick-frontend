@@ -22,7 +22,6 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
         var scene;
         if(res.data.length){
             scene = new THREE.Scene();
-            console.log(scene);
             var objectToAdd = {};
             res.data.forEach(function(sceneObject) {
                 var id = sceneObject.id;
@@ -43,7 +42,6 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
 
     this.getScene = function(sceneId, isTemplateScene, callback) {
         RequestService.post('sceneobjects/get', {scene_id: sceneId, is_templatescene: isTemplateScene}, function(res) {
-            console.log(res);
             _this.resolve(res, callback);
         }, function(error) {
             console.error(error);
