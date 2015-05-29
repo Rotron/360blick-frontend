@@ -117,7 +117,7 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
             side: THREE.DoubleSide,
             map: THREE.ImageUtils.loadTexture(ENV_CONFIG.assets + assetUrl)
         } );
-        if(parameters.material && parameters.material.mapOffsetX){
+        if(parameters && parameters.material && parameters.material.mapOffsetX){
             item.material.map.offset.x = parameters.material.mapOffsetX;
             item.material.map.offset.y = parameters.material.mapOffsetY;
             item.material.map.repeat.x = parameters.material.mapRepeatX;
