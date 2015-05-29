@@ -106,6 +106,7 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
         EditorService.getObjects().forEach(function(object) {
            changedObjects.push(_this.getReducedObject(object));
         });
+        console.log(changedObjects);
         var isTemplateScene = $state.current.name == 'template';
         RequestService.post('sceneobjects/update', {scene_id: sceneId, is_templatescene: isTemplateScene, sceneobjects: JSON.stringify(changedObjects)}, function(res) {
                 $rootScope.$broadcast('sceneSaved');

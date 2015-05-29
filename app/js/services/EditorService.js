@@ -5,32 +5,13 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
     var _this = this;
 
     /**
-     * returns new default scene with lightning
-     * @returns {Scene}
-     */
-    this.getNewScene = function(){
-        var scene = new THREE.Scene();
-        var light = PrimitiveObjectService.getObject('PointLight', {
-            positionX: 0,
-            positionY: 5,
-            positionZ: 10
-        });
-        scene.add( light );
-        return scene;
-    };
-
-    /**
      * parse scene loaded from api
      * @param res
      */
     function resolveScene(scene) {
-        if(scene) {
-            _this.scene = scene;
-            if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
-                $rootScope.$apply();
-            }
-        } else {
-            _this.scene = _this.getNewScene();
+        _this.scene = scene;
+        if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
+            $rootScope.$apply();
         }
         _this.render();
     }
@@ -46,8 +27,10 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
     }
 
     this.render = function() {
-        requestAnimationFrame( _this.render );
-        _this.renderer.render( _this.scene, _this.camera );
+        if(Object.prototype.toString.call(_this.scene.traverse) === '[object Function]') {
+            requestAnimationFrame( _this.render );
+            _this.renderer.render( _this.scene, _this.camera );
+        }
     };
 
     this.init = function(container){
@@ -68,13 +51,14 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
         var isTemplateScene = $state.current.name == 'template';
         var id = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
+
         LoadSceneService.getScene(id, isTemplateScene, resolveScene);
 
-        if(isTemplateScene){
-            RequestService.post('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
-        } else {
-            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
-        }
+//        if(isTemplateScene){
+//            RequestService.post('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
+//        } else {
+//            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
+//        }
 
     };
 
