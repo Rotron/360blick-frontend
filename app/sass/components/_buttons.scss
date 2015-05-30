@@ -105,6 +105,14 @@
   }
 }
 
+.btn--dropdown--edit {
+  .fa:first-child {
+    line-height: 47px;
+    position: absolute;
+    top: 0;
+  }
+}
+
 .btn--select {
   position: relative;
   border-radius: 0;
