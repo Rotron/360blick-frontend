@@ -122,6 +122,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('reset', {
+            url: "/reset",
+            views: {
+                "app": {
+                    templateUrl: "auth/reset.html",
+                    controller: "ResetController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
         .state('user.scenetemplates', {
             url: "/scenetemplates",
             views: {
