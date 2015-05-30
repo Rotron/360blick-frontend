@@ -8,18 +8,18 @@
             <div class="col span-6">
                 Interaction
                 <fieldset class="row">
-                    <dropdown template-name="select" on-select="onInteractionSelect" data="{'currentItemId': currentInteractionId, 'items': interactions}"></dropdown>
+                    <dropdown template-name="select" on-select="onInteractionSelect" data="{'currentItemId': currentInteractionId, 'items': interactionsList}"></dropdown>
                 </fieldset>
-                <div ng-if="isNeededProperty('scenes')">
+                <div ng-if="isNeededProperty('scene')">
                     Scenes
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scenes'}"></dropdown>
+                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scene'}"></dropdown>
                     </fieldset>
                 </div>
-                <div ng-if="isNeededProperty('objects')">
+                <div ng-if="isNeededProperty('object')">
                     Objects
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': sceneObjects, type: 'objects'}"></dropdown>
+                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': sceneObjects, type: 'object'}"></dropdown>
                     </fieldset>
                 </div>
                 <div class="row">

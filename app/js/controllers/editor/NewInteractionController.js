@@ -1,16 +1,30 @@
 'use strict';
 
-  app.controller('NewInteractionController', ['$scope', '$stateParams', 'SUPPORTED_INTERACTIONS', 'RequestService', '$filter', function ($scope, $stateParams, SUPPORTED_INTERACTIONS, RequestService, $filter) {
+  app.controller('NewInteractionController', ['$scope', '$stateParams', 'SUPPORTED_INTERACTIONS', 'RequestService', function ($scope, $stateParams, SUPPORTED_INTERACTIONS, RequestService) {
 
       $scope.projectId = $stateParams['projectId'];
       $scope.username = $stateParams['username'];
 
       $scope.interactionProperties = {
-          'scenes': null,
-          'objects': null
+          'scene': null,
+          'object': null,
+          'effectIn': null,
+          'effectOut': null
       };
 
       $scope.interactions = SUPPORTED_INTERACTIONS;
+
+      function getInteractionList() {
+          var interactions = [];
+          for(var key in SUPPORTED_INTERACTIONS) {
+              interactions.push({
+                  id: key,
+                  title: SUPPORTED_INTERACTIONS[key].title
+              })
+          };
+          return interactions;
+      }
+      $scope.interactionsList = getInteractionList();
       $scope.currentInteractionId = null;
 
       function getreducedSceneObjects() {
@@ -45,13 +59,9 @@
       );
 
       $scope.isNeededProperty = function(type) {
-          for(var i = 0; i < $scope.interactions.length; i++) {
-              if($scope.interactions[i].id == $scope.currentInteractionId && $scope.interactions[i].properties.indexOf(type) !== -1) {
-                  return true;
-              }
-          }
-          return false;
-      }
+          var currentInteraction = $scope.interactions[$scope.currentInteractionId];
+          return currentInteraction && currentInteraction.properties && currentInteraction.properties.indexOf(type) !== -1;
+      };
 
       $scope.onInteractionSelect = function(id) {
           $scope.currentInteractionId = id;
@@ -62,8 +72,26 @@
           $scope.interactionProperties[type] = val;
       };
 
+      $scope.getInteractionParameters = function(type) {
+          if(!$scope.interactions[type].properties){
+              return null;
+          }
+          var parameters = {};
+          $scope.interactions[type].properties.forEach(function(prop) {
+              if($scope.interactionProperties[prop] !== null) {
+                parameters[prop] = $scope.interactionProperties[prop];
+              }
+          });
+          return parameters;
+      };
+
       $scope.addInteraction = function() {
-           console.log($scope.currentInteractionId);
+          var interactionObject = {
+              type: $scope.currentInteractionId,
+              parameters: $scope.getInteractionParameters($scope.currentInteractionId)
+          };
+          if(!$scope.data.item.custom) $scope.data.item.custom = {};
+          $scope.data.item.custom.interaction = interactionObject;
       }
 
   }]);

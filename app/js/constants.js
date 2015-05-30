@@ -20,26 +20,22 @@ angular.module('constants', [])
         notAuthorized: 'auth-not-authorized'
     })
 
-    .constant('SUPPORTED_INTERACTIONS', [
-        {
+    .constant('SUPPORTED_INTERACTIONS', {
+        'goToScene': {
             title: 'Go to Scene:',
-            id: 'goToScene',
             properties: [
-                'scenes',
+                'scene',
                 'effectIn',
                 'effectOut'
             ]
         },
-        {
+        'goToObject': {
             title: 'Go to Object:',
-            id: 'goToObject',
             properties: [
-                'objects',
-                'effectIn',
-                'effectOut'
+                'object'
             ]
         }
-    ])
+    })
 
     .constant('SUPPORTED_OBJECTS', [
         {
