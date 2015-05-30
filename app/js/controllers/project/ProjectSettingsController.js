@@ -4,6 +4,17 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
 
+    $scope.uploadOptions = {
+        broadcastDomain: 'newAssetProjectSettings',
+        apiEndPoint: 'projects/update',
+        paramName: 'data[project][preview_image]',
+        uploadData: {project: {id: $scope.projectId}}
+    };
+
+    $rootScope.$on('newAssetProjectSettings', function(event, data) {
+        console.log('new project image:', data);
+    });
+
     // Get project settings
     RequestService.post('projects/get_projects', {user_nick: $scope.username}, function(res) {
             for(var i = 0, len = res.data.length; i < len; i++) {
