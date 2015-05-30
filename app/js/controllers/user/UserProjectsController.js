@@ -16,9 +16,11 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
 
     getAllProjects();
 
-    $scope.deleteProject = function(project, $event) {
-        $event.stopPropagation();
+    $scope.renameProject = function() {
+        console.log('not implemented. just go to settings.');
+    };
 
+    $scope.deleteProject = function(project) {
         RequestService.post('projects/delete', {project: {id: project.id}}, function (res) {
                 $rootScope.$broadcast('removeProject', project);
             }, function (error) {
@@ -51,6 +53,29 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
             }, {
                 id: 1,
                 title: 'Title'
+            }
+        ]
+    };
+
+    var editOptions = {
+        'delete': $scope.deleteProject,
+        'rename': $scope.renameProject
+    };
+
+    $scope.onEditSelect = function(id, item) {
+        editOptions[id](item);
+    };
+
+    $scope.edit = {
+        items: [
+            {
+                id: 'delete',
+                title: 'Delete',
+                icon: 'fa-trash-o'
+            }, {
+                id: 'rename',
+                title: 'Rename',
+                icon: 'fa-pencil'
             }
         ]
     };

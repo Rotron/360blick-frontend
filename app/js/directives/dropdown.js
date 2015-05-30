@@ -5,7 +5,8 @@ app.directive('dropdown',[function() {
         scope: {
             data: '=',
             onSelect: '=',
-            classSuffix: '@'
+            classSuffix: '@',
+            parentItem: '='
         },
         link: function(scope, element, attrs) {
             scope.active = false;
@@ -14,15 +15,23 @@ app.directive('dropdown',[function() {
                 value: null
             };
 
-            scope.toggleDropdown = function() {
+            scope.toggleGhost = function($event) {
+                $event && $event.stopPropagation();
                 scope.active = !scope.active;
             };
 
-            scope.selectDropdownItem = function(id, value) {
+            scope.toggleDropdown = function($event) {
+                $event.stopPropagation();
+                scope.active = !scope.active;
+            };
+
+            scope.selectDropdownItem = function(item, $event) {
+                $event.stopPropagation();
+
                 scope.active = false;
-                scope.select.value = value;
+                scope.select.value = item.title;
                 if(typeof(scope.onSelect) == "function") {
-                    scope.onSelect(id);
+                    scope.onSelect(item.id, scope.parentItem);
                 }
             }
         },

@@ -8,8 +8,6 @@ app.controller('SceneTemplatesController', ['$scope', '$rootScope', '$stateParam
     function getAllTemplates() {
         RequestService.post('templatescenes/all', {}, function (res) {
                 $scope.sceneTemplates = res.data;
-                console.log(res.data);
-
             }, function (error) {
                 console.log(error);
             }
@@ -18,9 +16,12 @@ app.controller('SceneTemplatesController', ['$scope', '$rootScope', '$stateParam
 
     getAllTemplates();
 
-    $scope.deleteTemplate = function(scene, $event) {
-        $event.stopPropagation();
+    $scope.renameTemplate = function() {
+        // TODO: implement
+        console.log('not implemented.');
+    };
 
+    $scope.deleteTemplate = function(scene) {
         RequestService.post('templatescenes/delete', {scene: {id: scene.id}}, function (res) {
                 $rootScope.$broadcast('removeTemplate', scene);
             }, function (error) {
@@ -53,6 +54,29 @@ app.controller('SceneTemplatesController', ['$scope', '$rootScope', '$stateParam
             }, {
                 id: 1,
                 title: 'Title'
+            }
+        ]
+    };
+
+    var editOptions = {
+        'delete': $scope.deleteTemplate,
+        'rename': $scope.renameTemplate
+    };
+
+    $scope.onEditSelect = function(id, item) {
+        editOptions[id](item);
+    };
+
+    $scope.edit = {
+        items: [
+            {
+                id: 'delete',
+                title: 'Delete',
+                icon: 'fa-trash-o'
+            }, {
+                id: 'rename',
+                title: 'Rename',
+                icon: 'fa-pencil'
             }
         ]
     };
