@@ -7,21 +7,33 @@ app.controller('ResetController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'Reque
         password: null
     };
 
-    $scope.showResetForm = true;
-
     $scope.states = {
-        reset: {
+        resetRequest: {
             showSuccessMessage: false,
             showErrorMessage: false,
-            showPasswordInput: false,
-            showEmailInput: true,
             showForm: true
+        },
+        resetConfirm: {
+            showSuccessMessage: false,
+            showErrorMessage: false,
+            showForm: false
         }
     };
 
-    // TODO: go for two diffrent forms.... to reduce states
+    $scope.reset = function (credentials) {
+        RequestService.post('users/send_reset_pw', credentials, function(res) {
+                $scope.states.resetRequest.showForm = false;
+                $scope.states.resetRequest.showSuccessMessage = true;
+                $scope.states.resetRequest.showErrorMessage = false;
+            },
+            function(error) {
+                $scope.states.resetRequest.showErrorMessage = true;
+            }
+        );
+    };
+
     // TODO: handle conflict on repeated request
-    function resetPassword() {
+    $scope.confirm = function(credentials) {
 
         var data = {
             password: $scope.credentials.password,
@@ -30,29 +42,24 @@ app.controller('ResetController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'Reque
         };
 
         RequestService.post('users/reset_pw', data, function(res) {
-                console.log('success');
+                $scope.states.resetConfirm.showForm = false;
+                $scope.states.resetConfirm.showSuccessMessage = true;
+                $scope.states.resetConfirm.showErrorMessage = false;
             },
             function(error) {
                 console.log(error);
-                $scope.states.reset.showErrorMessage = true;
-            }
-        );
-    }
-
-    if($location.search().token) {
-        $scope.states.reset.showEmailInput = false;
-        $scope.states.reset.showPasswordInput = true;
-    }
-
-    $scope.reset = function (credentials) {
-        RequestService.post('users/send_reset_pw', credentials, function(res) {
-                $scope.states.reset.showSuccessMessage = true;
-                $scope.states.reset.showForm = false;
-                $scope.states.reset.showErrorMessage = false;
-            },
-            function(error) {
-                $scope.states.reset.showErrorMessage = true;
+                $scope.states.resetConfirm.showErrorMessage = true;
             }
         );
     };
+
+    $scope.redirectProfile = function() {
+        console.log('redirect');
+    };
+
+    if($location.search().token) {
+        $scope.states.resetRequest.showForm = false;
+        $scope.states.resetConfirm.showForm = true;
+    }
+
 }]);

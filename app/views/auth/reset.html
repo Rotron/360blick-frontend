@@ -1,19 +1,34 @@
 <div id="view--reset" class="view container">
     <div id="view--reset__wrapper" class="view__wrapper">
         <h1><a href="/">360blick</a></h1>
-        <form name="loginForm" class="container" ng-submit="reset(credentials)" ng-if="states.reset.showForm" novalidate>
-            <fieldset class="row" ng-if="states.reset.showEmailInput">
+        <form name="resetRequestForm" class="container" ng-submit="reset(credentials)" ng-if="states.resetRequest.showForm" novalidate>
+            <fieldset class="row">
                 <placeholder-input value="credentials.email" label="Email" type="text" has-initial-focus="true"></placeholder-input>
-            </fieldset>
-            <fieldset class="row" ng-if="states.reset.showPasswordInput">
-                <placeholder-input value="credentials.password" label="Password" type="password"></placeholder-input>
             </fieldset>
             <div class="row">
                 <button class="btn btn--round btn--submit">Reset Password</button>
             </div>
         </form>
-        <p class="auth-message auth-message--success" ng-if="states.reset.showSuccessMessage">An email with reset information has been sent.</p>
-        <p class="auth-message auth-message--error" ng-if="states.reset.showErrorMessage">Email not found.</p>
+        <form name="resetConfirmForm" class="container" ng-submit="confirm(credentials)" ng-if="states.resetConfirm.showForm" novalidate>
+            <fieldset class="row">
+                <placeholder-input value="credentials.password" label="New Password" type="password" has-initial-focus="true"></placeholder-input>
+            </fieldset>
+            <div class="row">
+                <button class="btn btn--round btn--submit">Save Password</button>
+            </div>
+        </form>
+        <div class="auth-message auth-message--success" ng-if="states.resetRequest.showSuccessMessage">
+            <p>An email with reset information has been sent.</p>
+        </div>
+        <div class="auth-message auth-message--error" ng-if="states.resetRequest.showErrorMessage">
+            <p>Email not found.</p>
+        </div>
+        <div class="auth-message auth-message--success" ng-if="states.resetConfirm.showSuccessMessage">
+            <p>Success.</p>
+        </div>
+        <div class="auth-message auth-message--error" ng-if="states.resetConfirm.showErrorMessage">
+            <p>Error.</p>
+        </div>
         <ul class="tiny-list">
             <li class="tiny-list__item"><a ui-sref="login">Login Page</a></li>
         </ul>
