@@ -20,9 +20,7 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
         console.log('not implemented. just go to settings.');
     };
 
-    $scope.deleteProject = function(project, $event) {
-        $event.stopPropagation();
-
+    $scope.deleteProject = function(project) {
         RequestService.post('projects/delete', {project: {id: project.id}}, function (res) {
                 $rootScope.$broadcast('removeProject', project);
             }, function (error) {
