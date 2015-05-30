@@ -58,13 +58,13 @@ $dialog-header-height: $base * 12;
 }
 
 .dialog__close {
-  background: $cta-0;
+  //background: $cta-0;
   color: $secondary-light;
   position: absolute;
   right: 17px;
   top:  50%;
   margin-top: -16px;
-  font-size: 18px;
+  font-size: 26px;
   line-height: 32px;
   height: 32px;
   width: 32px;
@@ -73,7 +73,7 @@ $dialog-header-height: $base * 12;
   @include blick-transition;
 
   &:hover {
-    opacity: 0.8;
+    color: $cta-0;
   }
 }
 
@@ -88,6 +88,7 @@ $dialog-header-height: $base * 12;
 
 .dialog__title {
   font-size: $size-title;
+  font-weight: 300;
   line-height: $dialog-header-height;
 }
 
