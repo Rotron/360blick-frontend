@@ -1,3 +1,33 @@
+
+<div class="interaction-bar container">
+    <div class="col span-6">
+        <h2>{{project.title}} Settings</h2>
+        <div>
+            {{project.description}}
+        </div>
+    </div>
+    <ul class="col span-12 form">
+        <li>
+            New Title:
+            <input ng-model="updatedProject.title">
+        </li>
+        <li>
+            New Description:
+            <input ng-model="updatedProject.description">
+        </li>
+        <li>
+            Is Private:
+            <input type="checkbox" ng-model="updatedProject.is_private" ng-checked="updatedProject.is_private">
+        </li>
+        <li>
+            <!-- Preview Image:
+            <dropdown template-name="edit" on-select="onEditSelect" parent-item="project" data="{'items': edit.items}" class-suffix="light"></dropdown> -->
+        </li>
+        <li>
+            <button ng-click="updateProjectSettings($event)" class="btn btn--cta">Update Settings</button>
+        </li>
+    </ul>
+</div>
 <div class="interaction-bar container">
     <div class="col span-6">
         <button ng-click="generateExport($event)" class="btn btn--cta">Generate Export</button>
@@ -14,3 +44,9 @@
         <div>size: {{export.size | fileSize}}</div>
     </li>
 </ol>
+
+<div class="container settings">
+    <div class="col span-6">
+
+    </div>
+</div>

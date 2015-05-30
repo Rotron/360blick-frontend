@@ -3,6 +3,37 @@
 app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', 'ENV_CONFIG', function ($scope, $stateParams, RequestService, $rootScope, ENV_CONFIG) {
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
+
+    // Get project settings
+    RequestService.post('projects/get_projects', {user_nick: $scope.username}, function(res) {
+            for(var i = 0, len = res.data.length; i < len; i++) {
+                if(parseInt(res.data[i].id) === parseInt($scope.projectId)) {
+                    $scope.project = res.data[i];
+                    $scope.updatedProject = {}
+                    angular.copy($scope.project, $scope.updatedProject)
+                    delete $scope.updatedProject.title;
+                    delete $scope.updatedProject.description;
+                    delete $scope.updatedProject.preview_image;
+                }
+            }
+        }, function(error) {
+            console.log(error);
+        }
+    );
+
+    $scope.updateProjectSettings = function($event) {
+        $event.stopPropagation();
+
+        console.log($scope.updatedProject);
+        RequestService.post('projects/update', {project: $scope.updatedProject}, function(res) {
+              $scope.project = res.data;
+            }, function(error) {
+                console.log(error);
+            }
+        );
+    };
+
+    // $scope.projectTitle = $stateParams.title;
     $scope.exports = [];
 
     $scope.startDownload = function(item) {
