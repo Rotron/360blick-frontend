@@ -1,0 +1,17 @@
+.tiny-list {
+  padding: $base * 3 0;
+
+  a {
+    @include blick-transition;
+    color: $primary-cta;
+    border-bottom: 1px solid $secondary-light;
+
+    &:hover {
+      border-color: $primary-cta;
+    }
+  }
+}
+
+.tiny-list__item {
+  margin-bottom: $base * 2;
+}

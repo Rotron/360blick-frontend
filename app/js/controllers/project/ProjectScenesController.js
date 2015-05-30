@@ -17,8 +17,43 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     getAllScenes();
 
+    $scope.deleteScene = function(scene, $event) {
+        $event.stopPropagation();
 
-    $rootScope.$on('newSceneCreated', function(event, data){
+        RequestService.post('scenes/delete', {scene: {id: scene.id}}, function(res) {
+                $rootScope.$broadcast('removeScene', scene);
+            }, function(error) {
+                console.log(error);
+            }
+        );
+    };
+
+    $rootScope.$on('removeScene', function(event, data){
+        $scope.scenes.splice($scope.scenes.indexOf(data), 1);
+    });
+
+    $rootScope.$on('newScene', function(event, data){
         $scope.scenes.push(data);
     });
+
+    $scope.onOrderSelect = function(id) {
+        $scope.order.predicate = predicateOptions[id];
+    };
+
+    var predicateOptions = ['updated_at', 'title'];
+
+    $scope.order = {
+        reverse: true,
+        predicate: predicateOptions[0],
+        items: [
+            {
+                id: 0,
+                title: 'Most Recent'
+            }, {
+                id: 1,
+                title: 'Title'
+            }
+        ]
+    };
+
 }]);

@@ -1,0 +1,12 @@
+.auth-message {
+  font-size: 18px;
+  padding: $base * 2 0;
+}
+
+.auth-message--error {
+  color: $cta-0;
+}
+
+.auth-message--success {
+  color: $cta-1;
+}

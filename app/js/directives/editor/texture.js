@@ -1,17 +1,14 @@
-app.directive('xyzInput',[ function() {
+app.directive('texture',[ function() {
 
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'partials/xyzInput.html',
+        templateUrl: 'partials/editor/texture.html',
         scope: {
             title: "@",
-            icon: "@",
             item: "="
         },
         link: function(scope) {
-
-
         }
     };
 }]);

@@ -1,23 +1,52 @@
-app.directive('sidebarMenu', ['Project', 'SceneTemplate', '$rootScope', '$stateParams', function (Project, SceneTemplate, $rootScope, $stateParams) {
+app.directive('sidebarMenu', ['RequestService', '$rootScope', '$stateParams', function (RequestService, $rootScope, $stateParams) {
     return {
         restrict: 'E',
         templateUrl: 'partials/sidebarMenu.html',
         replace: true,
-        link: function(scope, elem, attrs) {
+        link: function($scope, elem, attrs) {
+            $scope.username = $stateParams.username;
 
-            scope.username = $stateParams.username;
+            $scope.projects = [];
+            $scope.sceneTemplates = [];
 
-            scope.projects = Project.get(function(projects){
-                scope.projects = projects;
+            function getAllProjects() {
+                RequestService.post('projects/get_projects', {user_nick: $scope.username}, function (res) {
+                        $scope.projects = res.data;
+                    }, function (error) {
+                        console.log(error);
+                    }
+                );
+            }
+
+            getAllProjects();
+
+            $rootScope.$on('removeProject', function(event, data) {
+                $scope.projects.splice($scope.projects.indexOf(data), 1);
             });
 
-            scope.sceneTemplates = SceneTemplate.get(function(sceneTemplates){
-                scope.sceneTemplates = sceneTemplates;
+            $rootScope.$on('newProject', function(event, data) {
+                $scope.projects.push(data);
             });
 
-            $rootScope.$on('newSceneTemplateCreated', function(event, data){
-                scope.sceneTemplates.push(data);
+            function getAllTemplates() {
+                RequestService.post('templatescenes/all', {}, function (res) {
+                        $scope.sceneTemplates = res.data;
+                    }, function (error) {
+                        console.log(error);
+                    }
+                );
+            }
+
+            getAllTemplates();
+
+            $rootScope.$on('removeTemplate', function(event, data) {
+                $scope.sceneTemplates.splice($scope.sceneTemplates.indexOf(data), 1);
             });
+
+            $rootScope.$on('newTemplate', function(event, data) {
+                $scope.sceneTemplates.push(data);
+            });
+
         }
     };
 }]);

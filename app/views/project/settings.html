@@ -1,1 +1,16 @@
-settings von {{projectId}}
+<div class="interaction-bar container">
+    <div class="col span-6">
+        <button ng-click="generateExport($event)" class="btn btn--cta">Generate Export</button>
+    </div>
+    <div class="col span-6 has-text-right">
+    </div>
+</div>
+
+<ol class="export-list">
+    <li class="export-list__item" ng-repeat="export in exports" ng-click="startDownload(export)">
+        <div>project: {{export.project_title}}</div>
+        <div>Amount Assets: {{export.amount_assets}}</div>
+        <div>Created at: {{export.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</div>
+        <div>size: {{export.size | fileSize}}</div>
+    </li>
+</ol>

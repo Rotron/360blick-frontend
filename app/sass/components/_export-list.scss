@@ -1,0 +1,22 @@
+.export-list {
+  background: $secondary-light;
+}
+
+.export-list__item {
+  border-bottom: 1px solid $secondary-2;
+  background: $secondary-light;
+  padding: $base * 2 $base * 6;
+  @include blick-transition;
+
+  &:first-child {
+    border: 1px solid $secondary-2;
+  }
+
+  &:hover {
+    background: $secondary-1;
+  }
+}
+
+.export-list__link {
+  display: block;
+}

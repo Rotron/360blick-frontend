@@ -3,22 +3,21 @@
         <button ng-click="openModal('newScene')" class="btn btn--dotted"><i class="fa fa-plus"></i>New Scene</button>
     </div>
     <div class="col span-6 has-text-right">
-        <button class="btn btn--dropdown btn--dropdown--light">Most Recent<i class="fa fa-chevron-down"></i></button>
-        <button class="btn"><i class="fa fa-th-list"></i></button>
-        <button class="btn"><i class="fa fa-th"></i></button>
+        <dropdown template-name="select" on-select="onOrderSelect" data="{'currentItemId': order.items[0].title, 'items': order.items}" class-suffix="light"></dropdown>
     </div>
 </div>
 
 <ul class="overview-list container">
-    <li ng-repeat="scene in scenes" ui-sref="editor({username: username, projectId: projectId, sceneId: scene.id})" class="overview-list__item col span-6">
+    <li ng-repeat="scene in scenes | orderBy:order.predicate:order.reverse" ui-sref="editor({username: username, projectId: projectId, sceneId: scene.id})" class="overview-list__item col span-6">
         <div class="overview-list__asset" style="background-image:url(http://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg);">
             <div class="overview-list__color" style="background-color:rgb(100,100,160);"></div>
             <div class="overview-list__content container">
                 <div class="col span-8">
                     <h2 class="overview-list__title">{{scene.title}}</h2>
-                    <time class="overview-list__modified" datetime="2000-01-30 18:00">Last modified: {{scene.description}}</time>
+                    <time class="overview-list__modified" datetime="{{scene.updated_at | date:'yyyy-MM-dd hh:mm'}}">Last modified: {{scene.updated_at | date:'medium'}}</time>
                 </div>
                 <div class="col span-4 has-text-right">
+                    <button ng-click="deleteScene(scene, $event)" class="btn btn--danger">Delete</button>
                     <button class="btn btn--cta">Edit</button>
                 </div>
             </div>

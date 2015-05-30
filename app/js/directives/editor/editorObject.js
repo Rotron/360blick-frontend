@@ -1,9 +1,14 @@
-app.directive('editorObject', ['$rootScope', function ($rootScope) {
+app.directive('editorObject', ['$rootScope', 'EditorService', function ($rootScope, EditorService) {
     return {
         restrict: 'E',
-        templateUrl: 'partials/editorObject.html',
+        templateUrl: 'partials/editor/editorObject.html',
         replace: true,
         link: function(scope, elem, attrs) {
+
+            scope.$on('getEditorObject', function(mass, callback) {
+                callback(scope.item);
+            });
+
             $rootScope.$on('objectSelected', function(event, object) {
                 if(scope.item.id == object.id){
                     scope.isActive = true;
@@ -25,7 +30,11 @@ app.directive('editorObject', ['$rootScope', function ($rootScope) {
                     scope.item.detailsOpen = !scope.item.detailsOpen;
                 }
                 $rootScope.$emit('objectSelected', scope.item);
-            }
+            };
+
+            scope.remove = function(object) {
+                EditorService.remove(object);
+            };
 
         }
     };

@@ -1,15 +1,8 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', 'Asset', function ($scope, $stateParams, ENV_CONFIG, RequestService, Asset) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', '$rootScope', function ($scope, $stateParams, ENV_CONFIG, RequestService, $rootScope) {
     $scope.username = $stateParams.username;
     var projectId = $stateParams['projectId'];
-
-    $scope.assets = [];
-
-    function removeAssetFromArray(asset) {
-        var index = $scope.assets.indexOf(asset);
-        $scope.assets.splice(index, 1);
-    }
 
     $scope.getAssetBackgroundImage = function getAssetBackgroundImage(asset) {
         return {
@@ -17,25 +10,56 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
         };
     };
 
-    $scope.deleteProjectAsset = function deleteAsset(asset) {
+    $scope.assets = [];
+
+    function getAllAssets() {
+        RequestService.post('projects/assets/get_from_project', {project: {id: $stateParams['projectId']}}, function(res) {
+                $scope.assets = res.data;
+            }, function(error) {
+                console.log(error);
+            }
+        );
+    }
+
+    getAllAssets();
+
+    $scope.deleteAsset = function(asset, $event) {
+        $event.stopPropagation();
+
         RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
-                removeAssetFromArray(asset);
+                $rootScope.$broadcast('removeAsset', asset);;
             }, function(error) {
                 console.log(error);
             }
         );
     };
 
-    function getProjectAssets() {
-        $scope.assets = Asset.get(projectId, function(assets){
-            $scope.assets = assets;
-        });
-    }
+    $rootScope.$on('removeAsset', function(event, data) {
+        $scope.assets.splice($scope.assets.indexOf(data), 1);
+    });
 
-    getProjectAssets();
+    $rootScope.$on('newAsset', function(event, data) {
+        $scope.assets.push(data);
+    });
 
-/*    $rootScope.$on('newAssetCreated', function(event, data){
-        $scope.scenes.push(data);
-    });*/
+    $scope.onOrderSelect = function(id) {
+        $scope.order.predicate = predicateOptions[id];
+    };
+
+    var predicateOptions = ['updated_at', 'title'];
+
+    $scope.order = {
+        reverse: true,
+        predicate: predicateOptions[0],
+        items: [
+            {
+                id: 0,
+                title: 'Most Recent'
+            }, {
+                id: 1,
+                title: 'Title'
+            }
+        ]
+    };
 
 }]);
