@@ -20,6 +20,7 @@
             <input type="checkbox" ng-model="updatedProject.is_private" ng-checked="updatedProject.is_private">
         </li>
         <li>
+            <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
             <!-- Preview Image:
             <dropdown template-name="edit" on-select="onEditSelect" parent-item="project" data="{'items': edit.items}" class-suffix="light"></dropdown> -->
         </li>

@@ -119,11 +119,11 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
      * e.g. getUploadConfig(data)
      *
      */
-    function getUploadConfig(data) {
+    function getUploadConfig(data, settings) {
         return {
             'options': {
-                'url': getFullActionUrl('projects/assets/create'),
-                'paramName': 'data[asset][file]'
+                'url': getFullActionUrl(settings.apiEndPoint),
+                'paramName': settings.paramName
             },
             'eventHandlers': {
                 'sending': function (file, xhr, formData) {
@@ -133,7 +133,7 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
                     });
                 },
                 'success': function (file, res) {
-                    $rootScope.$broadcast('newAsset', res.data);
+                    $rootScope.$broadcast(settings.broadcastDomain, res.data);
                 }
             }
         };
@@ -144,7 +144,7 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
      *
      */
     this.upload = function(scope, element) {
-        var config = getUploadConfig(scope.uploadData);
+        var config = getUploadConfig(scope.uploadData, scope.uploadSettings);
         var dropzone = new Dropzone(element[0], config.options);
 
         angular.forEach(config.eventHandlers, function (handler, event) {
