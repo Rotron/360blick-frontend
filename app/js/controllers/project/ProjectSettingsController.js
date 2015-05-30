@@ -5,13 +5,13 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
     $scope.projectId = $stateParams.projectId;
 
     $scope.uploadOptions = {
-        broadcastDomain: 'newAssetProjectSettings',
+        broadcastDomain: 'updatedProjectPreviewImage',
         apiEndPoint: 'projects/update',
         paramName: 'data[project][preview_image]',
         uploadData: {project: {id: $scope.projectId}}
     };
 
-    $rootScope.$on('newAssetProjectSettings', function(event, data) {
+    $rootScope.$on('updatedProjectPreviewImage', function(event, data) {
         console.log('new project image:', data);
     });
 
