@@ -8,11 +8,6 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
     RequestService.post('projects/specific', {project_id: $scope.projectId}, function(res) {   
 
             $scope.project = res.data;
-            $scope.updatedProject = {};
-            angular.copy($scope.project, $scope.updatedProject);
-            delete $scope.updatedProject.title;
-            delete $scope.updatedProject.description;
-            delete $scope.updatedProject.preview_image;
 
         }, function(error) {
             console.log(error);
