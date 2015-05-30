@@ -59,6 +59,14 @@ angular.module('btford.modal', []).
                 $animate.enter(element, container);
                 scope = $rootScope.$new();
                 scope.closeIt = deactivate;
+
+                scope.checkCloseIt = function($event) {
+                    var isDialogWrapper = angular.element($event.target).hasClass('dialog');
+                    if(isDialogWrapper) {
+                        scope.closeIt();
+                    }
+                };
+
                 if (locals) {
                     for (var prop in locals) {
                         scope[prop] = locals[prop];
