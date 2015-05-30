@@ -1,1 +1,15 @@
-Settings von User {{username}}
+<div class="interaction-bar container">
+    <div class="col span-6">
+        <h2>{{user.nick}} Settings</h2>
+    </div>
+    <ul class="col span-12 form">
+        
+        <li>
+            <!-- Preview Image:
+            <dropdown template-name="edit" on-select="onEditSelect" parent-item="project" data="{'items': edit.items}" class-suffix="light"></dropdown> -->
+        </li>
+        <li>
+            <button ng-click="updateUserSettings($event)" class="btn btn--cta">Update Profile</button>
+        </li>
+    </ul>
+</div>
