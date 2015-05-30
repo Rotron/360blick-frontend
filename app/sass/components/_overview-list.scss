@@ -11,7 +11,7 @@
 
   &:hover {
     .overview-list__color {
-      opacity: .5;
+      opacity: .1;
     }
   }
 }
@@ -27,7 +27,7 @@
 
 .overview-list__color {
   @include blick-transition(opacity, .5s);
-  opacity: 1;
+  opacity: .6;
   position: absolute;
   top: 0;
   width: 100%;

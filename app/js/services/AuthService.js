@@ -2,14 +2,16 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
     function (RequestService, SessionService, $rootScope, AUTH_EVENTS) {
 
     this.login = function (credentials) {
-        RequestService.post('users/login', credentials, function(res){
 
-            SessionService.create(res.token, res.nick, res.email, res.role);
-            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: res.nick});
+        RequestService.post('users/login', credentials,
+            function(res){
+                SessionService.create(res.token, res.nick, res.email, res.role);
+                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: res.nick});
             },
-        function(){
-            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-        });
+            function(){
+                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+            }
+        );
     };
 
     this.logout = function () {
@@ -17,13 +19,15 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
             nick: SessionService.nick
         };
 
-        RequestService.post('users/logout', credentials, function(res){
+        RequestService.post('users/logout', credentials,
+            function(res){
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 SessionService.destroy();
             },
             function(error){
                 $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
-            });
+            }
+        );
     };
 
     this.reloadLocalCredentials = function () {

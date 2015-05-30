@@ -5,6 +5,13 @@
       $scope.projectId = $stateParams['projectId'];
       $scope.username = $stateParams['username'];
 
+      $scope.hiddenTypes = {
+          'Line':               true,
+          'PointLight':         true,
+          'HemisphereLight':    true,
+          'PerspectiveCamera':  true
+      };
+
 
       $scope.zoomIn = function(){
           EditorService.zoomIn(0.9);
@@ -14,9 +21,10 @@
       }
 
       $scope.save = function(){
+          console.log(EditorService.scene);
           var exporter = new THREE.SceneExporter();
           var sceneJson = JSON.stringify(exporter.parse(EditorService.scene));
-
+          console.log(sceneJson);
           var scene = {
               file: sceneJson
           };

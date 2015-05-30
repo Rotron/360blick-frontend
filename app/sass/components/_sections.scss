@@ -27,7 +27,7 @@
   background-position: 50% 50%;
   background-size: cover;
   padding: 240px 20px;
-  color: $secondary-1;
+  color: $secondary-light;
   position: relative;
 
   > * {
@@ -57,11 +57,11 @@
 }
 
 .section--features {
-  background-color: $secondary-1;
+  background-color: $secondary-light;
 }
 
 .section--toggle {
-  background-color: $secondary-0;
+  background-color: $secondary-3;
 }
 
 .section--toggle__images {
@@ -72,6 +72,6 @@
 }
 
 .section--options {
-  color: $secondary-1;
+  color: $secondary-light;
   background-color: $primary-1;
 }

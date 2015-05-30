@@ -9,18 +9,18 @@
     padding: 0 15px;
 
     + li {
-      border-left: 1px solid $secondary-1;
+      border-left: 1px solid $secondary-light;
     }
   }
 
   a {
-    color: $secondary-1;
+    color: $secondary-light;
     border-bottom: 1px solid $primary-0;
     text-transform: uppercase;
     @include blick-transition(border-color);
 
     &:hover {
-      border-color: $secondary-1;
+      border-color: $secondary-light;
     }
   }
 }

@@ -3,7 +3,6 @@ app.directive('editorScene', ['EditorService', 'ObjectSelectionService', functio
         restrict: 'E',
         replace: true,
         link: function(scope, elem, attrs) {
-            console.log('ccc');
             EditorService.init(elem);
             ObjectSelectionService.init(elem);
         }

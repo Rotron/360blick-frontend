@@ -1,4 +1,4 @@
-app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams) {
+app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService', function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService) {
 
 
     var _this = this;
@@ -7,38 +7,42 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
      * returns new default scene with lightning
      * @returns {Scene}
      */
-    function getNewScene(){
+    this.getNewScene = function(){
         var scene = new THREE.Scene();
-
-//        var axes = new THREE.AxisHelper(100);
-//        axes.position.y = 0.001;
-//        this.scene.add(axes);
-//        var gridXZ = new THREE.GridHelper(100, 1);
-//        this.scene.add(gridXZ);
-
-        //TODO: check why exporter has a problem with point light
-        var light = new THREE.HemisphereLight( 0x0000ff, 0x00ff00, 0.8 );
-        light.position.set( 10, 10, 10 );
+        var light = new THREE.PointLight( 0xffffff, 1, 0 );
+        light.position.set( 0, 5, 10 );
         scene.add( light );
         return scene;
-    }
+    };
 
     /**
      * parse scene loaded from api
      * @param res
      */
     function resolveScene(res) {
-        console.log(res);
         if(res.data.file) {
-
             var sceneLoader = new THREE.SceneLoader();
             sceneLoader.parse(JSON.parse(res.data.file), function (e) {
                 _this.scene = e.scene;
+                console.log(_this.scene);
+                if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
+                    $rootScope.$apply();
+                }
                 _this.render();
             }, '.');
         } else {
-            _this.scene = getNewScene();
+            _this.scene = _this.getNewScene();
             _this.render();
+        }
+    }
+
+    //TODO: move to shortcutservice
+    document.onkeydown = function(event) {
+        if (event.keyCode == 37) {
+            CameraService.rotate(Math.PI/200);
+        }
+        if (event.keyCode == 39) {
+            CameraService.rotate(-(Math.PI/200));
         }
     }
 
@@ -50,19 +54,17 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     this.init = function(container){
         this.container = container;
         this.scene = {};
-        this.camera = new THREE.PerspectiveCamera( 75, this.container[0].clientWidth / this.container[0].clientHeight, 0.1, 1000 );
+        this.camera = CameraService.init(this.container);
         this.renderer = new THREE.WebGLRenderer({
             precision: 'highp',
-            antialias: true
+            antialias: true,
+            alpha: true
 
         });
         this.renderer.setClearColor( 0x1C2229, 1);
         this.renderer.setSize( this.container[0].clientWidth, this.container[0].clientHeight );
+        this.renderer.shadowMapEnabled = true;
         this.container[0].appendChild( this.renderer.domElement );
-
-        this.camera.position.z = 10;
-        this.camera.position.y = 5;
-        this.camera.lookAt(new THREE.Vector3(0,0,0));
 
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
 
@@ -75,8 +77,7 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     };
 
     this.zoomIn = function(zoomFactor){
-        this.camera.fov *= zoomFactor;
-        this.camera.updateProjectionMatrix();
+        CameraService.zoom(zoomFactor);
     };
 
     this.getObjects = function(){

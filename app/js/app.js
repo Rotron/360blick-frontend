@@ -5,11 +5,24 @@ var app = angular.module('360blickFrontendApp', [
     'ngSanitize',
     'ngAnimate',
     'ui.router',
-    'angularFileUpload',
     'btford.modal',
     'templates',
+    'sun.scrollable',
     'mdo-angular-cryptography'
 ]);
+
+// TODO: Cleanup ENV
+var api_url = 'http://localhost:3000/api/v1';
+var assets_url = 'http://localhost:3000';
+// @if NODE_ENV = 'PRODUCTION'
+api_url = 'https://blick.herokuapp.com/api/v1';
+assets_url = 'https://blick.herokuapp.com';
+// @endif
+
+app.constant('ENV_CONFIG', {
+    api: api_url,
+    assets: assets_url
+});
 
 app.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
@@ -35,12 +48,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
-    $httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.withCredentials = true;
-    delete $httpProvider.defaults.headers.common["X-Requested-With"];
-    $httpProvider.defaults.headers.common["Accept"] = "application/json";
-    $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
 
     $stateProvider
         .state('app', {
@@ -295,6 +302,7 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
                 event.preventDefault();
                 if (AuthService.isAuthenticated()) {
                     // user is not allowed
+                    console.log(AuthService.isAuthenticated());
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {next: next, params: nextParams});
                 } else {
                     // user is not logged in
@@ -303,3 +311,5 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
             }
          });
 }]);
+
+angular.module('templates', []);

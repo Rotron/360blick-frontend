@@ -31,6 +31,32 @@
                 </div>
                 <ul class="editor-options-list">
                     <li class="editor-options-list__item">
+                        <texture item="item"></texture>
+                    </li>
+                </ul>
+                <ul class="editor-options-list">
+                    <li class="editor-options-list__item">
+                        <div class="col span-9">
+                            Wireframes
+                        </div>
+                        <div class="col span-3">
+                            <input type="checkbox" ng-model="item.material.wireframe">
+                        </div>
+                    </li>
+                </ul>
+                <ul class="editor-options-list">
+                    <li class="editor-options-list__item">
+                        <div class="col span-9">
+                            Double Sided
+                        </div>
+                        <div class="col span-3">
+                            <input type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="item.material.side">
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="editor-options-list">
+                    <li class="editor-options-list__item">
                         <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
                     </li>
                 </ul>

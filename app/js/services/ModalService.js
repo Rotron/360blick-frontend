@@ -35,14 +35,19 @@ app.service('ModalService',['$rootScope', 'btfModal', function($rootScope, btfMo
             controller: 'NewAssetController',
             controllerAs: 'ctrl',
             templateUrl: 'partials/dialog/newAsset.html'
+        }),
+        'selectTexture': btfModal({
+            controller: 'SelectTextureController',
+            controllerAs: 'ctrl',
+            templateUrl: 'partials/dialog/selectTexture.html'
         })
     };
 
-    this.openModal = function(modalName){
+    this.openModal = function(modalName, data){
         if(!modals[modalName]){
             console.error('Modal "' + modalName + '" does not exist in ModalService');
         }
-        modals[modalName].activate();
+        modals[modalName].activate({data: data});
     };
     this.closeModal = function(modalName){
         if(!modals[modalName]){

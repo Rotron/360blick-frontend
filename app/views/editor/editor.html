@@ -1,77 +1,81 @@
 <nav-header></nav-header>
 <nav class="editor-toolbar">
-    <ul class="editor-toolbar__list">
-        <li class="editor-toolbar__item has-bottom-seperator active">
-            <i class="fa fa-location-arrow"></i>
-            <h2 class="editor-toolbar__title">Selection</h2>
-        </li>
-        <li class="editor-toolbar__item has-bottom-seperator">
-            <i class="fa fa-trash-o"></i>
-            <h2 class="editor-toolbar__title">Trash / Rubber</h2>
-        </li>
-        <li class="editor-toolbar__item">
-            <i class="fa fa-expand"></i>
-            <h2 class="editor-toolbar__title">Scale</h2>
-        </li>
-        <li class="editor-toolbar__item">
-            <i class="fa fa-arrows"></i>
-            <h2 class="editor-toolbar__title">Translate</h2>
-        </li>
-        <li class="editor-toolbar__item has-bottom-seperator">
-            <i class="fa fa-arrows-h"></i>
-            <h2 class="editor-toolbar__title">Move</h2>
-        </li>
-        <li class="editor-toolbar__item">
-            <i class="fa fa-camera"></i>
-            <h2 class="editor-toolbar__title">Camera 1</h2>
-        </li>
-        <li class="editor-toolbar__item">
-            <i class="fa fa-camera"></i>
-            <h2 class="editor-toolbar__title">Camera 2</h2>
-        </li>
-        <li class="editor-toolbar__item active">
-            <i class="fa fa-camera"></i>
-            <h2 class="editor-toolbar__title">Camera 3</h2>
-        </li>
-    </ul>
+    <scrollable>
+        <ul class="editor-toolbar__list">
+            <li class="editor-toolbar__item has-bottom-seperator active">
+                <i class="fa fa-location-arrow"></i>
+                <h2 class="editor-toolbar__title">Selection</h2>
+            </li>
+            <li class="editor-toolbar__item has-bottom-seperator">
+                <i class="fa fa-trash-o"></i>
+                <h2 class="editor-toolbar__title">Trash / Rubber</h2>
+            </li>
+            <li class="editor-toolbar__item">
+                <i class="fa fa-expand"></i>
+                <h2 class="editor-toolbar__title">Scale</h2>
+            </li>
+            <li class="editor-toolbar__item">
+                <i class="fa fa-arrows"></i>
+                <h2 class="editor-toolbar__title">Translate</h2>
+            </li>
+            <li class="editor-toolbar__item has-bottom-seperator">
+                <i class="fa fa-arrows-h"></i>
+                <h2 class="editor-toolbar__title">Move</h2>
+            </li>
+            <li class="editor-toolbar__item">
+                <i class="fa fa-camera"></i>
+                <h2 class="editor-toolbar__title">Camera 1</h2>
+            </li>
+            <li class="editor-toolbar__item">
+                <i class="fa fa-camera"></i>
+                <h2 class="editor-toolbar__title">Camera 2</h2>
+            </li>
+            <li class="editor-toolbar__item active">
+                <i class="fa fa-camera"></i>
+                <h2 class="editor-toolbar__title">Camera 3</h2>
+            </li>
+        </ul>
+    </scrollable>
 </nav>
 <editor-scene class="editor-scene"></editor-scene>
 <div class="editor-sidebar">
-    <div class="editor-sidebar__top">
-        <nav class="filter-switch">
-            <button class="filter-switch__option active">Objects</button>
-            <button class="filter-switch__option">Settings</button>
-        </nav>
-        <div class="editor-settings">Editor Settings</div>
-        <div class="editor-objects">
-            <ul class="toggle-list">
-                <editor-object ng-repeat="item in getSceneObjects()" ng-if="item.type != 'Line' && item.type != 'PointLight' && item.type != 'HemisphereLight'"></editor-object>
+    <scrollable>
+        <div class="editor-sidebar__top">
+            <nav class="filter-switch">
+                <button class="filter-switch__option active">Objects</button>
+                <button class="filter-switch__option">Settings</button>
+            </nav>
+            <div class="editor-settings">Editor Settings</div>
+            <div class="editor-objects">
+                <ul class="toggle-list">
+                    <editor-object ng-repeat="item in getSceneObjects()" ng-if="!hiddenTypes[item.type]"></editor-object>
+                </ul>
+            </div>
+        </div>
+
+        <div class="editor-sidebar__bottom">
+            <button class="editor-sidebar__ellipsis">
+                <i class="fa fa-ellipsis-h"></i>
+            </button>
+            <nav class="filter-switch">
+                <button class="filter-switch__option">POI</button>
+                <button class="filter-switch__option">Media</button>
+                <button class="filter-switch__option active">Objects</button>
+                <button class="filter-switch__option">Effects</button>
+            </nav>
+            <ul class="toggle-list--small">
+                <li class="toggle-list--small__item" ng-repeat="primitives in getSupportedPrimitiveObjects()">
+                    <div class="toggle-list--small__header">
+                        <h2 class="toggle-list--small__title">{{primitives.title}}</h2>
+                    </div>
+                    <ul class="selection-list container">
+                        <li class="selection-list__item col span-3" ng-repeat="primitive in primitives.items track by $index"  ng-click="addNewObject(primitive)">
+                            <i class="fa fa-cube"></i>
+                            <h4 class="selection-list__title">{{primitive}}</h4>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
-    </div>
-
-    <div class="editor-sidebar__bottom">
-        <button class="editor-sidebar__ellipsis">
-            <i class="fa fa-ellipsis-h"></i>
-        </button>
-        <nav class="filter-switch">
-            <button class="filter-switch__option">POI</button>
-            <button class="filter-switch__option">Media</button>
-            <button class="filter-switch__option active">Objects</button>
-            <button class="filter-switch__option">Effects</button>
-        </nav>
-        <ul class="toggle-list--small">
-            <li class="toggle-list--small__item" ng-repeat="primitives in getSupportedPrimitiveObjects()">
-                <div class="toggle-list--small__header">
-                    <h2 class="toggle-list--small__title">{{primitives.title}}</h2>
-                </div>
-                <ul class="selection-list container">
-                    <li class="selection-list__item col span-3" ng-repeat="primitive in primitives.items track by $index"  ng-click="addNewObject(primitive)">
-                        <i class="fa fa-cube"></i>
-                        <h4 class="selection-list__title">{{primitive}}</h4>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+    </scrollable>
 </div>

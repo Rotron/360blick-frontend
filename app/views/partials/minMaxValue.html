@@ -2,12 +2,12 @@
     <!-- todo: refactor minmax and xyz to editor-option -->
     <div class="minmax-interaction__title col span-3">{{title}}</div>
     <div class="minmax-interaction__slider col span-6">
-        <input type="range" min="0" max="1" step="0.01" ng-model="item">
+        <input type="range" min="{{min}}" max="{{max}}" step="{{step || 1}}" ng-model="item">
     </div>
     <div class="col span-3">
         <div class="input--sidebar">
             <label class="input--sidebar__label">
-                <span class="input--sidebar__label__unit">%</span>
+                <span class="input--sidebar__label__unit">{{measure || '%'}}</span>
                 <input class="input--sidebar__field" type="number" ng-model="item" min="{{min}}" max="{{max}}" step="{{step || 1}}">
             </label>
         </div>
