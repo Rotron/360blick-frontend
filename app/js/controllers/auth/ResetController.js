@@ -1,6 +1,11 @@
 'use strict';
 
-app.controller('ResetController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'RequestService', '$location', function ($scope, $rootScope, AUTH_EVENTS, RequestService, $location) {
+app.controller('ResetController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'SessionService', 'RequestService', '$location', '$state', function ($scope, $rootScope, AUTH_EVENTS, SessionService, RequestService, $location, $state) {
+
+    var isResetTemplate = $state.current.name == 'reset';
+    if(isResetTemplate && $rootScope.isAuthenticated()) {
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: SessionService.nick});
+    }
 
     $scope.credentials = {
         email: '',
