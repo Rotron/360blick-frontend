@@ -17,11 +17,13 @@
       function getInteractionList() {
           var interactions = [];
           for(var key in SUPPORTED_INTERACTIONS) {
-              interactions.push({
-                  id: key,
-                  title: SUPPORTED_INTERACTIONS[key].title
-              })
-          };
+              if ( SUPPORTED_INTERACTIONS.hasOwnProperty(key) ) {
+                  interactions.push({
+                      id: key,
+                      title: SUPPORTED_INTERACTIONS[key].title
+                  })
+              }
+          }
           return interactions;
       }
       $scope.interactionsList = getInteractionList();

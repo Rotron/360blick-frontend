@@ -25,10 +25,12 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
             var objectToAdd = {};
             res.data.forEach(function(sceneObject) {
                 var id = sceneObject.id;
+                console.log(sceneObject);
                 if(sceneObject.name != null) {
                     objectToAdd = PrimitiveObjectService.getObject(sceneObject.objecttype, sceneObject);
                     objectToAdd.custom = {
-                        id: id
+                        id: id,
+                        interaction: JSON.parse(sceneObject.interaction) || null
                     };
                     scene.add(objectToAdd);
                 }
