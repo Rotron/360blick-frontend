@@ -4,7 +4,7 @@ app.controller('UserSettingsController', ['$scope', '$stateParams', 'RequestServ
     $scope.username = $stateParams.username;
 
     // Get user settings
-    RequestService.post('users/get_data', function(res) {   
+    RequestService.post('users/get_data', {}, function(res) {   
 
             $scope.user = res.data;
             $scope.updatedUser = {};
