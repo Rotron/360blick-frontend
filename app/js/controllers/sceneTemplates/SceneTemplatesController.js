@@ -8,6 +8,8 @@ app.controller('SceneTemplatesController', ['$scope', '$rootScope', '$stateParam
     function getAllTemplates() {
         RequestService.post('templatescenes/all', {}, function (res) {
                 $scope.sceneTemplates = res.data;
+                console.log(res.data);
+
             }, function (error) {
                 console.log(error);
             }
@@ -34,6 +36,26 @@ app.controller('SceneTemplatesController', ['$scope', '$rootScope', '$stateParam
     $rootScope.$on('newTemplate', function(event, data) {
         $scope.sceneTemplates.push(data);
     });
+
+    $scope.onOrderSelect = function(id) {
+        $scope.order.predicate = predicateOptions[id];
+    };
+
+    var predicateOptions = ['updated_at', 'title'];
+
+    $scope.order = {
+        reverse: true,
+        predicate: predicateOptions[0],
+        items: [
+            {
+                id: 0,
+                title: 'Most Recent'
+            }, {
+                id: 1,
+                title: 'Title'
+            }
+        ]
+    };
 
 }]);
 
