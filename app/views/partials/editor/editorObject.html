@@ -50,11 +50,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="toggle-list--small__item">
-                <div class="toggle-list--small__header">
-                    <h2 class="toggle-list--small__title">Shadow</h2>
-                </div>
-            </li>
+            <interaction ng-if="!isTemplateScene" item="item"></interaction>
             <li class="toggle-list--small__item">
                 <button class="btn btn--danger" ng-click="remove(item)">remove</button>
             </li>

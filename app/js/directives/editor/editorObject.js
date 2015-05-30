@@ -1,9 +1,11 @@
-app.directive('editorObject', ['$rootScope', 'EditorService', function ($rootScope, EditorService) {
+app.directive('editorObject', ['$rootScope', 'EditorService', '$stateParams', function ($rootScope, EditorService, $stateParams) {
     return {
         restrict: 'E',
         templateUrl: 'partials/editor/editorObject.html',
         replace: true,
         link: function(scope, elem, attrs) {
+
+            scope.isTemplateScene = !!$stateParams['templateId'];
 
             scope.$on('getEditorObject', function(mass, callback) {
                 callback(scope.item);
