@@ -1,6 +1,11 @@
 'use strict';
 
-app.controller('RegisterController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'RequestService', 'SessionService', function ($scope, $rootScope, AUTH_EVENTS, RequestService, SessionService) {
+app.controller('RegisterController', ['$scope', '$rootScope', 'AUTH_EVENTS', 'RequestService', 'SessionService', '$state', function ($scope, $rootScope, AUTH_EVENTS, RequestService, SessionService, $state) {
+
+    var isRegisterTemplate = $state.current.name == 'register';
+    if(isRegisterTemplate && $rootScope.isAuthenticated()) {
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: SessionService.nick});
+    }
 
     $scope.credentials = {};
 

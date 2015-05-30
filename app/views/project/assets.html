@@ -13,12 +13,11 @@
             <div class="overview-list__color" ng-style="{'background-color': asset.color}"></div>
             <div class="overview-list__content container">
                 <div class="col span-8">
-                    <h2 class="overview-list__title">{{asset.title}}</h2>
+                    <h2 class="overview-list__title">{{asset.title | truncate:false:18}}</h2>
                     <time class="overview-list__modified" datetime="{{asset.updated_at | date:'yyyy-MM-dd hh:mm'}}">Last modified: {{asset.updated_at | date:'medium'}}</time>
                 </div>
                 <div class="col span-4 has-text-right">
-                    <button ng-click="deleteAsset(asset, $event)" class="btn btn--danger">Delete</button>
-                    <button class="btn btn--cta">Edit</button>
+                    <dropdown template-name="edit" on-select="onEditSelect" parent-item="asset" data="{'items': edit.items}" class-suffix="light"></dropdown>
                 </div>
             </div>
         </div>

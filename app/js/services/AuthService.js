@@ -2,9 +2,7 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
     function (RequestService, SessionService, $rootScope, AUTH_EVENTS) {
 
     this.login = function (credentials) {
-
-        RequestService.post('users/login', credentials,
-            function(res){
+        RequestService.post('users/login', credentials, function(res){
                 SessionService.create(res.token, res.nick, res.email, res.role);
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: res.nick});
             },
@@ -19,8 +17,7 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
             nick: SessionService.nick
         };
 
-        RequestService.post('users/logout', credentials,
-            function(res){
+        RequestService.post('users/logout', credentials, function(res) {
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 SessionService.destroy();
             },
@@ -42,11 +39,10 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
         if (!angular.isArray(authorizedRoles)) {
             authorizedRoles = [authorizedRoles];
         }
-        return (this.isAuthenticated() &&
-        authorizedRoles.indexOf(SessionService.getRole()) !== -1);
+        return (this.isAuthenticated() && authorizedRoles.indexOf(SessionService.getRole()) !== -1);
     };
 
-        $rootScope.isAuthenticated = this.isAuthenticated;
-        $rootScope.isAuthorized = this.isAuthorized;
+    $rootScope.isAuthenticated = this.isAuthenticated;
+    $rootScope.isAuthorized = this.isAuthorized;
 
 }]);

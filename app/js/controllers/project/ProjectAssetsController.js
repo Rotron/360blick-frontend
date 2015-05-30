@@ -23,9 +23,12 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
 
     getAllAssets();
 
-    $scope.deleteAsset = function(asset, $event) {
-        $event.stopPropagation();
+    $scope.renameAsset = function() {
+        // TODO: implement
+        console.log('not implemented.');
+    };
 
+    $scope.deleteAsset = function(asset) {
         RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
                 $rootScope.$broadcast('removeAsset', asset);;
             }, function(error) {
@@ -58,6 +61,29 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
             }, {
                 id: 1,
                 title: 'Title'
+            }
+        ]
+    };
+
+    var editOptions = {
+        'delete': $scope.deleteAsset,
+        'rename': $scope.renameAsset
+    };
+
+    $scope.onEditSelect = function(id, item) {
+        editOptions[id](item);
+    };
+
+    $scope.edit = {
+        items: [
+            {
+                id: 'delete',
+                title: 'Delete',
+                icon: 'fa-trash-o'
+            }, {
+                id: 'rename',
+                title: 'Rename',
+                icon: 'fa-pencil'
             }
         ]
     };

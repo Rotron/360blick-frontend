@@ -1,0 +1,11 @@
+<div class="dropdown dropdown--edit">
+    <div class="dropdown__ghost" ng-class="{'active': active}" ng-click="toggleGhost($event)"></div>
+    <button class="btn btn--light btn--dropdown btn--dropdown--edit dropdown__trigger" ng-click="toggleDropdown($event)"><i class="fa fa-gear"></i>Edit<i class="fa fa-chevron-down"></i></button>
+    <div class="dropdown__toggle" ng-class="{'active': active}">
+        <ul class="dropdown__list dropdown__list--edit">
+            <li class="dropdown__list__item dropdown__list--edit__item" ng-repeat="item in data.items" ng-click="selectDropdownItem(item, $event)">
+                <i class="fa {{item.icon}}"></i>{{item.title}}
+            </li>
+        </ul>
+    </div>
+</div>

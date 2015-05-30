@@ -21,6 +21,7 @@ body, html {
   }
 }
 
+#view--newsletter,
 #view--login,
 #view--reset,
 #view--register {
@@ -28,6 +29,7 @@ body, html {
   min-height: 100%;
 }
 
+#view--newsletter__wrapper,
 #view--login__wrapper,
 #view--reset__wrapper,
 #view--register__wrapper {
@@ -50,6 +52,12 @@ body, html {
 
   .btn {
     width: 40%;
+  }
+}
+
+#view--newsletter__wrapper {
+  h1 a {
+    font-size: 50px;
   }
 }
 

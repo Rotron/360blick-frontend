@@ -31,42 +31,103 @@
   background: $primary-2;
   border-radius: 3px;
   margin-top: 10px;
-  // FIXME: change to .dropdown__list--default__item
-  .dropdown__list__item {
-    width: 100%;
-    height: $base * 10;
-    color: $secondary-3;
-    padding: $base * 4;
-    cursor: pointer;
-    @include blick-transition;
-    &:hover{
-      background: $primary-1;
+}
+
+.dropdown__list--default__item {
+  width: 100%;
+  height: $base * 10;
+  color: $secondary-3;
+  padding: $base * 4;
+  cursor: pointer;
+  @include blick-transition;
+
+  &:hover {
+    background: $primary-1;
+  }
+
+  &:first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      border-width: 5px 5px;
+      border-color: transparent;
+      border-bottom-color: $primary-2;
+      border-style: solid;
+      position: absolute;
+      top: -10px;
+      @include blick-transition;
     }
-    &:first-child {
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-      position: relative;
+
+    &:hover {
       &:before {
-        content: '';
-        display: block;
-        border-width: 5px 5px;
-        border-color: transparent;
+        border-bottom-color: $primary-1;
+      }
+    }
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+}
+
+.dropdown__list--edit{
+  width: 185px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.dropdown__list--edit__item {
+  width: 100%;
+  height: $base * 10;
+  background: $secondary-3;
+  color: $primary-2;
+  padding: $base * 4;
+  cursor: pointer;
+  text-align: left;
+  @include blick-transition;
+
+  .fa {
+    margin-right: $base * 2;
+  }
+
+  &:hover {
+    background: $primary-2;
+    color: $secondary-light;
+  }
+
+  &:first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      border-width: 8px 8px;
+      border-color: transparent;
+      border-bottom-color: $secondary-3;
+      border-style: solid;
+      position: absolute;
+      top: -14px;
+      right: 50px;
+      @include blick-transition;
+    }
+
+    &:hover {
+      &:before {
         border-bottom-color: $primary-2;
-        border-style: solid;
-        position: absolute;
-        top: -10px;
-        @include blick-transition;
-      }
-      &:hover {
-        &:before {
-          border-bottom-color: $primary-1;
-        }
       }
     }
-    &:last-child {
-      border-bottom-left-radius: 3px;
-      border-bottom-right-radius: 3px;
-    }
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 }
 

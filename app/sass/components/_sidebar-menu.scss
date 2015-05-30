@@ -75,6 +75,7 @@
   display: block;
   font-size: $font-size-medium;
   @include blick-transition;
+  @include ellipsis;
   font-weight: $font-weight-light;
   cursor: pointer;
 

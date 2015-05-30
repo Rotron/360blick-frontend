@@ -17,8 +17,12 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     getAllScenes();
 
+    $scope.renameScene = function() {
+        console.log('not implemented.');
+    };
+
     $scope.deleteScene = function(scene, $event) {
-        $event.stopPropagation();
+        $event && $event.stopPropagation();
 
         RequestService.post('scenes/delete', {scene: {id: scene.id}}, function(res) {
                 $rootScope.$broadcast('removeScene', scene);
@@ -52,6 +56,29 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
             }, {
                 id: 1,
                 title: 'Title'
+            }
+        ]
+    };
+
+    var editOptions = {
+        'delete': $scope.deleteScene,
+        'rename': $scope.renameScene
+    };
+
+    $scope.onEditSelect = function(id, item) {
+        editOptions[id](item);
+    };
+
+    $scope.edit = {
+        items: [
+            {
+                id: 'delete',
+                title: 'Delete',
+                icon: 'fa-trash-o'
+            }, {
+                id: 'rename',
+                title: 'Rename',
+                icon: 'fa-pencil'
             }
         ]
     };
