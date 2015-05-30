@@ -69,9 +69,9 @@
                         <h2 class="toggle-list--small__title">{{primitives.title}}</h2>
                     </div>
                     <ul class="selection-list container">
-                        <li class="selection-list__item col span-3" ng-repeat="primitive in primitives.items track by $index"  ng-click="addNewObject(primitive)">
+                        <li class="selection-list__item col span-3" ng-repeat="primitive in primitives.items track by $index"  ng-click="addNewObject(primitive.objecttype)">
                             <i class="fa fa-cube"></i>
-                            <h4 class="selection-list__title">{{primitive}}</h4>
+                            <h4 class="selection-list__title">{{primitive.name}}</h4>
                         </li>
                     </ul>
                 </li>

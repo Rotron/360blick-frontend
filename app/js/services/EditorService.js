@@ -1,39 +1,19 @@
-app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService', function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService) {
+app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService', 'HistoryService', 'LoadSceneService',
+    function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService, HistoryService, LoadSceneService) {
 
 
     var _this = this;
 
     /**
-     * returns new default scene with lightning
-     * @returns {Scene}
-     */
-    this.getNewScene = function(){
-        var scene = new THREE.Scene();
-        var light = new THREE.PointLight( 0xffffff, 1, 0 );
-        light.position.set( 0, 5, 10 );
-        scene.add( light );
-        return scene;
-    };
-
-    /**
      * parse scene loaded from api
      * @param res
      */
-    function resolveScene(res) {
-        if(res.data.file) {
-            var sceneLoader = new THREE.SceneLoader();
-            sceneLoader.parse(JSON.parse(res.data.file), function (e) {
-                _this.scene = e.scene;
-                console.log(_this.scene);
-                if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
-                    $rootScope.$apply();
-                }
-                _this.render();
-            }, '.');
-        } else {
-            _this.scene = _this.getNewScene();
-            _this.render();
+    function resolveScene(scene) {
+        _this.scene = scene;
+        if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
+            $rootScope.$apply();
         }
+        _this.render();
     }
 
     //TODO: move to shortcutservice
@@ -47,8 +27,10 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     }
 
     this.render = function() {
-        requestAnimationFrame( _this.render );
-        _this.renderer.render( _this.scene, _this.camera );
+        if(Object.prototype.toString.call(_this.scene.traverse) === '[object Function]') {
+            requestAnimationFrame( _this.render );
+            _this.renderer.render( _this.scene, _this.camera );
+        }
     };
 
     this.init = function(container){
@@ -67,12 +49,16 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
         this.container[0].appendChild( this.renderer.domElement );
 
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
+        var isTemplateScene = $state.current.name == 'template';
+        var id = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
 
-        if($state.current.name == 'template'){
-            RequestService.post('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
-        } else {
-            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
-        }
+        LoadSceneService.getScene(id, isTemplateScene, resolveScene);
+
+//        if(isTemplateScene){
+//            RequestService.post('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
+//        } else {
+//            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
+//        }
 
     };
 
@@ -87,6 +73,24 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     this.addNewPrimitive = function(type){
         var object = PrimitiveObjectService.getObject(type);
         this.scene.add(object);
+        HistoryService.queue({
+            message: 'object [' + type + '] added',
+            uuid: object.uuid,
+            callback: (function() {
+                this.scene.remove(object);
+            }).bind(this)
+        });
+    }
+
+    this.remove = function(object){
+        this.scene.remove(object);
+        HistoryService.queue({
+            message: 'object removed',
+            uuid: object.uuid,
+            callback: (function() {
+                this.scene.add(object);
+            }).bind(this)
+        });
     }
 
 }]);
