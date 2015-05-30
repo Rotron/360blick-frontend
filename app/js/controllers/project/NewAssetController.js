@@ -4,6 +4,8 @@ app.controller('NewAssetController', ['$scope', '$stateParams', function ($scope
     $scope.currentProjectId = $stateParams['projectId'];
     if(!$scope.data) $scope.data = {};
 
+    $scope.modalHeader = $scope.data.modalHeader || 'New Asset';
+
     $scope.upload = {
         settings: {
             broadcastDomain: $scope.data.broadcastDomain || 'newAsset',

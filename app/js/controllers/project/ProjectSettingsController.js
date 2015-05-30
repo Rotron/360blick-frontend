@@ -8,18 +8,18 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
         broadcastDomain: 'updatedProjectPreviewImage',
         apiEndPoint: 'projects/update',
         paramName: 'data[project][preview_image]',
-        uploadData: {project: {id: $scope.projectId}}
+        uploadData: {project: {id: $scope.projectId}},
+        modalHeader: 'New Preview Image'
     };
 
     $rootScope.$on('updatedProjectPreviewImage', function(event, data) {
         console.log('new project image:', data);
+        $scope.project.preview_image = data.preview_image;
     });
 
     // Get project settings
     RequestService.post('projects/specific', {project_id: $scope.projectId}, function(res) {   
-
             $scope.project = res.data;
-
         }, function(error) {
             console.log(error);
         }

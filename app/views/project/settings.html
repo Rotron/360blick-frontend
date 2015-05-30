@@ -21,8 +21,7 @@
         </li>
         <li>
             <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
-            <!-- Preview Image:
-            <dropdown template-name="edit" on-select="onEditSelect" parent-item="project" data="{'items': edit.items}" class-suffix="light"></dropdown> -->
+            {{project.preview_image}}
         </li>
         <li>
             <button ng-click="updateProjectSettings($event)" class="btn btn--cta">Update Settings</button>
