@@ -21,7 +21,7 @@ app.directive('dropdown',[function() {
             };
 
             scope.toggleDropdown = function($event) {
-                $event.stopPropagation();
+                $event && $event.stopPropagation();
                 scope.active = !scope.active;
             };
 
@@ -31,7 +31,14 @@ app.directive('dropdown',[function() {
                 scope.active = false;
                 scope.select.value = item.title;
                 if(typeof(scope.onSelect) == "function") {
-                    scope.onSelect(item.id, scope.parentItem);
+                    //TODO: quickfixed
+                    var data;
+                    if(scope.data && scope.data.type) {
+                        data = scope.data.type;
+                    } else if (scope.parentItem) {
+                        data = scope.parentItem;
+                    }
+                    scope.onSelect(item.id, data);
                 }
             }
         },

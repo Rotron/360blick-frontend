@@ -52,11 +52,20 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
         });
     };
 
+    this.setCustomProperties = function(reducedObject, object) {
+        angular.extend(reducedObject, object.custom);
+        if(reducedObject.interaction) {
+            reducedObject.interaction = JSON.stringify(reducedObject.interaction);
+        }
+    };
+
     this.getReducedObject = function(object) {
         var reducedObject = {};
         this.setGeneralValues(reducedObject, object);
 
         if(object.type == 'Mesh') this.setMaterial(reducedObject, object);
+
+        if(object.custom) this.setCustomProperties(reducedObject, object);
 
         if(reducedObject.objecttype == 'BoxGeometry') {
             angular.extend(reducedObject, {
@@ -108,7 +117,6 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
         EditorService.getObjects().forEach(function(object) {
            changedObjects.push(_this.getReducedObject(object));
         });
-        console.log(changedObjects);
         var isTemplateScene = $state.current.name == 'template';
         RequestService.post('sceneobjects/update', {scene_id: sceneId, is_templatescene: isTemplateScene, sceneobjects: JSON.stringify(changedObjects)}, function(res) {
                 $rootScope.$broadcast('sceneSaved');

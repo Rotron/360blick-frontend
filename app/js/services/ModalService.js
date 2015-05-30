@@ -40,6 +40,11 @@ app.service('ModalService',['$rootScope', 'btfModal', function($rootScope, btfMo
             controller: 'SelectTextureController',
             controllerAs: 'ctrl',
             templateUrl: 'partials/dialog/selectTexture.html'
+        }),
+        'newInteraction': btfModal({
+            controller: 'NewInteractionController',
+            controllerAs: 'ctrl',
+            templateUrl: 'partials/dialog/newInteraction.html'
         })
     };
 

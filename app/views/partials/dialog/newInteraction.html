@@ -1,0 +1,33 @@
+<div class="dialog">
+    <div class="dialog__content">
+        <div class="dialog__header">
+            <button class="dialog__close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="dialog__title">Interaction</h4>
+        </div>
+        <div class="dialog__body">
+            <div class="col span-6">
+                Interaction
+                <fieldset class="row">
+                    <dropdown template-name="select" on-select="onInteractionSelect" data="{'currentItemId': currentInteractionId, 'items': interactionsList}"></dropdown>
+                </fieldset>
+                <div ng-if="isNeededProperty('scene')">
+                    Scenes
+                    <fieldset class="row">
+                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scene'}"></dropdown>
+                    </fieldset>
+                </div>
+                <div ng-if="isNeededProperty('object')">
+                    Objects
+                    <fieldset class="row">
+                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': sceneObjects, type: 'object'}"></dropdown>
+                    </fieldset>
+                </div>
+                <div class="row">
+                    <button ng-click="addInteraction(); closeIt()" class="btn btn--cta btn--submit">Add</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

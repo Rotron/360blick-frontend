@@ -20,6 +20,23 @@ angular.module('constants', [])
         notAuthorized: 'auth-not-authorized'
     })
 
+    .constant('SUPPORTED_INTERACTIONS', {
+        'goToScene': {
+            title: 'Go to Scene:',
+            properties: [
+                'scene',
+                'effectIn',
+                'effectOut'
+            ]
+        },
+        'goToObject': {
+            title: 'Go to Object:',
+            properties: [
+                'object'
+            ]
+        }
+    })
+
     .constant('SUPPORTED_OBJECTS', [
         {
             title: '3D Primitives',
@@ -43,18 +60,6 @@ angular.module('constants', [])
             ]
         }, {
             title: '2D Primitives',
-            items: [
-                {
-                    name: 'empty1',
-                    objecttype: 'empty1'
-                },
-                {
-                    name: 'empty1',
-                    objecttype: 'empty1'
-                }
-            ]
-        }, {
-            title: 'Models',
             items: [
                 {
                     name: 'empty1',

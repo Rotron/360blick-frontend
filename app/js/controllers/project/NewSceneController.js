@@ -1,6 +1,8 @@
 'use strict';
 
-app.controller('NewSceneController', ['$scope', 'RequestService', '$stateParams', '$rootScope', function ($scope, RequestService, $stateParams, $rootScope) {
+app.controller('NewSceneController', ['$scope', 'RequestService', '$stateParams', '$rootScope',
+    function ($scope, RequestService, $stateParams, $rootScope) {
+
     $scope.currentProjectId = $stateParams['projectId'];
     $scope.currentTemplateId = null;
     $scope.sceneTemplates = [];
