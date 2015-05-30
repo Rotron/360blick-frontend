@@ -5,10 +5,15 @@
       $scope.projectId = $stateParams['projectId'];
       $scope.username = $stateParams['username'];
 
+      $scope.interactionProperties = {
+          'scenes': null,
+          'objects': null
+      };
+
       $scope.interactions = SUPPORTED_INTERACTIONS;
       $scope.currentInteractionId = null;
 
-      function getSceneObjects() {
+      function getreducedSceneObjects() {
           var objects = $scope.data.item.parent.children;
           var reducedObjects = [];
           for(var i = 0; i < objects.length; i++) {
@@ -22,7 +27,7 @@
           return reducedObjects;
       }
 
-      $scope.sceneObjects = getSceneObjects();
+      $scope.sceneObjects = getreducedSceneObjects();
       $scope.currentObjectId = $scope.data.item.id;
 
       $scope.scenes = [];
@@ -46,6 +51,19 @@
               }
           }
           return false;
+      }
+
+      $scope.onInteractionSelect = function(id) {
+          $scope.currentInteractionId = id;
+
+      };
+
+      $scope.onPropertySelect = function(val, type){
+          $scope.interactionProperties[type] = val;
+      };
+
+      $scope.addInteraction = function() {
+           console.log($scope.currentInteractionId);
       }
 
   }]);

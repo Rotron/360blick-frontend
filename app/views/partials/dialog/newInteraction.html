@@ -13,17 +13,17 @@
                 <div ng-if="isNeededProperty('scenes')">
                     Scenes
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="" data="{'items': (scenes | filter: {id: '!'+currentSceneId})}"></dropdown>
+                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scenes'}"></dropdown>
                     </fieldset>
                 </div>
                 <div ng-if="isNeededProperty('objects')">
                     Objects
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="" data="{'items': sceneObjects}"></dropdown>
+                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': sceneObjects, type: 'objects'}"></dropdown>
                     </fieldset>
                 </div>
                 <div class="row">
-                    <button ng-click=" closeIt()" class="btn btn--cta btn--submit">Add</button>
+                    <button ng-click="addInteraction(); closeIt()" class="btn btn--cta btn--submit">Add</button>
                 </div>
             </div>
 

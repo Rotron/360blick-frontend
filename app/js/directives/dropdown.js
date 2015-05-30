@@ -22,7 +22,8 @@ app.directive('dropdown',[function() {
                 scope.active = false;
                 scope.select.value = value;
                 if(typeof(scope.onSelect) == "function") {
-                    scope.onSelect(id);
+                    var type = (scope.data && scope.data.type) ? scope.data.type : null
+                    scope.onSelect(id, type);
                 }
             }
         },
