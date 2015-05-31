@@ -75,13 +75,15 @@
   }
 }
 
-.dropdown__list--edit{
+.dropdown__list--edit,
+.dropdown__list--user {
   width: 185px;
   border-radius: 3px;
   margin-top: 10px;
 }
 
-.dropdown__list--edit__item {
+.dropdown__list--edit__item,
+.dropdown__list--user__item {
   width: 100%;
   height: $base * 9;
   line-height: $base * 9;

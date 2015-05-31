@@ -1,15 +1,18 @@
-<div class="interaction-bar container">
-    <div class="col span-6">
-        <h2>{{user.nick}} Settings</h2>
+<div class="interaction-bar container settings">
+    <form name="settingsForm" class="container" ng-submit="updateUserSettings($event)" novalidate>
+        <fieldset class="row">
+            <placeholder-input value="user.nick" label="Nick" type="text"></placeholder-input>
+        </fieldset>
+        <fieldset class="row">
+            <placeholder-input value="user.email" label="Email" type="email"></placeholder-input>
+        </fieldset>
+        <div class="row">
+            <button class="btn btn--round btn--submit">Update Profile</button>
+        </div>
+    </form>
+    <br>
+    <div>
+        <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
+        {{user.preview_image}}
     </div>
-    <ul class="col span-12 form">
-        
-        <li>
-            <!-- Preview Image:
-            <dropdown template-name="edit" on-select="onEditSelect" parent-item="project" data="{'items': edit.items}" class-suffix="light"></dropdown> -->
-        </li>
-        <li>
-            <button ng-click="updateUserSettings($event)" class="btn btn--cta">Update Profile</button>
-        </li>
-    </ul>
 </div>
