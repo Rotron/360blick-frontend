@@ -17,6 +17,11 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
         return scene;
     };
 
+    /**
+     * loops over sceneobjects and gets three.js objects from PrimitiveObjectService
+     * @param res
+     * @param callback
+     */
     this.resolve = function(res, callback) {
 
         var scene;
@@ -24,12 +29,10 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
             scene = new THREE.Scene();
             var objectToAdd = {};
             res.data.forEach(function(sceneObject) {
-                var id = sceneObject.id;
-                console.log(sceneObject);
                 if(sceneObject.name != null) {
                     objectToAdd = PrimitiveObjectService.getObject(sceneObject.objecttype, sceneObject);
                     objectToAdd.custom = {
-                        id: id,
+                        id: sceneObject.id,
                         interaction: JSON.parse(sceneObject.interaction) || null
                     };
                     scene.add(objectToAdd);
@@ -42,6 +45,12 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
         callback(scene);
     };
 
+    /**
+     * loads sceneObjects from backend
+     * @param sceneId
+     * @param isTemplateScene
+     * @param callback
+     */
     this.getScene = function(sceneId, isTemplateScene, callback) {
         RequestService.post('sceneobjects/get', {scene_id: sceneId, is_templatescene: isTemplateScene}, function(res) {
             _this.resolve(res, callback);

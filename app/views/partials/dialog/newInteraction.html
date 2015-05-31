@@ -13,7 +13,7 @@
                 <div ng-if="isNeededProperty('scene')">
                     Scenes
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scene'}"></dropdown>
+                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scenes'}"></dropdown>
                     </fieldset>
                 </div>
                 <div ng-if="isNeededProperty('object')">
