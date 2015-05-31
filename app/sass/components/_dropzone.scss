@@ -38,7 +38,7 @@ $dropzone-size: 300px;
   .dz-preview {
     position: relative;
     display: inline-block;
-    width: 50%;
+    width: 120px;
     margin: 0.5em;
 
     .dz-progress {
@@ -52,6 +52,15 @@ $dropzone-size: 300px;
         width: 0;
         background: $cta-1;
       }
+    }
+
+    .dz-size span {
+
+    }
+
+    .dz-filename span {
+      @include ellipsis;
+      display: block;
     }
 
     .dz-error-message {

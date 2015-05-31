@@ -121,18 +121,18 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
      */
     function getUploadConfig(data, settings) {
         return {
-            'options': {
-                'url': getFullActionUrl(settings.apiEndPoint),
-                'paramName': settings.paramName
+            options: {
+                url: getFullActionUrl(settings.apiEndPoint),
+                paramName: settings.paramName
             },
-            'eventHandlers': {
-                'sending': function (file, xhr, formData) {
+            eventHandlers: {
+                sending: function (file, xhr, formData) {
                     var fields = getPostFields(data);
                     angular.forEach(fields, function(val, key) {
                         formDataAppender(formData, val, key);
                     });
                 },
-                'success': function (file, res) {
+                success: function (file, res) {
                     $rootScope.$broadcast(settings.broadcastDomain, res.data);
                 }
             }
