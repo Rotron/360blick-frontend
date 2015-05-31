@@ -1,4 +1,23 @@
 <div class="interaction-bar container">
+    <form name="loginForm" class="container" ng-submit="updateProjectSettings($event)" novalidate>
+        <fieldset class="row">
+            <placeholder-input value="project.title" label="Username" type="text"></placeholder-input>
+        </fieldset>
+        <fieldset class="row">
+            <placeholder-input value="project.description" label="Description" type="text"></placeholder-input>
+        </fieldset>
+        <div class="row">
+            <button class="btn btn--round btn--submit">Update Settings</button>
+        </div>
+    </form>
+    <br>
+    <div>
+        <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
+        {{project.preview_image}}
+    </div>
+
+</div>
+<div class="interaction-bar container">
     <div class="col span-6">
         <button ng-click="generateExport($event)" class="btn btn--cta">Generate Export</button>
     </div>
@@ -14,3 +33,9 @@
         <div>size: {{export.size | fileSize}}</div>
     </li>
 </ol>
+
+<div class="container settings">
+    <div class="col span-6">
+
+    </div>
+</div>

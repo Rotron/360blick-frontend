@@ -83,12 +83,14 @@
 
 .dropdown__list--edit__item {
   width: 100%;
-  height: $base * 10;
+  height: $base * 9;
+  line-height: $base * 9;
   background: $secondary-3;
   color: $primary-2;
-  padding: $base * 4;
+  padding: 0 $base * 4;
   cursor: pointer;
   text-align: left;
+  border-bottom: 1px solid darken($secondary-3, 5%);
   @include blick-transition;
 
   .fa {
@@ -126,6 +128,7 @@
   }
 
   &:last-child {
+    border-bottom: none;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
   }
