@@ -17,8 +17,7 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
         $scope.project.preview_image = data.preview_image;
     });
 
-    // Get project settings
-    RequestService.post('projects/specific', {project_id: $scope.projectId}, function(res) {   
+    RequestService.post('projects/specific', {project_id: $scope.projectId}, function(res) {
             $scope.project = res.data;
         }, function(error) {
             console.log(error);
@@ -28,8 +27,14 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
     $scope.updateProjectSettings = function($event) {
         $event.stopPropagation();
 
-        console.log($scope.updatedProject);
-        RequestService.post('projects/update', {project: $scope.updatedProject}, function(res) {
+        var data = {
+            project: {
+                id: $scope.project.id,
+                title: $scope.project.title,
+                description: $scope.project.description
+            }
+        };
+        RequestService.post('projects/update', data, function(res) {
               $scope.project = res.data;
             }, function(error) {
                 console.log(error);
@@ -37,7 +42,6 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
         );
     };
 
-    // $scope.projectTitle = $stateParams.title;
     $scope.exports = [];
 
     $scope.startDownload = function(item) {

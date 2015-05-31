@@ -1,32 +1,21 @@
-
 <div class="interaction-bar container">
-    <div class="col span-6">
-        <h2>{{project.title}} Settings</h2>
-        <div>
-            {{project.description}}
+    <form name="loginForm" class="container" ng-submit="updateProjectSettings($event)" novalidate>
+        <fieldset class="row">
+            <placeholder-input value="project.title" label="Username" type="text"></placeholder-input>
+        </fieldset>
+        <fieldset class="row">
+            <placeholder-input value="project.description" label="Description" type="text"></placeholder-input>
+        </fieldset>
+        <div class="row">
+            <button class="btn btn--round btn--submit">Update Settings</button>
         </div>
+    </form>
+    <br>
+    <div>
+        <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
+        {{project.preview_image}}
     </div>
-    <ul class="col span-12 form">
-        <li>
-            New Title:
-            <input ng-model="updatedProject.title">
-        </li>
-        <li>
-            New Description:
-            <input ng-model="updatedProject.description">
-        </li>
-        <li>
-            Is Private:
-            <input type="checkbox" ng-model="updatedProject.is_private" ng-checked="updatedProject.is_private">
-        </li>
-        <li>
-            <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
-            {{project.preview_image}}
-        </li>
-        <li>
-            <button ng-click="updateProjectSettings($event)" class="btn btn--cta">Update Settings</button>
-        </li>
-    </ul>
+
 </div>
 <div class="interaction-bar container">
     <div class="col span-6">
