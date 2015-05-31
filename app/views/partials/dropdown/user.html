@@ -1,0 +1,15 @@
+<div class="dropdown dropdown--user">
+    <div class="dropdown__ghost" ng-class="{'active': active}" ng-click="toggleGhost($event)"></div>
+    <button class="btn btn--dropdown btn--dropdown--user dropdown__trigger" ng-click="toggleDropdown($event)">
+        <div class="btn--dropdown--user__nick">{{data.user.nick}}</div>
+        <div class="btn--dropdown--user__email">{{data.user.email | truncate:false:18:'..'}}</div>
+        <div class="btn--dropdown--user__image" ng-style="{'background-image':'url(' + data.user.profile_image + ')'}"></div>
+    </button>
+    <div class="dropdown__toggle" ng-class="{'active': active}">
+        <ul class="dropdown__list dropdown__list--user">
+            <li class="dropdown__list__item dropdown__list--user__item" ng-repeat="item in data.items" ng-click="selectDropdownItem(item, $event)">
+                <i class="fa {{item.icon}}"></i>{{item.title}}
+            </li>
+        </ul>
+    </div>
+</div>

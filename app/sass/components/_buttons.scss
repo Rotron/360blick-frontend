@@ -113,6 +113,43 @@
   }
 }
 
+.btn--dropdown--user {
+  height: $banner-height - 1px;
+  background: $secondary-3;
+  width: 100%;
+  padding: 0;
+  padding-right: 95px;
+  padding-left: 20px;
+  @include blick-transition();
+
+  &:hover {
+    background: $secondary-2;
+  }
+}
+
+.btn--dropdown--user__nick {
+  color: $primary-2;
+  font-weight: 600;
+  text-align: right;
+  font-size: 18px;
+}
+
+.btn--dropdown--user__email {
+  color: $primary-1;
+  text-align: right;
+}
+
+.btn--dropdown--user__image {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  background: $primary-2;
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  border-radius: 3px;
+}
+
 .btn--select {
   position: relative;
   border-radius: 0;

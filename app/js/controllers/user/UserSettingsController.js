@@ -6,9 +6,9 @@ app.controller('UserSettingsController', ['$scope', '$stateParams', 'RequestServ
     $scope.uploadOptions = {
         broadcastDomain: 'updatedUserImage',
         apiEndPoint: 'users/update',
-        paramName: 'data[asset][file]',
+        paramName: 'data[profile_image]',
         uploadData: {},
-        modalHeader: 'New Preview Image'
+        modalHeader: 'New Profile Image'
     };
 
     $rootScope.$on('updatedUserImage', function(event, data) {
@@ -16,11 +16,9 @@ app.controller('UserSettingsController', ['$scope', '$stateParams', 'RequestServ
         $scope.user.profile_image = data.profile_image;
     });
 
-    // Get user settings
-    RequestService.post('users/get_data', {}, function(res) {   
-
+    RequestService.post('users/get_data', {}, function(res) {
             $scope.user = res.data;
-
+            console.log($scope.user);
         }, function(error) {
           console.log(error);
         }
