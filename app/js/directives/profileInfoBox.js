@@ -11,10 +11,10 @@ app.directive('profileInfoBox', ['SessionService', 'ENV_CONFIG', 'AuthService', 
             };
 
             scope.goUserState = function() {
-                $state.go('user');
+                $state.go('user', {username: SessionService.nick});
             };
             scope.goSettingsState = function() {
-                $state.go('user.settings');
+                $state.go('user.settings', {username: SessionService.nick});
             };
 
             var dropdownActions = {
