@@ -24,6 +24,7 @@ var gulp = require('gulp'),
 gulp.task('webserver', function() {
     gulp.src('./app')
         .pipe(webserver({
+            host: '0.0.0.0',
             livereload: false,
             open: true,
             fallback: 'index.html'

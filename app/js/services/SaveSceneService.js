@@ -2,11 +2,21 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
 
     var _this = this;
 
+    /**
+     * returns objecttype of sceneObject
+     * @param object
+     * @returns {*}
+     */
     this.getObjectType = function(object) {
         if(object.type !== 'Mesh') return object.type;
         return object.geometry && object.geometry.type;
     };
 
+    /**
+     * set values all objects have in common
+     * @param reducedObject
+     * @param object
+     */
     this.setGeneralValues = function(reducedObject, object) {
         angular.extend(reducedObject, {
             id:         object.custom && object.custom.id || undefined,

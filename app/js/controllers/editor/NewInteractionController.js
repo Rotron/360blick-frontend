@@ -5,6 +5,8 @@
       $scope.projectId = $stateParams['projectId'];
       $scope.username = $stateParams['username'];
 
+      $scope.interactions = SUPPORTED_INTERACTIONS;
+
       $scope.interactionProperties = {
           'scene': null,
           'object': null,
@@ -12,8 +14,10 @@
           'effectOut': null
       };
 
-      $scope.interactions = SUPPORTED_INTERACTIONS;
-
+      /**
+       * transform interactions to array with necessary properties
+       * @returns {Array}
+       */
       function getInteractionList() {
           var interactions = [];
           for(var key in SUPPORTED_INTERACTIONS) {
@@ -29,6 +33,10 @@
       $scope.interactionsList = getInteractionList();
       $scope.currentInteractionId = null;
 
+      /**
+       * reduce scene object - fix for angular bug TODO: find clean solution
+       * @returns {Array}
+       */
       function getreducedSceneObjects() {
           var objects = $scope.data.item.parent.children;
           var reducedObjects = [];
@@ -42,16 +50,10 @@
           }
           return reducedObjects;
       }
-
       $scope.sceneObjects = getreducedSceneObjects();
       $scope.currentObjectId = $scope.data.item.id;
 
-      $scope.scenes = [];
       $scope.currentSceneId = $stateParams['sceneId'];
-
-      $scope.onInteractionSelect = function(id) {
-          $scope.currentInteractionId = id;
-      };
 
       RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
               $scope.scenes = res.data;
@@ -59,21 +61,29 @@
               console.log(error);
           }
       );
-
+      /**
+       * checks if property needs to be shown for specific interaction
+       * @param type
+       * @returns {boolean}
+       */
       $scope.isNeededProperty = function(type) {
           var currentInteraction = $scope.interactions[$scope.currentInteractionId];
-          return currentInteraction && currentInteraction.properties && currentInteraction.properties.indexOf(type) !== -1;
+          return !!(currentInteraction && currentInteraction.properties && currentInteraction.properties.indexOf(type) !== -1);
       };
 
       $scope.onInteractionSelect = function(id) {
           $scope.currentInteractionId = id;
-
       };
 
       $scope.onPropertySelect = function(val, type){
           $scope.interactionProperties[type] = val;
       };
 
+      /**
+       * returns parameters needed for specific interaction
+       * @param type
+       * @returns {*}
+       */
       $scope.getInteractionParameters = function(type) {
           if(!$scope.interactions[type].properties){
               return null;
