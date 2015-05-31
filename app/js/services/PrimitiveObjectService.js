@@ -1,7 +1,6 @@
 app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraService', 'SUPPORTED_OBJECTS', '$rootScope', function(RequestService, ENV_CONFIG, CameraService, SUPPORTED_OBJECTS, $rootScope) {
 
-    var container = angular.element(document.getElementById('editor-view-container'))[0];
-
+    /********************************** copy to player (objectLoader) **************************************************/
     this.getGeometry = function(type, properties) {
         switch(type) {
             case 'SphereGeometry':
@@ -41,7 +40,7 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         }
     };
 
-    this.getMaterial = function(properties) {
+    this.getMaterial = function() {
         var material = new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x0088DA, specular: 0x000099, shininess: 30, shading: THREE.FlatShading, side: THREE.DoubleSide } );
         material.side = THREE.DoubleSide;
         material.transparent = true;
@@ -49,11 +48,13 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
     };
 
     this.setDefault = function(object) {
-        var cameralookAt = CameraService.getLookAtPoint(20);
-        object.position.x = cameralookAt.x;
-        object.position.y = cameralookAt.y;
-        object.position.z = cameralookAt.z;
-        object.rotation.y = CameraService.getCamera().rotation.y;
+        if(CameraService) {
+            var cameralookAt = CameraService.getLookAtPoint(20);
+            object.position.x = cameralookAt.x;
+            object.position.y = cameralookAt.y;
+            object.position.z = cameralookAt.z;
+            object.rotation.y = CameraService.getCamera().rotation.y;
+        }
     };
 
     this.setPosition = function(object, properties) {
@@ -107,10 +108,6 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         }
     };
 
-    this.getSupportedObjectTypes = function(){
-        return SUPPORTED_OBJECTS;
-    };
-
     this.mapTexture = function(item, assetUrl, parameters){
         THREE.ImageUtils.crossOrigin = '';
         item.material = new THREE.MeshPhongMaterial( {
@@ -125,9 +122,14 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
             item.material.wireframe    = parameters.material.mapWireframes;
             item.material.opacity      = parameters.material.opacity;
         }
-        if ($rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
+        if ($rootScope && $rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
             $rootScope.$apply();
         }
-    }
+    };
+    /************************************ /copy to player (objectLoader) ************************************************/
+
+    this.getSupportedObjectTypes = function(){
+        return SUPPORTED_OBJECTS;
+    };
 
 }]);
