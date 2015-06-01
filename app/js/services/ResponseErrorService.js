@@ -8,9 +8,7 @@ app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootSco
      440: AUTH_EVENTS.sessionTimeout
      */
 
-    function okCallback() {
-        console.log('ok clicked');
-    }
+    function okCallback() {}
 
     function unhandledError(data) {
         data.okCallback = okCallback;
@@ -29,9 +27,12 @@ app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootSco
         default: unhandledError
     };
 
-    this.handle = function(data, status) {
-        if(data.error === undefined) return;
+    var ignoredStates = [404];
+
+    this.handle = function(res, status) {
+        if(ignoredStates[status]) return;
         var action = errorActions[status] || errorActions.default;
+        var data = res.error || {};
         action(data);
     };
 
