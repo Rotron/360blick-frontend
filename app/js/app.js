@@ -299,7 +299,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 
     $locationProvider.html5Mode(true);
 
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise({
+        redirectTo: function(current, path, search) {
+            if(search.goto) {
+                return '/' + search.goto;
+            }
+            return '/';
+        }
+    });
 }]);
 
 app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService',
