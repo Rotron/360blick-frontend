@@ -5,8 +5,7 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
         RequestService.post('users/login', credentials, function(res){
                 SessionService.create(res.token, res.nick, res.email, res.role, res.profile_image);
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, {nick: res.nick});
-            },
-            function(){
+            }, function() {
                 $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
             }
         );
@@ -20,8 +19,7 @@ app.service('AuthService', ['RequestService', 'SessionService', '$rootScope', 'A
         RequestService.post('users/logout', credentials, function(res) {
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
                 SessionService.destroy();
-            },
-            function(error){
+            }, function(error) {
                 $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
             }
         );

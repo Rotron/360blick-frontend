@@ -1,4 +1,4 @@
-app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootScope', function ($http, ENV_CONFIG, SessionService, $rootScope) {
+app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', 'ResponseErrorService', '$rootScope', function ($http, ENV_CONFIG, SessionService, ResponseErrorService, $rootScope) {
     /**
      * getCredentialsObject
      * e.g. getCredentialsObject()
@@ -50,15 +50,9 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
             .success(function(res) {
                 callback(res);
             })
-            .error(function(res) {
-               errorCallback(res);
-
-                /* $rootScope.$broadcast({
-                 401: AUTH_EVENTS.notAuthenticated,
-                 403: AUTH_EVENTS.notAuthorized,
-                 419: AUTH_EVENTS.sessionTimeout,
-                 440: AUTH_EVENTS.sessionTimeout
-                 */
+            .error(function(data, status) {
+                errorCallback(data);
+                ResponseErrorService.handle(data, status);
             });
     };
     /**

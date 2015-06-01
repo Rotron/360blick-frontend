@@ -1,0 +1,16 @@
+<div class="dialog" ng-click="checkCloseIt($event)">
+    <div class="dialog__content">
+        <div class="dialog__header">
+            <button class="dialog__close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="dialog__title">{{modalHeader}}</h4>
+        </div>
+        <div class="dialog__body">
+            <div class="row">
+                Error: {{message}}
+            </div>
+            <div class="row">
+                <button ng-click="okCallback(); closeIt()" class="btn btn--submit">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
