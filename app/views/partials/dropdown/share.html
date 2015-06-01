@@ -1,14 +1,13 @@
 <div class="dropdown">
-    <div class="dropdown__ghost" ng-class="{'active': active}" ng-click="active = !active"></div>
-    <button class="btn btn--cta btn--dropdown dropdown__trigger" ng-click="toggleDropdown()"><i class="fa fa-link"></i>Share<i class="fa fa-chevron-down"></i></button>
+    <div class="dropdown__ghost" ng-class="{'active': active}" ng-click="toggleGhost($event)"></div>
+    <button class="btn btn--cta btn--dropdown dropdown__trigger" ng-click="toggleDropdown($event)"><i class="fa fa-link"></i>Share<i class="fa fa-chevron-down"></i></button>
     <div class="dropdown__toggle" ng-class="{'active': active}">
         <ul class="dropdown__list dropdown__list--default">
-            <li class="dropdown__list__item">
+            <li class="dropdown__list--default__item">
                 <a>
                     Url
                 </a>
             </li>
         </ul>
-
     </div>
 </div>

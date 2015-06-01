@@ -1,12 +1,9 @@
-app.directive('navHeader', ['AuthService', function (AuthService) {
+app.directive('navHeader', [function () {
     return {
         restrict: 'E',
         templateUrl: 'partials/navHeader.html',
         replace: true,
         link: function(scope, elem, attrs) {
-            scope.logout = function() {
-                AuthService.logout();
-            };
         }
     };
 }]);

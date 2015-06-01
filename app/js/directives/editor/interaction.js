@@ -1,14 +1,14 @@
-app.directive('texture',[ function() {
+app.directive('interaction',[function() {
 
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'partials/texture.html',
+        templateUrl: 'partials/editor/interaction.html',
         scope: {
-            title: "@",
             item: "="
         },
         link: function(scope) {
+
         }
     };
 }]);

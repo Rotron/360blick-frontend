@@ -1,17 +1,19 @@
-app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $crypto) {
+app.service('SessionService', ['USER_ROLES', '$crypto', '$rootScope', function (USER_ROLES, $crypto, $rootScope) {
 
     this.token = null;
     this.nick = null;
     this.email = null;
     this.userRole = USER_ROLES.guest;
+    this.profileImage = null;
 
     var _this = this;
 
-    this.create = function (token, nick, email, userRole) {
+    this.create = function (token, nick, email, userRole, profileImage) {
         this.token = token;
         this.nick = nick;
         this.email = email;
         this.userRole = userRole;
+        this.profileImage = profileImage;
 
         this.setLocalCredentials();
     };
@@ -30,7 +32,8 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
             token: this.token,
             nick: this.nick,
             email: this.email,
-            userRole: this.userRole
+            userRole: this.userRole,
+            profileImage: this.profileImage
         }
     };
 
@@ -41,10 +44,14 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
     this.getRole = function () {
         return this.userRole;
     };
-    this.setLocalCredentials = function () {
 
+    this.renewLocalCredentials = function() {
+        this.removeLocalCredentials();
+        this.setLocalCredentials();
+    };
+
+    this.setLocalCredentials = function () {
         var userData = JSON.stringify(this.getUser());
-        console.log(userData);
 
         var encrypted = $crypto.encrypt(userData, '360crd');
         localStorage.setItem('blick-ls', encrypted);
@@ -69,9 +76,14 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
         var localCredentials = this.getLocalCredentials();
 
         if(localCredentials) {
-            this.create(localCredentials.token, localCredentials.nick, localCredentials.email, localCredentials.userRole);
+            this.create(localCredentials.token, localCredentials.nick, localCredentials.email, localCredentials.userRole, localCredentials.profileImage);
         }
     };
+
+    $rootScope.$on('updatedUserImage', (function(event, data) {
+        this.profileImage = data.profile_image;
+        this.renewLocalCredentials();
+    }).bind(this));
 
     return this;
 }]);

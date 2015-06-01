@@ -3,7 +3,7 @@ app.directive('xyzInput',[ function() {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'partials/xyzInput.html',
+        templateUrl: 'partials/editor/xyzInput.html',
         scope: {
             title: "@",
             icon: "@",

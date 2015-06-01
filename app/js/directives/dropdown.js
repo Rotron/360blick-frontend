@@ -5,23 +5,40 @@ app.directive('dropdown',[function() {
         scope: {
             data: '=',
             onSelect: '=',
-            classSuffix: '@'
+            classSuffix: '@',
+            parentItem: '='
         },
         link: function(scope, element, attrs) {
             scope.active = false;
+
             scope.select = {
-                value: undefined
+                value: null
             };
 
-            scope.toggleDropdown = function() {
+            scope.toggleGhost = function($event) {
+                $event && $event.stopPropagation();
                 scope.active = !scope.active;
             };
 
-            scope.selectDropdownItem = function(id, value) {
+            scope.toggleDropdown = function($event) {
+                $event && $event.stopPropagation();
+                scope.active = !scope.active;
+            };
+
+            scope.selectDropdownItem = function(item, $event) {
+                $event.stopPropagation();
+
                 scope.active = false;
-                scope.select.value = value;
+                scope.select.value = item.title;
                 if(typeof(scope.onSelect) == "function") {
-                    scope.onSelect(id);
+                    //TODO: quickfixed
+                    var data;
+                    if(scope.data && scope.data.type) {
+                        data = scope.data.type;
+                    } else if (scope.parentItem) {
+                        data = scope.parentItem;
+                    }
+                    scope.onSelect(item.id, data);
                 }
             }
         },

@@ -36,17 +36,24 @@
                 </ul>
                 <ul class="editor-options-list">
                     <li class="editor-options-list__item">
+                        <div class="col span-9">
+                            Wireframes
+                        </div>
+                        <div class="col span-3">
+                            <input history-input type="checkbox" ng-model="item.material.wireframe">
+                        </div>
+                    </li>
+                </ul>
+                <ul class="editor-options-list">
+                    <li class="editor-options-list__item">
                         <min-max-value title="Opacity" item="item.material.opacity" minimum="0" maximum="1" step-size="0.1"></min-max-value>
                     </li>
                 </ul>
             </li>
+            <interaction ng-if="!isTemplateScene" item="item"></interaction>
             <li class="toggle-list--small__item">
-                <div class="toggle-list--small__header">
-                    <h2 class="toggle-list--small__title">Shadow</h2>
-                </div>
+                <button class="btn btn--danger" ng-click="remove(item)">remove</button>
             </li>
         </ul>
     </div>
-
-
 </li>

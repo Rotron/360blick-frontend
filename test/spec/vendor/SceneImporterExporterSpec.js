@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Vendor:SceneImporterExporter: ', function () {
+xdescribe('Vendor:SceneImporterExporter: ', function () {
 
     beforeEach(module('360blickFrontendApp'));
 

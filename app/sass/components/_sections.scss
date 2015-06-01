@@ -56,6 +56,28 @@
   margin-left: -65px;
 }
 
+.section--gallery__login {
+  position: absolute;
+  bottom: 100px;
+  width: 240px;
+  left: 50%;
+  margin-left: -120px;
+  color: $secondary-light;
+  line-height: 2;
+  padding: 0 20px;
+
+  a {
+    color: $secondary-light;
+    border-bottom: 1px solid $secondary-light;
+    @include blick-transition();
+
+    &:hover {
+      color: $primary-cta;
+      border-color: $primary-cta;
+    }
+  }
+}
+
 .section--features {
   background-color: $secondary-light;
 }

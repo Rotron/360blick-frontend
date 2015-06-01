@@ -175,8 +175,8 @@ THREE.SceneLoader.prototype = {
             var mat, dst, pos, rot, scl, quat;
 
             for ( var objID in children ) {
-
                 // check by id if child has already been handled,
+                // if not, create new object
                 // if not, create new object
 
                 var object = result.objects[ objID ];
@@ -191,6 +191,7 @@ THREE.SceneLoader.prototype = {
                         if ( objJSON.loading === undefined ) {
 
                             material = result.materials[ objJSON.material ];
+
 
                             objJSON.loading = true;
 
@@ -648,7 +649,6 @@ THREE.SceneLoader.prototype = {
         };
 
         function async_callback_gate() {
-
             var progress = {
 
                 totalModels : total_models,
@@ -661,7 +661,6 @@ THREE.SceneLoader.prototype = {
             scope.callbackProgress( progress, result );
 
             scope.onLoadProgress();
-
             if ( counter_models === 0 && counter_textures === 0 ) {
 
                 finalize();
@@ -703,7 +702,6 @@ THREE.SceneLoader.prototype = {
         };
 
         var callbackTexture = function ( count ) {
-
             counter_textures -= count;
             async_callback_gate();
 
@@ -831,7 +829,7 @@ THREE.SceneLoader.prototype = {
 
             } else if ( geoJSON.type === "cylinder" ) {
 
-                geometry = new THREE.CylinderGeometry( geoJSON.topRad, geoJSON.botRad, geoJSON.height, geoJSON.radSegs, geoJSON.heightSegs );
+                geometry = new THREE.CylinderGeometry( geoJSON.radiusTop, geoJSON.radiusBottom, geoJSON.height, geoJSON.radiusSegments, geoJSON.heightSegments, geoJSON.openEnded, geoJSON.thetaStart, geoJSON.thetaLength );
                 geometry.name = geoID;
                 result.geometries[ geoID ] = geometry;
 
@@ -896,7 +894,6 @@ THREE.SceneLoader.prototype = {
             } else {
 
                 counter_textures += 1;
-
                 scope.onLoadStart();
 
             }
@@ -942,7 +939,6 @@ THREE.SceneLoader.prototype = {
                 }
 
             } else {
-
                 var fullUrl = get_url( textureJSON.url, data.urlBaseType );
                 var textureCallback = generateTextureCallback( 1 );
 
@@ -958,7 +954,6 @@ THREE.SceneLoader.prototype = {
                     loader.crossOrigin = '';//for loading images from foreign servers
 
                     ( function ( texture ) {
-
                         loader.load( fullUrl, function ( image ) {
 
                             texture.image = image;

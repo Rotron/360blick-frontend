@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', function ($scope, $stateParams, RequestService, $rootScope) {
+app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', 'ModalService', function ($scope, $stateParams, RequestService, $rootScope, $state, ModalService) {
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
 
@@ -17,8 +17,77 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     getAllScenes();
 
+    $scope.settingScene = function(item) {
+        $state.go('user.project.scenes.settings', {sceneId: item.id});
+    };
 
-    $rootScope.$on('newSceneCreated', function(event, data){
+    $scope.deleteScene = function(scene) {
+        var confirmCallback = function() {
+            RequestService.post('scenes/delete', {scene: {id: scene.id}}, function(res) {
+                    $rootScope.$broadcast('removeScene', scene);
+                }, function(error) {
+                    console.log(error);
+                }
+            );
+        };
+
+        ModalService.openModal('confirm', {
+            title: 'Delete Scene?',
+            message: 'Delete Scene? This action cannot be revoked.',
+            confirmCallback: confirmCallback,
+            cancelCallback: function() {}
+        });
+    };
+
+    $rootScope.$on('removeScene', function(event, data){
+        $scope.scenes.splice($scope.scenes.indexOf(data), 1);
+    });
+
+    $rootScope.$on('newScene', function(event, data){
         $scope.scenes.push(data);
     });
+
+    $scope.onOrderSelect = function(id) {
+        $scope.order.predicate = predicateOptions[id];
+    };
+
+    var predicateOptions = ['updated_at', 'title'];
+
+    $scope.order = {
+        reverse: true,
+        predicate: predicateOptions[0],
+        items: [
+            {
+                id: 0,
+                title: 'Most Recent'
+            }, {
+                id: 1,
+                title: 'Title'
+            }
+        ]
+    };
+
+    var editOptions = {
+        'delete': $scope.deleteScene,
+        'settings': $scope.settingScene
+    };
+
+    $scope.onEditSelect = function(id, item) {
+        editOptions[id](item);
+    };
+
+    $scope.edit = {
+        items: [
+            {
+                id: 'settings',
+                title: 'Settings',
+                icon: 'fa-gear'
+            }, {
+                id: 'delete',
+                title: 'Delete',
+                icon: 'fa-trash-o'
+            }
+        ]
+    };
+
 }]);

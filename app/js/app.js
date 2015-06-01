@@ -1,13 +1,14 @@
 'use strict';
 var app = angular.module('360blickFrontendApp', [
+    'constants',
     'ngCookies',
     'ngResource',
     'ngSanitize',
     'ngAnimate',
     'ui.router',
-    'angularFileUpload',
     'btford.modal',
     'templates',
+    'sun.scrollable',
     'mdo-angular-cryptography'
 ]);
 
@@ -22,25 +23,6 @@ assets_url = 'https://blick.herokuapp.com';
 app.constant('ENV_CONFIG', {
     api: api_url,
     assets: assets_url
-});
-
-app.constant('AUTH_EVENTS', {
-    loginSuccess: 'auth-login-success',
-    loginFailed: 'auth-login-failed',
-    logoutSuccess: 'auth-logout-success',
-    logoutFailed: 'auth-logout-failed',
-    registerSuccess: 'auth-register-success',
-    registerFailed: 'auth-register-failed',
-    sessionTimeout: 'auth-session-timeout',
-    notAuthenticated: 'auth-not-authenticated',
-    notAuthorized: 'auth-not-authorized'
-});
-
-app.constant('USER_ROLES', {
-    all: '*',
-    admin: 'admin',
-    editor: 'editor',
-    guest: 'guest'
 });
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'USER_ROLES',
@@ -86,6 +68,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('newsletter', {
+            url: "/newsletter",
+            views: {
+                "app": {
+                    templateUrl: "newsletter/index.html",
+                    controller: "NewsletterController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
         .state('register', {
             url: "/register",
             views: {
@@ -104,6 +98,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 "app": {
                     templateUrl: "auth/login.html",
                     controller: "LoginController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
+        .state('reset', {
+            url: "/reset",
+            views: {
+                "app": {
+                    templateUrl: "auth/reset.html",
+                    controller: "ResetController"
                 }
             },
             data: {
@@ -226,12 +232,36 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
+        .state('user.project.scenes.settings', {
+            url: "/:sceneId/settings",
+            views: {
+                "projectContent@user.project": {
+                    templateUrl: "project/sceneSettings.html",
+                    controller: "ProjectSceneSettingsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
         .state('user.project.assets', {
             url: "/assets",
             views: {
                 "projectContent@user.project": {
                     templateUrl: "project/assets.html",
                     controller: "ProjectAssetsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('user.project.assets.settings', {
+            url: "/:assetId/settings",
+            views: {
+                "projectContent@user.project": {
+                    templateUrl: "project/assetSettings.html",
+                    controller: "ProjectAssetsSettingsController"
                 }
             },
             data: {

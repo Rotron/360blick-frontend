@@ -1,82 +1,69 @@
-app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams) {
+app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowResizeService', '$state', 'RequestService', '$stateParams', 'CameraService', 'HistoryService', 'LoadSceneService',
+    function($rootScope, PrimitiveObjectService, WindowResizeService, $state, RequestService, $stateParams, CameraService, HistoryService, LoadSceneService) {
 
 
     var _this = this;
 
     /**
-     * returns new default scene with lightning
-     * @returns {Scene}
-     */
-    this.getNewScene = function(){
-        var scene = new THREE.Scene();
-        var light = new THREE.PointLight( 0xffffff, 1, 0 );
-        light.position.set( 0, 5, 10 );
-        scene.add( light );
-        return scene;
-    }
-
-    /**
      * parse scene loaded from api
      * @param res
      */
-    function resolveScene(res) {
-        if(res.data.file) {
-            var sceneLoader = new THREE.SceneLoader();
-            sceneLoader.parse(JSON.parse(res.data.file), function (e) {
-                _this.scene = e.scene;
-                _this.render();
-            }, '.');
-        } else {
-            _this.scene = _this.getNewScene();
-            _this.render();
+    function resolveScene(scene) {
+        _this.scene = scene;
+        if ($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest') {
+            $rootScope.$apply();
         }
+        _this.render();
     }
 
     //TODO: move to shortcutservice
     document.onkeydown = function(event) {
         if (event.keyCode == 37) {
-            _this.camera.rotation.y += Math.PI/200;
+            CameraService.rotate(Math.PI/200);
         }
         if (event.keyCode == 39) {
-            _this.camera.rotation.y -= Math.PI/200;
+            CameraService.rotate(-(Math.PI/200));
         }
     }
 
     this.render = function() {
-        requestAnimationFrame( _this.render );
-        _this.renderer.render( _this.scene, _this.camera );
+        if(Object.prototype.toString.call(_this.scene.traverse) === '[object Function]') {
+            requestAnimationFrame( _this.render );
+            _this.renderer.render( _this.scene, _this.camera );
+        }
     };
 
     this.init = function(container){
         this.container = container;
         this.scene = {};
-        this.camera = new THREE.PerspectiveCamera( 75, this.container[0].clientWidth / this.container[0].clientHeight, 0.1, 1000 );
+        this.camera = CameraService.init(this.container);
         this.renderer = new THREE.WebGLRenderer({
             precision: 'highp',
-            antialias: true
+            antialias: true,
+            alpha: true
 
         });
         this.renderer.setClearColor( 0x1C2229, 1);
         this.renderer.setSize( this.container[0].clientWidth, this.container[0].clientHeight );
+        this.renderer.shadowMapEnabled = true;
         this.container[0].appendChild( this.renderer.domElement );
 
-        this.camera.position.z = 10;
-        this.camera.position.y = 5;
-        this.camera.lookAt(new THREE.Vector3(0,5,0));
-
         WindowResizeService.init(this.renderer, this.camera, this.container[0]);
+        var isTemplateScene = $state.current.name == 'template';
+        var id = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
 
-        if($state.current.name == 'template'){
-            RequestService.get('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
-        } else {
-            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
-        }
+        LoadSceneService.getScene(id, isTemplateScene, resolveScene);
+
+//        if(isTemplateScene){
+//            RequestService.post('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
+//        } else {
+//            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
+//        }
 
     };
 
     this.zoomIn = function(zoomFactor){
-        this.camera.fov *= zoomFactor;
-        this.camera.updateProjectionMatrix();
+        CameraService.zoom(zoomFactor);
     };
 
     this.getObjects = function(){
@@ -86,6 +73,24 @@ app.service('EditorService',['$rootScope', 'PrimitiveObjectService', 'WindowResi
     this.addNewPrimitive = function(type){
         var object = PrimitiveObjectService.getObject(type);
         this.scene.add(object);
+        HistoryService.queue({
+            message: 'object [' + type + '] added',
+            uuid: object.uuid,
+            callback: (function() {
+                this.scene.remove(object);
+            }).bind(this)
+        });
+    }
+
+    this.remove = function(object){
+        this.scene.remove(object);
+        HistoryService.queue({
+            message: 'object removed',
+            uuid: object.uuid,
+            callback: (function() {
+                this.scene.add(object);
+            }).bind(this)
+        });
     }
 
 }]);

@@ -1,15 +1,8 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', 'Asset', function ($scope, $stateParams, ENV_CONFIG, RequestService, Asset) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', '$rootScope', '$state', 'ModalService', function ($scope, $stateParams, ENV_CONFIG, RequestService, $rootScope, $state, ModalService) {
     $scope.username = $stateParams.username;
     var projectId = $stateParams['projectId'];
-
-    $scope.assets = [];
-
-    function removeAssetFromArray(asset) {
-        var index = $scope.assets.indexOf(asset);
-        $scope.assets.splice(index, 1);
-    }
 
     $scope.getAssetBackgroundImage = function getAssetBackgroundImage(asset) {
         return {
@@ -17,25 +10,90 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
         };
     };
 
-    $scope.deleteProjectAsset = function deleteAsset(asset) {
-        RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
-                removeAssetFromArray(asset);
+    $scope.assets = [];
+
+    function getAllAssets() {
+        RequestService.post('projects/assets/get_from_project', {project: {id: $stateParams['projectId']}}, function(res) {
+                $scope.assets = res.data;
             }, function(error) {
                 console.log(error);
             }
         );
-    };
-
-    function getProjectAssets() {
-        $scope.assets = Asset.get(projectId, function(assets){
-            $scope.assets = assets;
-        });
     }
 
-    getProjectAssets();
+    getAllAssets();
 
-/*    $rootScope.$on('newAssetCreated', function(event, data){
-        $scope.scenes.push(data);
-    });*/
+    $scope.settingsAsset = function() {
+        $state.go('user.project.assets.settings', {assetId: item.id});
+    };
+
+    $scope.deleteAsset = function(asset) {
+        var confirmCallback = function() {
+            RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
+                    $rootScope.$broadcast('removeAsset', asset);;
+                }, function(error) {
+                    console.log(error);
+                }
+            );
+        };
+
+        ModalService.openModal('confirm', {
+            title: 'Delete Asset?',
+            message: 'Delete Asset? This action cannot be revoked.',
+            confirmCallback: confirmCallback,
+            cancelCallback: function() {}
+        });
+    };
+
+    $rootScope.$on('removeAsset', function(event, data) {
+        $scope.assets.splice($scope.assets.indexOf(data), 1);
+    });
+
+    $rootScope.$on('newAsset', function(event, data) {
+        $scope.assets.push(data);
+    });
+
+    $scope.onOrderSelect = function(id) {
+        $scope.order.predicate = predicateOptions[id];
+    };
+
+    var predicateOptions = ['updated_at', 'title'];
+
+    $scope.order = {
+        reverse: true,
+        predicate: predicateOptions[0],
+        items: [
+            {
+                id: 0,
+                title: 'Most Recent'
+            }, {
+                id: 1,
+                title: 'Title'
+            }
+        ]
+    };
+
+    var editOptions = {
+        'settings': $scope.settingsAsset,
+        'delete': $scope.deleteAsset
+    };
+
+    $scope.onEditSelect = function(id, item) {
+        editOptions[id](item);
+    };
+
+    $scope.edit = {
+        items: [
+            {
+                id: 'settings',
+                title: 'Settings',
+                icon: 'fa-gear'
+            }, {
+                id: 'delete',
+                title: 'Delete',
+                icon: 'fa-trash-o'
+            }
+        ]
+    };
 
 }]);

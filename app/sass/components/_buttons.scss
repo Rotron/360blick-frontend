@@ -11,7 +11,7 @@
 .btn {
   cursor: pointer;
   border-radius: 3px;
-  @include blick-transition;
+  @include blick-transition(opacity);
 }
 
 .btn--submit {
@@ -21,7 +21,7 @@
   color: $secondary-light;
   font-size: $font-size-large;
 
-  &:hover {
+  &:hover, &:focus {
     opacity: .8;
   }
 }
@@ -33,22 +33,38 @@
   color: $secondary-light;
   font-size: $font-size-large;
 
-  &:hover {
+  &:hover, &:focus  {
     opacity: .8;
   }
 }
 
-.btn--danger {
+.btn--light {
+  @include blick-transition;
+  border: 2px solid $secondary-light;
+  color: $secondary-light;
+  height: $base * 10;
+  font-size: $font-size-large;
+  background: rgba(255, 255, 255, 0);
+
+  &:hover, &:focus  {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.btn--danger, .btn--success {
   background: $cta-0;
-  // FIXME: Use padding: 0 $base * 4
-  padding: 0 $base * 2;
+  padding: 0 $base * 4;
   height: $base * 10;
   color: $secondary-light;
   font-size: $font-size-large;
 
-  &:hover {
+  &:hover, &:focus  {
     opacity: .8;
   }
+}
+
+.btn--success {
+  background: $cta-1;
 }
 
 .btn--dotted {
@@ -64,7 +80,7 @@
     font-size: 16px;
   }
 
-  &:hover {
+  &:hover, &:focus  {
     border-color: $secondary-0;
     color: $secondary-0;
   }
@@ -89,26 +105,79 @@
   }
 }
 
+.btn--dropdown--edit {
+  .fa:first-child {
+    line-height: 47px;
+    position: absolute;
+    top: 0;
+  }
+}
+
+.btn--dropdown--user {
+  height: $banner-height - 1px;
+  background: $secondary-3;
+  width: 100%;
+  padding: 0;
+  padding-right: 95px;
+  padding-left: 20px;
+  @include blick-transition();
+
+  &:hover {
+    background: $secondary-2;
+  }
+}
+
+.btn--dropdown--user__nick {
+  color: $primary-2;
+  font-weight: 600;
+  text-align: right;
+  font-size: 18px;
+}
+
+.btn--dropdown--user__email {
+  color: $primary-1;
+  text-align: right;
+}
+
+.btn--dropdown--user__image {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  background: $primary-2;
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  border-radius: 3px;
+  background-size: 100% 100%;
+  background-position: 50% 50%;
+}
+
 .btn--select {
   position: relative;
   border-radius: 0;
   width: 100%;
   height: $base * 10;
+  line-height: $base * 10;
   background: $secondary-3;
-  padding: $base * 4;
-  padding-right: $base * 5;
+  padding: 0 $base * 3;
   text-align: left;
+
   .fa {
     position: absolute;
-    left: $base * 2;
-    font-size: 22px;
+    right: $base * 2;
+    top: 50%;
+    margin-top: -8px;
 
     &:last-child {
-      left: auto;
       right: $base * 2;
       font-size: 14px;
-      height: 100%;
-      line-height: 13px;
     }
   }
+}
+
+.btn--select--light {
+  background: $secondary-light;
+  border: 2px solid $secondary-3;
+  color: $secondary-2;
+  border-radius: 2px;
 }

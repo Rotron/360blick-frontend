@@ -2,24 +2,18 @@
 
 app.controller('NewSceneTemplateController', ['$scope', 'RequestService', '$rootScope', function ($scope, RequestService, $rootScope) {
 
-
-    $scope.newScene = {
+    $scope.newSceneTemplate = {
         title: null,
         description: null
     };
 
-    $scope.createNewSceneTemplate = function(){
-        var scene = {
-            title: $scope.newSceneTemplate.title
-        };
+    $scope.createNewSceneTemplate = function() {
+        RequestService.post('templatescenes/create', {scene: {title: $scope.newSceneTemplate.title}}, function (res) {
+                $rootScope.$broadcast('newTemplate', res.data);
+            }, function (error) {
+                console.log(error);
+            }
+        );
+    };
 
-        if($scope.newSceneTemplate.title){
-            RequestService.post('templatescenes/create', {scene: scene}, function(res) {
-                    $rootScope.$emit('newSceneTemplateCreated', res.data);
-                }, function(error) {
-                    console.log(error);
-                }
-            );
-        }
-    }
 }]);

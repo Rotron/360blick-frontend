@@ -1,5 +1,4 @@
-app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService', function ($http, $upload, ENV_CONFIG, SessionService) {
-
+app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', 'ResponseErrorService', '$rootScope', function ($http, ENV_CONFIG, SessionService, ResponseErrorService, $rootScope) {
     /**
      * getCredentialsObject
      * e.g. getCredentialsObject()
@@ -13,6 +12,18 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
         };
     }
     /**
+     * getPostFields
+     * e.g. getPostFields()
+     *
+     * @return {Object}
+     */
+    function getPostFields (data) {
+        return {
+            user: getCredentialsObject(),
+            data: data
+        };
+    }
+    /**
      * RequestService.getFullActionUrl
      * e.g. RequestService.getFullActionUrl('users/login')
      *
@@ -20,31 +31,8 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
      *
      * @return {String}
      */
-    this.getFullActionUrl = function(action) {
+    function getFullActionUrl (action) {
         return ENV_CONFIG.api + '/' + action + '.json';
-    };
-    /**
-     * RequestService.getFullActionUrl
-     * e.g. RequestService.getFullActionUrl()
-     *
-     * Helper Function for module ng-file-upload
-     *
-     * TODO: Refactor to Recursive
-     */
-    this.formDataAppender = function(fd, key, val) {
-        if (angular.isObject(val)) {
-            angular.forEach(val, function(val_in, key_in) {
-                if(angular.isObject(val_in)) {
-                    angular.forEach(val_in, function(val_in_in, key_in_in) {
-                        fd.append(key + '[' + key_in + '][' + key_in_in + ']', val_in_in);
-                    });
-                } else {
-                    fd.append(key + '[' + key_in + ']', val_in);
-                }
-            });
-        } else {
-            fd.append(key, val);
-        }
     }
     /**
      * RequestService.post
@@ -56,21 +44,15 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
      * @param errorCallback {Function}
      */
     this.post = function(action, data, callback, errorCallback) {
-
+        errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : function(error) { console.log(error); };
         return $http
-            .post(this.getFullActionUrl(action), { user: getCredentialsObject(), data: data })
-            .success(function(res){
+            .post(getFullActionUrl(action), getPostFields(data))
+            .success(function(res) {
                 callback(res);
             })
-            .error(function(res){
-               errorCallback(res);
-
-                /* $rootScope.$broadcast({
-                 401: AUTH_EVENTS.notAuthenticated,
-                 403: AUTH_EVENTS.notAuthorized,
-                 419: AUTH_EVENTS.sessionTimeout,
-                 440: AUTH_EVENTS.sessionTimeout
-                 */
+            .error(function(res, status) {
+                errorCallback(data);
+                ResponseErrorService.handle(res, status);
             });
     };
     /**
@@ -86,50 +68,76 @@ app.service('RequestService', ['$http', '$upload', 'ENV_CONFIG', 'SessionService
      * @param errorCallback {Function}
      */
     this.get = function(action, data, callback, errorCallback) {
-
+        errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : function(error) { console.log(error); };
         return $http
-            .get(this.getFullActionUrl(action), { params: data })
+            .get(getFullActionUrl(action), { params: data })
             .success(function(res){
                 callback(res);
             })
             .error(function(res){
                 errorCallback(res);
-
-                /* $rootScope.$broadcast({
-                 401: AUTH_EVENTS.notAuthenticated,
-                 403: AUTH_EVENTS.notAuthorized,
-                 419: AUTH_EVENTS.sessionTimeout,
-                 440: AUTH_EVENTS.sessionTimeout
-                 */
+                ResponseErrorService.handle(data, status);
             });
     };
     /**
-     * RequestService.upload
-     * e.g. RequestService.upload('projects/assets/create', {field: 'content'}, function callback(){}, function errorCallback(){})
+     * formDataAppender
+     * e.g. formDataAppender(formData, val, key)
      *
-     * @param action {String} e.g. 'projects/assets/create'
-     * @param data {Object} e.g. {field: 'content'}
-     * @param callback {Function}
-     * @param errorCallback {Function}
-     * @param progressCallback {Function} e.g. progressCallback(progressPercentage, evt)
+     * Helper Function for module ng-file-upload
+     *
+     * TODO: Refactor to Recursive
      */
-    this.upload = function(action, data, file, callback, errorCallback, progressCallback) {
-        data = data || {};
+    function formDataAppender (formData, val, key) {
+        if (angular.isObject(val)) {
+            angular.forEach(val, function(val_in, key_in) {
+                if(angular.isObject(val_in)) {
+                    angular.forEach(val_in, function(val_in_in, key_in_in) {
+                        formData.append(key + '[' + key_in + '][' + key_in_in + ']', val_in_in);
+                    });
+                } else {
+                    formData.append(key + '[' + key_in + ']', val_in);
+                }
+            });
+        } else {
+            formData.append(key, val);
+        }
+    }
+    /**
+     * getUploadConfig
+     * e.g. getUploadConfig(data)
+     *
+     */
+    function getUploadConfig(data, settings) {
+        return {
+            options: {
+                url: getFullActionUrl(settings.apiEndPoint),
+                paramName: settings.paramName,
+                maxFiles: settings.maxFiles
+            },
+            eventHandlers: {
+                sending: function (file, xhr, formData) {
+                    var fields = getPostFields(data);
+                    angular.forEach(fields, function(val, key) {
+                        formDataAppender(formData, val, key);
+                    });
+                },
+                success: function (file, res) {
+                    $rootScope.$broadcast(settings.broadcastDomain, res.data);
+                }
+            }
+        };
+    }
+    /**
+     * RequestService.upload
+     * e.g. RequestService.upload(scope, element)
+     *
+     */
+    this.upload = function(scope, element) {
+        var config = getUploadConfig(scope.uploadData, scope.uploadSettings);
+        var dropzone = new Dropzone(element[0], config.options);
 
-        return $upload.upload({
-            url: this.getFullActionUrl(action),
-            method: 'post',
-            fileFormDataName: 'data[asset][file]',
-            formDataAppender: this.formDataAppender,
-            fields: { user: getCredentialsObject(), data: data},
-            file: file
-        }).progress(function(event) {
-            var progressPercentage = parseInt(100.0 * event.loaded / event.total);
-            progressCallback(progressPercentage, event);
-        }).success(function(res) {
-            callback(res);
-        }).error(function(res) {
-            errorCallback(res);
+        angular.forEach(config.eventHandlers, function (handler, event) {
+            dropzone.on(event, handler);
         });
     };
 
