@@ -125,7 +125,9 @@ app.service('SaveSceneService', ['$rootScope', 'EditorService', 'RequestService'
     this.save = function(sceneId){
         var changedObjects = [];
         EditorService.getObjects().forEach(function(object) {
-           changedObjects.push(_this.getReducedObject(object));
+           if(object.type === 'Mesh') {
+               changedObjects.push(_this.getReducedObject(object));
+           }
         });
         console.log(changedObjects);
         var isTemplateScene = $state.current.name == 'template';

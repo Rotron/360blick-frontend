@@ -76,10 +76,6 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
 
         properties = typeof properties !== 'undefined' ? properties : {};
 
-        if(type == 'PointLight'){
-            return this.getLight(type, properties);
-        }
-
         var object = new THREE.Mesh( this.getGeometry(type, properties), this.getMaterial(properties) );
 
         if(properties.material && properties.material.mapImage) {
@@ -100,18 +96,6 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
 
     this.getColor = function(hexString) {
         return 0xffffff; //TODO: get real color value from imported object
-    };
-
-    this.getLight = function(type, properties) {
-        switch(type) {
-            case 'PointLight':
-                return new THREE.PointLight(
-                    this.getColor(properties.hex),
-                    properties.intensity || 1,
-                    properties.distance  || 0
-                );
-                break;
-        }
     };
 
     this.mapTexture = function(item, assetUrl, parameters){
