@@ -299,13 +299,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
 
     $locationProvider.html5Mode(true);
 
-    $urlRouterProvider.otherwise({
-        redirectTo: function(current, path, search) {
-            if(search.goto) {
-                return '/' + search.goto;
-            }
-            return '/';
+    $urlRouterProvider.otherwise(function(current, path, search) {
+        if(search.goto) {
+            return '/' + search.goto;
         }
+        return '/';
     });
 }]);
 
