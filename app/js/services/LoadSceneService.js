@@ -8,11 +8,7 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
      */
     this.getNewScene = function(){
         var scene = new THREE.Scene();
-        var light = PrimitiveObjectService.getObject('PointLight', {
-            positionX: 0,
-            positionY: 0,
-            positionZ: 0
-        });
+        var light = new THREE.PointLight(0xffffff, 1, 0);
         scene.add( light );
         return scene;
     };
