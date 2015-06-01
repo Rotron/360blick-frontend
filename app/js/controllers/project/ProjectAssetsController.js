@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', '$rootScope', function ($scope, $stateParams, ENV_CONFIG, RequestService, $rootScope) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', '$rootScope', '$state', function ($scope, $stateParams, ENV_CONFIG, RequestService, $rootScope, $state) {
     $scope.username = $stateParams.username;
     var projectId = $stateParams['projectId'];
 
@@ -23,9 +23,8 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
 
     getAllAssets();
 
-    $scope.renameAsset = function() {
-        // TODO: implement
-        console.log('not implemented.');
+    $scope.settingsAsset = function(item) {
+        $state.go('user.project.assets.settings', {assetId: item.id});
     };
 
     $scope.deleteAsset = function(asset) {
@@ -66,8 +65,8 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
     };
 
     var editOptions = {
-        'delete': $scope.deleteAsset,
-        'rename': $scope.renameAsset
+        'settings': $scope.settingsAsset,
+        'delete': $scope.deleteAsset
     };
 
     $scope.onEditSelect = function(id, item) {
@@ -77,13 +76,13 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
     $scope.edit = {
         items: [
             {
+                id: 'settings',
+                title: 'Settings',
+                icon: 'fa-gear'
+            }, {
                 id: 'delete',
                 title: 'Delete',
                 icon: 'fa-trash-o'
-            }, {
-                id: 'rename',
-                title: 'Rename',
-                icon: 'fa-pencil'
             }
         ]
     };

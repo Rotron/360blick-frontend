@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', function ($scope, $stateParams, RequestService, $rootScope) {
+app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', function ($scope, $stateParams, RequestService, $rootScope, $state) {
     $scope.username = $stateParams['username'];
 
     $scope.projects = [];
@@ -16,8 +16,8 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
 
     getAllProjects();
 
-    $scope.renameProject = function() {
-        console.log('not implemented. just go to settings.');
+    $scope.settingsProject = function(item) {
+        $state.go('user.project.settings', {projectId: item.id});
     };
 
     $scope.deleteProject = function(project) {
@@ -58,8 +58,8 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
     };
 
     var editOptions = {
-        'delete': $scope.deleteProject,
-        'rename': $scope.renameProject
+        'settings': $scope.settingsProject,
+        'delete': $scope.deleteProject
     };
 
     $scope.onEditSelect = function(id, item) {
@@ -69,13 +69,13 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
     $scope.edit = {
         items: [
             {
+                id: 'settings',
+                title: 'Settings',
+                icon: 'fa-gear'
+            }, {
                 id: 'delete',
                 title: 'Delete',
                 icon: 'fa-trash-o'
-            }, {
-                id: 'rename',
-                title: 'Rename',
-                icon: 'fa-pencil'
             }
         ]
     };
