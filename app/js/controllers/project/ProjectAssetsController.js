@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', '$rootScope', '$state', function ($scope, $stateParams, ENV_CONFIG, RequestService, $rootScope, $state) {
+app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG', 'RequestService', '$rootScope', '$state', 'ModalService', function ($scope, $stateParams, ENV_CONFIG, RequestService, $rootScope, $state, ModalService) {
     $scope.username = $stateParams.username;
     var projectId = $stateParams['projectId'];
 
@@ -23,17 +23,26 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
 
     getAllAssets();
 
-    $scope.settingsAsset = function(item) {
+    $scope.settingsAsset = function() {
         $state.go('user.project.assets.settings', {assetId: item.id});
     };
 
     $scope.deleteAsset = function(asset) {
-        RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
-                $rootScope.$broadcast('removeAsset', asset);;
-            }, function(error) {
-                console.log(error);
-            }
-        );
+        var confirmCallback = function() {
+            RequestService.post('projects/assets/delete', {asset: {id: asset.id}}, function(res) {
+                    $rootScope.$broadcast('removeAsset', asset);;
+                }, function(error) {
+                    console.log(error);
+                }
+            );
+        };
+
+        ModalService.openModal('confirm', {
+            title: 'Delete Asset?',
+            message: 'Delete Asset? This action cannot be revoked.',
+            confirmCallback: confirmCallback,
+            cancelCallback: function() {}
+        });
     };
 
     $rootScope.$on('removeAsset', function(event, data) {

@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', function ($scope, $stateParams, RequestService, $rootScope, $state) {
+app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestService', 'ModalService', '$rootScope', '$state', function ($scope, $stateParams, RequestService, ModalService, $rootScope, $state) {
     $scope.username = $stateParams['username'];
 
     $scope.projects = [];
@@ -21,12 +21,21 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
     };
 
     $scope.deleteProject = function(project) {
-        RequestService.post('projects/delete', {project: {id: project.id}}, function (res) {
-                $rootScope.$broadcast('removeProject', project);
-            }, function (error) {
-                console.log(error);
-            }
-        );
+        var confirmCallback = function() {
+            RequestService.post('projects/delete', {project: {id: project.id}}, function (res) {
+                    $rootScope.$broadcast('removeProject', project);
+                 }, function (error) {
+                    console.log(error);
+                 }
+             );
+        };
+
+        ModalService.openModal('confirm', {
+            title: 'Delete Project?',
+            message: 'Deleting this project will also delete all related Assets and Settings. This action cannot be revoked.',
+            confirmCallback: confirmCallback,
+            cancelCallback: function() {}
+        });
     };
 
     $rootScope.$on('removeProject', function(event, data) {
