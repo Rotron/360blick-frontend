@@ -135,6 +135,8 @@ gulp.task('clean-build-folder', function () {
 });
 
 gulp.task('build', function () {
+    process.env.NODE_ENV = 'PRODUCTION';
+
     runSequence('clean-build-folder',
         'preprocess-build',
         'sass',
