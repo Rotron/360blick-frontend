@@ -10,8 +10,8 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
         var scene = new THREE.Scene();
         var light = PrimitiveObjectService.getObject('PointLight', {
             positionX: 0,
-            positionY: 5,
-            positionZ: 10
+            positionY: 0,
+            positionZ: 0
         });
         scene.add( light );
         return scene;
@@ -24,9 +24,8 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
      */
     this.resolve = function(res, callback) {
 
-        var scene;
+        var scene = _this.getNewScene();
         if(res.data.length){
-            scene = new THREE.Scene();
             var objectToAdd = {};
             res.data.forEach(function(sceneObject) {
                 if(sceneObject.name != null) {
@@ -34,10 +33,7 @@ app.service('LoadSceneService', ['RequestService', 'PrimitiveObjectService', fun
                     scene.add(objectToAdd);
                 }
             });
-        } else {
-            scene = _this.getNewScene();
         }
-
         callback(scene);
     };
 
