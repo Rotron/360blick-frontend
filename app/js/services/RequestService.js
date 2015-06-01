@@ -50,9 +50,9 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', 'Respons
             .success(function(res) {
                 callback(res);
             })
-            .error(function(data, status) {
+            .error(function(res, status) {
                 errorCallback(data);
-                ResponseErrorService.handle(data, status);
+                ResponseErrorService.handle(res, status);
             });
     };
     /**
@@ -76,13 +76,7 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', 'Respons
             })
             .error(function(res){
                 errorCallback(res);
-
-                /* $rootScope.$broadcast({
-                 401: AUTH_EVENTS.notAuthenticated,
-                 403: AUTH_EVENTS.notAuthorized,
-                 419: AUTH_EVENTS.sessionTimeout,
-                 440: AUTH_EVENTS.sessionTimeout
-                 */
+                ResponseErrorService.handle(data, status);
             });
     };
     /**
