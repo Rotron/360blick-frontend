@@ -89,11 +89,11 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         this.setPosition(object, properties);
         this.setRotation(object, properties);
         this.setScale(object, properties);
+        object.custom = {
+            id: properties.id
+        };
         if(properties && properties.interaction) {
-            object.custom = {
-                id: properties.id,
-                interaction: JSON.parse(properties.interaction) || null
-            };
+            object.custom.interaction = JSON.parse(properties.interaction) || null;
         }
         return object;
     };
