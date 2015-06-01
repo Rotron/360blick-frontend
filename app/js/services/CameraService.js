@@ -2,8 +2,6 @@ app.service('CameraService',[function() {
 
     this.init = function(container) {
         this.camera = new THREE.PerspectiveCamera( 75, container[0].clientWidth / container[0].clientHeight, 0.1, 1000 );
-        this.camera.position.y = 5;
-        this.camera.lookAt(new THREE.Vector3(0,5,0));
         return this.camera;
     };
 
