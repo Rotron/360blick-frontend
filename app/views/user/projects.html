@@ -9,9 +9,9 @@
 
 <ul class="overview-list container">
     <li ng-repeat="project in projects | orderBy:order.predicate:order.reverse" ui-sref="user.project.scenes({projectId: project.id})" class="overview-list__item col span-6">
-        <div class="overview-list__asset" style="background-image:url(http://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg);">
+        <div class="overview-list__asset" style="background-image:url('{{project.preview_image.url}}');">
             <div class="overview-list__color" style="background-color:rgba(100,100,160, 0.5);"></div>
-            <div class="overview-list__content container">
+            <div class="overview-list__content container">                
                 <div class="col span-8">
                     <h2 class="overview-list__title">{{project.title}}</h2>
                     <time class="overview-list__modified" datetime="{{project.updated_at | date:'yyyy-MM-dd hh:mm'}}">Last modified: {{project.updated_at | date:'medium'}}</time>
