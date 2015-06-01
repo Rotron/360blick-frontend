@@ -1,18 +1,21 @@
-<div class="interaction-bar container settings">
-    <form name="settingsForm" class="container" ng-submit="updateUserSettings($event)" novalidate>
-        <fieldset class="row">
-            <placeholder-input value="user.nick" label="Nick" type="text"></placeholder-input>
-        </fieldset>
-        <fieldset class="row">
-            <placeholder-input value="user.email" label="Email" type="email"></placeholder-input>
-        </fieldset>
-        <div class="row">
-            <button class="btn btn--round btn--submit">Update Profile</button>
+<div id="view--settings" class="view conainer">
+    <div id="view--settings__wrapper" class="view__wrapper">
+        <div class="interaction-bar settings">
+            <form name="settingsForm" class="settings__form container" ng-submit="updateUserSettings($event)" novalidate>
+                <fieldset class="row">
+                    <placeholder-input value="user.nick" label="Nick" type="text"></placeholder-input>
+                </fieldset>
+                <fieldset class="row">
+                    <placeholder-input value="user.email" label="Email" type="email"></placeholder-input>
+                </fieldset>
+                <div class="row">
+                    <button class="btn btn--round btn--submit">Update Profile</button>
+                </div>
+            </form>
+            <div class="settings__profile-image">
+                <img ng-src="{{user.profileImage}}" ng-click="openModal('newAsset', uploadOptions)" alt="Profile Image">
+                <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Profile Image</button>
+            </div>
         </div>
-    </form>
-    <br>
-    <div>
-        <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
-        {{user.preview_image}}
     </div>
 </div>

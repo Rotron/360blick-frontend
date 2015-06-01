@@ -10,7 +10,8 @@ app.controller('NewAssetController', ['$scope', '$stateParams', function ($scope
         settings: {
             broadcastDomain: $scope.data.broadcastDomain || 'newAsset',
             apiEndPoint: $scope.data.apiEndPoint || 'projects/assets/create',
-            paramName: $scope.data.paramName || 'data[asset][file]'
+            paramName: $scope.data.paramName || 'data[asset][file]',
+            maxFiles: $scope.data.maxFiles || 10
         },
         data: $scope.data.uploadData || {project: {id: $scope.currentProjectId}}
     };

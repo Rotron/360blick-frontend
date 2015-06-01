@@ -1,4 +1,4 @@
-app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $crypto) {
+app.service('SessionService', ['USER_ROLES', '$crypto', '$rootScope', function (USER_ROLES, $crypto, $rootScope) {
 
     this.token = null;
     this.nick = null;
@@ -44,8 +44,13 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
     this.getRole = function () {
         return this.userRole;
     };
-    this.setLocalCredentials = function () {
 
+    this.renewLocalCredentials = function() {
+        this.removeLocalCredentials();
+        this.setLocalCredentials();
+    };
+
+    this.setLocalCredentials = function () {
         var userData = JSON.stringify(this.getUser());
 
         var encrypted = $crypto.encrypt(userData, '360crd');
@@ -74,6 +79,11 @@ app.service('SessionService', ['USER_ROLES', '$crypto', function (USER_ROLES, $c
             this.create(localCredentials.token, localCredentials.nick, localCredentials.email, localCredentials.userRole, localCredentials.profileImage);
         }
     };
+
+    $rootScope.$on('updatedUserImage', (function(event, data) {
+        this.profileImage = data.profile_image;
+        this.renewLocalCredentials();
+    }).bind(this));
 
     return this;
 }]);

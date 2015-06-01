@@ -1,4 +1,4 @@
-app.directive('profileInfoBox', ['SessionService', 'ENV_CONFIG', 'AuthService', '$state', function (SessionService, ENV_CONFIG, AuthService, $state) {
+app.directive('profileInfoBox', ['SessionService', 'ENV_CONFIG', 'AuthService', '$state', '$rootScope', function (SessionService, ENV_CONFIG, AuthService, $state, $rootScope) {
     return {
         restrict: 'E',
         templateUrl: 'partials/profileInfoBox.html',
@@ -9,6 +9,10 @@ app.directive('profileInfoBox', ['SessionService', 'ENV_CONFIG', 'AuthService', 
                 nick: SessionService.nick,
                 profile_image: ENV_CONFIG.assets + SessionService.profileImage
             };
+
+            $rootScope.$on('updatedUserImage', function(event, data) {
+                scope.user.profile_image = ENV_CONFIG.assets + data.profile_image;
+            });
 
             scope.goUserState = function() {
                 $state.go('user', {username: SessionService.nick});

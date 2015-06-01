@@ -123,7 +123,8 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', '$rootSc
         return {
             options: {
                 url: getFullActionUrl(settings.apiEndPoint),
-                paramName: settings.paramName
+                paramName: settings.paramName,
+                maxFiles: settings.maxFiles
             },
             eventHandlers: {
                 sending: function (file, xhr, formData) {
