@@ -1,4 +1,4 @@
-app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootScope', 'AUTH_EVENTS', function (SessionService, ModalService, $rootScope, AUTH_EVENTS) {
+app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootScope', 'AUTH_EVENTS', '$state', function (SessionService, ModalService, $rootScope, AUTH_EVENTS, $state) {
 
 
     /* $rootScope.$broadcast({
@@ -17,10 +17,15 @@ app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootSco
         ModalService.openModal('error', data);
     }
 
+    function sessionExpired(data) {
+        data.okCallback = okCallback;
+        SessionService.destroy();
+        ModalService.openModal('login', data);
+    }
 
     var errorActions = {
         400: unhandledError,
-        401: unhandledError,
+        401: sessionExpired,
         default: unhandledError
     };
 
