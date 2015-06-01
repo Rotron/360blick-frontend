@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', function ($scope, $stateParams, RequestService, $rootScope, $state) {
+app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', 'ModalService', function ($scope, $stateParams, RequestService, $rootScope, $state, ModalService) {
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
 
@@ -21,15 +21,22 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
         $state.go('user.project.scenes.settings', {sceneId: item.id});
     };
 
-    $scope.deleteScene = function(scene, $event) {
-        $event && $event.stopPropagation();
+    $scope.deleteScene = function(scene) {
+        var confirmCallback = function() {
+            RequestService.post('scenes/delete', {scene: {id: scene.id}}, function(res) {
+                    $rootScope.$broadcast('removeScene', scene);
+                }, function(error) {
+                    console.log(error);
+                }
+            );
+        };
 
-        RequestService.post('scenes/delete', {scene: {id: scene.id}}, function(res) {
-                $rootScope.$broadcast('removeScene', scene);
-            }, function(error) {
-                console.log(error);
-            }
-        );
+        ModalService.openModal('confirm', {
+            title: 'Delete Scene?',
+            message: 'Delete Scene? This action cannot be revoked.',
+            confirmCallback: confirmCallback,
+            cancelCallback: function() {}
+        });
     };
 
     $rootScope.$on('removeScene', function(event, data){
