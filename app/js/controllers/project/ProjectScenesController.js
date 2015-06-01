@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', function ($scope, $stateParams, RequestService, $rootScope) {
+app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', function ($scope, $stateParams, RequestService, $rootScope, $state) {
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
 
@@ -17,8 +17,8 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     getAllScenes();
 
-    $scope.renameScene = function() {
-        console.log('not implemented.');
+    $scope.settingScene = function(item) {
+        $state.go('user.project.scenes.settings', {sceneId: item.id});
     };
 
     $scope.deleteScene = function(scene, $event) {
@@ -62,7 +62,7 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     var editOptions = {
         'delete': $scope.deleteScene,
-        'rename': $scope.renameScene
+        'settings': $scope.settingScene
     };
 
     $scope.onEditSelect = function(id, item) {
@@ -72,13 +72,13 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
     $scope.edit = {
         items: [
             {
+                id: 'settings',
+                title: 'Settings',
+                icon: 'fa-gear'
+            }, {
                 id: 'delete',
                 title: 'Delete',
                 icon: 'fa-trash-o'
-            }, {
-                id: 'rename',
-                title: 'Rename',
-                icon: 'fa-pencil'
             }
         ]
     };

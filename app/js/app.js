@@ -232,12 +232,36 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
+        .state('user.project.scenes.settings', {
+            url: "/:sceneId/settings",
+            views: {
+                "projectContent@user.project": {
+                    templateUrl: "project/sceneSettings.html",
+                    controller: "ProjectSceneSettingsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
         .state('user.project.assets', {
             url: "/assets",
             views: {
                 "projectContent@user.project": {
                     templateUrl: "project/assets.html",
                     controller: "ProjectAssetsController"
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('user.project.assets.settings', {
+            url: "/:assetId/settings",
+            views: {
+                "projectContent@user.project": {
+                    templateUrl: "project/assetSettings.html",
+                    controller: "ProjectAssetsSettingsController"
                 }
             },
             data: {
