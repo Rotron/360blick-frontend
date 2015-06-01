@@ -23,7 +23,7 @@ angular.module('constants', [])
     .constant('SUPPORTED_INTERACTIONS', {
         'goToScene': {
             title: 'Go to Scene:',
-            properties: [
+            parameters: [
                 'scene',
                 'effectIn',
                 'effectOut'
@@ -31,7 +31,7 @@ angular.module('constants', [])
         },
         'goToObject': {
             title: 'Go to Object:',
-            properties: [
+            parameters: [
                 'object'
             ]
         }

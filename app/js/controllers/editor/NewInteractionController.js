@@ -7,7 +7,7 @@
 
       $scope.interactions = SUPPORTED_INTERACTIONS;
 
-      $scope.interactionProperties = {
+      $scope.interactionParameters = {
           'scene': null,
           'object': null,
           'effectIn': null,
@@ -15,7 +15,7 @@
       };
 
       /**
-       * transform interactions to array with necessary properties
+       * transform interactions to array with necessary parameters
        * @returns {Array}
        */
       function getInteractionList() {
@@ -66,17 +66,17 @@
        * @param type
        * @returns {boolean}
        */
-      $scope.isNeededProperty = function(type) {
+      $scope.isNeededParameter = function(type) {
           var currentInteraction = $scope.interactions[$scope.currentInteractionId];
-          return !!(currentInteraction && currentInteraction.properties && currentInteraction.properties.indexOf(type) !== -1);
+          return !!(currentInteraction && currentInteraction.parameters && currentInteraction.parameters.indexOf(type) !== -1);
       };
 
       $scope.onInteractionSelect = function(id) {
           $scope.currentInteractionId = id;
       };
 
-      $scope.onPropertySelect = function(val, type){
-          $scope.interactionProperties[type] = val;
+      $scope.onParameterSelect = function(val, type){
+          $scope.interactionParameters[type] = val;
       };
 
       /**
@@ -85,13 +85,13 @@
        * @returns {*}
        */
       $scope.getInteractionParameters = function(type) {
-          if(!$scope.interactions[type].properties){
+          if(!$scope.interactions[type].parameters){
               return null;
           }
           var parameters = {};
-          $scope.interactions[type].properties.forEach(function(prop) {
-              if($scope.interactionProperties[prop] !== null) {
-                parameters[prop] = $scope.interactionProperties[prop];
+          $scope.interactions[type].parameters.forEach(function(prop) {
+              if($scope.interactionParameters[prop] !== null) {
+                parameters[prop] = $scope.interactionParameters[prop];
               }
           });
           return parameters;

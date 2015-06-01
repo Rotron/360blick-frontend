@@ -10,16 +10,16 @@
                 <fieldset class="row">
                     <dropdown template-name="select" on-select="onInteractionSelect" data="{'currentItemId': currentInteractionId, 'items': interactionsList}"></dropdown>
                 </fieldset>
-                <div ng-if="isNeededProperty('scene')">
+                <div ng-if="isNeededParameter('scene')">
                     Scenes
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scenes'}"></dropdown>
+                        <dropdown template-name="select" on-select="onParameterSelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scene'}"></dropdown>
                     </fieldset>
                 </div>
-                <div ng-if="isNeededProperty('object')">
+                <div ng-if="isNeededParameter('object')">
                     Objects
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="onPropertySelect" data="{'items': sceneObjects, type: 'object'}"></dropdown>
+                        <dropdown template-name="select" on-select="onParameterSelect" data="{'items': sceneObjects, type: 'object'}"></dropdown>
                     </fieldset>
                 </div>
                 <div class="row">
