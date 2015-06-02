@@ -16,6 +16,11 @@ app.service('ModalService',['$rootScope', 'btfModal', function($rootScope, btfMo
             controllerAs: 'ctrl',
             templateUrl: 'partials/dialog/confirm.html'
         }),
+        'info': btfModal({
+            controller: 'InfoController',
+            controllerAs: 'ctrl',
+            templateUrl: 'partials/dialog/info.html'
+        }),
         'help': btfModal({
             controller: 'HelpController',
             controllerAs: 'ctrl',

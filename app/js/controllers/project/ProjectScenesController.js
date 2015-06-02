@@ -22,11 +22,14 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
 
     function checkScenePreviewImage(scene) {
 
-        console.log(scene);
-        if(!scene.preview_image) {
-            scene.preview_image = "https://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg";
-            scene.preview_image_color = "RGBA(100,100,160, 0.5)";
-        } 
+        if(!scene.preview_image_output) {
+            if(scene.preview_image) {
+                scene.preview_image_output = $scope.rootUrl + scene.preview_image
+            } else {
+                scene.preview_image_output = ENV_CONFIG.preview_image;
+                scene.preview_image_color = "RGBA(100,100,160, 0.5)";
+            }
+        }
 
         return scene;
     }

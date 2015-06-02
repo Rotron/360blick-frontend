@@ -32,6 +32,20 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
         return project;
     }
 
+    function checkProjectPreviewImage(project) {
+
+        if(!project.preview_image_output) {
+            if(project.preview_image.url) {
+                project.preview_image_output = $scope.rootUrl + project.preview_image.url
+            } else {
+                project.preview_image_output = ENV_CONFIG.preview_image;
+                project.preview_image_color = "RGBA(100,100,160, 0.5)";
+            }
+        }
+
+        return project;
+    }
+
     getAllProjects();
 
     $scope.settingsProject = function(item) {
