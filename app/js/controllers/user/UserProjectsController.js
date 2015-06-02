@@ -20,11 +20,11 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
     }
 
     function checkProjectPreviewImage(project) {
-        console.log("check project image");
         if(!project.preview_image.url) {
-            project.preview_image.url = "http://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg";
+            project.preview_image.url = "https://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg";
+            project.preview_image_color = "RGBA(100,100,160, 0.5)";
         } else {
-            if(!project.preview_image.url.indexOf("http://upload.wikimedia.org") > -1) {
+            if(project.preview_image.url.indexOf("https://upload.wikimedia.org") <= 0) {
                 project.preview_image.url = $scope.rootUrl + project.preview_image.url;
             }
         }
