@@ -3,6 +3,7 @@
 app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', 'ENV_CONFIG', function ($scope, $stateParams, RequestService, $rootScope, ENV_CONFIG) {
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
+    $scope.assetUrl = ENV_CONFIG.assets;
 
     $scope.uploadOptions = {
         broadcastDomain: 'updatedProjectPreviewImage',
