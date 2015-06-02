@@ -1,0 +1,10 @@
+.fa-ext-cardboard {
+  background-image: url("../images/google-cardboard.png");
+  background-size: 85px auto;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+
+  &.is-small {
+    background-size: 55px auto;
+  }
+}

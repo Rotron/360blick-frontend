@@ -18,7 +18,7 @@ $icon-list-radius-minor: 80px;
   width: 240px;
 
   i {
-    background: $secondary-light;
+    background-color: $secondary-light;
     color: $primary-0;
     display: block;
     font-size: $icon-list-size;
@@ -53,7 +53,7 @@ $icon-list-radius-minor: 80px;
     width: 14%;
     height: 2px;
     margin-left: -7%;
-    background: $secondary-light;
+    background: $primary-1;
   }
 }
 

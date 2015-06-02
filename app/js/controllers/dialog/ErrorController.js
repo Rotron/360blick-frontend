@@ -1,7 +1,8 @@
 'use strict';
 
 app.controller('ErrorController', ['$scope', function ($scope) {
-    $scope.message = $scope.data.error || 'Unexpected Error';
+    // console.log($scope.data);
+    $scope.message = $scope.data || 'Unexpected Error';
     $scope.title = $scope.data.title || 'Error';
 
     $scope.okCallback = function () {
