@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', 'ENV_CONFIG', function ($scope, $stateParams, RequestService, $rootScope, ENV_CONFIG) {
+app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', 'ENV_CONFIG', 'ModalService', function ($scope, $stateParams, RequestService, $rootScope, ENV_CONFIG, ModalService) {
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
     $scope.assetUrl = ENV_CONFIG.assets;
@@ -36,7 +36,8 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
             }
         };
         RequestService.post('projects/update', data, function(res) {
-              $scope.project = res.data;
+                $scope.project = res.data;
+                ModalService.openModal('info', {title: 'Success', message: 'Successfully saved changes.'});
             }, function(error) {
                 console.log(error);
             }
@@ -51,6 +52,7 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
 
     $scope.generateExport = function($event) {
         $event.stopPropagation();
+        ModalService.openModal('info', {title: 'Progress', message: 'Export in process.'});
 
         RequestService.post('projects/export/zip', {project: {id: $scope.projectId}}, function(res) {
                 $rootScope.$broadcast('newExport', res.data.exportZipModel);
