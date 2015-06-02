@@ -21,9 +21,10 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
     }
 
     function checkScenePreviewImage(scene) {
+        console.log(scene);
 
         if(!scene.preview_image_output) {
-            if(scene.preview_image) {
+            if(scene.preview_image && scene.preview_image.length > 1) {
                 scene.preview_image_output = $scope.rootUrl + scene.preview_image
             } else {
                 scene.preview_image_output = ENV_CONFIG.preview_image;
