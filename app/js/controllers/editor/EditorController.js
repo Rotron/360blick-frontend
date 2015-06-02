@@ -5,6 +5,7 @@
 
       $scope.projectId = $stateParams['projectId'];
       $scope.username = $stateParams['username'];
+      $scope.currentSceneId = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
 
       $scope.hiddenTypes = {
           'Line':               true,
@@ -13,6 +14,19 @@
           'PerspectiveCamera':  true
       };
 
+      $scope.scenes = [];
+
+      RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
+              $scope.scenes = res.data;
+          }, function(error) {
+              console.log(error);
+          }
+      );
+
+      $scope.onSceneSelect = function(sceneId) {
+          $scope.save();
+          $state.go('editor', {username: $scope.username, projectId: $scope.projectId, sceneId: sceneId})
+      };
 
       $scope.zoomIn = function(){
           EditorService.zoomIn(0.9);
@@ -26,8 +40,7 @@
       };
 
       $scope.save = function(){
-            var id = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
-            SaveSceneService.save(id);
+            SaveSceneService.save($scope.currentSceneId);
       };
 
       $scope.addNewObject = function(type){
