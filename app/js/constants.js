@@ -58,17 +58,18 @@ angular.module('constants', [])
                     objecttype: 'CylinderGeometry'
                 }
             ]
-        }, {
-            title: '2D Primitives',
-            items: [
-                {
-                    name: 'empty1',
-                    objecttype: 'empty1'
-                },
-                {
-                    name: 'empty1',
-                    objecttype: 'empty1'
-                }
-            ]
         }
+//        {
+//            title: '2D Primitives',
+//            items: [
+//                {
+//                    name: 'empty1',
+//                    objecttype: 'empty1'
+//                },
+//                {
+//                    name: 'empty1',
+//                    objecttype: 'empty1'
+//                }
+//            ]
+//        }
     ]);
