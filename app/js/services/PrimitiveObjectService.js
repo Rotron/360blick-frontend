@@ -37,6 +37,16 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
                     properties.heightSeg    || 200
                 );
                 break;
+            case 'TextGeometry':
+                return new THREE.TextGeometry( 'Book Now', {
+                    font: 'helvetiker',
+                    weight: 'normal',
+                    height: 1,
+                    style : 'normal',
+                    size: 1,
+                    divisions: 1
+                });
+                break;
         }
     };
 

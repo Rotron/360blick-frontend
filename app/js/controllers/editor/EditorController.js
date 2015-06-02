@@ -59,8 +59,7 @@
           return EditorService.getObjects();
       };
 
-
-      $scope.getSupportedPrimitiveObjects = function(){
+      $scope.getSupportedObjects = function(){
           return PrimitiveObjectService.getSupportedObjectTypes();
       }
 
