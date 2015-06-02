@@ -152,7 +152,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             }
         })
         .state('user', {
-            url: ":username",
+            url: "/:username",
             views: {
                 "app": {
                     templateUrl: "user/index.html",
