@@ -21,7 +21,8 @@ assets_url = 'https://blick.herokuapp.com';
 
 app.constant('ENV_CONFIG', {
     api: api_url,
-    assets: assets_url
+    assets: assets_url,
+    preview_image: "/images/preview_placeholder.jpg"
 });
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'USER_ROLES',

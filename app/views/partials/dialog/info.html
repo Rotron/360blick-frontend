@@ -1,0 +1,14 @@
+<div class="dialog dialog--info" ng-click="checkCloseIt($event)">
+    <div class="dialog__content dialog--info__content">
+        <div class="dialog__header dialog--info__header">
+            <button class="dialog__close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="dialog__title dialog--info__title">{{title}}</h4>
+        </div>
+        <div class="dialog__body has-interaciton-bar dialog--info__body">
+            <div class="row">{{message}}</div>
+            <div class="dialog__body__interaction-bar">
+                <button ng-click="okCallback(); closeIt()" class="btn btn--submit btn--cta">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

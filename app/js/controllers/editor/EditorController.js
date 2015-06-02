@@ -26,7 +26,7 @@
       $scope.changeScene = function(sceneId) {
           $scope.save();
           $state.go('editor', {username: $scope.username, projectId: $scope.projectId, sceneId: sceneId})
-      }
+      };
 
       $scope.onSceneSelect = function(sceneId) {
           $scope.changeScene(sceneId);
@@ -61,7 +61,7 @@
 
       $scope.getSupportedObjects = function(){
           return PrimitiveObjectService.getSupportedObjectTypes();
-      }
+      };
 
   }]);
 
