@@ -3,7 +3,7 @@
         <button ng-click="openModal('newProject')" class="btn btn--dotted"><i class="fa fa-plus"></i>New Project</button>
     </div>
     <div class="col span-6 has-text-right">
-        <dropdown template-name="select" on-select="onOrderSelect" data="{'currentItemId': order.items[0].title, 'items': order.items}" class-suffix="light"></dropdown>
+        <dropdown template-name="select" on-select="onOrderSelect" data="{'currentItemName': order.items[0].title, 'items': order.items}" class-suffix="light"></dropdown>
     </div>
 </div>
 
