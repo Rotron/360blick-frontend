@@ -23,10 +23,18 @@
           }
       );
 
-      $scope.onSceneSelect = function(sceneId) {
+      $scope.changeScene = function(sceneId) {
           $scope.save();
           $state.go('editor', {username: $scope.username, projectId: $scope.projectId, sceneId: sceneId})
+      }
+
+      $scope.onSceneSelect = function(sceneId) {
+          $scope.changeScene(sceneId);
       };
+
+      $rootScope.$on('newScene', function(event, data) {
+          $scope.changeScene(data.id);
+      });
 
       $scope.zoomIn = function(){
           EditorService.zoomIn(0.9);
