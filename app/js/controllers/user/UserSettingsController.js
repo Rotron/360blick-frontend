@@ -17,13 +17,12 @@ app.controller('UserSettingsController', ['$scope', 'SessionService', 'RequestSe
     };
 
     // TODO: Move to SessionService
-    var updateSession = function(data) {
-        SessionService.destroy();
-        SessionService.create(data.token, data.nick, data.email, data.role, data.profile_image);
+    this.renewSession = function(data) {
+
     };
 
     $rootScope.$on('updatedUserImage', function(event, data) {
-        updateSession(res);
+        SessionService.renewSession(data);
         $scope.user.profileImage = ENV_CONFIG.assets + data.profile_image;
     });
 
@@ -32,7 +31,7 @@ app.controller('UserSettingsController', ['$scope', 'SessionService', 'RequestSe
 
         // FIXME: not able to change email?? Bachend condition?
 /*        RequestService.post('users/update', {email: $scope.email}, function(res) {
-                updateSession(res.data);
+            SessionService.renewSession(res.data);
                 // TODO: bind data
                 $scope.user.email = res.data.email;
             }, function(error) {
