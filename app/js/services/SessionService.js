@@ -45,6 +45,11 @@ app.service('SessionService', ['USER_ROLES', '$crypto', '$rootScope', function (
         return this.userRole;
     };
 
+    this.renewSession = function(data) {
+        this.destroy();
+        this.create(data.token, data.nick, data.email, data.role, data.profile_image);
+    };
+
     this.renewLocalCredentials = function() {
         this.removeLocalCredentials();
         this.setLocalCredentials();
