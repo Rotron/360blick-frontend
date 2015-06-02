@@ -333,6 +333,12 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
                 }
             }
          });
+        angular.apply = function(scope) {
+            scope = scope ? scope : $rootScope;
+            if (scope.$root.$$phase != '$apply' && scope.$root.$$phase != '$digest') {
+                scope.$apply();
+            }
+        }
 }]);
 
 angular.module('templates', []);
