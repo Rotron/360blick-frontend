@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ProjectSceneSettingsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', 'ENV_CONFIG', function ($scope, $stateParams, RequestService, $rootScope, ENV_CONFIG) {
+app.controller('ProjectSceneSettingsController', ['$scope', '$stateParams', 'RequestService', '$rootScope', 'ENV_CONFIG', 'ModalService', function ($scope, $stateParams, RequestService, $rootScope, ENV_CONFIG, ModalService) {
   $scope.username = $stateParams.username;
   $scope.sceneId = $stateParams.sceneId
 
@@ -37,6 +37,7 @@ app.controller('ProjectSceneSettingsController', ['$scope', '$stateParams', 'Req
       };
       RequestService.post('scenes/update', data, function(res) {
             $scope.scene = res.data;
+            ModalService.openModal('info', {title: 'Success', message: 'Successfully saved changes.'});
           }, function(error) {
               console.log(error);
           }
