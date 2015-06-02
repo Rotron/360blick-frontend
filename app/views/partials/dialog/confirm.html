@@ -1,14 +1,14 @@
-<div class="dialog" ng-click="checkCloseIt($event)">
-    <div class="dialog__content">
-        <div class="dialog__header">
+<div class="dialog dialog--confirm" ng-click="checkCloseIt($event)">
+    <div class="dialog__content dialog--confirm__content">
+        <div class="dialog__header dialog--confirm__header">
             <button class="dialog__close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="dialog__title">{{title}}</h4>
+            <h4 class="dialog__title dialog--confirm__title">{{title}}</h4>
         </div>
-        <div class="dialog__body">
+        <div class="dialog__body has-interaciton-bar dialog--confirm__body">
             <div class="row">
                 {{message}}
             </div>
-            <div class="row">
+            <div class="dialog__body__interaction-bar">
                 <button ng-click="confirmCallback(); closeIt()" class="btn btn--submit btn--cta">Confirm</button>
                 <button ng-click="cancelCallback(); closeIt()" class="btn btn--submit btn--danger">Cancel</button>
             </div>
