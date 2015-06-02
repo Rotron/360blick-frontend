@@ -2,6 +2,7 @@ app.directive('historyInput',['HistoryService', '$timeout', function(HistoryServ
     return {
         require: 'ngModel',
         restrict: 'A',
+        replace: false,
         scope: {
             ngModel: '='
         },
