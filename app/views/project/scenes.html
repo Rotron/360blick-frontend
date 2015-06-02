@@ -9,7 +9,7 @@
 
 <ul class="overview-list container">
     <li ng-repeat="scene in scenes | orderBy:order.predicate:order.reverse" ui-sref="editor({username: username, projectId: projectId, sceneId: scene.id})" class="overview-list__item col span-6">
-        <div class="overview-list__asset" style="background-image:url('{{scene.preview_image.preview_image.url}}');">
+        <div class="overview-list__asset" style="background-image:url('{{scene.preview_image_output}}');">
             <div class="overview-list__color" style="background-color:{{scene.preview_image_color}};"></div>
             <div class="overview-list__content container">
                 <div class="col span-8">

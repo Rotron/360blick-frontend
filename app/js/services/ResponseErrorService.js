@@ -32,7 +32,7 @@ app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootSco
     this.handle = function(res, status) {
         if(ignoredStates[status]) return;
         var action = errorActions[status] || errorActions.default;
-        var data = res.description || {};
+        var data = res.description || res.error || {};
         action(data);
     };
 
