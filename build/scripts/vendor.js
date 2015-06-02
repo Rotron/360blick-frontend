@@ -75197,7 +75197,7 @@ THREE.MorphBlendMesh.prototype.update = function ( delta ) {
 };
 
 
-/*! nanoScrollerJS - v0.8.6 - 2015
+/*! nanoScrollerJS - v0.8.7 - 2015
 * http://jamesflorentino.github.com/nanoScrollerJS/
 * Copyright (c) 2015 James Florentino; Licensed MIT */
 (function(factory) {

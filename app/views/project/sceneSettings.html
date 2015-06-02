@@ -1,1 +1,15 @@
-scene settings
+<div class="interaction-bar container settings">
+    <form name="settingsForm" class="container" ng-submit="updateSceneSettings($event)" novalidate>
+        <fieldset class="row">
+            <placeholder-input value="scene.title" label="Scene Title" type="text"></placeholder-input>
+        </fieldset>
+        <div class="row">
+            <button class="btn btn--round btn--submit">Update Settings</button>
+        </div>
+    </form>
+    <br>
+    <div>
+        <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
+        {{scene.preview_image}}
+    </div>
+</div>

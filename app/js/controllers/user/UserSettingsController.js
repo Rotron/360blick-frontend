@@ -30,13 +30,14 @@ app.controller('UserSettingsController', ['$scope', 'SessionService', 'RequestSe
         $event.stopPropagation();
 
         // FIXME: not able to change email?? Bachend condition?
-/*        RequestService.post('users/update', {email: $scope.email}, function(res) {
+        RequestService.post('users/update', {email: $scope.user.email, old_password: $scope.user.old_password}, function(res) {
             SessionService.renewSession(res.data);
                 // TODO: bind data
                 $scope.user.email = res.data.email;
+
             }, function(error) {
                 console.log(error);
             }
-        );*/
+        );
     };
 }]);
