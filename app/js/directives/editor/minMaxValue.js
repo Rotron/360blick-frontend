@@ -1,6 +1,7 @@
 app.directive('customNgModel',['$timeout', function($timeout) {
     return {
         restrict: 'A',
+        replace: false,
         scope: {
             model: "="
         },
