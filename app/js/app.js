@@ -12,7 +12,6 @@ var app = angular.module('360blickFrontendApp', [
     'mdo-angular-cryptography'
 ]);
 
-// TODO: Cleanup ENV
 var api_url = 'http://localhost:3000/api/v1';
 var assets_url = 'http://localhost:3000';
 // @if NODE_ENV = 'PRODUCTION'
@@ -153,7 +152,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
             }
         })
         .state('user', {
-            url: "/:username",
+            url: ":username",
             views: {
                 "app": {
                     templateUrl: "user/index.html",
@@ -298,23 +297,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         });
 
     $locationProvider.html5Mode(true);
-
-    $urlRouterProvider.otherwise(function(current, path, search) {
-        if(search.goto) {
-            return '/' + search.goto;
-        }
-        return '/';
-    });
+    $urlRouterProvider.otherwise('/');
 }]);
 
 app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService',
     function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS, ModalService) {
-
         $rootScope.editorControllerLoaded = false;
-
         AuthService.reloadLocalCredentials();
-
-//        console.log(SessionService.getUser());
 
         $rootScope.currentUser = SessionService.getUser().nick;
         $rootScope.userRoles = USER_ROLES;
@@ -322,7 +311,6 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
         $rootScope.isAdmin = SessionService.isAdmin;
 
         $rootScope.sidebarMenu = { isActive: true };
-        // debugging
         $rootScope.console = console;
 
         $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {

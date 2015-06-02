@@ -2,11 +2,11 @@
     <section class="section section--gallery row">
         <h1 class="section--gallery__title">360blick</h1>
         <p class="section--gallery__subtitle">interactive panorama experiences</p>
-        <button ui-sref="register" class="btn btn--cta section--gallery__sign-up" ng-if="!isAuthenticated()">sign up</button>
-        <button class="section--gallery__login" ui-sref="login">
-            Already got an Account? <a ui-sref="login" ng-if="!isAuthenticated()">Login</a>
+        <button ui-sref="register" class="btn btn--cta section--gallery__sign-up" ng-if="!isAuthenticated()">Sign Up</button>
+        <button class="section--gallery__login" ui-sref="login" ng-if="!isAuthenticated()">
+            Already got an Account? <a ui-sref="login">Login</a>
         </button>
-        <button ui-sref="user({username: currentUser})" class="btn btn--cta section--gallery__sign-up" ng-if="isAuthenticated()">Your profile</button>
+        <button ui-sref="user({username: currentUser})" class="btn btn--cta section--gallery__sign-up" ng-if="isAuthenticated()">Your Profile</button>
     </section>
     <section class="section section--features row">
         <ul class="icon-list">
