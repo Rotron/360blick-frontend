@@ -38,7 +38,7 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
                 );
                 break;
             case 'TextGeometry':
-                return new THREE.TextGeometry( 'Book Now', {
+                return new THREE.TextGeometry( 'Text', {
                     font: 'helvetiker',
                     weight: 'normal',
                     height: 1,
