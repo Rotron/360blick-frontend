@@ -1,11 +1,12 @@
 <li class="toggle-list__item" ng-class="{active: isActive}">
     <div class="toggle-list__header container" ng-click="setActive(); ">
-        <div class="col span-2 toggle-list__header__icon"><i class="fa fa-cube"></i></div>
-        <div class="col span-8 toggle-list__header__title" >{{item.type}} {{item.id}}: {{item.geometry.type}}</div>
-        <div class="col span-2 has-text-right toggle-list__header__interaction">
-            <button class="toggle-list__header__interaction__button">
+        <div class="toggle-list__header__icon"><i class="fa fa-cube"></i></div>
+        <div class="col span-12 toggle-list__header__title" >{{item.type}} {{item.id}}: {{item.geometry.type}}</div>
+        <div class="toggle-list__header__interaction has-text-right ">
+            <dropdown template-name="object3d" on-select="onSettingsSelect" parent-item="item" data="{'items': edit.items}" class-suffix="object3d"></dropdown>
+<!--            <button class="toggle-list__header__interaction__button">
                 <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
-            </button>
+            </button>-->
             <button class="toggle-list__header__interaction__button">
                 <i class="fa fa-chevron-down"></i>
             </button>
@@ -26,7 +27,7 @@
 
         <ul class="toggle-list--small">
             <li class="toggle-list--small__item">
-                <div class="toggle-list--small__header">
+                <div class="toggle-list--small__header is-nested">
                     <h2 class="toggle-list--small__title">Material</h2>
                 </div>
                 <ul class="editor-options-list">
@@ -39,8 +40,8 @@
                         <div class="col span-9">
                             Wireframes
                         </div>
-                        <div class="col span-3">
-                            <input history-input type="checkbox" ng-model="item.material.wireframe">
+                        <div class="col span-3 has-text-right">
+                            {{item.material.wireframe}} <input history-input type="checkbox" ng-model="item.material.wireframe">
                         </div>
                     </li>
                 </ul>
@@ -52,9 +53,6 @@
             </li>
             <interaction ng-if="!isTemplateScene" item="item"></interaction>
             <text-geometry ng-if="item.geometry.type == 'TextGeometry'" item="item"></text-geometry>
-            <li class="toggle-list--small__item">
-                <button class="btn btn--danger" ng-click="remove(item)">remove</button>
-            </li>
         </ul>
     </div>
 </li>

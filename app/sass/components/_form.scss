@@ -2,6 +2,28 @@ fieldset {
   margin-bottom: $base * 2;
 }
 
+.textarea {
+  @include blick-transition;
+  background: $secondary-light;
+  border: 2px solid $secondary-2;
+  font-size: $base * 3;
+  padding: $base * 2;
+  border-radius: 3px;
+  resize: none;
+  width: 100%;
+  height: 165px;
+  outline: none;
+  color: $primary-0;
+
+  &:hover {
+    border-color: $secondary-0;
+  }
+
+  &:focus {
+    border-color: $primary-cta;
+  }
+}
+
 .input {
   position: relative;
 
@@ -89,33 +111,3 @@ fieldset {
     background: $primary-highlight;
   }
 }
-
-// TODO: Joscha, why has the Select Label Animation?? There is also a dropdown class... remove .input--select!
-/*
-.input--select {
-  width: 100%;
-
-  .input__label--select {
-    line-height: $base * 2;
-    padding: $base * 4;
-    @include blick-transition();
-  }
-
-  &.is-focused, &.is-filled  {
-    .input__label--select {
-      line-height: $base * 2;
-      padding: $base;
-      padding-left: $base * 4;
-      color: $secondary-0;
-      opacity: 1;
-    }
-  }
-}
-
-.input__field.input--select__field {
-  width: 100%;
-  height: $base * 10;
-  background: $secondary-3;
-  padding: $base * 4;
-}
-*/
