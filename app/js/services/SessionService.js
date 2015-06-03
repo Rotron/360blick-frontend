@@ -45,12 +45,14 @@ app.service('SessionService', ['USER_ROLES', '$crypto', '$rootScope', function (
         return this.userRole;
     };
 
-    this.renewSession = function(data) {
-        this.destroy();
-        this.create(data.token, data.nick, data.email, data.role, data.profile_image);
-    };
+    this.renewLocalCredentials = function(data) {
+        console.log(data);
+        this.token = data.token || this.token;
+        this.nick = data.nick || this.nick;
+        this.email = data.email || this.email;
+        this.userRole = data.user_role || this.userRole;
+        this.profileImage = data.profile_image || this.profileImage;
 
-    this.renewLocalCredentials = function() {
         this.removeLocalCredentials();
         this.setLocalCredentials();
     };
@@ -87,7 +89,8 @@ app.service('SessionService', ['USER_ROLES', '$crypto', '$rootScope', function (
 
     $rootScope.$on('updatedUserImage', (function(event, data) {
         this.profileImage = data.profile_image;
-        this.renewLocalCredentials();
+        console.log(this.profileImage);
+        this.renewLocalCredentials(data);
     }).bind(this));
 
     return this;
