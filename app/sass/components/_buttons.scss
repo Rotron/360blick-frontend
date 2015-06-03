@@ -185,3 +185,21 @@
   color: $secondary-2;
   border-radius: 2px;
 }
+
+.btn--editor--sidebar {
+  @include blick-transition();
+  border: 2px solid $primary-0;
+  background: $primary-0;
+  height: $base * 6;
+  line-height: 100%;
+  padding: 0 $base - 2px;
+  margin: $base $base + 3px;
+  display: block;
+  color: $secondary-light;
+  font-size: 12px;
+
+  &:hover {
+    border-color: $primary-cta;
+    color: $primary-cta;
+  }
+}
