@@ -38,6 +38,12 @@
   margin-top: 10px;
 }
 
+.dropdown__list--select--light {
+  width: 200px;
+  position: absolute;
+  right: 0;
+}
+
 .dropdown__list--default__item {
   width: 100%;
   height: $base * 10;
