@@ -9,7 +9,7 @@
     </form>
     <br>
     <div>
-        <img ng-src="{{scene.preview_image}}" style="max-width:400px;">
+        <img ng-click="openModal('newAsset', uploadOptions)" ng-src="{{scene.preview_image}}" style="max-width:400px;">
         <br>
         <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
     </div>
