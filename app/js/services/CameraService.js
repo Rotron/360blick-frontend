@@ -1,8 +1,24 @@
 app.service('CameraService',[function() {
 
     this.init = function(container) {
-        this.camera = new THREE.PerspectiveCamera( 75, container[0].clientWidth / container[0].clientHeight, 0.1, 1000 );
+        this.cameras = [
+            new THREE.PerspectiveCamera( 75, container[0].clientWidth / container[0].clientHeight, 0.1, 1000 ),
+            new THREE.PerspectiveCamera( 75, container[0].clientWidth / container[0].clientHeight, 0.1, 1000 )
+        ];
+        this.cameras[1].up = new THREE.Vector3(0,0,1);
+        this.cameras[1].position.y = 100;
+        this.cameras[1].lookAt(new THREE.Vector3(0,0,0));
+
+        this.camera = this.cameras[0];
+        this.currentCameraId = 0;
         return this.camera;
+    };
+
+    this.switchCamera = function(id) {
+        if(id == this.currentCameraId) return;
+        this.currentCameraId = id;
+        if(this.cameras[id]) this.camera = this.cameras[id];
+        return this.currentCameraId;
     };
 
     this.rotate = function(val) {

@@ -1,1 +1,14 @@
-asset settings
+<div id="view--settings" class="view conainer">
+    <div id="view--settings__wrapper" class="view__wrapper">
+        <div class="interaction-bar settings">
+            <form name="settingsForm" class="settings__form container" ng-submit="updateAsset($event)" novalidate>
+                <fieldset class="row">
+                    <placeholder-input value="assetTitle" label="Title" type="text"></placeholder-input>
+                </fieldset>
+                <div class="row">
+                    <button class="btn btn--round btn--submit">Update Title</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

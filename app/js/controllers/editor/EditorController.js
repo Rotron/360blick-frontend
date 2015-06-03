@@ -1,11 +1,12 @@
 'use strict';
 
-  app.controller('EditorController', ['$scope', '$rootScope', 'AuthService', 'EditorService', 'PrimitiveObjectService', '$stateParams', '$state', 'RequestService', 'HistoryService', 'SaveSceneService',
-      function ($scope, $rootScope, AuthService, EditorService, PrimitiveObjectService, $stateParams, $state, RequestService, HistoryService, SaveSceneService) {
+  app.controller('EditorController', ['$scope', '$rootScope', 'EditorService', 'PrimitiveObjectService', '$stateParams', '$state', 'RequestService', 'HistoryService', 'SaveSceneService', 'CameraService',
+      function ($scope, $rootScope, EditorService, PrimitiveObjectService, $stateParams, $state, RequestService, HistoryService, SaveSceneService, CameraService) {
 
       $scope.projectId = $stateParams['projectId'];
       $scope.username = $stateParams['username'];
       $scope.currentSceneId = $stateParams['sceneId'] ? $stateParams['sceneId'] : $stateParams['templateId'];
+      $scope.currentCameraId = 0;
 
       $scope.hiddenTypes = {
           'Line':               true,
@@ -39,8 +40,13 @@
       $scope.zoomIn = function(){
           EditorService.zoomIn(0.9);
       };
+
       $scope.zoomOut = function(){
           EditorService.zoomIn(1.1);
+      };
+
+      $scope.switchCamera = function(id){
+          $scope.currentCameraId = EditorService.switchCamera(id);
       };
 
       $scope.goBack = function(){

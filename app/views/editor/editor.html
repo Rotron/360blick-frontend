@@ -22,14 +22,14 @@
                 <!--<i class="fa fa-arrows-h"></i>-->
                 <!--<h2 class="editor-toolbar__title">Move</h2>-->
             <!--</li>-->
-            <!--<li class="editor-toolbar__item">-->
-                <!--<i class="fa fa-camera"></i>-->
-                <!--<h2 class="editor-toolbar__title">Camera 1</h2>-->
-            <!--</li>-->
-            <!--<li class="editor-toolbar__item">-->
-                <!--<i class="fa fa-camera"></i>-->
-                <!--<h2 class="editor-toolbar__title">Camera 2</h2>-->
-            <!--</li>-->
+            <li class="editor-toolbar__item" ng-click="switchCamera(0);" ng-class="{'active': currentCameraId == 0}">
+                <i class="fa fa-camera"></i>
+                <h2 class="editor-toolbar__title">Camera 1</h2>
+            </li>
+            <li class="editor-toolbar__item" ng-click="switchCamera(1);" ng-class="{'active': currentCameraId == 1}">
+                <i class="fa fa-camera"></i>
+                <h2 class="editor-toolbar__title">Camera 2</h2>
+            </li>
             <!--<li class="editor-toolbar__item active">-->
                 <!--<i class="fa fa-camera"></i>-->
                 <!--<h2 class="editor-toolbar__title">Camera 3</h2>-->
