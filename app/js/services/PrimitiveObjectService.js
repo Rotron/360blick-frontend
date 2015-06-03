@@ -136,14 +136,16 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
     };
 
     this.changeText = function(text, object) {
-        object.geometry =  new THREE.TextGeometry( text, {
-            font: 'helvetiker',
-            weight: 'normal',
-            height: 1,
-            style : 'normal',
-            size: 1,
-            divisions: 1
-        });
+        if(object.geometry.type == 'TextGeometry') {
+            object.geometry =  new THREE.TextGeometry( text, {
+                font: 'helvetiker',
+                weight: 'normal',
+                height: 1,
+                style : 'normal',
+                size: 1,
+                divisions: 1
+            });
+        }
     };
     /************************************ /copy to player (objectLoader) ************************************************/
 
