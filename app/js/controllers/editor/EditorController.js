@@ -17,12 +17,18 @@
 
       $scope.scenes = [];
 
-      RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
-              $scope.scenes = res.data;
-          }, function(error) {
-              console.log(error);
-          }
-      );
+      function getAllScenes() {
+          RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
+                  $scope.scenes = res.data;
+              }, function(error) {
+                  console.log(error);
+              }
+          );
+      }
+      if($state.is('editor')) {
+          $scope.isEditor = true;
+          getAllScenes();
+      }
 
       $scope.changeScene = function(sceneId) {
           if($state.is('editor')) {
