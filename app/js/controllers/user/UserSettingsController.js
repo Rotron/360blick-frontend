@@ -24,7 +24,7 @@ app.controller('UserSettingsController', ['$scope', 'SessionService', 'RequestSe
         $event.stopPropagation();
 
         RequestService.post('users/update', {email: $scope.user.email, old_password: $scope.user.old_password}, function(res) {
-            SessionService.renewSession(res.data);
+            SessionService.renewLocalCredentials(res.data);
                 $scope.user.email = res.data.email;
                 $scope.user.old_password = "";
                 ModalService.openModal('info', {title: 'Success', message: 'Successfully updated.'});
