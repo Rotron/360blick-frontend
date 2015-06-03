@@ -14,13 +14,12 @@ app.controller('ProjectSceneSettingsController', ['$scope', '$stateParams', 'Req
   };
 
   $rootScope.$on('updatedScenePreviewImage', function(event, data) {
-      console.log('new project image:', data);
-      $scope.scene.preview_image = data.preview_image;
+      $scope.scene.preview_image = ENV_CONFIG.assets + data.preview_image.url;
   });
 
   RequestService.post('scenes/specific', {scene_id: $scope.sceneId}, function(res) {
-          console.log(res.data);
           $scope.scene = res.data;
+          $scope.scene.preview_image = ENV_CONFIG.assets + $scope.scene.preview_image;
       }, function(error) {
           console.log(error);
       }
