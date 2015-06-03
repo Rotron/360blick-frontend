@@ -82,7 +82,9 @@ $object-header-interaction-width: 75px;
   width: $object-header-interaction-width;
 }
 
+.btn--dropdown--object3d,
 .toggle-list__header__interaction__button {
+  border-radius: 0;
   color: $secondary-light;
   cursor: pointer;
   height: $object-header-height;

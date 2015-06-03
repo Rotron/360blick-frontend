@@ -1,0 +1,13 @@
+<div class="dropdown dropdown--object3d">
+    <div class="dropdown__ghost" ng-class="{'active': active}" ng-click="toggleGhost($event)"></div>
+    <button class="btn btn--dropdown--object3d dropdown__trigger" ng-click="toggleDropdown($event)">
+        <i class="fa fa-cog" ng-click="item.detailsOpen = !item.detailsOpen"></i>
+    </button>
+    <div class="dropdown__toggle" ng-class="{'active': active}">
+        <ul class="dropdown__list dropdown__list--object3d">
+            <li class="dropdown__list__item dropdown__list--object3d__item" ng-repeat="item in data.items" ng-click="selectDropdownItem(item, $event)">
+                <i class="fa {{item.icon}}"></i>{{item.title}}
+            </li>
+        </ul>
+    </div>
+</div>

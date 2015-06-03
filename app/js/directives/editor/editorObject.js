@@ -38,6 +38,24 @@ app.directive('editorObject', ['$rootScope', 'EditorService', '$stateParams', fu
                 EditorService.remove(object);
             };
 
+            var editOptions = {
+                'delete': scope.remove
+            };
+
+            scope.onSettingsSelect = function(id, item) {
+                editOptions[id](item);
+            };
+
+            scope.edit = {
+                items: [
+                    {
+                        id: 'delete',
+                        title: 'Delete',
+                        icon: 'fa-trash-o'
+                    }
+                ]
+            };
+
         }
     };
 }]);
