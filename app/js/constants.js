@@ -5,6 +5,7 @@ angular.module('constants', [])
         all: '*',
         admin: 'admin',
         editor: 'editor',
+        subscriber: 'subscriber',
         guest: 'guest'
     })
 

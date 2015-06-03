@@ -22,11 +22,15 @@ app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootSco
 
     var ignoredStates = [404];
 
+    this.getResponseData = function(res) {
+        if(res.description) return res;
+        return res.error ? {description: res.error} : {};
+    }
+
     this.handle = function(res, status) {
         if(ignoredStates[status]) return;
         var action = errorActions[status] || errorActions.default;
-        var data = res.description ? res : {};
-        action(data);
+        action(this.getResponseData(res));
     };
 
 }]);
