@@ -5,6 +5,7 @@ angular.module('constants', [])
         all: '*',
         admin: 'admin',
         editor: 'editor',
+        subscriber: 'subscriber',
         guest: 'guest'
     })
 
@@ -37,39 +38,52 @@ angular.module('constants', [])
         }
     })
 
-    .constant('SUPPORTED_OBJECTS', [
-        {
-            title: '3D Primitives',
-            items: [
-                {
-                    name: 'Sphere',
-                    objecttype: 'SphereGeometry'
-                },
-                {
-                    name: 'Cube',
-                    objecttype: 'BoxGeometry'
-                },
-                {
-                    name: 'Plane',
-                    objecttype: 'PlaneGeometry'
-                },
-                {
-                    name: 'Cylinder',
-                    objecttype: 'CylinderGeometry'
-                }
-            ]
-        }
-//        {
-//            title: '2D Primitives',
-//            items: [
-//                {
-//                    name: 'empty1',
-//                    objecttype: 'empty1'
-//                },
-//                {
-//                    name: 'empty1',
-//                    objecttype: 'empty1'
-//                }
-//            ]
-//        }
-    ]);
+    .constant('SUPPORTED_OBJECTS', {
+        'primitive': [
+            {
+                title: '3D Primitives',
+                items: [
+                    {
+                        name: 'Sphere',
+                        objecttype: 'SphereGeometry'
+                    },
+                    {
+                        name: 'Cube',
+                        objecttype: 'BoxGeometry'
+                    },
+                    {
+                        name: 'Plane',
+                        objecttype: 'PlaneGeometry'
+                    },
+                    {
+                        name: 'Cylinder',
+                        objecttype: 'CylinderGeometry'
+                    }
+                ]
+            }
+//            {
+//                title: '2d',
+//                items: [
+//                    {
+//                        name: 'empty1',
+//                        objecttype: 'empty1'
+//                    },
+//                    {
+//                        name: 'empty1',
+//                        objecttype: 'empty1'
+//                    }
+//                ]
+//            }
+        ],
+        'media': [
+            {
+                title: 'Static',
+                items: [
+                    {
+                        name: 'Text',
+                        objecttype: 'TextGeometry'
+                    }
+                ]
+            }
+        ]
+    });

@@ -57,14 +57,16 @@
             <button class="editor-sidebar__ellipsis">
                 <i class="fa fa-ellipsis-h"></i>
             </button>
-            <!--<nav class="filter-switch">-->
+
+            <nav class="filter-switch" data-tab-menu data-ng-model="ui.tabview" ng-init="ui.tabview = 'tabObjects.html'">
                 <!--<button class="filter-switch__option">POI</button>-->
-                <!--<button class="filter-switch__option">Media</button>-->
-                <!--<button class="filter-switch__option active">Objects</button>-->
+                <button href="tabObjects.html" class="filter-switch__option active">Objects</button>
+                <button href="tabMedia.html" class="filter-switch__option">Media</button>
                 <!--<button class="filter-switch__option">Effects</button>-->
-            <!--</nav>-->
-            <ul class="toggle-list--small">
-                <li class="toggle-list--small__item" ng-repeat="primitives in getSupportedPrimitiveObjects()">
+            </nav>
+            <ul class="toggle-list--small" data-ng-include="ui.tabview"></ul>
+            <script type="text/ng-template" id="tabObjects.html">
+                <li class="toggle-list--small__item" ng-repeat="primitives in getSupportedObjects()['primitive']">
                     <div class="toggle-list--small__header">
                         <h2 class="toggle-list--small__title">{{primitives.title}}</h2>
                     </div>
@@ -75,7 +77,20 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
+            </script>
+            <script type="text/ng-template" id="tabMedia.html">
+                <li class="toggle-list--small__item" ng-repeat="media in getSupportedObjects()['media']">
+                    <div class="toggle-list--small__header">
+                        <h2 class="toggle-list--small__title">{{media.title}}</h2>
+                    </div>
+                    <ul class="selection-list container">
+                        <li class="selection-list__item col span-3" ng-repeat="medium in media.items track by $index"  ng-click="addNewObject(medium.objecttype)">
+                            <i class="fa fa-cube"></i>
+                            <h4 class="selection-list__title">{{medium.name}}</h4>
+                        </li>
+                    </ul>
+                </li>
+            </script>
         </div>
     </scrollable>
 </div>

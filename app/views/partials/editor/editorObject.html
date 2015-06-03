@@ -51,6 +51,7 @@
                 </ul>
             </li>
             <interaction ng-if="!isTemplateScene" item="item"></interaction>
+            <text-geometry ng-if="item.geometry.type == 'TextGeometry'" item="item"></text-geometry>
             <li class="toggle-list--small__item">
                 <button class="btn btn--danger" ng-click="remove(item)">remove</button>
             </li>

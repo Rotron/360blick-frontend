@@ -1,20 +1,16 @@
 app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootScope', 'AUTH_EVENTS', '$state', function (SessionService, ModalService, $rootScope, AUTH_EVENTS, $state) {
 
-    function okCallback() {}
-
     function unhandledError(data) {
-        data.okCallback = okCallback;
         ModalService.openModal('error', data);
     }
 
     function sessionExpired(data) {
-        data.okCallback = okCallback;
         SessionService.destroy();
         ModalService.openModal('login', data);
     }
 
     function paymentRequired(data) {
-        data.okCallback = function() { $state.go('app'); console.log('pay'); };
+        data.okCallback = function() { $state.go('app'); };
         ModalService.openModal('error', data);
     }
 
@@ -26,11 +22,15 @@ app.service('ResponseErrorService', ['SessionService', 'ModalService', '$rootSco
 
     var ignoredStates = [404];
 
+    this.getResponseData = function(res) {
+        if(res.description) return res;
+        return res.error ? {description: res.error} : {};
+    }
+
     this.handle = function(res, status) {
         if(ignoredStates[status]) return;
         var action = errorActions[status] || errorActions.default;
-        var data = res.description ? res : {};
-        action(data);
+        action(this.getResponseData(res));
     };
 
 }]);

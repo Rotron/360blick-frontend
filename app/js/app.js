@@ -28,6 +28,8 @@ app.constant('ENV_CONFIG', {
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'USER_ROLES',
     function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, USER_ROLES) {
 
+        console.log(USER_ROLES);
+
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
@@ -301,8 +303,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
     $urlRouterProvider.otherwise('/');
 }]);
 
-app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService',
-    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS, ModalService) {
+app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService', '$state',
+    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS, ModalService, $state) {
         $rootScope.editorControllerLoaded = false;
         AuthService.reloadLocalCredentials();
 
@@ -326,7 +328,6 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
                 event.preventDefault();
                 if (AuthService.isAuthenticated()) {
                     // user is not allowed
-                    console.log(AuthService.isAuthenticated());
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {next: next, params: nextParams});
                 } else {
                     // user is not logged in
