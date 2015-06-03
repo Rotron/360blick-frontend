@@ -50,7 +50,11 @@ $object-header-interaction-width: 75px;
 
 .toggle-list--small__header {
   background: $primary-0;
-  padding: $base;
+  padding: $base $base * 2;
+
+  &.is-nested {
+    padding: $base $base + 3px;
+  }
 }
 
 .toggle-list--small__item {

@@ -24,9 +24,11 @@
 .minmax-interaction__slider {
   height: $input-sidebar-height;
   line-height: $input-sidebar-height;
+  padding-right: $base;
   input[type=range] {
     width: 100%;
     -webkit-appearance: none;
+    cursor: pointer;
   }
 
   @mixin rangeTrack() {

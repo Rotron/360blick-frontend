@@ -26,7 +26,7 @@
 
         <ul class="toggle-list--small">
             <li class="toggle-list--small__item">
-                <div class="toggle-list--small__header">
+                <div class="toggle-list--small__header is-nested">
                     <h2 class="toggle-list--small__title">Material</h2>
                 </div>
                 <ul class="editor-options-list">
@@ -39,8 +39,8 @@
                         <div class="col span-9">
                             Wireframes
                         </div>
-                        <div class="col span-3">
-                            <input history-input type="checkbox" ng-model="item.material.wireframe">
+                        <div class="col span-3 has-text-right">
+                            {{item.material.wireframe}} <input history-input type="checkbox" ng-model="item.material.wireframe">
                         </div>
                     </li>
                 </ul>
