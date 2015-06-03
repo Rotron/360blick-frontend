@@ -1,4 +1,4 @@
-<nav class="sidebar-menu">
+<nav class="sidebar-menu reveal-animation">
     <scrollable>
         <a ui-sref="user" ui-sref-active="is-active" class="sidebar-menu__title">360blick</a>
         <ul class="menu-list">
@@ -9,7 +9,7 @@
                     <li class="menu-secondary__item">
                         <a ng-click="openModal('newProject')" ui-sref-active="is-active" class="menu-secondary__title"><i class="fa fa-plus"></i>New Project</a>
                     </li>
-                    <li class="menu-secondary__item" ng-repeat="project in projects | orderBy:'title'">
+                    <li class="menu-secondary__item reveal-animation reveal-animation" ng-repeat="project in projects | orderBy:'title'">
                         <a ui-sref="user.project({projectId: project.id})" ui-sref-active="is-active" class="menu-secondary__title">{{project.title}}</a>
                     </li>
                 </ul>
@@ -21,7 +21,7 @@
                     <li class="menu-secondary__item">
                         <a ng-click="openModal('newSceneTemplate')" ui-sref-active="is-active" class="menu-secondary__title"><i class="fa fa-plus"></i>New Scenetemplate</a>
                     </li>
-                    <li class="menu-secondary__item" ng-repeat="template in sceneTemplates | orderBy:'title' track by $index">
+                    <li class="menu-secondary__item reveal-animation" ng-repeat="template in sceneTemplates | orderBy:'title' track by $index">
                         <a ui-sref="template({username: username, templateId: template.id})" ui-sref-active="is-active" class="menu-secondary__title">{{template.title}}</a>
                     </li>
                 </ul>
@@ -50,7 +50,7 @@
                 <a ui-sref="newsletter" target="_blank" ui-sref-active="is-active" class="menu-primary__title"><i class="fa fa-paper-plane-o"></i>Newsletter</a>
             </li>
             <li class="menu-primary__item">
-                <a ng-click="openModal('feedback')" ui-sref-active="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-comments-o"></i>Feedback</a>
+                <a ng-click="openModal('feedback',{title: 'Feedback'})" ui-sref-active="is-active" class="menu-primary__title has-menu-seperator"><i class="fa fa-comments-o"></i>Feedback</a>
             </li>
         </ul>
     </scrollable>

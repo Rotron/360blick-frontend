@@ -95,7 +95,8 @@ fieldset {
   border-radius: 0px 4px 4px 0px;
 }
 
-.input--sidebar__field {
+.input--sidebar__field,
+.input--sidebar__field[type=text] {
   width: 100%;
   border: 2px solid $primary-0;
   background: $primary-2;
@@ -111,33 +112,3 @@ fieldset {
     background: $primary-highlight;
   }
 }
-
-// TODO: Joscha, why has the Select Label Animation?? There is also a dropdown class... remove .input--select!
-/*
-.input--select {
-  width: 100%;
-
-  .input__label--select {
-    line-height: $base * 2;
-    padding: $base * 4;
-    @include blick-transition();
-  }
-
-  &.is-focused, &.is-filled  {
-    .input__label--select {
-      line-height: $base * 2;
-      padding: $base;
-      padding-left: $base * 4;
-      color: $secondary-0;
-      opacity: 1;
-    }
-  }
-}
-
-.input__field.input--select__field {
-  width: 100%;
-  height: $base * 10;
-  background: $secondary-3;
-  padding: $base * 4;
-}
-*/

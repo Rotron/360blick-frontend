@@ -9,6 +9,11 @@
                     <button class="btn btn--round btn--submit">Update Title</button>
                 </div>
             </form>
+            <div class="settings__profile-image">
+                <img ng-src="{{assetImage}}" ng-click="openModal('newAsset', uploadOptions)" alt="Asset Image" style="max-width:400px;">
+                <br>
+                <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset Image</button>
+            </div>
         </div>
     </div>
 </div>

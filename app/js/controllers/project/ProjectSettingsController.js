@@ -4,6 +4,7 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
     $scope.assetUrl = ENV_CONFIG.assets;
+    $scope.defaultImage = ENV_CONFIG.preview_image;
 
     $scope.uploadOptions = {
         broadcastDomain: 'updatedProjectPreviewImage',
@@ -14,7 +15,6 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
     };
 
     $rootScope.$on('updatedProjectPreviewImage', function(event, data) {
-        console.log('new project image:', data);
         $scope.project.preview_image = data.preview_image;
     });
 
@@ -52,20 +52,15 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
 
     $scope.generateExport = function($event) {
         $event.stopPropagation();
-        ModalService.openModal('info', {title: 'Success', message: 'Successfully started Export. This may take several seconds.'});
 
         RequestService.post('projects/export/zip', {project: {id: $scope.projectId}}, function(res) {
-                $rootScope.$broadcast('newExport', res.data.exportZipModel);
+                ModalService.openModal('info', {title: 'Success', message: 'Successfully started Export. This may take several seconds.'});
+                $scope.exports = res.data.exportZipModels;
             }, function(error) {
                 console.log(error);
             }
         );
     };
-
-    $rootScope.$on('newExport', function(event, data) {
-        console.log(data);
-        $scope.exports.push(data);
-    });
 
     RequestService.post('projects/export/get_zip_files', {project: {id: $scope.projectId}}, function(res) {
             $scope.exports = res.data.userZipFiles;

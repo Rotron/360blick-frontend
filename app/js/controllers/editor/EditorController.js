@@ -17,12 +17,32 @@
 
       $scope.scenes = [];
 
-      RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
-              $scope.scenes = res.data;
-          }, function(error) {
-              console.log(error);
+      function getAllScenes() {
+          RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
+                  $scope.scenes = res.data;
+                  $scope.currentScene = $scope.scenes.filter(function(scene) {
+                      return scene.id == $scope.currentSceneId;
+                  })[0];
+              }, function(error) {
+                  console.log(error);
+              }
+          );
+      }
+      if($state.is('editor')) {
+          $scope.isEditor = true;
+          getAllScenes();
+      }
+
+      $scope.saveSceneSetting = function() {
+          if($state.is('editor')) {//TODO: make it work for templates as well
+              RequestService.post('scenes/update', {scene: {id: $scope.currentSceneId, title: $scope.currentScene.title}}, function(res) {
+
+                  }, function(error) {
+                      console.log(error);
+                  }
+              );
           }
-      );
+      }
 
       $scope.changeScene = function(sceneId) {
           if($state.is('editor')) {

@@ -12,7 +12,7 @@
     </form>
     <br>
     <div>
-        <img ng-src="{{assetUrl + project.preview_image.url}}" style="max-width:400px;">
+        <img ng-click="openModal('newAsset', uploadOptions)" ng-src="{{project.preview_image ? assetUrl + project.preview_image.url : assetUrl + defaultImage}}" style="max-width:400px;">
         <br>
         <br>
         <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
@@ -28,10 +28,10 @@
 </div>
 
 <ol class="export-list">
-    <li class="export-list__item" ng-repeat="export in exports" ng-click="startDownload(export)">
-        <div>project: {{export.project_title}}</div>
-        <div>Amount Assets: {{export.amount_assets}}</div>
-        <div>Created at: {{export.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</div>
-        <div>size: {{export.size | fileSize}}</div>
+    <li class="export-list__item" ng-repeat="export in exports | orderBy:'-created_at'" ng-click="startDownload(export)">
+        <i class="fa fa-file-archive-o"></i>
+        <div class="export-list__item__date">{{export.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</div>
+        <div class="export-list__item__filesize">{{export.size | fileSize}}</div>
+        <div class="export-list__item__assets">{{export.amount_assets}} Assets</div>
     </li>
 </ol>

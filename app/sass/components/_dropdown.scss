@@ -38,6 +38,12 @@
   margin-top: 10px;
 }
 
+.dropdown__list--select--light {
+  width: 200px;
+  position: absolute;
+  right: 0;
+}
+
 .dropdown__list--default__item {
   width: 100%;
   height: $base * 10;
@@ -98,11 +104,11 @@
 .dropdown__list--edit__item,
 .dropdown__list--user__item {
   width: 100%;
-  height: $base * 4;
-  line-height: $base * 4;
+  height: $base * 9;
+  line-height: $base * 9;
   background: $secondary-3;
   color: $primary-2;
-  padding: 0 $base * 3;
+  padding: 0 $base * 4;
   cursor: pointer;
   text-align: left;
   border-bottom: 1px solid darken($secondary-3, 5%);

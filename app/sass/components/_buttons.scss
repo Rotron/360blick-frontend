@@ -165,6 +165,7 @@
   background: $secondary-3;
   padding: 0 $base * 3;
   text-align: left;
+  @include ellipsis;
 
   .fa {
     position: absolute;
@@ -179,9 +180,40 @@
   }
 }
 
+.btn--select--editor {
+  @include blick-transition(border);
+  border: 2px solid $secondary-2;
+  color: $secondary-0;
+  border-radius: 3px;
+
+  &:hover {
+    border: 2px solid $secondary-0;
+    color: $secondary-0;
+  }
+}
+
 .btn--select--light {
   background: $secondary-light;
   border: 2px solid $secondary-3;
   color: $secondary-2;
   border-radius: 2px;
+  width: 200px;
+}
+
+.btn--editor--sidebar {
+  @include blick-transition();
+  border: 2px solid $primary-0;
+  background: $primary-0;
+  height: $base * 6;
+  line-height: 100%;
+  padding: 0 $base - 2px;
+  margin: $base $base + 3px;
+  display: block;
+  color: $secondary-light;
+  font-size: 12px;
+
+  &:hover {
+    border-color: $primary-cta;
+    color: $primary-cta;
+  }
 }

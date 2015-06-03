@@ -3,6 +3,8 @@
 app.controller('HelpController', ['$scope', 'RequestService', 'ModalService', 'SessionService', function ($scope, RequestService, ModalService, SessionService) {
     $scope.credentials = {};
 
+    $scope.title = $scope.data ? $scope.data.title : "Help";
+
     if(SessionService.email) {
         $scope.credentials.sender = SessionService.email;
     }

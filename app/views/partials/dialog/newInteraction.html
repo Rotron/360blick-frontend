@@ -13,13 +13,13 @@
                 <div ng-if="isNeededParameter('scene')">
                     Scenes
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="onParameterSelect" data="{'items': (scenes | filter: {id: '!'+currentSceneId}), type: 'scene'}"></dropdown>
+                        <dropdown template-name="select" on-select="onParameterSelect" parent-item="'scene'" data="{'items': (scenes | filter: {id: '!'+currentSceneId})}"></dropdown>
                     </fieldset>
                 </div>
                 <div ng-if="isNeededParameter('object')">
                     Objects
                     <fieldset class="row">
-                        <dropdown template-name="select" on-select="onParameterSelect" data="{'items': sceneObjects, type: 'object'}"></dropdown>
+                        <dropdown template-name="select" on-select="onParameterSelect" parent-item="'object'" data="{'items': sceneObjects}"></dropdown>
                     </fieldset>
                 </div>
                 <div class="row">

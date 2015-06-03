@@ -41,16 +41,31 @@
 <div class="editor-sidebar">
     <scrollable>
         <div class="editor-sidebar__top">
-            <!--<nav class="filter-switch">-->
-                <!--<button class="filter-switch__option active">Objects</button>-->
-                <!--<button class="filter-switch__option">Settings</button>-->
-            <!--</nav>-->
-            <div class="editor-settings">Editor Settings</div>
-            <div class="editor-objects">
-                <ul class="toggle-list">
-                    <editor-object ng-repeat="item in getSceneObjects()" ng-if="!hiddenTypes[item.type]"></editor-object>
+            <nav class="filter-switch" data-tab-menu data-ng-model="ui.topTabView" ng-init="ui.topTabView = 'tabSceneObjects.html'">
+                <button href="tabSceneObjects.html" class="filter-switch__option active">Objects</button>
+                <button href="tabSceneSettings.html" class="filter-switch__option">Settings</button>
+            </nav>
+            <div class="container" data-ng-include="ui.topTabView"></div>
+            <script type="text/ng-template" id="tabSceneSettings.html">
+                <div class="toggle-list--small__header is-nested">
+                    <h2 class="toggle-list--small__title">Title</h2>
+                </div>
+                <ul class="selection-list">
+                    <li>
+                        <label class="input--sidebar__label">
+                            <span class="input--sidebar__label__unit" ng-click="saveSceneSetting()"> Save </span>
+                            <input class="input--sidebar__field" type="text" ng-model="currentScene.title">
+                        </label>
+                    </li>
                 </ul>
-            </div>
+            </script>
+            <script type="text/ng-template" id="tabSceneObjects.html">
+                <div class="editor-objects">
+                    <ul class="toggle-list">
+                        <editor-object ng-repeat="item in getSceneObjects()" ng-if="!hiddenTypes[item.type]"></editor-object>
+                    </ul>
+                </div>
+            </script>
         </div>
 
         <div class="editor-sidebar__bottom">
