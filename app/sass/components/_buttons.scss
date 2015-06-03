@@ -185,7 +185,6 @@
   border: 2px solid $secondary-2;
   color: $secondary-0;
   border-radius: 3px;
-  //max-width: 200px;
 
   &:hover {
     border: 2px solid $secondary-0;
@@ -198,6 +197,7 @@
   border: 2px solid $secondary-3;
   color: $secondary-2;
   border-radius: 2px;
+  width: 200px;
 }
 
 .btn--editor--sidebar {

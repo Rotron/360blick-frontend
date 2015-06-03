@@ -126,24 +126,41 @@ $link-external: #0000FF;
   }
 }
 
-/*
- The animate class is apart of the element and the ng-enter class
- is attached to the element once the enter animation event is triggered
-*/
-.reveal-animation.ng-enter {
-  -webkit-transition: .5s linear all; /* Safari/Chrome */
-  transition: .5s linear all; /* All other modern browsers and IE10+ */
+.reveal-animation {
+  @include blick-transition(all, 0.3s);
+}
 
-  /* The animation preparation code */
+.reveal-animation.ng-enter, .reveal-animation.ng-leave.ng-leave-active {
   opacity: 0;
 }
 
-/*
- Keep in mind that you want to combine both CSS
- classes together to avoid any CSS-specificity
- conflicts
-*/
-.reveal-animation.ng-enter.ng-enter-active {
-  /* The animation code itself */
+.reveal-animation.ng-enter.ng-enter-active, .reveal-animation.ng-leave {
   opacity: 1;
+}
+
+.ui-view-container {
+  position: relative;
+}
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+  @include blick-transition(all, 0.3s);
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+[ui-view].ng-enter {
+  opacity: 0;
+}
+
+[ui-view].ng-enter-active {
+  opacity: 1;
+}
+
+[ui-view].ng-leave {
+  opacity: 1;
+}
+
+[ui-view].ng-leave-active {
+  opacity: 0;
 }
