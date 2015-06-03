@@ -21,7 +21,6 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
     }
 
     function checkScenePreviewImage(scene) {
-        console.log(scene);
 
         if(!scene.preview_image_output) {
             if(scene.preview_image && scene.preview_image.length > 1) {
