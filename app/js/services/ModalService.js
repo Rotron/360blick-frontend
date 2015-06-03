@@ -27,9 +27,9 @@ app.service('ModalService',['$rootScope', 'btfModal', function($rootScope, btfMo
             templateUrl: 'partials/dialog/help.html'
         }),
         'feedback': btfModal({
-            controller: 'FeedbackController',
+            controller: 'HelpController',
             controllerAs: 'ctrl',
-            templateUrl: 'partials/dialog/feedback.html'
+            templateUrl: 'partials/feedback.html'
         }),
         'newProject': btfModal({
             controller: 'NewProjectController',

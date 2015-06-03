@@ -7,6 +7,9 @@
             Already got an Account? <a ui-sref="login">Login</a>
         </button>
         <button ui-sref="user({username: currentUser})" class="btn btn--cta section--gallery__sign-up" ng-if="isAuthenticated()">Your Profile</button>
+        <button class="section--gallery__login" ng-click="logout($event)" ng-if="isAuthenticated()">
+            Not your Session? <a ui-sref="app">Logout</a>
+        </button>
     </section>
     <section class="section section--features row">
         <ul class="icon-list">

@@ -34,7 +34,11 @@ app.service('EventService', ['RequestService', '$rootScope', 'AUTH_EVENTS', 'Mod
             that.handleAuthorization(data);
         });
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function(event,data){
-            that.handleAuthorization(data);
+            ModalService.openModal('info', {
+                title: '',
+                message: 'Your account is not activated or unauthorized. Please contact the 360blick Team to ask for an account upgrade.',
+                okCallback: function() { $state.go('app'); }
+            });
         });
         $rootScope.$on(AUTH_EVENTS.sessionTimeout, function() {
             ModalService.openModal('login');

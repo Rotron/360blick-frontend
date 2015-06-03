@@ -3,7 +3,6 @@
 app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', 'ModalService', 'ENV_CONFIG', function ($scope, $stateParams, RequestService, $rootScope, $state, ModalService, ENV_CONFIG) {
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
-
     $scope.rootUrl = ENV_CONFIG.assets;
 
     $scope.scenes = [];
@@ -21,7 +20,6 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
     }
 
     function checkScenePreviewImage(scene) {
-
         if(!scene.preview_image_output) {
             if(scene.preview_image && scene.preview_image.length > 1) {
                 scene.preview_image_output = $scope.rootUrl + scene.preview_image
