@@ -112,7 +112,8 @@ app.service('RequestService', ['$http', 'ENV_CONFIG', 'SessionService', 'Respons
             options: {
                 url: getFullActionUrl(settings.apiEndPoint),
                 paramName: settings.paramName,
-                maxFiles: settings.maxFiles
+                maxFiles: settings.maxFiles,
+                acceptedFiles: ".png,.jpg"
             },
             eventHandlers: {
                 sending: function (file, xhr, formData) {

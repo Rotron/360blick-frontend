@@ -12,7 +12,6 @@ var app = angular.module('360blickFrontendApp', [
     'mdo-angular-cryptography'
 ]);
 
-// TODO: Cleanup ENV
 var api_url = 'http://localhost:3000/api/v1';
 var assets_url = 'http://localhost:3000';
 // @if NODE_ENV = 'PRODUCTION'
@@ -22,7 +21,8 @@ assets_url = 'https://blick.herokuapp.com';
 
 app.constant('ENV_CONFIG', {
     api: api_url,
-    assets: assets_url
+    assets: assets_url,
+    preview_image: "/images/preview_placeholder.jpg"
 });
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', 'USER_ROLES',
@@ -62,6 +62,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 "app": {
                     templateUrl: "documentation/index.html",
                     controller: "DocumentationController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
+        .state('imprint', {
+            url: "/imprint",
+            views: {
+                "app": {
+                    templateUrl: "imprint/index.html",
+                    controller: "ImprintController"
                 }
             },
             data: {
@@ -298,23 +310,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
         });
 
     $locationProvider.html5Mode(true);
-
-    $urlRouterProvider.otherwise(function(current, path, search) {
-        if(search.goto) {
-            return '/' + search.goto;
-        }
-        return '/';
-    });
+    $urlRouterProvider.otherwise('/');
 }]);
 
-app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService',
-    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS, ModalService) {
-
+app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_ROLES', 'AUTH_EVENTS', 'ModalService', '$state',
+    function ($rootScope, AuthService, EventService, SessionService, USER_ROLES, AUTH_EVENTS, ModalService, $state) {
         $rootScope.editorControllerLoaded = false;
-
         AuthService.reloadLocalCredentials();
-
-//        console.log(SessionService.getUser());
 
         $rootScope.currentUser = SessionService.getUser().nick;
         $rootScope.userRoles = USER_ROLES;
@@ -322,7 +324,6 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
         $rootScope.isAdmin = SessionService.isAdmin;
 
         $rootScope.sidebarMenu = { isActive: true };
-        // debugging
         $rootScope.console = console;
 
         $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
@@ -337,7 +338,6 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
                 event.preventDefault();
                 if (AuthService.isAuthenticated()) {
                     // user is not allowed
-                    console.log(AuthService.isAuthenticated());
                     $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, {next: next, params: nextParams});
                 } else {
                     // user is not logged in
@@ -345,6 +345,12 @@ app.run(['$rootScope', 'AuthService', 'EventService', 'SessionService', 'USER_RO
                 }
             }
          });
+        angular.apply = function(scope) {
+            scope = scope ? scope : $rootScope;
+            if (scope.$root.$$phase != '$apply' && scope.$root.$$phase != '$digest') {
+                scope.$apply();
+            }
+        }
 }]);
 
 angular.module('templates', []);

@@ -1,17 +1,49 @@
 'use strict';
 
-app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestService', 'ModalService', '$rootScope', '$state', function ($scope, $stateParams, RequestService, ModalService, $rootScope, $state) {
+app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestService', 'ModalService', '$rootScope', '$state', 'ENV_CONFIG', function ($scope, $stateParams, RequestService, ModalService, $rootScope, $state, ENV_CONFIG) {
     $scope.username = $stateParams['username'];
 
     $scope.projects = [];
 
+    $scope.rootUrl = ENV_CONFIG.assets;
+
     function getAllProjects() {
         RequestService.post('projects/get_projects', {user_nick: $scope.username}, function (res) {
+                for(var i = 0, len = res.data.length; i < len; i++) {
+                    res.data[i] = checkProjectPreviewImage(res.data[i]);
+                }
                 $scope.projects = res.data;
             }, function (error) {
                 console.log(error);
             }
         );
+    }
+
+    function checkProjectPreviewImage(project) {
+        if(!project.preview_image.url) {
+            project.preview_image.url = "https://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg";
+            project.preview_image_color = "RGBA(100,100,160, 0.5)";
+        } else {
+            if(project.preview_image.url.indexOf("https://upload.wikimedia.org") <= 0) {
+                project.preview_image.url = $scope.rootUrl + project.preview_image.url;
+            }
+        }
+
+        return project;
+    }
+
+    function checkProjectPreviewImage(project) {
+
+        if(!project.preview_image_output) {
+            if(project.preview_image.url) {
+                project.preview_image_output = $scope.rootUrl + project.preview_image.url
+            } else {
+                project.preview_image_output = ENV_CONFIG.preview_image;
+                project.preview_image_color = "RGBA(100,100,160, 0.5)";
+            }
+        }
+
+        return project;
     }
 
     getAllProjects();
@@ -43,7 +75,7 @@ app.controller('UserProjectsController', ['$scope', '$stateParams', 'RequestServ
     });
 
     $rootScope.$on('newProject', function(event, data) {
-        $scope.projects.push(data);
+        $scope.projects.push(checkProjectPreviewImage(data));
     });
 
     $scope.onOrderSelect = function(id) {

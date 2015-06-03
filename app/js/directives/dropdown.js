@@ -10,9 +10,8 @@ app.directive('dropdown',[function() {
         },
         link: function(scope, element, attrs) {
             scope.active = false;
-
             scope.select = {
-                value: null
+                value: scope.data.currentItemName || scope.data.currentItemId
             };
 
             scope.toggleGhost = function($event) {
@@ -31,14 +30,7 @@ app.directive('dropdown',[function() {
                 scope.active = false;
                 scope.select.value = item.title;
                 if(typeof(scope.onSelect) == "function") {
-                    //TODO: quickfixed
-                    var data;
-                    if(scope.data && scope.data.type) {
-                        data = scope.data.type;
-                    } else if (scope.parentItem) {
-                        data = scope.parentItem;
-                    }
-                    scope.onSelect(item.id, data);
+                    scope.onSelect(item.id, scope.parentItem);
                 }
             }
         },

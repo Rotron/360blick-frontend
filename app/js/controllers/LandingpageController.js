@@ -1,6 +1,9 @@
 'use strict';
 
-app.controller('LandingpageController', ['$scope', function ($scope) {
-    console.log('landing init');
+app.controller('LandingpageController', ['$scope', 'AuthService', function ($scope, AuthService) {
+    $scope.logout = function($event) {
+        $event.stopPropagation();
+        AuthService.logout();
+    };
 }]);
 

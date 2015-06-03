@@ -101,4 +101,41 @@ $dialog-header-height: $base * 12;
   height: 100%;
   border-radius: 0 0 3px 3px;
   cursor: default;
+
+  &.has-interaciton-bar {
+    padding-bottom: 85px;
+  }
+}
+
+.dialog__body__interaction-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 $base * 3;
+  height: 80px;
+  width: 100%;
+  text-align: center;
+  font-size: 0;
+
+  .btn + .btn {
+    margin-left: $base * 2;
+  }
+}
+
+.dialog--confirm__content,
+.dialog--error__content,
+.dialog--info__content{
+  width: 430px;
+  height: auto;
+}
+
+.dialog--confirm__body,
+.dialog--error__body,
+.dialog--info__body {
+
+  .row {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
 }

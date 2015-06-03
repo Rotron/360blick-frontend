@@ -1,18 +1,35 @@
 'use strict';
 
-app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', 'ModalService', function ($scope, $stateParams, RequestService, $rootScope, $state, ModalService) {
+app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestService', '$rootScope', '$state', 'ModalService', 'ENV_CONFIG', function ($scope, $stateParams, RequestService, $rootScope, $state, ModalService, ENV_CONFIG) {
     $scope.username = $stateParams.username;
     $scope.projectId = $stateParams.projectId;
+    $scope.rootUrl = ENV_CONFIG.assets;
 
     $scope.scenes = [];
 
     function getAllScenes() {
         RequestService.post('scenes/get_scenes', {project: {id: $stateParams['projectId']}}, function(res) {
+                for(var i = 0, len = res.data.length; i < len; i++) {
+                    res.data[i] = checkScenePreviewImage(res.data[i]);
+                }
                 $scope.scenes = res.data;
             }, function(error) {
                 console.log(error);
             }
         );
+    }
+
+    function checkScenePreviewImage(scene) {
+        if(!scene.preview_image_output) {
+            if(scene.preview_image && scene.preview_image.length > 1) {
+                scene.preview_image_output = $scope.rootUrl + scene.preview_image
+            } else {
+                scene.preview_image_output = ENV_CONFIG.preview_image;
+                scene.preview_image_color = "RGBA(100,100,160, 0.5)";
+            }
+        }
+
+        return scene;
     }
 
     getAllScenes();
@@ -44,7 +61,7 @@ app.controller('ProjectScenesController', ['$scope', '$stateParams', 'RequestSer
     });
 
     $rootScope.$on('newScene', function(event, data){
-        $scope.scenes.push(data);
+        $scope.scenes.push(checkScenePreviewImage(data));
     });
 
     $scope.onOrderSelect = function(id) {

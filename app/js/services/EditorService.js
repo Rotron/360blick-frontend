@@ -29,7 +29,7 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
     this.render = function() {
         if(Object.prototype.toString.call(_this.scene.traverse) === '[object Function]') {
             requestAnimationFrame( _this.render );
-            _this.renderer.render( _this.scene, _this.camera );
+            _this.renderer.render( _this.scene, CameraService.camera );
         }
     };
 
@@ -54,16 +54,14 @@ app.service('EditorService', ['$rootScope', 'PrimitiveObjectService', 'WindowRes
 
         LoadSceneService.getScene(id, isTemplateScene, resolveScene);
 
-//        if(isTemplateScene){
-//            RequestService.post('templatescenes/specific', {scene_id: $stateParams['templateId']}, resolveScene);
-//        } else {
-//            RequestService.post('scenes/specific', {scene_id: $stateParams['sceneId']}, resolveScene);
-//        }
-
     };
 
     this.zoomIn = function(zoomFactor){
         CameraService.zoom(zoomFactor);
+    };
+
+    this.switchCamera = function(id){
+        return CameraService.switchCamera(id);
     };
 
     this.getObjects = function(){
