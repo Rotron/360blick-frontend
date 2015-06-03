@@ -165,6 +165,7 @@
   background: $secondary-3;
   padding: 0 $base * 3;
   text-align: left;
+  @include ellipsis;
 
   .fa {
     position: absolute;
@@ -176,6 +177,19 @@
       right: $base * 2;
       font-size: 14px;
     }
+  }
+}
+
+.btn--select--editor {
+  @include blick-transition(border);
+  border: 2px solid $secondary-2;
+  color: $secondary-0;
+  border-radius: 3px;
+  //max-width: 200px;
+
+  &:hover {
+    border: 2px solid $secondary-0;
+    color: $secondary-0;
   }
 }
 
