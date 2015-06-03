@@ -1,22 +1,56 @@
 .export-list {
   background: $secondary-light;
+  padding: 0 $base * 6;
 }
 
 .export-list__item {
-  border-bottom: 1px solid $secondary-2;
+  border: 2px solid $secondary-2;
+  border-radius: 3px;
+  margin: 0 $base * 2 $base * 2 0;
   background: $secondary-light;
   padding: $base * 2 $base * 6;
   @include blick-transition;
+  font-size: 0;
+  display: inline-block;
+  width: 240px;
+  text-align: center;
+  color: $secondary-0;
+  position: relative;
 
   &:first-child {
-    border: 1px solid $secondary-2;
+    &:before {
+      content: 'NEWEST';
+      display: inline-block;
+      position: absolute;
+      background: $primary-cta;
+      color: $secondary-light;
+      font-size: 14px;
+      left: 5px;
+      top: 5px;
+      padding: 5px;
+      border-radius: 3px;
+
+    }
   }
 
   &:hover {
-    background: $secondary-1;
+    color: $primary-cta;
+    border-color: $primary-cta;
+  }
+
+  .fa {
+    font-size: 50px;
+    margin-bottom: 10px;
   }
 }
 
-.export-list__link {
-  display: block;
+.export-list__item__date {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.export-list__item__filesize,
+.export-list__item__assets {
+  font-size: 14px;
+  margin-bottom: 10px;
 }
