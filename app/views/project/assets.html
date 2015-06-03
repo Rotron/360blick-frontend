@@ -8,7 +8,7 @@
 </div>
 
 <ul class="overview-list container">
-    <li ng-repeat="asset in assets | orderBy:order.predicate:order.reverse" ui-sref="user.project.assets({assetId: asset.id})" class="overview-list__item col span-6">
+    <li ng-repeat="asset in assets | orderBy:order.predicate:order.reverse" ui-sref="user.project.assets({assetId: asset.id})" class="overview-list__item col span-6 reveal-animation">
         <div class="overview-list__asset" ng-style="getAssetBackgroundImage(asset)">
             <div class="overview-list__color" ng-style="{'background-color': asset.color}"></div>
             <div class="overview-list__content container">
