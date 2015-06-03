@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UserSettingsController', ['$scope', 'SessionService', 'RequestService', '$rootScope', 'ENV_CONFIG', function ($scope, SessionService, RequestService, $rootScope, ENV_CONFIG) {
+app.controller('UserSettingsController', ['$scope', 'SessionService', 'RequestService', '$rootScope', 'ENV_CONFIG', 'ModalService', function ($scope, SessionService, RequestService, $rootScope, ENV_CONFIG, ModalService) {
 
     $scope.user = {
         email: SessionService.email,
@@ -34,7 +34,8 @@ app.controller('UserSettingsController', ['$scope', 'SessionService', 'RequestSe
             SessionService.renewSession(res.data);
                 // TODO: bind data
                 $scope.user.email = res.data.email;
-
+                $scope.user.old_password = "";
+                ModalService.openModal('info', {title: 'Success', message: 'Successfully updated.'});
             }, function(error) {
                 console.log(error);
             }

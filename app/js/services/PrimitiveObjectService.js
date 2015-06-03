@@ -37,6 +37,16 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
                     properties.heightSeg    || 200
                 );
                 break;
+            case 'TextGeometry':
+                return new THREE.TextGeometry( 'Text', {
+                    font: 'helvetiker',
+                    weight: 'normal',
+                    height: 1,
+                    style : 'normal',
+                    size: 1,
+                    divisions: 1
+                });
+                break;
         }
     };
 
@@ -88,8 +98,16 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         object.custom = {
             id: properties.id
         };
-        if(properties && properties.interaction) {
+        if(properties.interaction) {
             object.custom.interaction = JSON.parse(properties.interaction) || null;
+        }
+        if(object.geometry && object.geometry.type == 'TextGeometry') {
+            if(properties.text) {
+                this.changeText(properties.text, object);
+                object.custom.text = properties.text;
+            } else {
+                object.custom.text = 'Text';
+            }
         }
         return object;
     };
@@ -114,6 +132,19 @@ app.service('PrimitiveObjectService',['RequestService', 'ENV_CONFIG', 'CameraSer
         }
         if ($rootScope && $rootScope.$$phase != '$apply' && $rootScope.$$phase != '$digest') {
             $rootScope.$apply();
+        }
+    };
+
+    this.changeText = function(text, object) {
+        if(object.geometry.type == 'TextGeometry') {
+            object.geometry =  new THREE.TextGeometry( text, {
+                font: 'helvetiker',
+                weight: 'normal',
+                height: 1,
+                style : 'normal',
+                size: 1,
+                divisions: 1
+            });
         }
     };
     /************************************ /copy to player (objectLoader) ************************************************/
