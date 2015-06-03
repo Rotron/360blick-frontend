@@ -52,9 +52,9 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
 
     $scope.generateExport = function($event) {
         $event.stopPropagation();
-        ModalService.openModal('info', {title: 'Success', message: 'Successfully started Export. This may take several seconds.'});
 
         RequestService.post('projects/export/zip', {project: {id: $scope.projectId}}, function(res) {
+                ModalService.openModal('info', {title: 'Success', message: 'Successfully started Export. This may take several seconds.'});
                 $rootScope.$broadcast('newExport', res.data.exportZipModel);
             }, function(error) {
                 console.log(error);
