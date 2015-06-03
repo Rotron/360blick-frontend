@@ -86,10 +86,18 @@
   background-color: $secondary-3;
 }
 
+.section--editor-image {
+  max-width: 970px;
+  border: 2px solid $primary-0;
+}
+
 .section--toggle__images {
-  width: 625px;
-  height: 320px;
+  width: 800px;
+  height: 800px;
   background: $secondary-1;
+  background-image: url(../images/360blick-editor.jpg);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
   margin: 0 auto;
 }
 
