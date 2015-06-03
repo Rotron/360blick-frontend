@@ -1,10 +1,21 @@
+$object-header-height: 35px;
+$object-header-interaction-width: 75px;
+
 .toggle-list {
 }
 
 .toggle-list__header {
   background: $primary-0;
-  padding: $base * 2;
+  height: 35px;
   cursor: pointer;
+  @include blick-transition;
+  padding-left: $object-header-height + $base;
+  padding-right: $object-header-interaction-width;
+  position: relative;
+
+  &:hover {
+    background: $primary-cta;
+  }
 }
 
 .toggle-list__item {
@@ -12,17 +23,24 @@
     .toggle-list__header {
       background: $primary-cta;
     }
-    border: 3px solid $primary-cta;
-    border-top: none;
+
+    .toggle-list__body.selected {
+      border-color: $primary-cta;
+    }
   }
 }
 
 .toggle-list__body {
-  max-height: 0px;
+  max-height: 0;
+  @include blick-transition(max-height, 0.3s);
   overflow: hidden;
-  @include blick-transition;
+  padding: 0 3px;
+
   &.selected {
     max-height: 2000px;
+    padding: 0;
+    border: 3px solid $primary-1;
+    border-top: none;
   }
 }
 
@@ -36,24 +54,37 @@
 }
 
 .toggle-list--small__item {
-  // todo: is-heading-state
-  //padding: $base;
 }
 
 .toggle-list__header__icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: $object-header-height;
+  height: $object-header-height;
+  line-height: $object-header-height;
+  text-align: center;
 }
 
 .toggle-list__header__title {
+  line-height: $object-header-height;
 }
 
 .toggle-list__header__interaction {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 0;
+  width: $object-header-interaction-width;
 }
 
 .toggle-list__header__interaction__button {
   color: $secondary-light;
   cursor: pointer;
+  height: $object-header-height;
+  width: $object-header-height - $base;
 
   &:hover {
-    opacity: .8;
+    background: rgba(255,255,255,0.4);
   }
 }
