@@ -17,6 +17,7 @@ body, html {
   }
 }
 
+#view--imprint,
 #view--newsletter,
 #view--login,
 #view--reset,
@@ -25,6 +26,7 @@ body, html {
   min-height: 100%;
 }
 
+#view--imprint__wrapper,
 #view--newsletter__wrapper,
 #view--login__wrapper,
 #view--reset__wrapper,
@@ -46,9 +48,39 @@ body, html {
     }
   }
 
+  p {
+    a {
+      outline: none;
+      color: $primary-cta;
+      &:hover {
+        border-bottom: 1px solid $primary-cta;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: $base * 3;
+  }
+
+  svg {
+    display: block;
+    margin: 20px auto;
+  }
+
+  small {
+    font-size: 12px;
+    display: block;
+    padding-bottom: 60px
+  }
+
   .btn {
     width: 40%;
   }
+}
+
+#view--imprint__wrapper {
+  text-align: center;
 }
 
 #view--newsletter__wrapper {

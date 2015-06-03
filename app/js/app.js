@@ -68,6 +68,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpP
                 authorizedRoles: false
             }
         })
+        .state('imprint', {
+            url: "/imprint",
+            views: {
+                "app": {
+                    templateUrl: "imprint/index.html",
+                    controller: "ImprintController"
+                }
+            },
+            data: {
+                authorizedRoles: false
+            }
+        })
         .state('newsletter', {
             url: "/newsletter",
             views: {

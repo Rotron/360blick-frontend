@@ -23,7 +23,7 @@ app.controller('ProjectAssetsController', ['$scope', '$stateParams', 'ENV_CONFIG
 
     getAllAssets();
 
-    $scope.settingsAsset = function() {
+    $scope.settingsAsset = function(item) {
         $state.go('user.project.assets.settings', {assetId: item.id});
     };
 

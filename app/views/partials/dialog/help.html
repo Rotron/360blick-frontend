@@ -5,19 +5,18 @@
             <h4 class="dialog__title">Help</h4>
         </div>
         <div class="dialog__body">
-            <form name="loginForm" class="container"
-                  ng-submit="sendHelp(credentials)" novalidate>
+            <form name="loginForm" class="container" ng-submit="sendHelp(credentials)" novalidate>
+                <fieldset class="row" ng-if="!isAuthenticated()">
+                    <placeholder-input value="credentials.sender" label="Email" type="email"></placeholder-input>
+                </fieldset>
                 <fieldset class="row">
                     <placeholder-input value="credentials.subject" label="Subject" type="text"></placeholder-input>
                 </fieldset>
                 <fieldset class="row">
-                    <textarea ng-model="credentials.message" placeholder="Your Message"></textarea>
-                </fieldset>
-                <fieldset class="row">
-                    <placeholder-input value="credentials.sender" label="Email" type="email"></placeholder-input>
+                    <textarea ng-model="credentials.message" placeholder="Your Message" class="textarea"></textarea>
                 </fieldset>
                 <div class="row">
-                    <button class="btn btn--round btn--submit">Login</button>
+                    <button class="btn btn--round btn--cta">Send</button>
                 </div>
             </form>
         </div>
