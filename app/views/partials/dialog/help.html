@@ -2,7 +2,7 @@
     <div class="dialog__content">
         <div class="dialog__header">
             <button class="dialog__close" ng-click="closeIt()" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="dialog__title">Help</h4>
+            <h4 class="dialog__title">{{title}}</h4>
         </div>
         <div class="dialog__body">
             <form name="loginForm" class="container" ng-submit="sendHelp(credentials)" novalidate>

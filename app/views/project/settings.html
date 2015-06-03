@@ -12,7 +12,7 @@
     </form>
     <br>
     <div>
-        <img ng-src="{{project.preview_image ? assetUrl + project.preview_image.url : assetUrl + defaultImage}}" style="max-width:400px;">
+        <img ng-click="openModal('newAsset', uploadOptions)" ng-src="{{project.preview_image ? assetUrl + project.preview_image.url : assetUrl + defaultImage}}" style="max-width:400px;">
         <br>
         <br>
         <button ng-click="openModal('newAsset', uploadOptions)" class="btn btn--dotted"><i class="fa fa-upload"></i>Change Asset</button>
