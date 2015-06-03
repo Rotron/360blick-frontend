@@ -95,7 +95,8 @@ fieldset {
   border-radius: 0px 4px 4px 0px;
 }
 
-.input--sidebar__field {
+.input--sidebar__field,
+.input--sidebar__field[type=text] {
   width: 100%;
   border: 2px solid $primary-0;
   background: $primary-2;
