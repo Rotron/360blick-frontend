@@ -4,6 +4,8 @@
     </div>
     <div class="toggle-list--small__item">
         <button class="btn btn--editor--sidebar" ng-if="!item.custom.interaction" ng-click="$root.openModal('newInteraction', {item: item})">+ Add Interaction</button>
-        <span ng-if="item.custom.interaction">{{item.custom.interaction.type}}</span>
+        <ul class="editor-options-list" ng-if="item.custom.interaction">
+            <li class="editor-options-list__item">{{item.custom.interaction.type}}</li>
+        </ul>
     </div>
 </li>
