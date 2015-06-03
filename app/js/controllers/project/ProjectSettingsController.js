@@ -55,17 +55,12 @@ app.controller('ProjectSettingsController', ['$scope', '$stateParams', 'RequestS
 
         RequestService.post('projects/export/zip', {project: {id: $scope.projectId}}, function(res) {
                 ModalService.openModal('info', {title: 'Success', message: 'Successfully started Export. This may take several seconds.'});
-                $rootScope.$broadcast('newExport', res.data.exportZipModel);
+                $scope.exports = res.data.exportZipModels;
             }, function(error) {
                 console.log(error);
             }
         );
     };
-
-    $rootScope.$on('newExport', function(event, data) {
-        console.log(data);
-        $scope.exports.push(data);
-    });
 
     RequestService.post('projects/export/get_zip_files', {project: {id: $scope.projectId}}, function(res) {
             $scope.exports = res.data.userZipFiles;
