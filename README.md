@@ -1,13 +1,11 @@
+__This project is not maintained. It was realized during our undergraduat study as an interdisciplinary project. Feel free to get in touch. Note: The `backend` and `player` are currently still private repositories.__
+
 # 360blick
 
 Interactive Panorama Editor with 3D Content.
 
-## Continous Delivery and Deployment
-
-On every push tests will run on Codeship. Only Commits to the master branch will be deployed.
-
 ## Team
 
-* Julian Schwarz
+* Julian Schwarz 
 * David Neubauer
 * Joscha Probst
