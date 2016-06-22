@@ -1,10 +1,10 @@
 {
   "name": "360blickfrontend",
   "version": "0.0.0",
-  "description": "more perspective for content",
+  "description": "Interactive WebGL Panorama Editor",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:360blick/frida.git"
+    "url": "git@github.com:davidspinat/360blick-frontend.git"
   },
   "scripts": {
     "test": "gulp test"
