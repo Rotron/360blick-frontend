@@ -1,6 +1,6 @@
 {
   "name": "360blickfrontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Interactive WebGL Panorama Editor",
   "repository": {
     "type": "git",
