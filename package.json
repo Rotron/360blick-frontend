@@ -6,6 +6,14 @@
     "type": "git",
     "url": "git@github.com:davidspinat/360blick-frontend.git"
   },
+  "keywords": [
+    "webgl",
+    "3d",
+    "panorama",
+    "editor",
+    "angularjs",
+    "threejs"
+  ],
   "scripts": {
     "test": "gulp test"
   },
